@@ -1,0 +1,14 @@
+.regi-main
+  %section.regi-main__contents
+    %h2<>
+      新規会員登録
+    .regi-main__contents__form
+      .regi-main__contents__form__btn
+        =link_to root_path, class:'btn-default regi-main__contents__form__btn__mail' do
+          = fa_icon 'envelope', class: "contents__btn--icon"
+          メールアドレスで登録する
+        =link_to root_path, class:'btn-default regi-main__contents__form__btn__facebook' do
+          = fa_icon 'facebook-square', class: "contents__btn--icon"
+          Facebookで登録する
+        =link_to root_path, class:'btn-default regi-main__contents__form__btn__google' do
+          Googleで登録する 
