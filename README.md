@@ -38,22 +38,20 @@ Things you may want to cover:
 |lastname|string|null: false|
 |firstname_kana|string|null: false|
 |lastname_kana|string|null: false|
-|birth_year|integer|null: false|
-|birth_month|integer|null: false|
-|birth_day|integer|null: false|
+|birthday|date|null: false|
 |tel|integer|null:false|
 |postal_code|integer|null: false|
 |prefecture|string|null: false|
 |city|string|null: false|
 |address_number|string|null: false|
 |building_name|string||
-|card|references|null: false,foreign_key: true|
 |rating_good|integer|null: false,default: "0"|
 |rating_normal|integer|null: false,default: "0"|
 |rating_bad|integer|null: false,default: "0"|
+|sales_amont|integer|null: false,default: "0"|
 
 ### Association
-- has_many :cards, dependent: :destroy
+- has_one :card, dependent: :destroy
 - has_many :products
 - has_many :images
 - has_many :comments
@@ -63,10 +61,9 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|user|references|null: false,foreign_key: true|
+|user_id|integer|null: false,foreign_key: true|
 |card_number|integer|null: false|
-|card_year|integer|null: false|
-|card_month|integer|null: false|
+|expiration_date|date|null: false|
 |card_security_code|integer|null: false|
 
 ### Association
@@ -76,24 +73,26 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|user|references|null: false,foreign_key: true|
-|category|references|null: false,foreign_key: true|
-|brand|references|null: false,foreign_key: true|
+|user_id|integer|null: false,foreign_key: true|
+|category_id|integer|null: false,foreign_key: true|
+|brand_id|integer|null: false,foreign_key: true|
 |name|string|null: false|
 |name|index|unique: true|
 |text|text|null: false|
 |text|index|unique: true|
-|status|int|null: false|
-|postage_burden|int|null: false|
+|size_id|integer|null: fals|
+|status|integer|null: false|
+|postage_burden|integer|null: false|
 |buyer_area|string|null: false|
 |delivery_days|string|null: false|
 |price|integer|null: false|
-|sales_status|int|null: false, default: "0"|
+|sales_status|integer|null: false, default: "0"|
 
 ### Association
 - belongs_to :user
 - has_many :images, dependent: :destroy
-- has_many :commentss
+- has_one :size
+- has_many :comments
 - has_many :favorites
 - belongs_to :category
 
@@ -101,8 +100,8 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|data|text|null: false|
-|product|references|null: false,foreign_key: true|
+|url|text|null: false|
+|product_id|integer|null: false,foreign_key: true|
 
 ### Association
 - belongs_to :product
@@ -112,8 +111,8 @@ Things you may want to cover:
 |Column|Type|Options|
 |------|----|-------|
 |text|text|null: false|
-|user|references|null: false,foreign_key: true|
-|product|references|null: false,foreign_key: true|
+|user_id|integer|null: false,foreign_key: true|
+|product_id|integer|null: false,foreign_key: true|
 
 ### Association
 - belongs_to :user
@@ -123,8 +122,8 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|user|references|null: false,foreign_key: true|
-|product|references|null: false,foreign_key: true|
+|user_id|integer|null: false,foreign_key: true|
+|product_id|integer|null: false,foreign_key: true|
 
 ### Association
 - belongs_to :user
@@ -136,7 +135,7 @@ Things you may want to cover:
 |------|----|-------|
 |name|string|null: false|
 |name|index|unique: true|
-|product|references|null: false,foreign_key: true|
+|product_id|integer|null: false,foreign_key: true|
 
 ### Association
 - has_many :products
@@ -149,7 +148,7 @@ Things you may want to cover:
 |------|----|-------|
 |name|string|null: false|
 |name|index|unique: true|
-|product|references|null: false,foreign_key: true|
+|product_id|integer|null: false,foreign_key: true|
 
 ### Association
 - has_many :products
@@ -160,9 +159,19 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|category|references|null: false,foreign_key: true|
-|brand|references|null: false,foreign_key: true|
+|category_id|integer|null: false,foreign_key: true|
+|brand_id|integer|null: false,foreign_key: true|
 
 ### Association
 - belongs_to :category
 - belongs_to :brand
+
+# sizesテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|data|string|null: false|
+|size_category|integer|null: false|
+
+### Association
+- belongs_to :product
