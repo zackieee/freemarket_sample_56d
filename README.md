@@ -84,7 +84,7 @@ Things you may want to cover:
 |text|text|null: false|
 |text|index|unique: true|
 |status|int|null: false|
-|postage_burden|string|null: false|
+|postage_burden|int|null: false|
 |buyer_area|string|null: false|
 |delivery_days|string|null: false|
 |price|integer|null: false|
@@ -102,11 +102,9 @@ Things you may want to cover:
 |Column|Type|Options|
 |------|----|-------|
 |data|text|null: false|
-|user|references|null: false,foreign_key: true|
 |product|references|null: false,foreign_key: true|
 
 ### Association
-- belongs_to :user
 - belongs_to :product
 
 ## commentsテーブル
