@@ -13,13 +13,31 @@
     .header-select_category
       %a{href: "#"}
         = fa_icon 'list', class: "awsome"
-        カテゴリーから探す
+        カテゴリーから探す    
     .header-select_category
       %a{href: "#"}
         = fa_icon 'tag', class: "awsome"
         ブランドから探す
-    .header-btn
-      .header-btn_signupbtn
-        = link_to "新規会員登録"
-      .header-btn_logbtn
-        = link_to "ログイン"
+  -# - if user_signed in?
+    .header-user-status-login
+      %a{href: "#"}
+        = fa_icon 'heart'
+        いいね！一覧
+      %a{href: "#"}
+        = fa_icon 'bell'
+        お知らせ
+      %a{href: "#"}
+        = fa_icon 'check'
+        やることリスト
+    .mypage
+      %a{href: "#"}
+        = image_tag 'icon.png', width: "35", class: "img"
+      %a{href: "#", class: "mypage-link"}
+        マイページ
+  -# - else    
+  -#   .header-btn
+  -#     .header-btn_signupbtn
+  -#       = link_to "新規会員登録"
+  -#     .header-btn_logbtn
+  -#       = link_to "ログイン"
+
