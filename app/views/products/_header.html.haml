@@ -1,43 +1,41 @@
 .header
-  .header-wrapper
-    .header-logo
+  .header--wrapper
+    .header--logo
       %a{href: "#"}
         = image_tag 'logo.png', width: '133', alt: 'アイコン'
-    .header-search
-      .header-search_input
+    .header--search
+      .header--search__input
         %input.search-register{type: "text", name: "name", placeholder: "何かお探しですか？", autocomplete: "off", style: "font-size:100%;"}
-      .header-search_icon
+      .header--search__icon
         %a{href: "#"}
           = fa_icon 'search', class: 'icon'
-  .header-select
-    .header-select_category
+  .header--select
+    .header--select__category
       %a{href: "#"}
         = fa_icon 'list', class: "awsome"
         カテゴリーから探す    
-    .header-select_category
+    .header--select__category
       %a{href: "#"}
         = fa_icon 'tag', class: "awsome"
         ブランドから探す
-  -# - if user_signed in?
-    .header-user-status-login
-      %a{href: "#"}
-        = fa_icon 'heart'
-        いいね！一覧
-      %a{href: "#"}
-        = fa_icon 'bell'
-        お知らせ
-      %a{href: "#"}
-        = fa_icon 'check'
-        やることリスト
-    .mypage
-      %a{href: "#"}
-        = image_tag 'icon.png', width: "35", class: "img"
-      %a{href: "#", class: "mypage-link"}
-        マイページ
-  -# - else    
-  -#   .header-btn
-  -#     .header-btn_signupbtn
-  -#       = link_to "新規会員登録"
-  -#     .header-btn_logbtn
-  -#       = link_to "ログイン"
+    -# .header--user--status--login
+    -#   %a{href: "#"}
+    -#     = fa_icon 'heart'
+    -#     いいね！一覧
+    -#   %a{href: "#"}
+    -#     = fa_icon 'bell'
+    -#     お知らせ
+    -#   %a{href: "#"}
+    -#     = fa_icon 'check'
+    -#     やることリスト
+    -# .mypage
+    -#   %a{href: "#"}
+    -#     = image_tag 'icon.png', width: "35", class: "img"
+    -#   %a{href: "#", class: "mypage-link"}
+    -#     マイページ   
+    .header--btn
+      .header--btn__signupbtn
+        = link_to "新規会員登録"
+      .header--btn__logbtn
+        = link_to "ログイン"
 

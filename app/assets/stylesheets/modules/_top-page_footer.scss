@@ -1,6 +1,6 @@
 .footer {
   width: 100%;
-  &-top {
+  &--top {
     position: absolute;
     height: 280px;
     width: 100%;
@@ -11,12 +11,12 @@
     }
   }
 }
-.footer-top_contents {
+.footer--top__contents {
   height: 170px;
   padding: 0 10% 0 23%; 
   display: flex;
   position: relative;
-  &_heading {
+  &__heading {
     width: 450px;
     margin: 6% 0 0 0;
     h1 {
@@ -40,12 +40,12 @@
   }
 }
 
-.footer-bottom {
+.footer--bottom {
   margin-top: 108px;
   padding: 1% 0 0 13%;
   height: 380px;
   background-color: black;
-  &-detail {
+  &--detail {
     color: white;
     display: flex;
     a {
@@ -55,36 +55,36 @@
       color: #ADADAD;
       text-decoration: none;
     }
-   &_something {
+   &__something {
      margin-left: 30px;
      width: 180px;
      p {
        margin-bottom: 10%; 
      }
-     &_right {
+     &__right {
        margin: 3% 1% 0 3%;
        width: 180px;
      }
-     &_icon {
+     &__icon {
        display: flex;
        a {
          margin-right: 20px; 
+       .tw-icon {
+         margin-top: 40%;
+         font-size: 30px;
+         color: white;
+        } 
+       .fb-icon {
+         margin: 120% 0 0 100%;
+         padding: 40% 30% 0 80%;
+         background: white;
+         font-size: 20px;
+         color: black;
+         border-radius: 5%; 
+        }
        }
-     }
-     .tw-icon {
-      margin-top: 40%;
-      font-size: 30px;
-      color: white;
-     } 
-     .fb-icon {
-       margin: 120% 0 0 100%;
-       padding: 40% 30% 0 80%;
-       background: white;
-       font-size: 20px;
-       color: black;
-       border-radius: 5%; 
-     }
-   }
+      }
+    }
   }
 }
 
