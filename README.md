@@ -112,7 +112,7 @@ Things you may want to cover:
 ### Association
 - belongs_to :user
 - has_many :images, dependent: :destroy
-- has_one :size
+- has_many :sizes
 - has_many :comments
 - has_many :favorites
 - belongs_to :category
@@ -196,4 +196,4 @@ Things you may want to cover:
 |size_category|integer|null: false|
 
 ### Association
-- belongs_to :product
+- has_many :products
