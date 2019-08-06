@@ -1,0 +1,13 @@
+@mixin arow(){
+  content: '';
+  width: 25px;
+  height: 25px;
+  border: 0px;
+  border-top: solid 2px white;
+  border-right: solid 2px white;
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  position: absolute;
+  top: 36%;
+  margin-top: -4px;
+}
