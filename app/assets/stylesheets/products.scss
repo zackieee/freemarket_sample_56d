@@ -3,6 +3,9 @@
       height: 400px;
       background: #ECEBE9;
       text-align: center;
+      a {
+         text-decoration: none;
+      }
       &__backimage {
          position: absolute;
       }
