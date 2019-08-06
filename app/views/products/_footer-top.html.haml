@@ -6,9 +6,9 @@
       %h1 スマホでかんたんフリマアプリ
       %p 今すぐ無料ダウンロード！
       = image_tag 'icon.png', width: '65', class: "ml-icon"
-      %a{href: "https://apps.apple.com/jp/app/id667861049?l=ja"}
+      = link_to "https://apps.apple.com/jp/app/id667861049?l=ja" do
         = image_tag '//www-mercari-jp.akamaized.net/assets/img/common/common/app-store.svg?863303983', class: "dllink-image"
-      %a{href: "https://play.google.com/store/apps/details?id=com.kouzoh.mercari&hl=ja"}
+      = link_to "https://play.google.com/store/apps/details?id=com.kouzoh.mercari&hl=ja" do 
         = image_tag '//www-mercari-jp.akamaized.net/assets/img/common/common/google-play.svg?863303983', class: "dllink-image"
     .footer--top__contents__img
       = image_tag 'footer-main.png', width: '320', class: 'footer-main__img'

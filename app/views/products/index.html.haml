@@ -1,8 +1,8 @@
 =render 'header'
 .products
   .products--heading
-    %a
-      = image_tag 'heading-image.png', alt: '', height: '400', width: '', class: ''
+    = link_to '' do
+      = image_tag 'heading-image.png', height: '400'
     .arrow
     .arrow-second
     .circle-wrapper
@@ -16,9 +16,9 @@
     -#     %h1 フリマアプリ
     -#     %p メルカリはスマホカメラからすぐに出品できる
     -#     %p 購入時も安心な独自システムのアプリです
-    -#     %a{href: "#"}
+    -#     = link_to '' do
     -#       = image_tag '//www-mercari-jp.akamaized.net/assets/img/common/common/app-store.svg?863303983', class: "dllink-image", width: "170"
-    -#     %a{href: "#"}
+    -#     = link_to '' do
     -#       = image_tag '//www-mercari-jp.akamaized.net/assets/img/common/common/google-play.svg?863303983', class: "dllink-image", width: "170"
     -#   .products--heading__wrapper__headingimage
     -#     = image_tag 'top-image', width: '450'
@@ -26,7 +26,7 @@
   .item--heading
     %h1 ピックアップカテゴリー
   .item--new
-    %a{href: "#"} レディース新着アイテム 
+    = link_to "レディース新着アイテム" 
   .item--list
     .item--list__image
       = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
@@ -72,9 +72,9 @@
     %a{href: "#"} すべての商品を見る  
 .item
   .item--heading
-    %h1 ピックアップカテゴリー
+    %h1 ピックアップブランド
   .item--new
-    %a{href: "#"} レディース新着アイテム 
+    = link_to "レディース新着アイテム" 
   .item--list
     .item--list__image
       = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
@@ -117,6 +117,6 @@
             = fa_icon 'heart'
             %span 1
   .show-item
-    %a{href: "#"} すべての商品を見る 
+    = link_to "すべての商品を見る" 
 =render 'footer-top'
 =render 'footer-bottom'
