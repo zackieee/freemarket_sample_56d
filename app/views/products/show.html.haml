@@ -1,0 +1,69 @@
+=render 'header'
+.show
+  .show-item
+    %h1 【新品・送料無料】ユニシティ スーパーホワイト 2個セット
+    %p『【新品・送料無料】ユニシティ スーパーホワイト 2個セット』は、100回の取引実績を持つawsさんから出品されました。健康用品/コスメ・香水・美容の商品で、東京都から2~3日で発送されます。
+    .show-item__wrapper
+      .show-item__wrapper__contents
+        .show-item__wrapper__contents__image
+          = image_tag 'top-image', alt: '', height: '265', width: '300', class: ''
+        .show-item__wrapper__contents__list
+          = image_tag 'top-image', height: '50', width: '54'
+          = image_tag 'top-image', height: '50', width: '54'
+          = image_tag 'top-image', height: '50', width: '54'
+          = image_tag 'top-image', height: '50', width: '54'
+          = image_tag 'top-image', height: '50', width: '54'
+          = image_tag 'top-image', height: '50', width: '54'
+          = image_tag 'top-image', height: '50', width: '54'
+          = image_tag 'top-image', height: '50', width: '54'
+          = image_tag 'top-image', height: '50', width: '54'
+          = image_tag 'top-image', height: '50', width: '54'
+      .show-item__wrapper__contents__owner
+        .show-item__wrapper__contentsowner__left
+          出品者
+        .show-item__wrapper__contentsowner__right
+          = link_to 'aws'
+=render 'footer-top'
+.footer--bottom
+  .footer--bottom--detail
+    .footer--bottom--detail__something
+      %p メルカリについて
+      = link_to "会社概要 (運営会社)"
+      = link_to "採用情報"
+      = link_to "プレリリース"
+      = link_to "公式ブログ"
+      = link_to "メルカリロゴ利用ガイドライン"
+      .footer--bottom--detail__something__icon
+        = link_to '' do
+          = icon 'fab', 'twitter', class: 'tw-icon'
+        = link_to '' do
+          = icon 'fab', 'facebook', class: 'fb-icon'
+    .footer--bottom--detail__something
+      %p ヘルプ&ガイド 
+      = link_to "メルカリガイド"
+      = link_to "らくらくメルカリ便"
+      = link_to "ゆうゆうメルカリ便"
+      = link_to "大型メルカリ便"
+      = link_to "車体取引ガイド"
+      = link_to "メルカリあんしん・あんぜん宣言！"
+      = link_to "偽ブランド品撲滅への取り組み"
+      = link_to "メルカリボックス"
+    .footer--bottom--detail__something
+      %p プライバシーと利用規約
+      = link_to "プライバシーボリシー"
+      = link_to "メルカリ利用規約"
+      = link_to "あんしんスマホサポート制度に関する利用規約"
+      = link_to "コンプライアンスポリシー"
+    .footer--bottom--detail__something__right
+      = link_to "個人データの安全管理に係る基本方針"
+      = link_to "特定商取引に関する表記"
+      = link_to "資産決済法に基づく表示"
+      = link_to "法令遵守と犯罪防止のために"
+    .footer--bottom--detail__something
+      %p 国
+      = link_to "日本"
+      = link_to "United States"
+  .footer-logo
+    = link_to '' do
+      = image_tag 'logo-white.png', class: 'logo-white'
+    %p © 2019 Mercar
