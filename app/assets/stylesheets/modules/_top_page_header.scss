@@ -1,9 +1,7 @@
 .header {
   height: 100px;
-  width: 100%;
   background-color: white;
-  position: fixed;
-  padding: 0 25% 0 14%;
+  padding-left: 14%;
   a {
     text-decoration: none;
   }
@@ -94,7 +92,7 @@
 
 
 .header--btn {
-  margin-left: 34.3%;
+  margin-left: 40%;
   margin-top: 10px;
   display: flex;
   &__signupbtn a {

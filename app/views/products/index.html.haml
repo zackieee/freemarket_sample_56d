@@ -1,3 +1,121 @@
 =render 'header'
 .products
-=render 'footer'
+  .products--heading
+    %a
+      = image_tag 'heading-image.png', alt: '', height: '400', width: '', class: ''
+    %a{href: "#",class: "arrow"}
+    %a{href: "#",class: "arrow2"}
+    .circle-wrapper
+      .circle
+      .circle
+    -# .products--heading__backimage
+    -#   = image_tag 'back-image.png', alt: '', height: '400', width: '1500', class: ''
+    -# .products--heading__wrapper
+    -#   .products--heading__wrapper__text
+    -#     %h1 スマホでかんたん
+    -#     %h1 フリマアプリ
+    -#     %p メルカリはスマホカメラからすぐに出品できる
+    -#     %p 購入時も安心な独自システムのアプリです
+    -#     %a{href: "#"}
+    -#       = image_tag '//www-mercari-jp.akamaized.net/assets/img/common/common/app-store.svg?863303983', class: "dllink-image", width: "170"
+    -#       = image_tag '//www-mercari-jp.akamaized.net/assets/img/common/common/google-play.svg?863303983', class: "dllink-image", width: "170"
+    -#   .products--heading__wrapper__headingimage
+    -#     = image_tag 'top-image', width: '450'
+.item
+  .item--heading
+    %h1 ピックアップカテゴリー
+  .item--new
+    %a{href: "#"} レディース新着アイテム 
+  .item--list
+    .item--list__image
+      = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
+      .item--list__image__text
+        %p アイコン売ってます
+        .item--list__image__text__wrapper
+          .item--list__detail__wrapper__value
+            %p ¥10000
+          .item--list__detail__wrapper__like
+            = fa_icon 'heart'
+            %span 1
+    .item--list__image
+      = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
+      .item--list__image__text
+        %p アイコン売ってます
+        .item--list__image__text__wrapper
+          .item--list__detail__wrapper__value
+            %p ¥10000
+          .item--list__detail__wrapper__like
+            = fa_icon 'heart'
+            %span 1
+    .item--list__image
+      = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
+      .item--list__image__text
+        %p アイコン売ってます
+        .item--list__image__text__wrapper
+          .item--list__detail__wrapper__value
+            %p ¥10000
+          .item--list__detail__wrapper__like
+            = fa_icon 'heart'
+            %span 1
+    .item--list__image
+      = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
+      .item--list__image__text
+        %p アイコン売ってます
+        .item--list__image__text__wrapper
+          .item--list__detail__wrapper__value
+            %p ¥10000
+          .item--list__detail__wrapper__like
+            = fa_icon 'heart'
+            %span 1
+  .show-item
+    %a{href: "#"} すべての商品を見る  
+.item
+  .item--heading
+    %h1 ピックアップブランド
+  .item--new
+    %a{href: "#"} シャネル新着アイテム 
+  .item--list
+    .item--list__image
+      = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
+      .item--list__image__text
+        %p アイコン売ってます
+        .item--list__image__text__wrapper
+          .item--list__detail__wrapper__value
+            %p ¥10000
+          .item--list__detail__wrapper__like
+            = fa_icon 'heart'
+            %span 1
+    .item--list__image
+      = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
+      .item--list__image__text
+        %p アイコン売ってます
+        .item--list__image__text__wrapper
+          .item--list__detail__wrapper__value
+            %p ¥10000
+          .item--list__detail__wrapper__like
+            = fa_icon 'heart'
+            %span 1
+    .item--list__image
+      = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
+      .item--list__image__text
+        %p アイコン売ってます
+        .item--list__image__text__wrapper
+          .item--list__detail__wrapper__value
+            %p ¥10000
+          .item--list__detail__wrapper__like
+            = fa_icon 'heart'
+            %span 1
+    .item--list__image
+      = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
+      .item--list__image__text
+        %p アイコン売ってます
+        .item--list__image__text__wrapper
+          .item--list__detail__wrapper__value
+            %p ¥10000
+          .item--list__detail__wrapper__like
+            = fa_icon 'heart'
+            %span 1
+  .show-item
+    %a{href: "#"} すべての商品を見る
+=render 'footer-top'
+=render 'footer-bottom'
