@@ -1,0 +1,40 @@
+.header
+  .header--wrapper
+    .header--logo
+      = link_to '' do
+        = image_tag 'logo.png', width: '133', alt: 'アイコン'
+    .header--search
+      .header--search__input
+        %input.search-register{type: "text", name: "name", placeholder: "何かお探しですか？", autocomplete: "off", style: "font-size:100%;"}
+      .header--search__icon
+        = link_to '' do
+          = fa_icon 'search', class: 'icon'
+  .header--select
+    .header--select__category
+      = link_to '' do
+        = fa_icon 'list', class: "awsome"
+        カテゴリーから探す    
+    .header--select__category
+      = link_to '' do
+        = fa_icon 'tag', class: "awsome"
+        ブランドから探す
+    -# .header--user--status--login
+    -#   = link_to '' do
+    -#     = fa_icon 'heart'
+    -#     いいね！一覧
+    -#   = link_to '' do
+    -#     = fa_icon 'bell'
+    -#     お知らせ
+    -#   = link_to '' do
+    -#     = fa_icon 'check'
+    -#     やることリスト
+    -# .mypage
+    -#   = link_to '' do
+    -#     = image_tag 'icon.png', width: "35", class: "img"
+    -#   = link_to "マイページ", class: "mypage-link"   
+    .header--btn
+      .header--btn__signupbtn
+        = link_to "新規会員登録"
+      .header--btn__logbtn
+        = link_to "ログイン"
+
