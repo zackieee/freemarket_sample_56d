@@ -1,11 +1,10 @@
 //formパーツのCSSパーツ
 //ヘッダ設定
-@mixin form_headline(){
-  padding:32px;
+@mixin form_headline($padding){
+  padding:$padding;
   font-size:22px;
   font-weight: bold;
   text-align:center;
-  border-bottom:solid 1px #f5f5f5;
 }
 
 //テキストフィール設定
