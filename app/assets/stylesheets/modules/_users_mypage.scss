@@ -1,0 +1,68 @@
+.mypage {
+  margin: 40px auto 0;
+  padding-bottom: 40px;
+  width: 1020px;
+  &__main {
+    width: 700px;
+    float: left;
+    &__header {
+      height: 200px;
+      border-bottom: 1px solid #f5f5f5;
+      .mypage-background {
+        position: absolute;
+      }
+      &__contents {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding-top: 30px;
+        width: 700px;
+        .user-avater {
+          border-radius: 50%;
+        }
+        h3 {
+          font-size: 20px;
+          font-weight: bold;
+        }
+        &__number {
+          &__rating {
+            font-size: 12px;
+          }
+          &__products {
+          }
+        }
+      }
+    }
+    &__contents {
+      &__nav {
+        display: inline-block;
+        line-height: 70px;
+        li {
+          float: left;
+          width: 350px;
+          text-align: center;
+          font-weight: bold;
+        }
+        li:first-child {
+          border-top: 2px solid #dd0e0e;
+          background-color: #ffffff;
+
+        }
+      }
+      &__content {
+        background-color: #ffffff;
+        &__image {
+          
+          
+        }
+        &__text {
+
+        }
+      }
+    }
+    &__trade {
+      
+    }
+  }
+}
