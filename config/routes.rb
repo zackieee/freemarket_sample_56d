@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   end
 
   root 'products#index'
-  resources :products
+  resources :products do
+    get :buy, on: :collection #productsにデータを入れたら':collection'を':mender'に変更
+  end
   resources :users
 end
