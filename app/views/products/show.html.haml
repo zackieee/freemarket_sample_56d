@@ -1,5 +1,5 @@
 =render 'header'
-.show
+.show.crearfix
   .show-item
     %h1 【新品・送料無料】ユニシティ スーパーホワイト 2個セット
     %p『【新品・送料無料】ユニシティ スーパーホワイト 2個セット』は、100回の取引実績を持つawsさんから出品されました。健康用品/コスメ・香水・美容の商品で、東京都から2~3日で発送されます。
@@ -19,10 +19,80 @@
           = image_tag 'top-image', height: '50', width: '54'
           = image_tag 'top-image', height: '50', width: '54'
       .show-item__wrapper__contents__owner
-        .show-item__wrapper__contentsowner__left
-          出品者
-        .show-item__wrapper__contentsowner__right
-          = link_to 'aws'
+        .show-item__wrapper__contents__owner__detail
+          .show-item__wrapper__contents__owner__detail__left
+            %p 出品者
+          .show-item__wrapper__contents__owner__detail__right
+            = link_to "aws"
+            = icon 'far', 'laugh-squint', class: "good"
+            1
+            = icon 'far', 'meh', class: "normal"
+            1
+            = icon 'far', 'angry', class: "bad"
+            1
+        .show-item__wrapper__contents__owner__detail
+          .show-item__wrapper__contents__owner__detail__left
+            %p カテゴリー
+          .show-item__wrapper__contents__owner__detail__right
+            = link_to "aws"
+            .arow
+              = link_to '' do
+                = icon 'fas', 'angle-right'
+              = link_to "aws"
+            .arow-second
+              = link_to '' do
+                = icon 'fas', 'angle-right'
+              = link_to "aws" 
+        .show-item__wrapper__contents__owner__detail
+          .show-item__wrapper__contents__owner__detail__lefts
+            %p ブランド
+          .show-item__wrapper__contents__owner__detail__rights
+            = link_to "シャネル"
+        .show-item__wrapper__contents__owner__detail
+          .show-item__wrapper__contents__owner__detail__lefts
+            %p 商品の状態
+          .show-item__wrapper__contents__owner__detail__rights
+            %p やや傷や汚れあり
+        .show-item__wrapper__contents__owner__detail
+          .show-item__wrapper__contents__owner__detail__lefts
+            %p 配送料の負担
+          .show-item__wrapper__contents__owner__detail__rights
+            %p 送料込み(出品者負担)
+        .show-item__wrapper__contents__owner__detail
+          .show-item__wrapper__contents__owner__detail__lefts
+            %p 配送の方法
+          .show-item__wrapper__contents__owner__detail__rights
+            %p 未定
+        .show-item__wrapper__contents__owner__detail
+          .show-item__wrapper__contents__owner__detail__lefts
+            %p 配送元の地域
+          .show-item__wrapper__contents__owner__detail__rights
+            %p 未定
+        .show-item__wrapper__contents__owner__detail
+          .show-item__wrapper__contents__owner__detail__lefts
+            %p 発送日の目安
+          .show-item__wrapper__contents__owner__detail__rights
+            %p 1~2日で発送
+    .show-item__value
+      %h1 ¥ 114,000
+      %p (税込)
+      %span 送料込み
+    .show-item__buy
+      = link_to "購入画面に進む"
+    .show-item__text
+      %span ケータイです
+    .show-item__any
+      .show-item__any__like
+        = icon 'far', 'heart'
+        %p いいね！
+        %p 8
+      .show-item__any__info
+        = icon 'far', 'flag'
+        %p 不適切な商品の報告
+      .show-item__any__secure
+        = link_to '' do
+          = icon 'fas', 'lock'
+        = link_to "あんしん・あんぜんへの取り組み"
 =render 'footer-top'
 .footer--bottom
   .footer--bottom--detail

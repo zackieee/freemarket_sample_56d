@@ -1,10 +1,15 @@
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
 .show {
   min-height: 100vh;
   padding: 3% 25% 10% 25%;
   background: #F5F5F5;
   &-item {
-    height: 100vh;
-    padding: 3% 6% 10% 6%;
+    min-height: 100vh;
+    padding: 3% 6% 5% 6%;
     background: white;
     word-break: break-all;
     h1 {
@@ -13,12 +18,92 @@
       font-weight: bold;
     }
     p {
-      margin: 10%;
+      margin: 1% 0 3% 0;
       color: #888888;
+      font-size: 12px;
+    }
+    &__value {
+      width: 100%;
+      display: flex;
+      text-align: center;
+      padding: 0 25% 0 25%;
+      h1 {
+        font-size: 40px;
+      }
+      p {
+        margin: 5.5% 0 0 3%;
+        font-size: 10px;
+      }
+      span {
+        margin: 4.5% 0 0 0; 
+      }
+    }
+    &__buy {
+      width: 100%;
+      text-align: center;
+      background: #EB352D;
+      padding: 2% 0;
+      a {
+        text-decoration: none;
+        color: white;
+        font-size: 23px;
+        font-weight: bold;
+        display: block;
+      }
+    }
+    &__text {
+      min-height: 100px;
+      width: 100%;
+      margin: 10% 0 1% 0;
+      word-break: break-all;
+    }
+    &__any {
+      display: flex;
+      p {
+        font-size: 14px;
+        color: black;
+        margin-left: 3%; 
+      }
+      i {
+        margin: 3% 0 0 10%;
+        font-size: 14px;
+      }
+    &__like {
+      display: flex;
+      width: 120px;
+      height: 30px;
+      padding: 1% 1% 0 1%;
+      border-radius: 24px;
+      background: #F5F5F5;
+      }
+    &__info {
+      display: flex;
+      width: 180px;
+      height: 30px;
+      padding: 1% 1% 0 1%;
+      margin-left: 3%;
+      border-radius: 24px;
+      background: #F5F5F5;
+      }
+    &__secure {
+      display: flex;
+      width: 260px;
+      text-align: right;
+      margin-left: 10%;
+      padding-top: 0.5%;
+      color: #0099E8;
+        a {
+          color: #0099E8;
+          margin: 2% 0 0 3%;
+          font-size: 14px;
+          text-decoration: none;
+        }
+      }
     }
     &__wrapper {
-      display: flex;
       &__contents {
+        float: left;
+        width: 300px;
         background: #FAFAFA;
         &__image {
           width: 300px;
@@ -26,11 +111,97 @@
         }
         &__list {
             width: 300px;
-            height: 110px;
+            height: 150px;
             background: #FAFAFA;
-        }
       }
-    }   
+      &__owner {
+        float: left;
+        &__detail {
+          display: flex;
+        &__lefts {
+          height: 45px;
+          width: 120px;
+          margin-left: 5%;
+          background: #FAFAFA;
+          border: solid 1px #F5F5F5;
+          p {
+            color: black;
+            font-size: 13px;
+            margin: 13% 0 0 8%;
+          }
+        }
+        &__rights {
+          width: 180px;
+          min-height: 40px;
+          padding: 0 3% 0 3%;
+          border: solid 1px #F5F5F5;
+          a {
+          margin: 8% 5% 0 3%; 
+          text-decoration: none;
+          display: block;
+          color: #0099E8;
+          font-size: 14px;
+          }
+          p {
+            margin: 8% 5% 0 3%; 
+            display: block;
+            font-size: 14px;
+            color: black;
+          }
+        }
+        &__left {
+          min-height: 60px;
+          width: 120px;
+          margin-left: 5%;
+          background: #FAFAFA;
+          border: solid 1px #F5F5F5;
+          p {
+            color: black;
+            font-size: 13px;
+            margin: 23% 0 15% 8%; 
+          }
+        }
+        &__right {
+          width: 180px;
+          min-height: 40px;
+          padding: 0 3% 0 3%;
+          border: solid 1px #F5F5F5;
+          a {
+          margin: 0 5% 0 3%; 
+          text-decoration: none;
+          display: block;
+          color: #0099E8;
+          font-size: 14px;
+        }
+        .good {
+          margin-top: 15%; 
+          color: pink;
+        }
+        .normal {
+          margin-left: 10%;
+          color: orange;
+        }
+        .bad {
+          margin-left: 10%;
+          color: blue;
+        }
+       }
+      } 
+     }
+    }
+   }   
   }
 }
 
+.arow {
+  display: flex;
+  a {
+    margin: 0;
+  }
+}
+.arow-second {
+  display: flex;
+  a {
+    margin: 0;
+  }
+}
