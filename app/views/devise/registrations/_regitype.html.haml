@@ -1,0 +1,13 @@
+.user-main__contents__form.single-panel
+  .user-main__contents__form__group
+    .user-main__contents__form__group__btn
+      =link_to users_sign_up_profile_path, class:'user-main__contents__form__group__btn--mail' do
+        = fa_icon 'envelope', class: "contents__btn--icon"
+        メールアドレスで登録する
+    .user-main__contents__form__group__btn
+      =link_to users_sign_up_profile_path, class:'user-main__contents__form__group__btn--facebook' do
+        = fa_icon 'facebook-square', class: "contents__btn--icon"
+        Facebookで登録する
+    .user-main__contents__form__group__btn
+      =link_to users_sign_up_profile_path, class:'user-main__contents__form__group__btn--google' do
+        Googleで登録する 
