@@ -1,0 +1,22 @@
+.sub-header-step
+  %h1.sub-header-step__logo
+    = link_to '#' do
+      = image_tag '/images/common/logo.svg'
+  %nav.sub-header-step__stepper
+    %ol
+      %li.sub-header-step__stepper__progress.passed
+        会員情報
+        .sub-header-step__stepper__progress__status.first
+      %li.sub-header-step__stepper__progress.active
+        電話番号認証
+        .sub-header-step__stepper__progress__status
+      %li.sub-header-step__stepper__progress
+        お届け先住所入力
+        .sub-header-step__stepper__progress__status
+      %li.sub-header-step__stepper__progress
+        支払い方法
+        .sub-header-step__stepper__progress__status
+      %li.sub-header-step__stepper__progress
+        完了
+        .sub-header-step__stepper__progress__status.last
+      
