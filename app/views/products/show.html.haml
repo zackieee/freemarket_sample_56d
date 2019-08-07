@@ -180,6 +180,46 @@
               %p ¥10000
             .item--list__image__text__wrapper__like
               = icon 'far', 'heart'
+//if文で条件分岐 if user_signed_in?
+  -# .show-status
+  -#   .show-status__edit
+  -#     =link_to "商品の編集"
+  -#   %p or
+  -#   .show-status__stop
+  -#     =link_to "出品を一旦停止する"
+  -#   .show-status__delete
+  -#     =link_to "この商品を削除する"
+  -# .show-message
+  -#   .show-message__user
+  -#     .show-message__user__faceicon
+  -#       %p.user-name 田中
+  -#       = image_tag 'icon.png'
+  -#       .show-message__user__faceicon__says
+  -#         %p aaaaaaa
+  -#         .show-message__user__faceicon__fa
+  -#           = icon 'far', 'clock', class: "clock"
+  -#           %p 100日前
+  -#           = link_to '' do
+  -#             = icon 'far', 'flag', class: "flag"
+  -#           = link_to '' do
+  -#             = icon 'far', "trash-alt", class: "user-trash"
+  -#     .show-message__user__chatting
+  -#     .show-message__user__mycomment
+  -#       %p.my-name 田中
+  -#       .show-message__user__mycomment__text
+  -#         %p 右ふきだし文
+  -#         .show-message__user__mycomment__fa
+  -#           = icon 'far', 'clock', class: "clock"
+  -#           %p 100日前
+  -#           = link_to '' do
+  -#             = icon 'far', 'trash-alt', class: "trash"
+  -#       = image_tag 'icon.png', class: "faceicon"
+
+  -#   .show-message__form
+  -#     %p 相手のことを考えて丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分になることがあります。
+  -#   .show-message__comment
+  -#     %textarea{class: "post"}
+  -#     = link_to  "コメントする", root_path, class: "combtn"
 //パンくずリストが入ります
 =render 'footer-top'
 .footer--bottom
