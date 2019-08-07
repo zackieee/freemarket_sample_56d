@@ -1,6 +1,8 @@
 .wrapper
-  =render 'header-stepper'
-
-  =render 'regitype'
-
-  =render 'footer'
+  =render '/layouts/sub_header'
+  .user-main
+    .user-main__contents.registration-form
+      %h2.user-main__contents__title
+        新規会員登録
+      =render 'regitype'
+  =render '/layouts/sub_footer'
