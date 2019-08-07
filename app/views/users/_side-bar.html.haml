@@ -1,31 +1,94 @@
 .side-bar
-  %ul.user-menu
-    %li
-      マイページ
-      = icon 'fas','angle-right'
-    %li
-      お知らせ
-
-    %li
-      やることリスト
-
-    %li
-      いいね！一覧
-
-    %li
-      出品する
-
-    %li
-      出品した商品-出品中
-
-    %li
-      出品した商品-取引中
-
-    %li
-      出品した商品-売却済み
-
-    %li
-      購入した商品-取引中
-
-    %li
-      購入した商品-過去の取引
+  %nav.side-bar__user-menu
+    %ul
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          マイページ
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          お知らせ
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          やることリスト
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          いいね！一覧
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          出品する
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          出品した商品-出品中
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          出品した商品-取引中
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          出品した商品-売却済み
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          購入した商品-取引中
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          購入した商品-過去の取引
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          売上確認
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          ポイント
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          評価一覧
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          ガイド
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          お問い合わせ
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+    %ul
+      %h3
+        設定
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          プロフィール
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          発送元・お届け先住所変更
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          支払い方法
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          メール/パスワード
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          本人確認
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          電話番号の確認
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
+      %li
+        = link_to '#',class: 'side-bar__links' do
+          ログアウト
+          = icon 'fas','angle-right', class: 'side-bar__links__icon'
