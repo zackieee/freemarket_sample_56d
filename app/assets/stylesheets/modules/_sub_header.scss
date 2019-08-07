@@ -1,0 +1,10 @@
+@import "config/variable";
+@import "mixin/sub_header";
+
+.sub-header{
+  @include sub_header_bar;
+  padding:40px 0 0;
+  &__logo{
+    @include logo(185px,49px);
+  }
+}

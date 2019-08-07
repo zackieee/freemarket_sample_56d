@@ -1,0 +1,36 @@
+.user-main
+  .user-main__contents.login-form
+    .user-main__contents__form.form-underline.top-panel
+      .user-main__contents__form__group
+        %p.user-main__contents__form__group__info-text.text-center
+          アカウントをお持ちでない方はこちら
+        =link_to new_user_registration_path, class:'user-main__contents__form__group__btn--signup' do
+          新規会員登録
+    .user-main__contents__form.middle-panel
+      .user-main__contents__form__group.nallow-margin
+        .user-main__contents__form__group__btn.nallow-margin
+          =link_to '#', class:'user-main__contents__form__group__btn--facebook none-radius' do
+            = fa_icon 'facebook-square', class: "contents__btn--icon"
+            Facebookでログイン
+      .user-main__contents__form__group.nallow-margin
+        .user-main__contents__form__group__btn.nallow-margin
+          =link_to '#', class:'user-main__contents__form__group__btn--google none-radius' do
+            Googleでログイン
+    .user-main__contents__form.inner-panel
+      .user-main__contents__form__group
+        %label.user-main__contents__form__group__item{for:"email"}
+        = email_field_tag :email, '', class:'user-main__contents__form__group__item__input none-top-margin', placeholder:'メールアドレス', required: true
+      .user-main__contents__form__group.nallow-margin
+        %label.user-main__contents__form__group__item{for:"password"}
+        = password_field_tag :password, '', class:'user-main__contents__form__group__item__input none-top-margin', placeholder:'パスワード', autocomplete: 'off', required: true, minlength:'7'
+      .user-main__contents__form__group
+        // reCAPTHAをここに入れる。
+        = image_tag 'common/reCAPTCHA_dummy.png'
+      .user-main__contents__form__group
+        =link_to '#', class:'user-main__contents__form__group__btn--default' do
+          ログイン
+        %p.user-main__contents__form__group__confirm-text
+          %br
+          %br
+          = link_to users_sign_up_telephone_path, class:'user-main__contents__form__group__confirm-text--link', target:'_blank' do
+            パスワードをお忘れの方
