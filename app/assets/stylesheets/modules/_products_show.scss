@@ -7,6 +7,9 @@
   min-height: 100vh;
   padding: 3% 25% 10% 25%;
   background: #F5F5F5;
+  a:hover {
+    opacity: 0.7;
+  }
   &-item {
     min-height: 100vh;
     padding: 3% 6% 5% 6%;
@@ -166,6 +169,18 @@
           min-height: 40px;
           padding: 0 3% 0 3%;
           border: solid 1px #F5F5F5;
+          .arow {
+            display: flex;
+            a {
+              margin: 0;
+            }
+          }
+          .arow-second {
+            display: flex;
+            a {
+              margin: 0;
+            }
+          }
           a {
           margin: 0 5% 0 3%; 
           text-decoration: none;
@@ -191,17 +206,81 @@
     }
    }   
   }
-}
-
-.arow {
-  display: flex;
-  a {
-    margin: 0;
+  &-other {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3%;
+    a {
+      text-decoration: none;
+      color: #0099E8;
+      margin-bottom: 10%;
+      font-size: 12px;
+    }
+    i {
+      font-size: 20px;
+    }
+    &__right {
+      display: flex;
+      i {
+        margin-left: 10px; 
+      }
+    }
+    &__left {
+      display: flex;
+      i {
+        transform: scale(-1, 1);
+    }
+   }
   }
-}
-.arow-second {
-  display: flex;
-  a {
-    margin: 0;
+  .show-applink {
+    padding: 10% 25% 5% 25%;
+    background: white;
+    text-align: center;
+    .fb-btn {
+      padding: 3%;
+      border-radius: 10%;
+      background: #385185;
+    }
+    .tw-btn {
+      padding: 3%;
+      background: #5D9DC9;
+      border-radius: 10%; 
+    }
+    .pr-btn {
+      padding: 3%;
+      border-radius: 10%; 
+      background: #AA272B;     
+    }
+    a {
+      text-decoration: none;
+    }
+    i {
+      color: white;
+      font-size: 30px;
+      border-radius: 3%;
+      margin-left: 3%;
+    }
+  }
+  &-user__item {
+    text-align: center;
+    margin-top: 5%;
+    a {
+      text-decoration: none;
+      font-size: 30px;
+      color: #0099E8;
+    }
+  }
+  &-other__brand {
+    text-align: center;
+    margin-top: 5%;
+    a {
+      text-decoration: none;
+      font-size: 30px;
+      color: #0099E8;
+    }
+  }
+  &-other__item {
+    display: flex;
+    flex-wrap: wrap; 
   }
 }

@@ -77,11 +77,11 @@
 
 .item {
    background: #F5F5F5;
-   padding: 3% 0 5% 0;
+   padding: 3% 25% 5% 17%;
    &--heading {
-     margin: 0 25% 0 25%;
      text-align: center;
      h1 {
+        margin-left: 10%;
        font-size: 27px;
        font-weight: bold;
        }
@@ -95,13 +95,13 @@
       text-decoration: none;
       font-size: 22px;
       font-weight: bold;
+      margin-left: 10%;
      }
    &--list {
-      padding: 1% 10% 1% 18%;
+      padding: 1% 0 1% 0;
       display: flex;
       &__image {
-         margin-top: 10px;
-         margin-left: 20px;
+         margin: 10px 5px 0 20px;
          width: 210px;
          background-color: white;
          &__text {
@@ -139,7 +139,6 @@
 
 .item-show {
    text-align: right;
-   padding-right: 18%;
    a {
      font-size: 14px;
    }
