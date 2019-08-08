@@ -2,9 +2,10 @@
 @import "mixin/form";
 .wrapper{
   background-color:#f5f5f5;
+  color: #333333;
+  width: 100vw;
   //ユーザフォーム全般で使用
   .user-main{
-    color:#333;
     &__contents{
       margin:0 auto;
       background-color:#fff;

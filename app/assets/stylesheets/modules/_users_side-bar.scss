@@ -1,6 +1,5 @@
 .side-bar {
   display: block;
-  float: left;
   width: 280px;
   margin-right: 40px;
   &__user-menu {
@@ -16,7 +15,8 @@
         border-bottom: 1px solid #f5f5f5;
         .side-bar__links {
           text-decoration: none;
-          font-size: 16px;
+          color:#333;
+          font-size: 14px;
           margin: 0;
           padding-left: 20px;
           height: 48px;
@@ -26,10 +26,21 @@
           align-items: center;
           &__icon {
             padding-right: 20px;
+            transition: all ease-out .2s;
+            color: #ccc;  
           }
         }
-        :hover {
-          background-color: #f1f1f1;
+        .selected{
+          font-weight:bold;
+          background-color:#eee;
+        }  
+      }
+      li:hover,li>i:hover{
+        background-color: #f1f1f1;
+        a{
+          i{
+            color:#333;
+          }
         }
       }
     }
