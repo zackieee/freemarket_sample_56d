@@ -2,16 +2,15 @@
 @import 'mixin/form';
 
 .mypage {
-  display: flex;
+  display:flex;
+  align-items:flex-start;
   margin: 40px auto 0;
   width: 1020px;
   &__main {
-    height: 180px;
-    width: 700px;
-    background-color: #ffffff;
-      
+    width: 700px;      
     &__logout {
       padding: 64px;
+      background-color: #ffffff;
       &__btn {
         @include form_button($default_color,0,1);
       }
