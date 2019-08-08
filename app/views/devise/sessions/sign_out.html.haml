@@ -4,5 +4,5 @@
     = render 'users/side-bar'
     .mypage__main
       .mypage__main__logout
-        =link_to '#', class: 'mypage__main__logout__btn' do
+        =link_to destroy_user_session_path, method: :delete, class: 'mypage__main__logout__btn' do
           ログアウト

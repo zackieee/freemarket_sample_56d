@@ -42,6 +42,6 @@
       = image_tag 'logo-white.png', class: 'logo-white'
     %p © 2019 Mercar
   .user-sell
-    = link_to "出品", class: "text"
-    = link_to '' do
-      = icon 'fas', 'camera', class: "camera"
+    = link_to "出品", sell_products_path, class: "text"
+    = link_to sell_products_path, class: "camera" do
+      = icon 'fas', 'camera'
