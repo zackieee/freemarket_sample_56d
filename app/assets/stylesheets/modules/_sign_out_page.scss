@@ -1,0 +1,20 @@
+@import 'config/variable';
+@import 'mixin/form';
+
+.mypage {
+  display: flex;
+  margin: 40px auto 0;
+  width: 1020px;
+  &__main {
+    height: 180px;
+    width: 700px;
+    background-color: #ffffff;
+      
+    &__logout {
+      padding: 64px;
+      &__btn {
+        @include form_button($default_color,0,1);
+      }
+    }
+  }
+}

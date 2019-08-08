@@ -36,7 +36,7 @@
     = number_field_tag :card_security_code, '', class:'user-main__contents__form__group__item__input', placeholder:'カード背面4桁もしくは3桁の番号', required: true
     %p.user-main__contents__form__group__confirm-text.text-right
       = link_to users_sign_up_complete_path, class:'user-main__contents__form__group__confirm-text--link', target:'_blank' do
-        = fa_icon 'question-circle'
+        = icon 'fas', 'question-circle'
         カード裏面の番号とは？
     .user-main__contents__form__group
       =link_to users_sign_up_complete_path, class:'user-main__contents__form__group__btn--default' do
