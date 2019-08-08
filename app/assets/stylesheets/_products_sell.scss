@@ -11,7 +11,7 @@
     margin:0 auto;
     background-color:#fff;
     &__title{
-      @include form_headline;
+      @include form_headline(20px);
     }
     &__content{
       padding:32px;
