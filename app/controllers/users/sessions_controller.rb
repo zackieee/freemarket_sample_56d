@@ -10,4 +10,7 @@ class Users::SessionsController < Devise::SessionsController
 
   def edit_account
   end
+
+  def sign_out
+  end
 end
