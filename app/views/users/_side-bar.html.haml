@@ -2,7 +2,7 @@
   %nav.side-bar__user-menu
     %ul
       %li
-        = link_to '#',class: 'side-bar__links selected' do
+        = link_to '',class: 'side-bar__links selected' do
           マイページ
           = icon 'fas fa-lg ','angle-right', class: 'side-bar__links__icon'
       %li
@@ -65,7 +65,7 @@
       %h3
         設定
       %li
-        = link_to '#',class: 'side-bar__links' do
+        = link_to 'users_edit_profile',class: 'side-bar__links' do
           プロフィール
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
@@ -81,7 +81,7 @@
           メール/パスワード
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
-        = link_to '#',class: 'side-bar__links' do
+        = link_to users_edit_account_path, class: 'side-bar__links' do
           本人確認
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
@@ -89,6 +89,6 @@
           電話番号の確認
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
-        = link_to '#',class: 'side-bar__links' do
+        = link_to users_sign_out_path,class: 'side-bar__links' do
           ログアウト
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'

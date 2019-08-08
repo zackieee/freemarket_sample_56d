@@ -78,7 +78,7 @@
       %p (税込)
       %span 送料込み
     .show-item__buy
-      = link_to "購入画面に進む"
+      = link_to "購入画面に進む", buy_products_path
     .show-item__text
       %span ケータイです
     .show-item__any
@@ -114,9 +114,11 @@
   .show-other__item
     .item--list
       .item--list__image
-        = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
+        = link_to 'products/show' do
+          = image_tag 'top-image.png', height: '200', width: '200'
         .item--list__image__text
-          %p アイコン売ってます
+          = link_to 'products/show' do
+            アイコン売ってます
           .item--list__image__text__wrapper
             .item--list__image__text__wrapper__value
               %p ¥10000
@@ -125,9 +127,11 @@
               %span 1
     .item--list
       .item--list__image
-        = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
+        = link_to 'products/show' do
+          = image_tag 'top-image.png', height: '200', width: '200'
         .item--list__image__text
-          %p アイコン売ってます
+          = link_to 'products/show' do
+            アイコン売ってます
           .item--list__image__text__wrapper
             .item--list__image__text__wrapper__value
               %p ¥10000
@@ -136,9 +140,11 @@
               %span 1
     .item--list
       .item--list__image
-        = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
+        = link_to 'products/show' do
+          = image_tag 'top-image.png', height: '200', width: '200'
         .item--list__image__text
-          %p アイコン売ってます
+          = link_to 'products/show' do
+            アイコン売ってます
           .item--list__image__text__wrapper
             .item--list__image__text__wrapper__value
               %p ¥10000
@@ -147,9 +153,11 @@
               %span 1
     .item--list
       .item--list__image
-        = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
+        = link_to 'products/show' do
+          = image_tag 'top-image.png', height: '200', width: '200'
         .item--list__image__text
-          %p アイコン売ってます
+          = link_to 'products/show' do
+            アイコン売ってます
           .item--list__image__text__wrapper
             .item--list__image__text__wrapper__value
               %p ¥10000
@@ -158,9 +166,11 @@
               %span 1
     .item--list
       .item--list__image
-        = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
+        = link_to 'products/show' do
+          = image_tag 'top-image.png', height: '200', width: '200'
         .item--list__image__text
-          %p アイコン売ってます
+          = link_to 'products/show' do
+            アイコン売ってます
           .item--list__image__text__wrapper
             .item--list__image__text__wrapper__value
               %p ¥10000
@@ -172,14 +182,17 @@
   .show-other__item
     .item--list
       .item--list__image
-        = image_tag 'top-image.png', alt: '', height: '200', width: '220', class: ''
+        = link_to 'products/show' do
+          = image_tag 'top-image.png', height: '200', width: '200'
         .item--list__image__text
-          %p アイコン売ってます
+          = link_to 'products/show' do
+            アイコン売ってます
           .item--list__image__text__wrapper
             .item--list__image__text__wrapper__value
               %p ¥10000
             .item--list__image__text__wrapper__like
               = icon 'far', 'heart'
+              %span 1
   -# .show-status
   -#   .show-status__edit
   -#     =link_to "商品の編集"

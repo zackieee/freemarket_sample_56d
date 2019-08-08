@@ -34,4 +34,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def edit_account
   end
+  
 end

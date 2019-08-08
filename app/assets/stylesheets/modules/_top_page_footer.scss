@@ -112,18 +112,24 @@
   border-radius: 50%;
   background-color: #EB352D;
   a{
-    margin-left: 30%;
     display: block;
     text-decoration: none;
     color:white;
+    position: absolute;
+    top: 20px;
+    left: 5px;
+    height:100%;
+    width: 100%;
   }
   .text {
     margin: 0 0 5% 30%;
   }
   .camera {
-    margin: 0 30% 10% 0; 
     font-size: 60px;
     position: absolute;
-    right: 1.5%;
+    right: 2.5%;
+    left: 45px;
+    top: 40px;
+    bottom: 0px;
   } 
 }
