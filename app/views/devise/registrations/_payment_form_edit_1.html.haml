@@ -1,0 +1,14 @@
+.user-main__contents__form.edit-form.form-underline
+  .user-main__contents__form__group.middle-panel
+    %p.user-main__contents__form__group__middle-title
+      クレジットカード一覧
+    .user-main__contents__form__group
+      =link_to users_edit_payment_2_path, class:'user-main__contents__form__group__btn--default' do
+        = icon 'fas fa-lg', 'credit-card'
+        　クレジットカードを追加する
+.user-main__contents__form.middle-panel
+  %p.user-main__contents__form__group__confirm-text.text-right
+    = link_to '#', class:'user-main__contents__form__group__confirm-text--link', target:'_blank' do
+      支払い方法について
+      = icon 'fas', 'chevron-right'
+

@@ -9,12 +9,6 @@
     &__contents{
       margin:0 auto;
       background-color:#fff;
-      //サイドバー用合流したら消す
-      &__side-bar{
-        width:280px;
-        margin-right:40px;
-        background-color:#fff;
-      }
       //user登録用タイトル（名前変更厳しいのでこのまま）
       &__title{
         @include form_headline(32px);
@@ -101,6 +95,32 @@
 
           }
           //クレジットカード一覧
+          &__user-card{
+            &__title{
+              font-weight:600;
+              width:240px;
+              margin:0 auto;
+            }
+            display:flex;
+            align-items: center;
+            padding: 24px 0;
+            border-bottom: 1px solid #eee;
+            &__info{
+              position:relative;
+              width:240px;
+              margin:0 auto;
+            }
+            &__delete{
+              position:absolute;
+              padding:2px 6px;
+              left:70%;
+              font-size:12px;
+              color:#ea352d;
+              border:solid 1px #ea352d;
+              border-radius:3px;
+              text-decoration: none;
+            }
+          }
           &__card-list{
             margin: 8px 0 0;
             list-style: none;
@@ -275,7 +295,6 @@
     //ユーザ編集画面全般
     .edit-form{
       width:700px;
-      height:568px;
     }
     //ユーザーログイン画面
     .login-form{
@@ -294,6 +313,7 @@
   //マイページサイドバーをつける場合指定する
   .sidebar{
     display:flex;
+    align-items: self-end;
     width:1020px;
     margin: 40px auto 0;
     padding: 0 0 40px;
