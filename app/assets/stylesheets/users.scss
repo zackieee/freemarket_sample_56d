@@ -1,5 +1,301 @@
-.wrapper {
-  background-color: #f5f5f5;
+@import "config/variable";
+@import "mixin/form";
+.wrapper{
+  background-color:#f5f5f5;
   color: #333333;
   width: 100vw;
+  //ユーザフォーム全般で使用
+  .user-main{
+    &__contents{
+      margin:0 auto;
+      background-color:#fff;
+      //サイドバー用合流したら消す
+      &__side-bar{
+        width:280px;
+        margin-right:40px;
+        background-color:#fff;
+      }
+      //user登録用タイトル（名前変更厳しいのでこのまま）
+      &__title{
+        @include form_headline(32px);
+        border-bottom:solid 1px #f5f5f5;
+      }
+      //user編集用タイトル
+      &__title-edit{
+        @include form_headline(8px 24px);
+      }
+      &__form{
+        &__group{
+          max-width:343px;
+          margin:0 auto;
+          //アプリ紹介フォーム用
+          &__apl{
+            display:flex;
+            align-items:center;
+            text-align:center;
+            &__intro-text{
+              display:block;
+              width:100%;
+              color:#fff;  
+            }
+            &__link{
+              display:flex;
+            }
+          }
+          &__middle-title{
+            font-weight:bold;
+          }
+          &__icon{
+            display:flex;
+          }          
+          //フォーム全体のデフォルト設定
+          &__item{
+            font-size:13px;
+            font-weight:600;
+            //フォームの入力エリア
+            &__input{
+              @include form_input;
+              width:100%;
+              &--half{
+                @include form_input;
+                width: calc(50% - 6px);
+              }
+            }
+            //フォームラベル指定用
+            &--required{
+              @include form_label($required);
+            }
+            &--optional{
+              @include form_label($optional);
+            }
+          //プロフィール専用
+          &__profile{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding: 72px 16px 24px;
+            background:url(common/user-bg.jpg) no-repeat;
+            background-size:cover;
+            &__avator{
+              img{
+                width:65px;
+                height:65px;
+                border-radius:50%;
+              }
+            }
+            &__input-profile{
+              margin: 0 0 0 8px!important;
+              @include form_input;
+            }
+            &__input-introduction{
+              box-sizing:border-box;
+              min-height: 216px;
+              width: 100%;
+              padding: 10px;
+              border: 1px solid #ccc;
+              background: #fff;
+              font-size: 16px;
+              line-height: 1.5;
+            }
+          }
+
+          }
+          //クレジットカード一覧
+          &__card-list{
+            margin: 8px 0 0;
+            list-style: none;
+            li{
+              display:inline-block;
+              margin: 0 0 0 8px;
+              vertical-align: middle;
+            }
+          }
+          //フォームと独立したメッセージ
+          &__info-text{
+            @include form_text(14px);
+          }
+          //フォームの注釈
+          &__form-text{
+            @include form_text(14px);
+            color:#888;
+          }
+          //フォームの注意喚起メッセージ
+          &__confirm-text{
+            @include form_text(14px);
+            &--link{
+              font-size:14px;
+              color:#0099e8;
+              text-decoration: none;
+            }
+            &--bold{
+              font-size:14px;
+              font-weight:600;
+            }
+          }
+          //フォームのボタン関連
+          &__btn{
+            margin-top: 32px;
+            &--default{
+              @include form_button($default_color,0px,1);
+            }
+            &--signup{
+              @include form_button($auth_color,0px,1);
+            }
+            &--mail{
+              @include form_button($default_color,4px,1);
+              @include form_button_hover;              
+              i{
+                @include form_button_icon(25px);
+              }
+            }
+            &--facebook{
+              margin:16px 0 0;              
+              @include form_button($facebook_color,4px,1);
+              i{
+                @include form_button_icon(30px);
+              }
+            }
+            &--google{
+              margin:16px 0 0;
+              @include form_button($unused_color,4px,0);
+              //googleは特殊なのでscssで指定
+              color:#333;
+              background:#fff url(common/google.svg) no-repeat 3px top;
+              border:solid 1px #979797;
+              border-radius: 4px;
+            }
+          }
+        }
+        //その他例外設定
+        //最初のブロックにmarginを設定しない
+        &__group:not(:first-child) {
+          margin-top: 32px;
+        }
+        //該当のブロックのみ下記の設定
+        &--footer{
+          padding: 20px 40px 64px;
+          border-top:solid 1px #f5f5f5;
+        }
+      }
+      //クラス外の共通設定(ちょい足し便利エリア）
+      //呼び出し位置によってpaddingの値を指定する
+      .single-panel{
+        padding: 40px 40px 64px;
+      }
+      .top-panel{
+        padding: 40px 64px;
+      }
+      .middle-panel{
+        padding: 32px 64px;
+      }
+      .bottom-panel{
+        padding: 40px 40px 64px;
+      }
+      .inner-panel{
+        padding: 40px 16px;
+      }
+
+      //呼び出し位置によってmarginを狭める（主にボタン）
+      .nallow-margin{
+        margin-top: 16px!important;
+      }
+      .none-top-margin{
+        margin-top: 0!important;
+      }
+
+      //max-widthを打ち消し
+      .max-width-init{
+        max-width: initial;
+      }
+
+      //radius打ち消し
+      .none-radius{
+        border-radius:0!important;
+      }
+
+      //テキストの揃え位置を指定
+      .text-center{
+        text-align:center;
+      }
+      .text-right{
+        text-align:right;
+      }
+      .text-left{
+        text-align:left;
+      }
+
+      //入力フィールドフォーカス時の挙動を本家に合わせて変更
+      input:focus,textarea:focus{
+        outline: 0;
+        border-color:#0099e8;
+        background-color:#fff;
+      }
+      //numberタグのスピンボタン非表示
+      input[type=number]::-webkit-inner-spin-button,
+      input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }  
+      //selectフィールドのボタン、フォーカスなどを挙動を本家に合わせて変更
+      //デフォルトのドロップダウンボタンを無効化
+      select,textarea {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+      //selectのデフォルトCSSを変更
+      select{
+        margin: 8px 0 0;
+        padding: 10px 10px 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }      
+      //フォーカス時の挙動を本家に合わせて変更
+      select:focus {
+        outline: 0;
+        border-color:#0099e8;
+        background-color:#fff;
+      }
+      //date_selectのデフォルトCSSを変更
+      //年月日用
+      .year,.month,.day{
+        @include form_select(76px,48px,85%);
+      }
+      //ポスト
+      .postal-code-input{
+        @include form_select(100%,48px,95%);
+      }
+    }
+    //画面によってwidth調整
+    //ユーザ登録画面
+    .registration-form{
+      width:700px;
+    }
+    //ユーザ編集画面全般
+    .edit-form{
+      width:700px;
+      height:568px;
+    }
+    //ユーザーログイン画面
+    .login-form{
+      width:456px;
+    }
+    //アプリ紹介パネル表示
+    .apl-intro-form{
+      width:700px;
+      background: url(back-image.png) no-repeat;
+    }
+    //divの下線つける用
+    .form-underline{
+      border-bottom:solid 1px #f5f5f5;
+    }
+  }
+  //マイページサイドバーをつける場合指定する
+  .sidebar{
+    display:flex;
+    width:1020px;
+    margin: 40px auto 0;
+    padding: 0 0 40px;
+  }
 }
