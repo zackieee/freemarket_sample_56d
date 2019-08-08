@@ -82,3 +82,14 @@
   left:16px;
   font-size:$font-size;
 }
+
+@mixin font(){
+  p {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10% 0 1% 0;
+  }
+  li {
+    font-size: 14px;
+  }
+}
