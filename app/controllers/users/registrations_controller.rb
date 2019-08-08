@@ -29,6 +29,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def edit_payment
   end
 
+  def edit_payment_2
+  end
+
   def edit_account
   end
   

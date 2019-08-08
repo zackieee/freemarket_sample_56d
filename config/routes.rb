@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get '/users/edit/profile' => 'users/registrations#edit_profile'
     get '/users/edit/address' => 'users/registrations#edit_address' 
     get '/users/edit/payment' => 'users/registrations#edit_payment'
+    get '/users/edit/payment_2' => 'users/registrations#edit_payment_2'
     get '/users/edit/account' => 'users/registrations#edit_account'
     #ユーザサインアウト画面
     get '/users/sign_out' => 'users/sessions#sign_out'
