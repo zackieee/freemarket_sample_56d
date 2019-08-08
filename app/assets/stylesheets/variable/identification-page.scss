@@ -5,9 +5,6 @@
   span {
     background: #CCCCCC!important;
   }
-  li {
-    display: flex;
-  }
   //ユーザフォーム全般で使用
   .user{
     color:#333;
@@ -25,6 +22,9 @@
       }
       &__area {
         padding: 10% 10%;
+        li {
+          list-style: none;
+        }
         &__info {
           font-size: 14px;
           p {
