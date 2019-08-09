@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_125149) do
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.integer "card_number", null: false
+    t.bigint "card_number", null: false
     t.date "expiration_date", null: false
     t.integer "card_security_code", null: false
     t.datetime "created_at", null: false
@@ -112,8 +112,8 @@ ActiveRecord::Schema.define(version: 2019_08_08_125149) do
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "seller_user_id", null: false
-    t.bigint "buyer_user_id"
+    t.bigint "seller_id", null: false
+    t.bigint "buyer_id"
     t.string "name", null: false
     t.text "text", null: false
     t.integer "status", null: false
@@ -124,9 +124,9 @@ ActiveRecord::Schema.define(version: 2019_08_08_125149) do
     t.integer "sales_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["buyer_user_id"], name: "index_products_on_buyer_user_id"
+    t.index ["buyer_id"], name: "index_products_on_buyer_id"
     t.index ["name"], name: "index_products_on_name"
-    t.index ["seller_user_id"], name: "index_products_on_seller_user_id"
+    t.index ["seller_id"], name: "index_products_on_seller_id"
   end
 
   create_table "ratings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -157,11 +157,11 @@ ActiveRecord::Schema.define(version: 2019_08_08_125149) do
     t.string "nickname", default: "", null: false
     t.text "introduction"
     t.string "firstname", null: false
-    t.string "lasttname", null: false
+    t.string "lastname", null: false
     t.string "firstname_kana", null: false
     t.string "lastname_kana", null: false
     t.date "birthday", null: false
-    t.integer "tel", null: false
+    t.string "tel", null: false
     t.integer "sales_amount", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -182,8 +182,8 @@ ActiveRecord::Schema.define(version: 2019_08_08_125149) do
   add_foreign_key "product_categories", "products"
   add_foreign_key "product_sizes", "products"
   add_foreign_key "product_sizes", "sizes"
-  add_foreign_key "products", "users", column: "buyer_user_id"
-  add_foreign_key "products", "users", column: "seller_user_id"
+  add_foreign_key "products", "users", column: "buyer_id"
+  add_foreign_key "products", "users", column: "seller_id"
   add_foreign_key "ratings", "users", column: "rated_user_id"
   add_foreign_key "ratings", "users", column: "rater_user_id"
 end
