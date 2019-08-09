@@ -1,0 +1,135 @@
+.footer {
+  width: 100%;
+  &--top {
+    position: absolute;
+    height: 280px;
+    width: 100%;
+    .back-image {
+      width: 100%;
+      height: 100%;
+      background-size: cover; 
+    }
+  }
+}
+.footer--top__contents {
+  height: 170px;
+  padding: 0 10% 0 23%; 
+  display: flex;
+  position: relative;
+  &__heading {
+    width: 450px;
+    margin: 6% 0 0 0;
+    h1 {
+      color: white;
+      font-size: 25px;
+      font-weight: bold;
+    }
+    p {
+      color: white;
+      font-size: 35px;
+    }
+    a {
+      height: 60px;
+    }
+    img {
+      margin: 0.5% 4% 0 0;
+    }
+    .dllink-image:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+.footer--bottom {
+  margin-top: 108px;
+  padding: 1.5% 0 0 13%;
+  height: 380px;
+  background-color: black;
+  &--detail {
+    color: white;
+    display: flex;
+    a {
+      margin-bottom: 7%; 
+      font-size: 12px;
+      display: block;
+      color: #ADADAD;
+      text-decoration: none;
+    }
+   &__something {
+     margin-left: 30px;
+     width: 180px;
+     p {
+       margin-bottom: 10%; 
+     }
+     &__right {
+       margin: 3% 1% 0 3%;
+       width: 180px;
+     }
+     &__icon {
+       display: flex;
+       a {
+         margin-right: 20px; 
+       .tw-icon {
+         margin-top: 40%;
+         font-size: 30px;
+         color: white;
+        } 
+       .fb-icon {
+         margin: 40% 0 0 30%;
+         font-size: 30px;
+         color: white;
+        }
+       }
+      }
+    }
+  }
+}
+
+.footer-logo {
+  display: flex;
+  a {
+    margin:1% 0 0 2%;
+  }
+  a:hover {
+    opacity: 0.7;
+  }
+  p {
+    margin: 2% 0 0 28%;
+    font-size: 10px;
+    color: white;
+  }
+}
+
+.user-sell {
+  height: 100px;
+  width: 100px;
+  padding: 2%;
+  font-size: 20px;
+  float: right;
+  position: fixed;
+  top: 76%;
+  left: 87%;
+  border-radius: 50%;
+  background-color: #EB352D;
+  a{
+    display: block;
+    text-decoration: none;
+    color:white;
+    position: absolute;
+    top: 20px;
+    left: 5px;
+    height:100%;
+    width: 100%;
+  }
+  .text {
+    margin: 0 0 5% 30%;
+  }
+  .camera {
+    font-size: 60px;
+    position: absolute;
+    right: 2.5%;
+    left: 45px;
+    top: 40px;
+    bottom: 0px;
+  } 
+}

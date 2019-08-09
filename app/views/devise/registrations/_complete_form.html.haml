@@ -1,0 +1,19 @@
+.user-main__contents__form.single-panel
+  .user-main__contents__form__group
+    =link_to root_path, class:'user-main__contents__form__group__btn--default' do
+      メルカリをはじめる
+.user-main__contents__form.apl-intro-form
+  .user-main__contents__form__group.max-width-init
+    .user-main__contents__form__group__apl
+      .user-main__contents__form__group__apl__intro-text
+        %h1 スマホでかんたんフリマアプリ
+        %p 今すぐ無料ダウンロード！
+        .user-main__contents_form__group__apl__intro-text__link
+          = image_tag 'icon.png', width: '65', class: "ml-icon"
+          = link_to "https://apps.apple.com/jp/app/id667861049?l=ja" do
+            = image_tag '//www-mercari-jp.akamaized.net/assets/img/common/common/app-store.svg?863303983', class: "dllink-image"
+          = link_to "https://play.google.com/store/apps/details?id=com.kouzoh.mercari&hl=ja" do 
+            = image_tag '//www-mercari-jp.akamaized.net/assets/img/common/common/google-play.svg?863303983', class: "dllink-image"
+      .user-main__contents_form__group__apl__image
+        = image_tag 'footer-main.png', width: '320', class: 'footer-main__img'
+

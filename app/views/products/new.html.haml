@@ -1,0 +1,110 @@
+.wrapper
+  =render '/layouts/sub_header'
+  .sell-main
+    .sell-main__contents.registration-form
+      %h2.sell-main__contents__title
+        商品の情報を入力
+      .sell-main__contents__content.clearfix
+        %label.sell-main__contents__content__item
+          出品画像
+        %span.sell-main__contents__content__item--required
+          必須
+        %p.sell-main__contents__content__item--p
+          最大10枚までアップロードできます
+        %label
+          = image_tag 'touch.jpg'
+          %input{type: "file", class: 'hidden'}
+      .sell-main__contents__content.clearfix
+        %label.sell-main__contents__content__item{for:"name"}
+          商品名
+        %span.sell-main__contents__content__item--required
+          必須
+        = text_field_tag :name, '', class:'sell-main__contents__content__item__input', placeholder:'商品名（必須40文字まで）', required: true, maxlength: '40'
+        %label.sell-main__contents__content__item{for:"text"}
+          商品の説明
+        %span.sell-main__contents__content__item--required
+          必須
+        = text_area_tag :text, '', class:'sell-main__contents__content__item__textarea', rows: "5", placeholder:'商品の説明（必須1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです', required: true, maxlength: '1000'
+      .sell-main__contents__content.clearfix
+        %p.sell-main__contents__content__info-text.left
+          商品の詳細
+        .product-details
+          %label.sell-main__contents__content__item{for:"name"}
+            カテゴリー
+          %span.sell-main__contents__content__item--required
+            必須
+          = text_field_tag :name, '', class:'dropdown', placeholder:'---', required: true, maxlength: '40'
+          %label.sell-main__contents__content__item{for:"status"}
+            商品の状態
+          %span.sell-main__contents__content__item--required.top-space
+            必須
+          = text_field_tag :status, '', class:'dropdown', placeholder:'---', required: true, maxlength: '40'
+      .sell-main__contents__content.clearfix
+        %p.sell-main__contents__content__info-text.left
+          配送について
+          = link_to '' do
+            = icon "far", "question-circle"
+        .product-details
+          %label.sell-main__contents__content__item{for:"price"}
+            配送料の負担
+          %span.sell-main__contents__content__item--required
+            必須
+          = text_field_tag :price, '', class:'dropdown', placeholder:'---', required: true, maxlength: '40'
+          %label.sell-main__contents__content__item{for:"buyer_area"}
+            配送元の地域
+          %span.sell-main__contents__content__item--required.top-space
+            必須
+          = text_field_tag :buyer_area, '', class:'dropdown', placeholder:'---', required: true, maxlength: '40'
+          %label.sell-main__contents__content__item{for:"delivery_days"}
+            配送元までの日数
+          %span.sell-main__contents__content__item--required.top-space
+            必須
+          = text_field_tag :delivery_days, '', class:'dropdown', placeholder:'---', required: true, maxlength: '40'
+      .sell-main__contents__content.clearfix
+        %p.sell-main__contents__content__info-text.left
+          販売価格(300~9,999,999)
+          = link_to '' do
+            = icon "far", "question-circle"
+        .product-details.bottom-border.top-space.clearfix
+          .left
+            %label.sell-main__contents__content__item
+              価格
+            %span.sell-main__contents__content__item--required
+              必須
+          .right
+            %p.dropdown--mark
+              ¥
+              = text_field_tag :name, '', class:'dropdown--right', placeholder:'           例）300', required: true, maxlength: '40'
+        .product-details.bottom-border.bottom-space.clearfix
+          %label.sell-main__contents__content__item.left
+            販売手数料
+          %p.sell-main__contents__content__item.text-right.right
+            ー
+        .product-details.bottom-space.clearfix
+          %label.sell-main__contents__content__item.left
+            販売利益
+          %p.sell-main__contents__content__item.text-right.right
+            ー
+      .sell-main__contents__content
+        %p.sell-main__contents__content__confirm-text
+          = link_to '#', class:'sell-main__contents__content__confirm-text--link' do
+            禁止されている出品
+          、
+          = link_to '#', class:'sell-main__contents__content__confirm-text--link' do
+            行為
+          を必ずご確認ください。
+          %br
+          またブランド品でシリアルナンバー等がある場合はご記載ください。
+          = link_to '#', class:'sell-main__contents__content__confirm-text--link' do
+            偽ブランドの販売
+          は犯罪であり処罰される可能性があります。
+          %br
+          また、出品をもちまして
+          = link_to '#', class:'sell-main__contents__content__confirm-text--link' do
+            加盟店規約
+          に同意したことになります。
+        =link_to '#', class:'sell-main__contents__content__btn--big' do
+          出品する
+        =link_to '#', class:'sell-main__contents__content__btn--default' do
+          もどる
+  =render '/layouts/sub_footer'

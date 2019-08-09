@@ -1,0 +1,90 @@
+.wrapper
+  =render 'products/header'
+  .mypage
+    =render 'side-bar'
+    .mypage__main
+      .mypage__main__header
+        = image_tag 'mypage-background.jpg', height: '200px', width: '700px', class: 'mypage-background'
+        .mypage__main__header__contents
+          = link_to users_edit_profile_path do
+            =image_tag 'icon.png', height: '60px', width: '60px', class: 'user-avater'
+            %h2
+              user-name
+            .mypage__main__header__contents__number
+              .mypage__main__header__contents__number__rating
+                評価
+                %span
+                  4
+              .mypage__main__header__contents__number__products
+                出品数
+                %span
+                  10
+      .mypage__main__contents
+        %ul.mypage__main__contents__nav
+          %li.mypage__main__contents__nav.selected-tab
+            = link_to '#' do
+              お知らせ
+          %li.mypage__main__contents__nav
+            = link_to '#' do
+              やることリスト
+        .maypage__main__contents__content
+          -if true
+            %ul
+              - (1..5).each do | info |
+                %li.mypage__main__contents__content
+                  =link_to '#' do
+                    =image_tag 'mercari_profile.png', class:'mypage__main__contents__content__image', height: '48px', width: '48px'
+                    .mypage__main__contents__content__text
+                      事務局から個別メッセージ「【新機能の紹介】商品画面で値引き可能かどうかを表示できるようになりました！」
+                      .mypage__main__contents__content__time
+                        = icon 'far fa-sm','clock'
+                        %p
+                          4時間前
+                    .mypage__main__contents__content__link-icon
+                      = icon 'fas fa-lg','angle-right'
+            .mypage__main__contents__content__btn
+              = link_to '#' do
+                一覧を見る
+          - else 
+            .mypage__main__contents__content--none
+              %h3
+                お知らせはありません
+
+      .mypage__main__contents.second-contents
+        .mypage__main__contents__header
+          %h2
+            購入した商品
+        %ul.mypage__main__contents__nav
+          %li.mypage__main__contents__nav.selected-tab
+            = link_to '#' do
+              取引中
+          %li.mypage__main__contents__nav
+            = link_to '#' do
+              過去の取引
+        .maypage__main__contents__content
+          -if false
+            %ul
+              - (1..5).each do | info |
+                %li.mypage__main__contents__content
+                  =link_to '#' do
+                    =image_tag 'mercari_profile.png', class:'mypage__main__contents__content__image', height: '48px', width: '48px'
+                    .mypage__main__contents__content__text
+                      事務局から個別メッセージ「【新機能の紹介】商品画面で値引き可能かどうかを表示できるようになりました！」
+                      .mypage__main__contents__content__time
+                        = icon 'far fa-sm','clock'
+                        %p
+                          4時間前
+                    .mypage__main__contents__content__link-icon
+                      = icon 'fas fa-lg','angle-right'
+            .mypage__main__contents__content__btn
+              = link_to '#' do
+                一覧を見る
+          - else 
+          .mypage__main__contents__content--none
+            %h3
+              取引中の商品がありません
+
+      .mypage__main__trade
+
+  =render 'products/footer-top'
+  =render 'products/footer-bottom'

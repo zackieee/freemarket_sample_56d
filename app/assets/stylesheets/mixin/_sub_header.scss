@@ -1,0 +1,16 @@
+@mixin sub_header_bar(){
+  box-sizing: border-box;
+  height:128px;
+  text-align:center;
+}
+
+@mixin logo($width,$height){
+  img{
+    width:$width;
+    height:$height;
+    line-height:$height;
+  }
+  &:hover{
+    opacity:0.5;
+  }
+}

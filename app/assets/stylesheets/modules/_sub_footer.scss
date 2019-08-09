@@ -1,0 +1,43 @@
+.sub-footer{
+  box-sizing: border-box;
+  width:456px;
+  height:220px;
+  margin:0 auto;
+  padding:40px 0;
+  &__list{
+    display:flex;
+    justify-content: center;
+    &__item{
+      margin:0 0 0 16px;
+      font-size:12px;
+      list-style:none;
+      a{
+        color:#333;
+        text-decoration: none;
+      }
+      a:hover{
+        color:#999;
+        text-decoration: underline;
+      }
+    }
+  }
+  &__logo {
+    display:block;
+    margin:40px 0 auto;
+    &__form {
+      display:flex;
+      justify-content: center;
+      img {
+        width:80px;
+        height:65px;
+      }
+      img:hover {
+        opacity:0.5;
+      }
+    }
+  }
+  p{
+    font-size:13px;
+    text-align:center;
+  }
+}

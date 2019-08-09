@@ -1,0 +1,73 @@
+@import "config/variable";
+@import "mixin/sub_header";
+@import "mixin/stepper";
+
+//新規会員登録時専用のステップ登録付きヘッダー
+.sub-header-step{
+  @include sub_header_bar;
+  //ロゴ表示
+  &__logo{
+    display:inline-block;
+    padding:40px 0 0;
+    @include logo(185px,49px);
+  }
+  //ステッパー表示
+  &__stepper{
+    display: inline-block;
+    padding:40px 0 0 44px;
+    vertical-align:top;
+    //プログレスバー
+    &__progress{
+      position: relative;
+      display:inline-block;
+      z-index: 1;
+      margin: 0 40px 0 0;
+      min-width: 60px;
+      font-size:11px;
+      color: #888;
+      &__status{
+        width:12px;
+        height:12px;
+        margin: 8px auto 0;
+        background: #ccc;
+        border-radius: 50%;
+      }
+      &__status:before{
+        @include stepper_status();
+        right:50%;
+      }
+      &__status:after{
+        @include stepper_status();
+        left:50%;
+      }
+    }
+    //最後の要素についてはマージンをなくす
+    &__progress:last-child {
+      margin-right: 0;
+    }
+    //最初と最後の要素については:before/:after非適用
+    .first:before{
+      content:none;
+    }
+    .last:after{
+      content:none;           
+    }
+  }
+
+  //ステッパーのアクティブ項目表示
+  .active{
+    font-weight: 600;
+    color: #ea352d;
+  }
+  //アクティブ状態のステッパー表示
+  .active > div,
+  .active > div:before{
+    background-color: #ea352d;
+  }
+  //入力終了後のステップバー表示
+  .passed > div,
+  .passed > div:after,
+  .passed > div:before{
+    background-color: #ea352d;
+  }
+}
