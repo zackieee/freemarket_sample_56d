@@ -18,7 +18,7 @@
           いいね！一覧
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
-        = link_to '#',class: 'side-bar__links' do
+        = link_to new_product_path,class: 'side-bar__links' do
           出品する
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
@@ -65,7 +65,7 @@
       %h3
         設定
       %li
-        = link_to 'users_edit_profile',class: 'side-bar__links' do
+        = link_to users_edit_profile_path,class: 'side-bar__links' do
           プロフィール
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
@@ -73,7 +73,7 @@
           発送元・お届け先住所変更
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
-        = link_to '#',class: 'side-bar__links' do
+        = link_to users_edit_payment_path,class: 'side-bar__links' do
           支払い方法
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li

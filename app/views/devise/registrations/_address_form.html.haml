@@ -53,13 +53,13 @@
   .user-main__contents__form__group
     %label.user-main__contents__form__group__item
       建物名
-    %span.form-not-required
+    %span.user-main__contents__form__group__item--optional
       任意
     = text_field_tag :lastname, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 柳ビル103', required: true
   .user-main__contents__form__group
     %label.user-main__contents__form__group__item{for:"tel"}
       携帯電話の番号
-    %span.form-not-required
+    %span.user-main__contents__form__group__item--optional
       任意
     = telephone_field_tag :tel, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 09012345678', required: true
   .user-main__contents__form__group

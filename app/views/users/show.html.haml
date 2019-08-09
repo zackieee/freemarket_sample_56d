@@ -6,7 +6,7 @@
       .mypage__main__header
         = image_tag 'mypage-background.jpg', height: '200px', width: '700px', class: 'mypage-background'
         .mypage__main__header__contents
-          = link_to '#' do
+          = link_to users_edit_profile_path do
             =image_tag 'icon.png', height: '60px', width: '60px', class: 'user-avater'
             %h2
               user-name
