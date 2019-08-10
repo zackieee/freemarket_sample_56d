@@ -1,0 +1,13 @@
+.item--list__image
+  - product.images.each_with_index do |image, i|
+    = link_to 'products/show' do
+      = image_tag image
+    - break if i==0
+  .item--list__image__text
+    = link_to product.text, 'products/show'
+    .item--list__image__text__wrapper
+      .item--list__image__text__wrapper__value
+        %p  ¥ #{product.price} 
+      .item--list__image__text__wrapper__like
+        = icon 'far', 'heart'
+        %span 1
