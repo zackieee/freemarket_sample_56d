@@ -7,7 +7,7 @@ class AddCereateToUser < ActiveRecord::Migration[5.2]
     add_column :users, :firstname_kana, :string,            null: false
     add_column :users, :lastname_kana,  :string,            null: false
     add_column :users, :birthday,       :date,              null: false
-    add_column :users, :tel,            :integer,           null: false, unique: true
+    add_column :users, :tel,            :string,            null: false, unique: true
     add_column :users, :sales_amount,   :integer,           default: "0"
   end
 end

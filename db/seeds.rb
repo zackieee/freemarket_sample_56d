@@ -1,7 +1,80 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# coding: utf-8
+
+User.create(id: 1, email: 'rails@example.com', password: '123456', nickname: 'てっくん', introduction: '売ります。買います。', firstname: 'テック', lastname: '渋谷', firstname_kana: 'テック', lastname_kana: 'シブヤ', birthday: '2000/01/01', tel: '0312345678', sales_amount: 4980 )
+User.create(id: 2, email: 'ruby@example.com', password: '123456', nickname: 'てっちゃん', introduction: '売ります。買います。働きます。', firstname: '徹子', lastname: '渋谷', firstname_kana: 'テツコ', lastname_kana: 'シブヤ', birthday: '1980/01/01', tel: '09011111111', sales_amount: 32400 )
+
+Address.create(id: 1, user_id: 1, postal_code: 150-0043, prefecture_id: 13, city: '渋谷区', address_number: '道玄坂2−23−12', building_name: 'フォンテスビル7F')
+Address.create(id: 2, user_id: 2, postal_code: 150-0041, prefecture_id: 13, city: '渋谷区', address_number: '神南1−12−16', building_name: 'アジアビル9F')
+
+Card.create(id: 1, user_id: 1, card_number: 1111222233334444, expiration_date: '2020-01-01', card_security_code: 111)
+Card.create(id: 2, user_id: 2, card_number: 4444333322221111, expiration_date: '2022-01-01', card_security_code: 999)
+
+Product.create(id: 1, seller_id: 1,                   name: '商品1', text: 'texttexttexttexttexttexttexttexttext', status: 1, postage_burden: 1, buyer_area: '東京', delivery_days: '１〜２日', price: 500, sales_status: 0)
+Product.create(id: 2, seller_id: 1,                   name: '商品2', text: 'texttexttexttexttexttexttexttexttext', status: 2, postage_burden: 0, buyer_area: '東京', delivery_days: '３〜４日', price: 2100, sales_status: 0)
+Product.create(id: 3, seller_id: 1,                   name: '商品3', text: 'texttexttexttexttexttexttexttexttext', status: 3, postage_burden: 1, buyer_area: '東京', delivery_days: '２〜３日', price: 300, sales_status: 0)
+Product.create(id: 4, seller_id: 1,                   name: '商品4', text: 'texttexttexttexttexttexttexttexttext', status: 4, postage_burden: 1, buyer_area: '東京', delivery_days: '１〜２日', price: 4500, sales_status: 0)
+Product.create(id: 5, seller_id: 1,                   name: '商品5', text: 'texttexttexttexttexttexttexttexttext', status: 5, postage_burden: 0, buyer_area: '東京', delivery_days: '１〜２日', price: 10000, sales_status: 0)
+Product.create(id: 6, seller_id: 1, buyer_id: 2,      name: '商品6', text: 'texttexttexttexttexttexttexttexttext', status: 0, postage_burden: 1, buyer_area: '東京', delivery_days: '４〜５日', price: 1980, sales_status: 1)
+Product.create(id: 7, seller_id: 1,                   name: '商品7', text: 'texttexttexttexttexttexttexttexttext', status: 3, postage_burden: 0, buyer_area: '東京', delivery_days: '２〜３日', price: 250, sales_status: 0)
+Product.create(id: 8, seller_id: 1, buyer_id: 2,      name: '商品8', text: 'texttexttexttexttexttexttexttexttext', status: 2, postage_burden: 1, buyer_area: '東京', delivery_days: '１〜２日', price: 600, sales_status: 1)
+Product.create(id: 9, seller_id: 2, buyer_id: 1,      name: '商品9', text: 'texttexttexttexttexttexttexttexttext', status: 1, postage_burden: 0, buyer_area: '東京', delivery_days: '２〜３日', price: 2300, sales_status: 1)
+Product.create(id: 10, seller_id: 2, buyer_id: 1,      name: '商品10', text: 'texttexttexttexttexttexttexttexttext', status: 0, postage_burden: 0, buyer_area: '東京', delivery_days: '１〜２日', price: 500, sales_status: 1)
+Product.create(id: 11, seller_id: 2,                   name: '商品11', text: 'texttexttexttexttexttexttexttexttext', status: 5, postage_burden: 1, buyer_area: '東京', delivery_days: '１〜２日', price: 500, sales_status: 0)
+
+Brand.create(id: 1, name: 'Apple')
+Brand.create(id: 2, name: 'Nike')
+Brand.create(id: 3, name: 'TIGER')
+Brand.create(id: 4, name: 'キリン')
+
+Category.create(id: 1, name: 'コンピュータ')
+Category.create(id: 2, name: 'メンズ')
+Category.create(id: 3, name: '日用雑貨')
+Category.create(id: 4, name: '飲食品')
+
+Size.create(id: 1, data: 'S', size_category: 1)
+Size.create(id: 2, data: 'M', size_category: 1)
+Size.create(id: 3, data: 'L', size_category: 1)
+Size.create(id: 4, data: 'XL', size_category: 1)
+
+CategoryBrand.create(id: 1, category_id: 1, brand_id: 1)
+CategoryBrand.create(id: 2, category_id: 2, brand_id: 2)
+CategoryBrand.create(id: 3, category_id: 3, brand_id: 3)
+CategoryBrand.create(id: 4, category_id: 4, brand_id: 4)
+
+ProductBrand.create(id: 1, product_id: 1, brand_id: 1)
+ProductBrand.create(id: 2, product_id: 2, brand_id: 2)
+ProductBrand.create(id: 3, product_id: 3, brand_id: 3)
+ProductBrand.create(id: 4, product_id: 4, brand_id: 4)
+ProductBrand.create(id: 5, product_id: 5, brand_id: 1)
+ProductBrand.create(id: 6, product_id: 6, brand_id: 2)
+ProductBrand.create(id: 7, product_id: 7, brand_id: 3)
+ProductBrand.create(id: 8, product_id: 8, brand_id: 4)
+ProductBrand.create(id: 9, product_id: 9, brand_id: 1)
+ProductBrand.create(id: 10, product_id: 10, brand_id: 2)
+ProductBrand.create(id: 11, product_id: 11, brand_id: 3)
+
+
+ProductCategory.create(id: 1, product_id: 1, category_id: 1)
+ProductCategory.create(id: 2, product_id: 2, category_id: 2)
+ProductCategory.create(id: 3, product_id: 3, category_id: 3)
+ProductCategory.create(id: 4, product_id: 4, category_id: 4)
+ProductCategory.create(id: 5, product_id: 5, category_id: 1)
+ProductCategory.create(id: 6, product_id: 6, category_id: 2)
+ProductCategory.create(id: 7, product_id: 7, category_id: 3)
+ProductCategory.create(id: 8, product_id: 8, category_id: 4)
+ProductCategory.create(id: 9, product_id: 9, category_id: 1)
+ProductCategory.create(id: 10, product_id: 10, category_id: 2)
+ProductCategory.create(id: 11, product_id: 11, category_id: 3)
+
+
+ProductSize.create(id: 1, product_id: 1, size_id: 1)
+ProductSize.create(id: 2, product_id: 2, size_id: 2)
+ProductSize.create(id: 3, product_id: 3, size_id: 3)
+ProductSize.create(id: 4, product_id: 4, size_id: 4)
+ProductSize.create(id: 5, product_id: 5, size_id: 1)
+ProductSize.create(id: 6, product_id: 6, size_id: 2)
+ProductSize.create(id: 7, product_id: 7, size_id: 3)
+ProductSize.create(id: 8, product_id: 8, size_id: 4)
+ProductSize.create(id: 9, product_id: 9, size_id: 1)
+ProductSize.create(id: 10, product_id: 10, size_id: 2)
+ProductSize.create(id: 11, product_id: 11, size_id: 3)
