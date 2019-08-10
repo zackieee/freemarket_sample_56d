@@ -80,3 +80,4 @@ gem 'font-awesome-sass', "< 5.0.13"
 gem 'pry-rails'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'active_hash'
