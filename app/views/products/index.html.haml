@@ -28,54 +28,7 @@
     .item--new
       = link_to "レディース新着アイテム" 
   .item--list
-    .item--list__image
-      = link_to 'products/show' do
-        = image_tag 'top-image.png', height: '200', width: '200'
-      .item--list__image__text
-        = link_to 'products/show' do
-          アイコン売ってます
-        .item--list__image__text__wrapper
-          .item--list__image__text__wrapper__value
-            %p ¥10000
-          .item--list__image__text__wrapper__like
-            = icon 'far', 'heart'
-            %span 1
-    .item--list__image
-      = link_to 'products/show' do
-        = image_tag 'top-image.png', height: '200', width: '200'
-      .item--list__image__text
-        = link_to 'products/show' do
-          アイコン売ってます
-        .item--list__image__text__wrapper
-          .item--list__image__text__wrapper__value
-            %p ¥10000
-          .item--list__image__text__wrapper__like
-            = icon 'far', 'heart'
-            %span 1
-    .item--list__image
-      = link_to 'products/show' do
-        = image_tag 'top-image.png', height: '200', width: '200'
-      .item--list__image__text
-        = link_to 'products/show' do
-          アイコン売ってます
-        .item--list__image__text__wrapper
-          .item--list__image__text__wrapper__value
-            %p ¥10000
-          .item--list__image__text__wrapper__like
-            = icon 'far', 'heart'
-            %span 1
-    .item--list__image
-      = link_to 'products/show' do
-        = image_tag 'top-image.png', height: '200', width: '200'
-      .item--list__image__text
-        = link_to 'products/show' do
-          アイコン売ってます
-        .item--list__image__text__wrapper
-          .item--list__image__text__wrapper__value
-            %p ¥10000
-          .item--list__image__text__wrapper__like
-            = icon 'far', 'heart'
-            %span 1
+    = render 'product-item'
   .item-show
     = link_to "全ての商品を見る"
 .item

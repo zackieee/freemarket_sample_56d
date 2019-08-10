@@ -109,8 +109,11 @@
       display: flex;
       &__image {
          margin: 10px 5px 0 20px;
-         width: 210px;
          background-color: white;
+         img {
+            height: 200px;
+            width: 210px;
+         }
          &__text {
             height: 100px;
             width: 210px;
