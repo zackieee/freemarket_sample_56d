@@ -3,8 +3,8 @@
 User.create(id: 1, email: 'rails@example.com', password: '123456', nickname: 'てっくん', introduction: '売ります。買います。', firstname: 'テック', lastname: '渋谷', firstname_kana: 'テック', lastname_kana: 'シブヤ', birthday: '2000/01/01', tel: '0312345678', sales_amount: 4980 )
 User.create(id: 2, email: 'ruby@example.com', password: '123456', nickname: 'てっちゃん', introduction: '売ります。買います。働きます。', firstname: '徹子', lastname: '渋谷', firstname_kana: 'テツコ', lastname_kana: 'シブヤ', birthday: '1980/01/01', tel: '09011111111', sales_amount: 32400 )
 
-Address.create(id: 1, user_id: 1, postal_code: 150-0043, prefecture: '東京都', city: '渋谷区', address_number: '道玄坂2−23−12', building_name: 'フォンテスビル7F')
-Address.create(id: 2, user_id: 2, postal_code: 150-0041, prefecture: '東京都', city: '渋谷区', address_number: '神南1−12−16', building_name: 'アジアビル9F')
+Address.create(id: 1, user_id: 1, postal_code: 150-0043, prefecture_id: 13, city: '渋谷区', address_number: '道玄坂2−23−12', building_name: 'フォンテスビル7F')
+Address.create(id: 2, user_id: 2, postal_code: 150-0041, prefecture_id: 13, city: '渋谷区', address_number: '神南1−12−16', building_name: 'アジアビル9F')
 
 Card.create(id: 1, user_id: 1, card_number: 1111222233334444, expiration_date: '2020-01-01', card_security_code: 111)
 Card.create(id: 2, user_id: 2, card_number: 4444333322221111, expiration_date: '2022-01-01', card_security_code: 999)
