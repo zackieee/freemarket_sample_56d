@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
+  belongs_to :seller, class_name: 'User', foreign_key: 'seller_id', optional: true
   belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id', optional: true
   has_many_attached :images, dependent: :destroy
   has_many :comments

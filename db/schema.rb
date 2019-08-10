@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 2019_08_09_103655) do
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "seller_id", null: false
+    t.bigint "seller_id"
     t.bigint "buyer_id"
     t.string "name", null: false
     t.text "text", null: false
@@ -204,7 +204,6 @@ ActiveRecord::Schema.define(version: 2019_08_09_103655) do
   add_foreign_key "product_categories", "products"
   add_foreign_key "product_sizes", "products"
   add_foreign_key "product_sizes", "sizes"
-
   add_foreign_key "products", "users", column: "buyer_id"
   add_foreign_key "products", "users", column: "seller_id"
   add_foreign_key "ratings", "users", column: "rated_user_id"
