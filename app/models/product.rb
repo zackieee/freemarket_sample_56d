@@ -6,4 +6,11 @@ class Product < ApplicationRecord
   # belongs_to :category
   # belongs_to :brand
   # belongs_to :sizes
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :prefecture
+  belongs_to_active_hash :status
+  belongs_to_active_hash :postage_burden
+  belongs_to_active_hash :delivery_days
+  belongs_to_active_hash :sales_status
 end
