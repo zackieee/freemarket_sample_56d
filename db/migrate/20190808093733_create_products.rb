@@ -5,12 +5,12 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       # t.references   :buyer_user,        foreign_key: { to_table: :users }
       t.string       :name,              null: false,index: true
       t.text         :text,              null: false
-      t.integer      :status,            null: false
-      t.integer      :postage_burden,    null: false
-      t.string       :buyer_area,        null: false
-      t.string       :delivery_days,     null: false
+      t.integer      :status_id,         null: false
+      t.integer      :postage_burden_id, null: false
+      t.integer      :prefecture_id,     null: false
+      t.integer      :delivery_days_id,  null: false
       t.integer      :price,             null: false
-      t.integer      :sales_status,      null: false, default: "0"
+      t.integer      :sales_status_id,   null: false, default: "1"
 
       t.timestamps
     end
