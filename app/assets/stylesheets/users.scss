@@ -68,7 +68,7 @@
             justify-content:center;
             align-items:center;
             padding: 72px 16px 24px;
-            background:url(common/user-bg.jpg) no-repeat;
+            background:url(/images/common/user-bg.jpg) no-repeat;
             background-size:cover;
             &__avator{
               img{
@@ -180,7 +180,7 @@
               @include form_button($unused_color,4px,0);
               //googleは特殊なのでscssで指定
               color:#333;
-              background:#fff url(common/google.svg) no-repeat 3px top;
+              background:#fff url(/images/common/google.svg) no-repeat 3px top;
               border:solid 1px #979797;
               border-radius: 4px;
             }
@@ -272,18 +272,37 @@
         border-radius: 4px;
       }      
       //フォーカス時の挙動を本家に合わせて変更
-      select:focus {
+      select:focus{
         outline: 0;
         border-color:#0099e8;
         background-color:#fff;
       }
+      //エラー時の挙動を本家に合わせて変更
+      input[type=text]:required,
+      input[type=email]:required,
+      input[type=email]:invalid,
+      input[type=password]:required,
+      select,textarea:required {
+	      border-color: #c20c33;
+	      background-color: #ffd9e1;
+      }
+      /* 入力値が正常な時のスタイル */
+      input[type=text]:valid,
+      input[type=email]:valid,
+      input[type=password]:valid,
+      select,textarea:valid {
+        color: #333;
+        border: 1px solid #ccc;
+        background: #fff;
+      }
+
       //date_selectのデフォルトCSSを変更
       //年月日用
       .year,.month,.day{
         @include form_select(76px,48px,85%);
       }
-      //ポスト
-      .postal-code-input{
+      //都道府県選択
+      .prefecture_id{
         @include form_select(100%,48px,95%);
       }
     }
@@ -303,7 +322,7 @@
     //アプリ紹介パネル表示
     .apl-intro-form{
       width:700px;
-      background: url(back-image.png) no-repeat;
+      background: url(/images/common/back-image.png) no-repeat;
     }
     //divの下線つける用
     .form-underline{
