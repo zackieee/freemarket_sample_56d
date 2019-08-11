@@ -1,9 +1,6 @@
 .item--list__image
-  - product.images.each_with_index do |image, i|
-    -# 商品詳細表示機能が実装できたら変更する
-    = link_to 'products/show' do
-      = image_tag image
-    - break if i==0
+  = link_to 'products/show' do
+    = image_tag product.images.first
   .item--list__image__text
     = link_to product.text, 'products/show'
     .item--list__image__text__wrapper
