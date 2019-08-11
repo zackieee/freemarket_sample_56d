@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products= Product.all
+    @products= Product.order('id DESC').limit(4)
   end
   
   def new
