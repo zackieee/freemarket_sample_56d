@@ -1,29 +1,29 @@
 =render 'header'
 .show.crearfix
   .show-item
-    %h1 【新品・送料無料】ユニシティ スーパーホワイト 2個セット
-    %p『【新品・送料無料】ユニシティ スーパーホワイト 2個セット』は、100回の取引実績を持つawsさんから出品されました。健康用品/コスメ・香水・美容の商品で、東京都から2~3日で発送されます。
+    %h1
+      = @product.name
     .show-item__wrapper
       .show-item__wrapper__contents
         .show-item__wrapper__contents__image
-          = image_tag 'top-image', alt: '', height: '265', width: '300', class: ''
+          = image_tag 'top-image.png', alt: '', height: '265', width: '300', class: ''
         .show-item__wrapper__contents__list
-          = image_tag 'top-image', height: '50', width: '54'
-          = image_tag 'top-image', height: '50', width: '54'
-          = image_tag 'top-image', height: '50', width: '54'
-          = image_tag 'top-image', height: '50', width: '54'
-          = image_tag 'top-image', height: '50', width: '54'
-          = image_tag 'top-image', height: '50', width: '54'
-          = image_tag 'top-image', height: '50', width: '54'
-          = image_tag 'top-image', height: '50', width: '54'
-          = image_tag 'top-image', height: '50', width: '54'
-          = image_tag 'top-image', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
       .show-item__wrapper__contents__owner
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__left
             %p 出品者
           .show-item__wrapper__contents__owner__detail__right
-            = link_to "aws"
+            = link_to "#{@product.seller.nickname}"
             = icon 'far', 'laugh-squint', class: "good"
             1
             = icon 'far', 'meh', class: "normal"
@@ -60,27 +60,22 @@
             %p 送料込み(出品者負担)
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
-            %p 配送の方法
-          .show-item__wrapper__contents__owner__detail__rights
-            %p 未定
-        .show-item__wrapper__contents__owner__detail
-          .show-item__wrapper__contents__owner__detail__lefts
             %p 配送元の地域
           .show-item__wrapper__contents__owner__detail__rights
-            %p 未定
+            %p #{@product.buyer_area}
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
             %p 発送日の目安
           .show-item__wrapper__contents__owner__detail__rights
-            %p 1~2日で発送
+            %p #{@product.delivery_days}で発送
     .show-item__value
-      %h1 ¥ 114,000
+      %h1 ¥#{@product.price}
       %p (税込)
       %span 送料込み
     .show-item__buy
-      = link_to "購入画面に進む", buy_products_path
+      = link_to "購入画面に進む", buy_product_path
     .show-item__text
-      %span ケータイです
+      %span #{@product.text}
     .show-item__any
       .show-item__any__like
         = icon 'far', 'heart'
