@@ -19,6 +19,12 @@ class ProductsController < ApplicationController
   def show
   end
 
+  def edit
+    # @product = Product.find(params[:id])
+    #仮でidが21のレコードを使う。
+    @product = Product.find(21)
+  end
+
   def buy
   end
   
