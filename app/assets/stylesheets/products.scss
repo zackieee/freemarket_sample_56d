@@ -78,9 +78,9 @@
 .item {
    background: #F5F5F5;
    padding: 3% 25% 5% 17%;
-   cursor: pointer;
    a {
       text-decoration: none;
+      cursor: pointer;
    }
    &--heading {
      text-align: center;
@@ -109,8 +109,11 @@
       display: flex;
       &__image {
          margin: 10px 5px 0 20px;
-         width: 210px;
          background-color: white;
+         img {
+            height: 200px;
+            width: 210px;
+         }
          &__text {
             height: 100px;
             width: 210px;

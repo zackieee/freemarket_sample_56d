@@ -12,9 +12,19 @@
             必須
           %p.sell-main__contents__content__item--p
             最大10枚までアップロードできます
-          %label
-            = image_tag 'touch.jpg'
-            = f.file_field :images, multiple: true, class: 'hidden'
+          .sell-main__contents__content__item__images
+            .sell-main__contents__content__item__images--already
+              - @product.images.each do |image|
+                .sell-main__contents__content__item__images--already__blocks
+                  = image_tag image, size: "120x130", class: "sell-main__contents__content__item__images--already__blocks__image"
+                  .sell-main__contents__content__item__images--already__blocks__block
+                    = link_to "#", class: "sell-main__contents__content__item__images--already__blocks__block--link" do
+                      編集
+                    = link_to "#", class: "sell-main__contents__content__item__images--already__blocks__block--link" do
+                      削除
+            %label
+              = image_tag 'touch.jpg', class: "sell-main__contents__content__item__images--upload"
+              = f.file_field :images, multiple: true, class: 'hidden'
         .sell-main__contents__content.clearfix
           %label.sell-main__contents__content__item{for:"name"}
             商品名
@@ -88,23 +98,7 @@
               ー
         .sell-main__contents__content
           %p.sell-main__contents__content__confirm-text
-            = link_to '#', class:'sell-main__contents__content__confirm-text--link' do
-              禁止されている出品
-            、
-            = link_to '#', class:'sell-main__contents__content__confirm-text--link' do
-              行為
-            を必ずご確認ください。
-            %br
-            またブランド品でシリアルナンバー等がある場合はご記載ください。
-            = link_to '#', class:'sell-main__contents__content__confirm-text--link' do
-              偽ブランドの販売
-            は犯罪であり処罰される可能性があります。
-            %br
-            また、出品をもちまして
-            = link_to '#', class:'sell-main__contents__content__confirm-text--link' do
-              加盟店規約
-            に同意したことになります。
-            = f.submit "出品する", class:"sell-main__contents__content__btn--big"
+            = f.submit "変更する", class:"sell-main__contents__content__btn--big"
           =link_to '#', class:'sell-main__contents__content__btn--default' do
             もどる
   =render '/layouts/sub_footer'

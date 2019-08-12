@@ -10,10 +10,10 @@
           .buy__main__contents__item__info__image
             = image_tag 'bag.jpg', height: '64px', width: '64px'
           %p
-            COACHかばん
+            = @product.name
           .buy__main__contents__item__info__form
             %p
-              ￥2,500
+              ￥ #{@product.price}
               %span
                 送料込み
             .buy__main__contents__item__info__form__point
@@ -22,9 +22,8 @@
               .buy__main__contents__item__info__form__price__tag
                 支払金額
               .buy__main__contents__item__info__form__price__data
-                ￥2,500
-            %button.buy__main__contents__item__info__form__btn
-              購入する
+                ￥ #{@product.price}
+            =link_to '購入する', product_trades_path(@product), method: :post, class:'buy__main__contents__item__info__form__btn'
       .buy__main__contents__user-address
         .buy__main__contents__user-address__info
           %h3
@@ -35,7 +34,7 @@
             東京都渋谷区道玄坂2−23−12-7
             %br
             渋谷 テック
-          = link_to '#',class: 'buy__main__contents__user-address__info__edit' do
+          = link_to users_edit_address_path,class: 'buy__main__contents__user-address__info__edit' do
             変更する >
       .buy__main__contents__user-card
         .buy__main__contents__user-card__info
