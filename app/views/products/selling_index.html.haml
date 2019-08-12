@@ -1,0 +1,47 @@
+.wrapper
+  =render 'products/header'
+  .selling-page
+    =render 'users/side-bar'
+    .selling-page__main
+      .selling-page__main__contents.second-contents
+        .selling-page__main__contents__header
+          %h2
+            出品した商品
+        %ul.selling-page__main__contents__nav
+          %li.selling-page__main__contents__nav.selected-tab
+            = link_to '#' do
+              出品中
+          %li.selling-page__main__contents__nav
+            = link_to '#' do
+              売却済み
+        .maypage__main__contents__content
+          - if @products
+            %ul
+              - @products.each do | product |
+                %li.selling-page__main__contents__content
+                  -# 実際はproduct_path(product)に飛ばす。
+                  = link_to "#" do
+                    - if product.images.first
+                      = image_tag product.images.first, class:'selling-page__main__contents__content__image', height: '48px', width: '48px'
+                    - else
+                      = image_tag 'mercari_profile.png', class:'selling-page__main__contents__content__image', height: '48px', width: '48px'
+                    .selling-page__main__contents__content__middle
+                      .selling-page__main__contents__content__middle__text
+                        = product.text
+                      .selling-page__main__contents__content__bottom
+                        .selling-page__main__contents__content__bottom__icon
+                          = icon 'far my-black', 'heart'
+                          5
+                          = icon 'far', 'comment-alt'
+                          0
+                        .selling-page__main__contents__content__bottom__text
+                          出品中
+                    .selling-page__main__contents__content__link-icon
+                      = icon 'fas fa-lg','angle-right'
+          - else
+            .selling-page__main__contents__content--none
+              %h3
+                取引中の商品がありません
+      .selling-page__main__trade
+  =render 'products/footer-top'
+  =render 'products/footer-bottom'
