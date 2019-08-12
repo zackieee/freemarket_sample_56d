@@ -1,77 +1,79 @@
 .user-main__contents__form.single-panel
-  -# = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  //form_forに変えた場合、f.XXX_fieldに変更が必要。value属性をつけて変数埋め込みも忘れずに。
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item{for:"nickname"}
-      ニックネーム
-    %span.user-main__contents__form__group__item--required
-      必須
-    = text_field_tag :nickname, '', class:'user-main__contents__form__group__item__input', placeholder:'例）メルカリ太郎', autofocus: true, required: true
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item{for:"email"}
-      メールアドレス
-    %span.user-main__contents__form__group__item--required
-      必須
-    = email_field_tag :email, '', class:'user-main__contents__form__group__item__input', placeholder:'PC・携帯どちらでも可', required: true
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item{for:"password"}
-      パスワード
-    %span.user-main__contents__form__group__item--required
-      必須
-    = password_field_tag :password, '', class:'user-main__contents__form__group__item__input', placeholder:'7文字以上', autocomplete: 'off', required: true, minlength:'7'
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item{for:"password"}
-      パスワード（確認）
-    %span.user-main__contents__form__group__item--required
-      必須
-    = password_field_tag :password, '', class:'user-main__contents__form__group__item__input', placeholder:'7文字以上', autocomplete: 'off', required: true, minlength:'7'
-  .user-main__contents__form__group
-    %h3.user-main__contents__form__group__middle-title
-      本人確認
-    %p.user-main__contents__form__group__info-text
-      安心・安全にご利用いただくために、お客さまの本人情報の登録にご協力ください。他のお客さまに公開されることはありません。
-  .user-main__contents__form__group
-    .div
-      %label.user-main__contents__form__group__item
-        お名前(全角)
+  = form_with model:@user, url:users_sign_up_telephone_path, method: :get,local: true  do |f|
+    .user-main__contents__form__group.error-messages.none-top-margin
+      .error-messages.text-center
+        - if @messages != nil
+          %p
+            = @messages
+    .user-main__contents__form__group
+      %label.user-main__contents__form__group__item{for:"nickname"}
+        ニックネーム
       %span.user-main__contents__form__group__item--required
         必須
-    = text_field_tag :lastname, '', class:'user-main__contents__form__group__item__input--half', placeholder:'例) 山田', required: true
-    = text_field_tag :firstname, '', class:'user-main__contents__form__group__item__input--half', placeholder:'例) 彩', required: true
-  .user-main__contents__form__group
-    .div
-      %label.user-main__contents__form__group__item
-        お名前カナ(全角) 
+      = f.text_field :nickname,class:'user-main__contents__form__group__item__input', placeholder:'例）メルカリ太郎', autofocus: true, required: true, value:"#{session[:nickname]}"
+    .user-main__contents__form__group
+      %label.user-main__contents__form__group__item{for:"email"}
+        メールアドレス
       %span.user-main__contents__form__group__item--required
         必須
-    = text_field_tag :lastname_kana, '', class:'user-main__contents__form__group__item__input--half', placeholder:'例) ヤマダ', required: true
-    = text_field_tag :firstname_kana, '', class:'user-main__contents__form__group__item__input--half', placeholder:'例) アヤ', required: true
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item{for:"birthday"}
-      生年月日
-    %span.user-main__contents__form__group__item--required
-      必須
-    %br        
-    != sprintf(date_select(:birthday, {order: [ :year, :month, :day ]},with_css_classes:'user-main__contents__form__group__item__input', prompt:"--", use_month_numbers:true, start_year:Time.now.year, end_year:1900, date_separator:'%s'),'年','月')
-    日
-    %p.user-main__contents__form__group__form-text
-      ※ 本人情報は正しく入力してください。会員登録後、修正するにはお時間を頂く場合があります。
-  .user-main__contents__form__group
-    // reCAPTHAをここに入れる。
-    = image_tag 'common/reCAPTCHA_dummy.png'
+      = f.email_field :email, class:'user-main__contents__form__group__item__input', placeholder:'PC・携帯どちらでも可', required: true, value:"#{session[:email]}"
     .user-main__contents__form__group
-      %p.user-main__contents__form__group__confirm-text.text-center
-        「次へ進む」のボタンを押すことにより、
-        = link_to '#', class:'user-main__contents__form__group__confirm-text--link' do
-          利用規約
-        に同意したものとみなします
+      %label.user-main__contents__form__group__item{for:"password"}
+        パスワード
+      %span.user-main__contents__form__group__item--required
+        必須
+      = f.password_field :password, class:'user-main__contents__form__group__item__input', placeholder:'7文字以上', autocomplete: 'off', required: true, minlength:'7',maxlength:'128'
     .user-main__contents__form__group
-      =link_to users_sign_up_telephone_path, class:'user-main__contents__form__group__btn--default' do
-        次へ進む
+      %label.user-main__contents__form__group__item{for:"password_confirmation"}
+        パスワード（確認）
+      %span.user-main__contents__form__group__item--required
+        必須
+      = f.password_field :password_confirmation, class:'user-main__contents__form__group__item__input', placeholder:'7文字以上', autocomplete: 'off', required: true, minlength:'7',maxlength:'128'
     .user-main__contents__form__group
-      %p.user-main__contents__form__group__confirm-text.text-right
-        = link_to '#', class:'user-main__contents__form__group__confirm-text--link', target:'_blank' do
-          本人情報の登録について
-          = icon 'fas', 'chevron-right'
+      %h3.user-main__contents__form__group__middle-title
+        本人確認
+      %p.user-main__contents__form__group__info-text
+        安心・安全にご利用いただくために、お客さまの本人情報の登録にご協力ください。他のお客さまに公開されることはありません。
+    .user-main__contents__form__group
+      .div
+        %label.user-main__contents__form__group__item
+          お名前(全角)
+        %span.user-main__contents__form__group__item--required
+          必須
+      = f.text_field :lastname, class:'user-main__contents__form__group__item__input--half', placeholder:'例) 山田', required: true, value:"#{session[:lastname]}"
+      = f.text_field :firstname, class:'user-main__contents__form__group__item__input--half', placeholder:'例) 彩', required: true, value:"#{session[:firstname]}"
+    .user-main__contents__form__group
+      .div
+        %label.user-main__contents__form__group__item
+          お名前カナ(全角) 
+        %span.user-main__contents__form__group__item--required
+          必須
+      = f.text_field :lastname_kana, class:'user-main__contents__form__group__item__input--half', placeholder:'例) ヤマダ', required: true, value:"#{session[:lastname_kana]}"
+      = f.text_field :firstname_kana, class:'user-main__contents__form__group__item__input--half', placeholder:'例) アヤ', required: true, value:"#{session[:firstname_kana]}"
+    .user-main__contents__form__group
+      %label.user-main__contents__form__group__item{for:"birthday"}
+        生年月日
+      %span.user-main__contents__form__group__item--required
+        必須
+      %br        
+      != sprintf(f.date_select(:birthday, prefix:'birthday',with_css_classes:'user-main__contents__form__group__item__input', prompt:"--",use_month_numbers:true, start_year:Time.now.year, end_year:1900,required: true, date_separator:'%s'),'年','月')
+      日
+      %p.user-main__contents__form__group__form-text
+        ※ 本人情報は正しく入力してください。会員登録後、修正するにはお時間を頂く場合があります。
+    .user-main__contents__form__group
+      = recaptcha_tags
+      .user-main__contents__form__group
+        %p.user-main__contents__form__group__confirm-text.text-center
+          「次へ進む」のボタンを押すことにより、
+          = link_to '#', class:'user-main__contents__form__group__confirm-text--link' do
+            利用規約
+          に同意したものとみなします
+      .user-main__contents__form__group
+        = f.submit '次へ進む', class:'user-main__contents__form__group__btn--default'
+      .user-main__contents__form__group
+        %p.user-main__contents__form__group__confirm-text.text-right
+          = link_to '#', class:'user-main__contents__form__group__confirm-text--link' do
+            本人情報の登録について
+            = icon 'fas', 'chevron-right'
 
 

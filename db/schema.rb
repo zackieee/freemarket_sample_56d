@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_09_103655) do
+ActiveRecord::Schema.define(version: 2019_08_11_071849) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2019_08_09_103655) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.integer "postal_code", null: false
+    t.string "postal_code", null: false
     t.integer "prefecture_id", null: false
     t.string "city", null: false
     t.string "address_number", null: false
@@ -54,9 +54,8 @@ ActiveRecord::Schema.define(version: 2019_08_09_103655) do
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "card_number", null: false
-    t.date "expiration_date", null: false
-    t.integer "card_security_code", null: false
+    t.string "customer_id", null: false
+    t.string "card_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_cards_on_user_id"
@@ -133,8 +132,7 @@ ActiveRecord::Schema.define(version: 2019_08_09_103655) do
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "seller_id"
-    t.bigint "buyer_id"
+    t.bigint "seller_id", null: false
     t.string "name", null: false
     t.text "text", null: false
     t.integer "status_id"
@@ -145,7 +143,6 @@ ActiveRecord::Schema.define(version: 2019_08_09_103655) do
     t.integer "sales_status_id", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["buyer_id"], name: "index_products_on_buyer_id"
     t.index ["name"], name: "index_products_on_name"
     t.index ["seller_id"], name: "index_products_on_seller_id"
   end
@@ -165,6 +162,17 @@ ActiveRecord::Schema.define(version: 2019_08_09_103655) do
     t.integer "size_category", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "trades", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "seller_id", null: false
+    t.bigint "buyer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_trades_on_buyer_id"
+    t.index ["product_id"], name: "index_trades_on_product_id"
+    t.index ["seller_id"], name: "index_trades_on_seller_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -204,8 +212,10 @@ ActiveRecord::Schema.define(version: 2019_08_09_103655) do
   add_foreign_key "product_categories", "products"
   add_foreign_key "product_sizes", "products"
   add_foreign_key "product_sizes", "sizes"
-  add_foreign_key "products", "users", column: "buyer_id"
   add_foreign_key "products", "users", column: "seller_id"
   add_foreign_key "ratings", "users", column: "rated_user_id"
   add_foreign_key "ratings", "users", column: "rater_user_id"
+  add_foreign_key "trades", "products"
+  add_foreign_key "trades", "users", column: "buyer_id"
+  add_foreign_key "trades", "users", column: "seller_id"
 end

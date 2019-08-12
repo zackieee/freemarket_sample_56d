@@ -1,4 +1,7 @@
 class ProductsController < ApplicationController
+
+  before_action :set_product, only: [:show, :buy]
+
   def index
     @products= Product.order('id DESC').limit(4)
   end
@@ -38,8 +41,12 @@ class ProductsController < ApplicationController
   
   private
    def product_params
-    params.require(:product).permit(:name, :text, :price, :status_id, :prefecture_id, :postage_burden_id, :buyer_area_id, :delivery_days_id, images: [])
+    params.require(:product).permit(:name, :text, :price, :status_id, :prefecture_id, :postage_burden_id, :buyer_area_id, :delivery_days_id, images: []).merge(seller_id: current_user.id)
    end
+
+   def set_product
+    @product = Product.find(params[:id])
+  end
 end
 
 # image: product_params[:image], name: product_params[:name], 
