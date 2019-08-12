@@ -23,7 +23,7 @@
           .show-item__wrapper__contents__owner__detail__left
             %p 出品者
           .show-item__wrapper__contents__owner__detail__right
-            = link_to "#{@product.seller.nickname}"
+            = link_to @product.seller.nickname
             = icon 'far', 'laugh-squint', class: "good"
             1
             = icon 'far', 'meh', class: "normal"
@@ -62,12 +62,12 @@
           .show-item__wrapper__contents__owner__detail__lefts
             %p 配送元の地域
           .show-item__wrapper__contents__owner__detail__rights
-            %p #{@product.buyer_area}
+            %p #{@product.prefecture_id}
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
             %p 発送日の目安
           .show-item__wrapper__contents__owner__detail__rights
-            %p #{@product.delivery_days}で発送
+            %p #{@product.delivery_days_id}
     .show-item__value
       %h1 ¥#{@product.price}
       %p (税込)

@@ -10,7 +10,7 @@
           .buy__main__contents__item__info__image
             = image_tag 'bag.jpg', height: '64px', width: '64px'
           %p
-            #{@product.name}
+            = @product.name
           .buy__main__contents__item__info__form
             %p
               ￥ #{@product.price}
