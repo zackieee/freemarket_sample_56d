@@ -1,6 +1,6 @@
 class TradesController < ApplicationController
 
-  def create
+  def new
     product = Product.find(trade_params[:product_id])
     trade = Trade.create(product_id: product[:id], seller_id: product[:seller_id], buyer_id: 2)  #ログイン機能ができたら、'current_user.id'に変更
     
@@ -11,7 +11,7 @@ class TradesController < ApplicationController
     #   currency: 'jpy'
     # )
 
-    
+
 
     #処理が終わったら一覧画面へ
     if trade.save
