@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  before_action :set_product, only: [:show, :buy]
+  before_action :set_product, only: [:show, :buy, :edit]
 
   def index
     @products= Product.order('id DESC').limit(4)
@@ -23,9 +23,6 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    # @product = Product.find(params[:id])
-    #仮でidが21のレコードを使う。
-    @product = Product.find(21)
   end
 
   def buy

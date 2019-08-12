@@ -23,7 +23,10 @@
                 支払金額
               .buy__main__contents__item__info__form__price__data
                 ￥ #{@product.price}
-            =link_to '購入する', product_trades_path(@product), method: :post, class:'buy__main__contents__item__info__form__btn'
+            -# =link_to '購入する', product_trades_path(@product), method: :post, class:'buy__main__contents__item__info__form__btn'
+            = form_with url:product_trades_path(@product), method: :post,local: true, html: {name:'inputForm'} do |f|
+              .buy__main__contents__item__info__form__btn#card_token
+                =f.submit '購入する', class:'buy__main__contents__item__info__form__btn',id:'token_submit'
       .buy__main__contents__user-address
         .buy__main__contents__user-address__info
           %h3
