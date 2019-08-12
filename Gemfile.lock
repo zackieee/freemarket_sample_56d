@@ -186,6 +186,10 @@ GEM
     orm_adapter (0.5.0)
     payjp (0.0.7)
       rest-client (~> 2.0)
+    phony (2.18.5)
+    phony_rails (0.14.13)
+      activesupport (>= 3.0)
+      phony (> 2.15)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -353,6 +357,7 @@ DEPENDENCIES
   mini_magick
   mysql2 (>= 0.4.4, < 0.6.0)
   payjp
+  phony_rails
   pry-rails
   puma (~> 3.11)
   rails (~> 5.2.2, >= 5.2.2.1)
