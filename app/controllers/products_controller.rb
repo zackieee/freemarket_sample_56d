@@ -22,6 +22,14 @@ class ProductsController < ApplicationController
   def show
   end
 
+  def selling_index
+    #本当はこれ
+    # @products = current_user.products
+    
+    #いったん全部取り出す
+    @products = Product.all
+  end
+
   def edit
     # @product = Product.find(params[:id])
     #仮でidが21のレコードを使う。
