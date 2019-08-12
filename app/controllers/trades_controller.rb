@@ -1,8 +1,8 @@
 class TradesController < ApplicationController
 
-  def new
+  def create
     product = Product.find(trade_params[:product_id])
-    trade = Trade.create(product_id: product[:id], seller_id: product[:seller_id], buyer_id: 2)  #ログイン機能ができたら、'current_user.id'に変更
+    trade = Trade.new(product_id: product[:id], seller_id: product[:seller_id], buyer_id: 2)  #ログイン機能ができたら、'current_user.id'に変更
     
     # Payjp.api_key = 'Payjp の画面から取得した秘密鍵'
     # Payjp::Charge.create(

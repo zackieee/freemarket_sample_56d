@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   root 'products#index'
   resources :products do
     get :buy, on: :member #productsにデータを入れたら':collection'を':mender'に変更
-    resources :trades, only: [:new]
+    resources :trades, only: [:create]
   end
   resources :users
 end
