@@ -17,7 +17,8 @@
           =link_to '#', class:'user-main__contents__form__group__btn--google none-radius' do
             Googleでログイン
     .user-main__contents__form.inner-panel
-      = form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
+      = form_with model: @user, url: new_user_session_path, id: 'new_user', class: 'new_user', local: true do |f|
+        = devise_error_messages!
         .user-main__contents__form__group
           %label.user-main__contents__form__group__item{for:"email"}
           = f.email_field :email, class:'user-main__contents__form__group__item__input none-top-margin', placeholder:'メールアドレス', required: true
