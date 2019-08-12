@@ -68,7 +68,7 @@
             justify-content:center;
             align-items:center;
             padding: 72px 16px 24px;
-            background:url(common/user-bg.jpg) no-repeat;
+            background:url(/images/common/user-bg.jpg) no-repeat;
             background-size:cover;
             &__avator{
               img{
@@ -180,7 +180,7 @@
               @include form_button($unused_color,4px,0);
               //googleは特殊なのでscssで指定
               color:#333;
-              background:#fff url(common/google.svg) no-repeat 3px top;
+              background:#fff url(/images/common/google.svg) no-repeat 3px top;
               border:solid 1px #979797;
               border-radius: 4px;
             }
@@ -197,6 +197,7 @@
           border-top:solid 1px #f5f5f5;
         }
       }
+
       //クラス外の共通設定(ちょい足し便利エリア）
       //呼び出し位置によってpaddingの値を指定する
       .single-panel{
@@ -255,7 +256,9 @@
       input[type=number]::-webkit-outer-spin-button {
         -webkit-appearance: none;
         margin: 0;
-      }  
+      } 
+      //ボタンタグの標準を打ち消し
+
       //selectフィールドのボタン、フォーカスなどを挙動を本家に合わせて変更
       //デフォルトのドロップダウンボタンを無効化
       select,textarea {
@@ -272,18 +275,34 @@
         border-radius: 4px;
       }      
       //フォーカス時の挙動を本家に合わせて変更
-      select:focus {
+      select:focus{
         outline: 0;
         border-color:#0099e8;
         background-color:#fff;
       }
+
+        input[type=submit],
+        input[type=submit]:active {
+          background-color:none;
+          border: none;
+          outline: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+      }
+
+      input[type=submit]:active{
+        @include form_button($default_color,0,1);
+      }
+
+
       //date_selectのデフォルトCSSを変更
       //年月日用
       .year,.month,.day{
         @include form_select(76px,48px,85%);
       }
-      //ポスト
-      .postal-code-input{
+      //都道府県選択
+      .prefecture_id{
         @include form_select(100%,48px,95%);
       }
     }
@@ -303,7 +322,7 @@
     //アプリ紹介パネル表示
     .apl-intro-form{
       width:700px;
-      background: url(back-image.png) no-repeat;
+      background: url(/images/common/back-image.png) no-repeat;
     }
     //divの下線つける用
     .form-underline{
@@ -318,4 +337,10 @@
     margin: 40px auto 0;
     padding: 0 0 40px;
   }
+}
+
+//エラーメッセージ
+.error-messages{
+  font-size:14px;
+  color:#ea352d;
 }

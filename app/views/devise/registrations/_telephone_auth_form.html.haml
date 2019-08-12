@@ -1,32 +1,37 @@
 .user-main__contents__form.single-panel
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item{for:"auth_code"}
-      認証番号
-    %span.user-main__contents__form__group__item--required
-      必須
-    = telephone_field_tag :auth_code, '', class:'user-main__contents__form__group__item__input', placeholder:'認証番号を入力', autofocus: true, required: true
-    %p.user-main__contents__form__group__confirm-text
-      SMSで届いた認証番号を入力してください
+  = form_with url:users_sign_up_telephone_check_path, method: :get,local: true do |f|
+    .user-main__contents__form__group.none-top-margin.text-center
+      .error-messages
+        - if @messages != nil
+          %p
+            = @messages
+    .user-main__contents__form__group.top-panel.none-top-margin
+      %label.user-main__contents__form__group__item{for:"auth_code"}
+        認証番号
+      %span.user-main__contents__form__group__item--required
+        必須
+      = f.number_field :auth_code, class:'user-main__contents__form__group__item__input', placeholder:'認証番号を入力', autofocus: true, required: true,value:"#{session[:auth_code]}"
+      %p.user-main__contents__form__group__confirm-text
+        SMSで届いた認証番号を入力してください
+      .user-main__contents__form__group
+        = f.submit '認証して完了', class:'user-main__contents__form__group__btn--default'
+  .user-main__contents__form--footer
     .user-main__contents__form__group
-      =link_to users_sign_up_address_path, class:'user-main__contents__form__group__btn--default' do
-        認証して完了
-.user-main__contents__form--footer
-  .user-main__contents__form__group
-    %p.user-main__contents__form__group__confirm-text--bold
-      30秒たっても認証番号が届かない方へ
-    %p.user-main__contents__form__group__confirm-text
-      電話で認証番号を聞くこともできます。
-  .user-main__contents__form__group
-    =link_to '#', class:'user-main__contents__form__group__btn--default' do
-      電話で認証番号を開く（無料通話）
-.user-main__contents__form--footer
-  .user-main__contents__form__group
-    %p.user-main__contents__form__group__confirm-text--bold
-      認証番号を再送することもできます。もう一度電話番号を入力して下さい。
-    = link_to '#', class:'user-main__contents__form__group__confirm-text--link' do
-      電話番号を再度入力する
-    %p.user-main__contents__form__group__confirm-text
-      ※SMSが届かない場合は
+      %p.user-main__contents__form__group__confirm-text--bold
+        30秒たっても認証番号が届かない方へ
+      %p.user-main__contents__form__group__confirm-text
+        電話で認証番号を聞くこともできます。
+    .user-main__contents__form__group
+      = link_to '#', class:'user-main__contents__form__group__btn--default' do
+        電話で認証番号を開く（無料通話）
+  .user-main__contents__form--footer.inner-panel
+    .user-main__contents__form__group
+      %p.user-main__contents__form__group__confirm-text--bold
+        認証番号を再送することもできます。もう一度電話番号を入力して下さい。
       = link_to '#', class:'user-main__contents__form__group__confirm-text--link' do
-        SMS受信設定
-      を確認して、もう一度電話番号を入力してください。
+        電話番号を再度入力する
+      %p.user-main__contents__form__group__confirm-text
+        ※SMSが届かない場合は
+        = link_to '#', class:'user-main__contents__form__group__confirm-text--link' do
+          SMS受信設定
+        を確認して、もう一度電話番号を入力してください。

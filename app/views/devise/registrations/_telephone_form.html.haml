@@ -1,17 +1,23 @@
 .user-main__contents__form.single-panel
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item{for:"tel"}
-      携帯電話の番号
-    %span.user-main__contents__form__group__item--required
-      必須
-    = telephone_field_tag :tel, '', class:'user-main__contents__form__group__item__input', placeholder:'携帯電話の番号を入力', autofocus: true, required: true
+  = form_with model:@user, url:users_sign_up_telephone_auth_path, method: :get,local: true do |f|
     .user-main__contents__form__group
-      =link_to users_sign_up_telephone_auth_path, class:'user-main__contents__form__group__btn--default' do
-        SMSを送信する
-      %p.user-main__contents__form__group__confirm-text.text-center
-        ※電話番号は本人確認や不正利用防止のために利用します。他のユーザーに公開されることはありません。 
-    .user-main__contents__form__group
-      %p.user-main__contents__form__group__confirm-text.text-right
-        = link_to users_sign_up_telephone_path, class:'user-main__contents__form__group__confirm-text--link',target:'_blank' do
-          電話番号の確認が必要な理由
-          = icon 'fas', 'chevron-right'
+      %label.user-main__contents__form__group__item{for:"tel"}
+        携帯電話の番号
+      %span.user-main__contents__form__group__item--required
+        必須
+      = f.telephone_field :tel, class:'user-main__contents__form__group__item__input', placeholder:'携帯電話の番号を入力', autofocus: true, required: true,value:"#{session[:tel]}"
+      .error-messages
+        - if @messages != nil
+          %p
+            = @messages
+      %p.user-main__contents__form__group__confirm-text
+        本人確認のため、携帯電話のSMS(ショートメッセージサービス)を利用して認証を行います。
+      .user-main__contents__form__group
+        = f.submit 'SMSを送信する', class:'user-main__contents__form__group__btn--default'
+        %p.user-main__contents__form__group__confirm-text.text-center
+          ※電話番号は本人確認や不正利用防止のために利用します。他のユーザーに公開されることはありません。 
+      .user-main__contents__form__group
+        %p.user-main__contents__form__group__confirm-text.text-right
+          = link_to users_sign_up_telephone_path, class:'user-main__contents__form__group__confirm-text--link',target:'_blank' do
+            電話番号の確認が必要な理由
+            = icon 'fas', 'chevron-right'

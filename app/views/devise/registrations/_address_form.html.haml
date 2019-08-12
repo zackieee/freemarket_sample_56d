@@ -1,67 +1,56 @@
 .user-main__contents__form.single-panel
-  -# = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  //form_forに変えた場合、f.XXX_fieldに変更が必要
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item
-      お名前
-    %span.user-main__contents__form__group__item--required
-      必須
-    = text_field_tag :lastname, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 山田', required: true, autofocus: true;
-    = text_field_tag :firstname, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 彩', required: true
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item
-      お名前カナ 
-    %span.user-main__contents__form__group__item--required
-      必須
-    = text_field_tag :lastname_kana, '', class:'user-main__contents__form__group__item__input', placeholder:'例) ヤマダ', required: true
-    = text_field_tag :firstname_kana, '', class:'user-main__contents__form__group__item__input', placeholder:'例) アヤ', required: true
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item{for:"postal_code"}
-      郵便番号
-    %span.user-main__contents__form__group__item--required
-      必須
-    = number_field_tag :postal_code, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 123-4567', required: true
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item{for:"postal_code"}
-      都道府県
-    %span.user-main__contents__form__group__item--required
-      必須
-    %br
-    %select{name: :prefecture_id, class:'postal-code-input'}
-      %option{value:"1"}
-        北海道
-      %option{value:"2"}
-        青森
-      %option{value:"3"}
-        岩手
-      %option{value:"4"}
-        秋田
-      %option{value:"5"}
-        宮城
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item
-      市区町村
-    %span.user-main__contents__form__group__item--required
-      必須
-    = text_field_tag :lastname, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 横浜市緑区', required: true
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item
-      番地
-    %span.user-main__contents__form__group__item--required
-      必須
-    = text_field_tag :lastname, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 青山1-1-1', required: true
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item
-      建物名
-    %span.user-main__contents__form__group__item--optional
-      任意
-    = text_field_tag :lastname, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 柳ビル103', required: true
-  .user-main__contents__form__group
-    %label.user-main__contents__form__group__item{for:"tel"}
-      携帯電話の番号
-    %span.user-main__contents__form__group__item--optional
-      任意
-    = telephone_field_tag :tel, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 09012345678', required: true
-  .user-main__contents__form__group
-    =link_to users_sign_up_payment_path, class:'user-main__contents__form__group__btn--default' do
-      次へ進む
+  = form_with model:@user, url:users_sign_up_payment_path, method: :get,local: true do |f|
+    .user-main__contents__form__group
+      %label.user-main__contents__form__group__item
+        お名前
+      %span.user-main__contents__form__group__item--required
+        必須
+      = f.text_field :lastname, class:'user-main__contents__form__group__item__input', placeholder:'例) 山田', required: true, autofocus: true, value:"#{session[:lastname]}"
+      = f.text_field :firstname, class:'user-main__contents__form__group__item__input', placeholder:'例) 彩', required: true, value:"#{session[:firstname]}"
+    .user-main__contents__form__group
+      %label.user-main__contents__form__group__item
+        お名前カナ 
+      %span.user-main__contents__form__group__item--required
+        必須
+      = f.text_field :lastname_kana, class:'user-main__contents__form__group__item__input', placeholder:'例) ヤマダ', required: true, value:"#{session[:lastname_kana]}"
+      = f.text_field :firstname_kana, class:'user-main__contents__form__group__item__input', placeholder:'例) アヤ', required: true, value:"#{session[:firstname_kana]}"
+    = f.fields_for :address do |fields|
+      .user-main__contents__form__group
+        %label.user-main__contents__form__group__item{for:"postal_code"}
+          郵便番号
+        %span.user-main__contents__form__group__item--required
+          必須
+        = fields.number_field :postal_code, class:'user-main__contents__form__group__item__input', placeholder:'例) 123-4567', required: true, value:"#{session[:postal_code]}"
+      .user-main__contents__form__group
+        %label.user-main__contents__form__group__item{for:"prefecture_id"}
+          都道府県
+        %span.user-main__contents__form__group__item--required
+          必須
+        %br
+        = fields.collection_select :prefecture_id, Prefecture.all, :id, :name,{prompt: "--"}, {class: "prefecture_id"}
+      .user-main__contents__form__group
+        %label.user-main__contents__form__group__item
+          市区町村
+        %span.user-main__contents__form__group__item--required
+          必須
+        = fields.text_field :city, class:'user-main__contents__form__group__item__input', placeholder:'例) 横浜市緑区', required: true, value:"#{session[:city]}"
+      .user-main__contents__form__group
+        %label.user-main__contents__form__group__item
+          番地
+        %span.user-main__contents__form__group__item--required
+          必須
+        = fields.text_field :address_number, class:'user-main__contents__form__group__item__input', placeholder:'例) 青山1-1-1', required: true, value:"#{session[:address_number]}"
+      .user-main__contents__form__group
+        %label.user-main__contents__form__group__item
+          建物名
+        %span.user-main__contents__form__group__item--optional
+          任意
+        = fields.text_field :building_name, class:'user-main__contents__form__group__item__input', placeholder:'例) 柳ビル103', value:"#{session[:building_name]}"
+    .user-main__contents__form__group
+      %label.user-main__contents__form__group__item{for:"tel"}
+        携帯電話の番号
+      %span.user-main__contents__form__group__item--optional
+        任意
+      = f.telephone_field :tel, class:'user-main__contents__form__group__item__input', placeholder:'例) 09012345678', value:"#{session[:tel]}"
+    .user-main__contents__form__group
+      = f.submit '次へ進む', class:'user-main__contents__form__group__btn--default'

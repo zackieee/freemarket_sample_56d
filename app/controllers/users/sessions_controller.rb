@@ -11,6 +11,6 @@ class Users::SessionsController < Devise::SessionsController
   def edit_account
   end
 
-  def sign_out
+  def sign_out_confirm
   end
 end
