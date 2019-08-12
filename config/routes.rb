@@ -25,8 +25,8 @@ Rails.application.routes.draw do
   end
 
   root 'products#index'
+  get 'products/selling_index' => 'products#selling_index' #productsにデータを入れたら':collection'を':mender'に変更
   resources :products do
-    get :selling_index #productsにデータを入れたら':collection'を':mender'に変更
     get :buy #productsにデータを入れたら':collection'を':mender'に変更
     resources :trades, only: [:create]
   end
