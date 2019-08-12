@@ -10,13 +10,13 @@
         ニックネーム
       %span.user-main__contents__form__group__item--required
         必須
-      = f.text_field :nickname,class:'user-main__contents__form__group__item__input', placeholder:'例）メルカリ太郎', autofocus: true, required: true, value:"#{session[:nickname]}"
+      = f.text_field :nickname,class:'user-main__contents__form__group__item__input', placeholder:'例）メルカリ太郎', autofocus: true, required: true, value:"#{session[:user]["nickname"]}"
     .user-main__contents__form__group
       %label.user-main__contents__form__group__item{for:"email"}
         メールアドレス
       %span.user-main__contents__form__group__item--required
         必須
-      = f.email_field :email, class:'user-main__contents__form__group__item__input', placeholder:'PC・携帯どちらでも可', required: true, value:"#{session[:email]}"
+      = f.email_field :email, class:'user-main__contents__form__group__item__input', placeholder:'PC・携帯どちらでも可', required: true, value:"#{session[:user]["email"]}"
     .user-main__contents__form__group
       %label.user-main__contents__form__group__item{for:"password"}
         パスワード
@@ -40,16 +40,16 @@
           お名前(全角)
         %span.user-main__contents__form__group__item--required
           必須
-      = f.text_field :lastname, class:'user-main__contents__form__group__item__input--half', placeholder:'例) 山田', required: true, value:"#{session[:lastname]}"
-      = f.text_field :firstname, class:'user-main__contents__form__group__item__input--half', placeholder:'例) 彩', required: true, value:"#{session[:firstname]}"
+      = f.text_field :lastname, class:'user-main__contents__form__group__item__input--half', placeholder:'例) 山田', required: true, value:"#{session[:user]["lastname"]}"
+      = f.text_field :firstname, class:'user-main__contents__form__group__item__input--half', placeholder:'例) 彩', required: true, value:"#{session[:user]["firstname"]}"
     .user-main__contents__form__group
       .div
         %label.user-main__contents__form__group__item
           お名前カナ(全角) 
         %span.user-main__contents__form__group__item--required
           必須
-      = f.text_field :lastname_kana, class:'user-main__contents__form__group__item__input--half', placeholder:'例) ヤマダ', required: true, value:"#{session[:lastname_kana]}"
-      = f.text_field :firstname_kana, class:'user-main__contents__form__group__item__input--half', placeholder:'例) アヤ', required: true, value:"#{session[:firstname_kana]}"
+      = f.text_field :lastname_kana, class:'user-main__contents__form__group__item__input--half', placeholder:'例) ヤマダ', required: true, value:"#{session[:user]["lastname_kana"]}"
+      = f.text_field :firstname_kana, class:'user-main__contents__form__group__item__input--half', placeholder:'例) アヤ', required: true, value:"#{session[:user]["firstname_kana"]}"
     .user-main__contents__form__group
       %label.user-main__contents__form__group__item{for:"birthday"}
         生年月日
