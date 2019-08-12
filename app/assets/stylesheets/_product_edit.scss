@@ -1,0 +1,191 @@
+@import "config/variable";
+@import "mixin/form";
+.wrapper{
+  background-color:#f5f5f5;
+  //ユーザフォーム全般で使用
+}
+
+.sell-main{
+  color:#333;
+  select{
+    @include form_select(400px, 50px, 95%);
+    border-radius: 4px;
+    border: solid 1px #ccc;
+    cursor: pointer;
+    margin-bottom: 30px;
+    padding: 10px;
+    -webkit-appearance: none;/* ベンダープレフィックス(Google Chrome、Safari用) */
+    &--right{
+      @include form_input;
+      width: 160px;
+      height: 48px;
+      padding: 10px 16px 8px;
+    }
+  }
+  &__contents{
+    margin:0 auto;
+    background-color:#fff;
+    &__title{
+      @include form_headline(20px);
+    }
+    &__content{
+      padding:32px;
+      border-bottom:solid 1px #f5f5f5;
+      max-width:620px;
+      margin:0 auto;
+      //フォーム全体のデフォルト設定
+      &__item{
+        font-size:13px;
+        font-weight:600;
+        //フォームの入力エリア
+        &__input{
+          @include form_input;
+          width:100%; 
+          margin-bottom: 40px;
+        }
+        //フォームラベル指定用
+        &--required{
+          @include form_label($required);
+        }
+        &__textarea{
+          @include form_input;
+          width: 100%;
+          height: 140px;
+        }
+        &--p{
+          margin-bottom: 15px;
+          font-size: 13px;
+        }
+        &__images{
+          display: flex;
+          &--already{
+            display: flex;
+            &__blocks{
+              margin-right: 10px;
+              background-color: #f5f5f5;
+              &__block{
+                display: flex;
+                &--link{
+                  height: 30px;
+                  width: 50%;
+                  border: solid 1px #ccc;
+                  display: inline-block;
+                  text-align: center;
+                  line-height: 30px;
+                  text-decoration: none;
+                  color: #0099e8;
+                }
+              }
+            }
+          }
+          &--upload{
+            height: 160px;
+            max-width: 100%;
+          }
+        }
+      }
+      //フォームの注意喚起メッセージ
+      &__confirm-text{
+        @include form_text(14px);
+        &--link{
+          font-size:14px;
+          color:#0099e8;
+          text-decoration: none;
+        }
+      }
+      &__info-text{
+        @include form_text(14px);
+      }
+      //フォームのボタン関連
+      &__btn{
+        margin-top: 32px;
+        &--big{
+          color: white;
+          background-color: red;
+          width: 620px;
+          position:relative;
+          display:block;
+          margin:40px auto 0;
+          font-size:14px;
+          line-height:48px;
+          text-align:center;
+          text-decoration:none;
+        }
+        &--default{
+          @include form_button($default_color,0px,1);
+          background-color: #aaa;
+          margin-top:20px;
+        }
+      }
+    }
+  }
+  //画面によってwidth調整
+  .registration-form{
+    width:700px;
+  }
+}
+
+//ファイルを開くボタンを隠す
+.hidden{
+  display: none;
+}
+
+.touch{
+  margin-top:15px;
+}
+
+//float使う時に必要？
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+//右側のコンテンツ
+.product-details{
+  margin-bottom: 20px;
+  float: right;
+  width: 400px;
+}
+
+.right{
+  float: right;
+}
+
+.left{
+  float: left;
+}
+
+.top-space{
+  margin-top: 20px;
+}
+
+.bottom-space{
+  margin-bottom: 20px;
+}
+
+.bottom-border{
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 24px;
+}
+
+.top-border{
+  border-top: 1px solid #ccc;
+}
+
+//ドロップダウンボタン。カテゴリーとか
+.dropdown{
+  @include form_select(400px, 50px, 95%);
+  border-radius: 4px;
+  border: solid 1px #ccc;
+  cursor: pointer;
+  margin-bottom: 30px;
+  -webkit-appearance: none;
+  &--right{
+    @include form_input;
+    width: 160px;
+    height: 48px;
+    padding: 10px 16px 8px;
+  }
+}
+
