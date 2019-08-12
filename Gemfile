@@ -48,6 +48,7 @@ group :development, :test do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -81,3 +82,6 @@ gem 'pry-rails'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'active_hash'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-google-oauth2', '~> 0.5.4'
+gem 'omniauth-facebook'
