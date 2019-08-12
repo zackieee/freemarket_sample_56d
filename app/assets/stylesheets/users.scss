@@ -197,6 +197,7 @@
           border-top:solid 1px #f5f5f5;
         }
       }
+
       //クラス外の共通設定(ちょい足し便利エリア）
       //呼び出し位置によってpaddingの値を指定する
       .single-panel{
@@ -255,7 +256,9 @@
       input[type=number]::-webkit-outer-spin-button {
         -webkit-appearance: none;
         margin: 0;
-      }  
+      } 
+      //ボタンタグの標準を打ち消し
+
       //selectフィールドのボタン、フォーカスなどを挙動を本家に合わせて変更
       //デフォルトのドロップダウンボタンを無効化
       select,textarea {
@@ -277,24 +280,21 @@
         border-color:#0099e8;
         background-color:#fff;
       }
-      //エラー時の挙動を本家に合わせて変更
-      input[type=text]:required,
-      input[type=email]:required,
-      input[type=email]:invalid,
-      input[type=password]:required,
-      select,textarea:required {
-	      border-color: #c20c33;
-	      background-color: #ffd9e1;
+
+        input[type=submit],
+        input[type=submit]:active {
+          background-color:none;
+          border: none;
+          outline: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
       }
-      /* 入力値が正常な時のスタイル */
-      input[type=text]:valid,
-      input[type=email]:valid,
-      input[type=password]:valid,
-      select,textarea:valid {
-        color: #333;
-        border: 1px solid #ccc;
-        background: #fff;
+
+      input[type=submit]:active{
+        @include form_button($default_color,0,1);
       }
+
 
       //date_selectのデフォルトCSSを変更
       //年月日用
@@ -337,4 +337,10 @@
     margin: 40px auto 0;
     padding: 0 0 40px;
   }
+}
+
+//エラーメッセージ
+.error-messages{
+  font-size:14px;
+  color:#ea352d;
 }
