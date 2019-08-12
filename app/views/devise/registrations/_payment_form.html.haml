@@ -1,5 +1,5 @@
 .user-main__contents__form.single-panel
-  = form_with url:users_sign_up_complete_path, method: :get,local: true do |f|
+  = form_with url:users_sign_up_complete_path, method: :post,local: true, html: {name:'inputForm'} do |f|
     .user-main__contents__form__group
       %label.user-main__contents__form__group__item{for:"card_number"}
         カード番号
@@ -39,5 +39,5 @@
         = link_to users_sign_up_complete_path, class:'user-main__contents__form__group__confirm-text--link', target:'_blank' do
           = icon 'fas', 'question-circle'
           カード裏面の番号とは？
-      .user-main__contents__form__group
-        =f.submit '次へ進む', class:'user-main__contents__form__group__btn--default'
+      .user-main__contents__form__group#card_token
+        =f.submit '次へ進む', class:'user-main__contents__form__group__btn--default',id:'token_submit'
