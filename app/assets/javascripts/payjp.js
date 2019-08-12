@@ -27,8 +27,6 @@ document.addEventListener(
           ); //トークンを送信できるように隠しタグを生成（これが走ってコントローラに飛ぶ)
           document.inputForm.submit();
         } else {
-          console.log(response);
-          console.log(status);
         }
       });
     });
