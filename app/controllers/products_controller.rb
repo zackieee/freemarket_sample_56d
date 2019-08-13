@@ -37,8 +37,12 @@ class ProductsController < ApplicationController
   end
 
   def update
-    product.update(product_params)
-    redirect_to root_path
+    begin
+      @product.update(product_params)
+      redirect_to selling_show_product_path(@product)
+    rescue
+      redirect_to edit_product_path(@product)
+    end
   end
 
   def buy
