@@ -37,11 +37,10 @@ class ProductsController < ApplicationController
   end
 
   def update
-    begin
-      @product.update(product_params)
+    if @product.update(product_params)
       redirect_to selling_show_product_path(@product)
-    rescue
-      redirect_to edit_product_path(@product)
+    else
+      render :edit
     end
   end
 
