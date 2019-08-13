@@ -73,7 +73,9 @@
       %p (税込)
       %span 送料込み
     .show-item__buy
-      = link_to "購入画面に進む", buy_product_path
+      = link_to "購入画面に進む"
+      -# エラーを避けるため、一旦パスを消した
+      -# 本当はこれ→ = link_to "購入画面に進む", product_buy_path(@product)
     .show-item__text
       %span #{@product.text}
     .show-item__any
