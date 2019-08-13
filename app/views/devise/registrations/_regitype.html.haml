@@ -5,9 +5,8 @@
         = icon 'far', 'envelope', class: "contents__btn--icon"
         メールアドレスで登録する
     .user-main__contents__form__group__btn
-      =link_to users_sign_up_profile_path, class:'user-main__contents__form__group__btn--facebook' do
+      =link_to user_facebook_omniauth_authorize_path, class:'user-main__contents__form__group__btn--facebook', method: :post do
         = icon 'fab', 'facebook-square', class: "contents__btn--icon"
         Facebookで登録する
     .user-main__contents__form__group__btn
-      =link_to users_sign_up_profile_path, class:'user-main__contents__form__group__btn--google' do
-        Googleで登録する 
+      =link_to "Googleで登録する ", user_google_oauth2_omniauth_authorize_path, class:'user-main__contents__form__group__btn--google', method: :post
