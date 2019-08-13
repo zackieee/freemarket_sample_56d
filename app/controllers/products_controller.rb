@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  before_action :set_product, only: [:show, :buy]
+  before_action :set_product, only: [:show, :buy, :selling_show, :edit, :update]
 
   def index
     @products= Product.order('id DESC').limit(4)
@@ -31,19 +31,12 @@ class ProductsController < ApplicationController
   end
 
   def selling_show
-    # 一旦id=12の商品を取り出す
-    @product = Product.find(12)
   end
 
   def edit
-    # @product = Product.find(params[:id])
-    #仮でidが21のレコードを使う。
-    @product = Product.find(12)
   end
 
   def update
-    # 現時点で仮置き
-    product = Product.find(12)
     product.update(product_params)
     redirect_to root_path
   end

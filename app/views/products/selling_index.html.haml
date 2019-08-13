@@ -20,7 +20,7 @@
               - @products.each do | product |
                 %li.selling-page__main__contents__content
                   -# 実際はproduct_path(product)に飛ばす。
-                  = link_to product_products_selling_show_path(product) do
+                  = link_to selling_show_product_path(product) do
                     - if product.images.first
                       = image_tag product.images.first, class:'selling-page__main__contents__content__image', height: '48px', width: '48px'
                     - else
