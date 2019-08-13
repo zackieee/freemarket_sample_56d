@@ -19,6 +19,7 @@
       text-align: center;
       font-size: 23px;
       font-weight: bold;
+      margin-bottom: 10px;
     }
     p {
       margin: 1% 0 3% 0;
@@ -57,7 +58,7 @@
     &__text {
       min-height: 10px;
       width: 100%;
-      margin: 10% 0 1% 0;
+      margin: 10% 0 3% 0;
       word-break: break-all;
     }
     &__any {
@@ -114,7 +115,7 @@
         }
         &__list {
             width: 300px;
-            height: 150px;
+            height: 110px;
             background: #FAFAFA;
       }
       &__owner {

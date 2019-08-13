@@ -84,3 +84,14 @@ gem 'active_hash'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2', '~> 0.5.4'
 gem 'omniauth-facebook'
+
+#recaptcha用
+gem 'recaptcha'
+
+#SMS認証
+gem 'twilio-ruby', '~> 5.6.0'
+gem 'phony_rails'
+
+#クレジットカード用
+gem 'payjp'
+
