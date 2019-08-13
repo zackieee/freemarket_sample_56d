@@ -30,10 +30,22 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def selling_show
+    # 一旦id=12の商品を取り出す
+    @product = Product.find(12)
+  end
+
   def edit
     # @product = Product.find(params[:id])
     #仮でidが21のレコードを使う。
-    @product = Product.find(21)
+    @product = Product.find(12)
+  end
+
+  def update
+    # 現時点で仮置き
+    product = Product.find(12)
+    product.update(product_params)
+    redirect_to root_path
   end
 
   def buy
