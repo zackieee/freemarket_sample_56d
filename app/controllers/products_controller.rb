@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  before_action :set_product, only: [:show, :buy, :selling_show, :edit, :update]
+  before_action :set_product, only: [:show, :buy, :selling_show, :edit, :update, :destroy]
 
   def index
     @products= Product.order('id DESC').limit(4)
@@ -42,6 +42,11 @@ class ProductsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @product.destroy #if current_user == @product.user_id ユーザー機能と結合できたら
+    redirect_to products_selling_index_path
   end
 
   def buy

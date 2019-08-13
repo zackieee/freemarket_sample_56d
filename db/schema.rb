@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 2019_08_11_080206) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -165,7 +164,6 @@ ActiveRecord::Schema.define(version: 2019_08_11_080206) do
     t.datetime "updated_at", null: false
   end
 
-
   create_table "sns_credentials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "provider"
     t.string "uid"
@@ -173,6 +171,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_080206) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_sns_credentials_on_user_id"
+  end
 
   create_table "trades", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "product_id", null: false
@@ -183,6 +182,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_080206) do
     t.index ["buyer_id"], name: "index_trades_on_buyer_id"
     t.index ["product_id"], name: "index_trades_on_product_id"
     t.index ["seller_id"], name: "index_trades_on_seller_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -194,12 +194,12 @@ ActiveRecord::Schema.define(version: 2019_08_11_080206) do
     t.datetime "updated_at", null: false
     t.string "nickname", default: "", null: false
     t.text "introduction"
-    t.string "firstname"
-    t.string "lastname"
-    t.string "firstname_kana"
-    t.string "lastname_kana"
-    t.date "birthday"
-    t.string "tel"
+    t.string "firstname", null: false
+    t.string "lastname", null: false
+    t.string "firstname_kana", null: false
+    t.string "lastname_kana", null: false
+    t.date "birthday", null: false
+    t.string "tel", null: false
     t.integer "sales_amount", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
