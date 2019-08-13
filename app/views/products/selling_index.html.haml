@@ -17,7 +17,7 @@
         .maypage__main__contents__content
           - if @products
             %ul
-              = render partial: 'product_index', collection: @products
+              = render partial: 'product_index', collection: @products, as: "product"
           - else
             .selling-page__main__contents__content--none
               %h3
