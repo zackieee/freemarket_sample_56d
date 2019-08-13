@@ -1,0 +1,169 @@
+=render 'header'
+.selling_show.crearfix
+  .selling_show-item
+    %h1
+      = @product.name
+    .selling_show-item__wrapper
+      .selling_show-item__wrapper__contents
+        .selling_show-item__wrapper__contents__image
+          = image_tag 'top-image.png', alt: '', height: '265', width: '300', class: ''
+        .selling_show-item__wrapper__contents__list
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+      .selling_show-item__wrapper__contents__owner
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__left
+            %p 出品者
+          .selling_show-item__wrapper__contents__owner__detail__right
+            = link_to @product.seller.nickname
+            = icon 'far', 'laugh-squint', class: "good"
+            1
+            = icon 'far', 'meh', class: "normal"
+            1
+            = icon 'far', 'angry', class: "bad"
+            1
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__left
+            %p カテゴリー
+          .selling_show-item__wrapper__contents__owner__detail__right
+            = link_to "aws"
+            .arow
+              = link_to '' do
+                = icon 'fas', 'angle-right'
+              = link_to "aws"
+            .arow-second
+              = link_to '' do
+                = icon 'fas', 'angle-right'
+              = link_to "aws" 
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__lefts
+            %p ブランド
+          .selling_show-item__wrapper__contents__owner__detail__rights
+            = link_to "シャネル"
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__lefts
+            %p 商品の状態
+          .selling_show-item__wrapper__contents__owner__detail__rights
+            %p やや傷や汚れあり
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__lefts
+            %p 配送料の負担
+          .selling_show-item__wrapper__contents__owner__detail__rights
+            %p 送料込み(出品者負担)
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__lefts
+            %p 配送元の地域
+          .selling_show-item__wrapper__contents__owner__detail__rights
+            %p #{@product.prefecture_id}
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__lefts
+            %p 発送日の目安
+          .selling_show-item__wrapper__contents__owner__detail__rights
+            %p #{@product.delivery_days_id}
+    .selling_show-item__value
+      %h1 ¥#{@product.price}
+      %p (税込)
+      %span 送料込み
+    .selling_show-item__text
+      %span #{@product.text}
+  .selling_show-item__second
+    .selling_show-item__edit
+      = link_to "商品の編集", edit_product_path(@product)
+    .selling_show-item__edit__or
+      or
+    .selling_show-item__destroy
+      = link_to "商品の削除"
+      -# 一旦パスを消した
+      -# 元は = link_to "購入画面に進む", product_buy_path
+  -# .selling_show-status
+  -#   .selling_show-status__edit
+  -#     =link_to "商品の編集"
+  -#   %p or
+  -#   .selling_show-status__stop
+  -#     =link_to "出品を一旦停止する"
+  -#   .selling_show-status__delete
+  -#     =link_to "この商品を削除する"
+  -# .selling_show-message
+  -#   .selling_show-message__user
+  -#     .selling_show-message__user__faceicon
+  -#       %p.user-name 田中
+  -#       = image_tag 'icon.png'
+  -#       .selling_show-message__user__faceicon__says
+  -#         %p aaaaaaa
+  -#         .selling_show-message__user__faceicon__fa
+  -#           = icon 'far', 'clock', class: "clock"
+  -#           %p 100日前
+  -#           = link_to '' do
+  -#             = icon 'far', 'flag', class: "flag"
+  -#           = link_to '' do
+  -#             = icon 'far', "trash-alt", class: "user-trash"
+  -#     .selling_show-message__user__chatting
+  -#     .selling_show-message__user__mycomment
+  -#       %p.my-name 田中
+  -#       .selling_show-message__user__mycomment__text
+  -#         %p 右ふきだし文
+  -#         .selling_show-message__user__mycomment__fa
+  -#           = icon 'far', 'clock', class: "clock"
+  -#           %p 100日前
+  -#           = link_to '' do
+  -#             = icon 'far', 'trash-alt', class: "trash"
+  -#       = image_tag 'icon.png', class: "faceicon"
+
+  -#   .selling_show-message__form
+  -#     %p 相手のことを考えて丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分になることがあります。
+  -#   .selling_show-message__comment
+  -#     %textarea{class: "post"}
+  -#     = link_to  "コメントする", root_path, class: "combtn"
+//パンくずリストが入ります
+=render 'footer-top'
+.footer--bottom
+  .footer--bottom--detail
+    .footer--bottom--detail__something
+      %p メルカリについて
+      = link_to "会社概要 (運営会社)"
+      = link_to "採用情報"
+      = link_to "プレリリース"
+      = link_to "公式ブログ"
+      = link_to "メルカリロゴ利用ガイドライン"
+      .footer--bottom--detail__something__icon
+        = link_to '' do
+          = icon 'fab', 'twitter', class: 'tw-icon'
+        = link_to '' do
+          = icon 'fab', 'facebook', class: 'fb-icon'
+    .footer--bottom--detail__something
+      %p ヘルプ&ガイド 
+      = link_to "メルカリガイド"
+      = link_to "らくらくメルカリ便"
+      = link_to "ゆうゆうメルカリ便"
+      = link_to "大型メルカリ便"
+      = link_to "車体取引ガイド"
+      = link_to "メルカリあんしん・あんぜん宣言！"
+      = link_to "偽ブランド品撲滅への取り組み"
+      = link_to "メルカリボックス"
+    .footer--bottom--detail__something
+      %p プライバシーと利用規約
+      = link_to "プライバシーボリシー"
+      = link_to "メルカリ利用規約"
+      = link_to "あんしんスマホサポート制度に関する利用規約"
+      = link_to "コンプライアンスポリシー"
+    .footer--bottom--detail__something__right
+      = link_to "個人データの安全管理に係る基本方針"
+      = link_to "特定商取引に関する表記"
+      = link_to "資産決済法に基づく表示"
+      = link_to "法令遵守と犯罪防止のために"
+    .footer--bottom--detail__something
+      %p 国
+      = link_to "日本"
+      = link_to "United States"
+  .footer-logo
+    = link_to '' do
+      = image_tag 'logo-white.png', class: 'logo-white'
+    %p © 2019 Mercar
