@@ -80,6 +80,6 @@
     .selling_show-item__edit__or
       or
     .selling_show-item__destroy
-      = link_to "商品の削除"
+      = link_to "商品の削除", product_path(@product), method: :delete, data: { confirm: "本当に削除してよろしいでしょうか？"}
 =render 'footer-top'
 =render 'footer-bottom'
