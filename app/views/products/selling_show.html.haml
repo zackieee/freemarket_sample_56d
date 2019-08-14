@@ -52,22 +52,22 @@
           .selling_show-item__wrapper__contents__owner__detail__lefts
             %p 商品の状態
           .selling_show-item__wrapper__contents__owner__detail__rights
-            %p やや傷や汚れあり
+            %p #{@product.status.name}
         .selling_show-item__wrapper__contents__owner__detail
           .selling_show-item__wrapper__contents__owner__detail__lefts
             %p 配送料の負担
           .selling_show-item__wrapper__contents__owner__detail__rights
-            %p 送料込み(出品者負担)
+            %p #{@product.postage_burden.name}
         .selling_show-item__wrapper__contents__owner__detail
           .selling_show-item__wrapper__contents__owner__detail__lefts
             %p 配送元の地域
           .selling_show-item__wrapper__contents__owner__detail__rights
-            %p #{@product.prefecture_id}
+            %p #{@product.prefecture.name}
         .selling_show-item__wrapper__contents__owner__detail
           .selling_show-item__wrapper__contents__owner__detail__lefts
             %p 発送日の目安
           .selling_show-item__wrapper__contents__owner__detail__rights
-            %p #{@product.delivery_days_id}
+            %p #{@product.delivery_days.name}
     .selling_show-item__value
       %h1 ¥#{@product.price}
       %p (税込)
