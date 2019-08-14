@@ -1,0 +1,6 @@
+@mixin sold-out-tag($size){
+  border-top: $size solid #E93F32;
+  border-right: $size solid transparent;
+  border-bottom: $size solid transparent;
+  border-left: $size solid #E93F32;
+}

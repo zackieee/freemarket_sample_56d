@@ -13,7 +13,6 @@ document.addEventListener(
         exp_month: document.getElementById("_expiration_date_2i").value,
         exp_year: 20 + document.getElementById("_expiration_date_1i").value
       }
-
       //トークン生成
       //カード情報はサーバ通信に含めないように削除する
       Payjp.createToken(card, (status, response) => {
