@@ -38,7 +38,7 @@ describe ProductsController, type: :controller do
       get :edit, params: { id: product }
       expect(assigns(:product)).to eq product
     end
-
+    
     it "商品編集ページに遷移するか" do
       product = create(:product)
       get :edit, params: { id: product }
@@ -51,6 +51,14 @@ describe ProductsController, type: :controller do
       product = create(:product)
       get :buy, params: { id: product }
       expect(response).to render_template :buy
+    end
+  end
+
+  describe 'GET #destroy' do
+    it "インスタンス変数の値が期待したものになるか" do
+      product = create(:product)
+      delete :destroy, params: { id: product }
+      expect(assigns(:product)).to eq product
     end
   end
 
