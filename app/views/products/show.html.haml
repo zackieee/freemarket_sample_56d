@@ -1,4 +1,7 @@
 =render 'header'
+.notification
+  - flash.each do |key, value|
+    = content_tag :div, value, class: key
 .show.crearfix
   .show-item
     %h1
@@ -6,18 +9,15 @@
     .show-item__wrapper
       .show-item__wrapper__contents
         .show-item__wrapper__contents__image
-          = image_tag 'top-image.png', alt: '', height: '265', width: '300', class: ''
-        .show-item__wrapper__contents__list
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag @product.images.first, height: '265', width: '300'
+        -# 売り切れの場合
+        - if @product.sales_status_id  == 2
+          .show-item__wrapper__contents__sold-out
+            SOLD
+          .show-item__wrapper__contents__sold-out__tag
+        - @product.images.each do |image|
+          .show-item__wrapper__contents__list
+            = image_tag image, height: '50', width: '54'
       .show-item__wrapper__contents__owner
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__left
@@ -52,28 +52,32 @@
           .show-item__wrapper__contents__owner__detail__lefts
             %p 商品の状態
           .show-item__wrapper__contents__owner__detail__rights
-            %p やや傷や汚れあり
+            %p #{@product.status.name}
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
             %p 配送料の負担
           .show-item__wrapper__contents__owner__detail__rights
-            %p 送料込み(出品者負担)
+            %p #{@product.postage_burden.name}
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
             %p 配送元の地域
           .show-item__wrapper__contents__owner__detail__rights
-            %p #{@product.prefecture_id}
+            %p #{@product.prefecture.name}
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
             %p 発送日の目安
           .show-item__wrapper__contents__owner__detail__rights
-            %p #{@product.delivery_days_id}
+            %p #{@product.delivery_days.name}
     .show-item__value
       %h1 ¥#{@product.price}
       %p (税込)
       %span 送料込み
-    .show-item__buy
-      = link_to "購入画面に進む", buy_product_path(@product)
+    - if @product.sales_status_id  == 1
+      .show-item__buy
+        = link_to "購入画面に進む", buy_product_path
+    - else @product.sales_status_id  == 2
+      .show-item__no-buy
+        %p 売り切れました
     .show-item__text
       %span #{@product.text}
     .show-item__any
@@ -89,14 +93,16 @@
           = icon 'fas', 'lock'
         = link_to "あんしん・あんぜんへの取り組み"
   .show-other
-    .show-other__left
-      = link_to '' do
-        = icon 'fas', 'angle-right', class: "arow-left"
-      = link_to "【HerveChapelier】 エルベシャプリエ トートバッグ H&L様専用" 
-    .show-other__right
-      = link_to "H&L様専用"
-      = link_to '' do
-        = icon 'fas', 'angle-right'
+    - if Product.exists?(@product.id + 1)
+      .show-other__left
+        = link_to product_path(@product_after) do
+          = icon 'fas', 'angle-right', class: "arow-left"
+          %span 次の商品
+    - if Product.exists?(@product.id - 1)
+      .show-other__right
+        = link_to product_path(@product_before) do
+          %span 前の商品
+          = icon 'fas', 'angle-right'
   .show-applink
     = link_to '' do
       = icon 'fab', 'facebook', class: 'fb-btn'
@@ -105,89 +111,19 @@
     = link_to '' do
       = icon 'fab', 'pinterest', class: 'pr-btn'
   .show-user__item
-    = link_to "awsさんのその他の出品"
+    = link_to "#{@product.seller.nickname}さんのその他の出品"
   .show-other__item
     .item--list
-      .item--list__image
-        = link_to 'products/show' do
-          = image_tag 'top-image.png', height: '200', width: '200'
-        .item--list__image__text
-          = link_to 'products/show' do
-            アイコン売ってます
-          .item--list__image__text__wrapper
-            .item--list__image__text__wrapper__value
-              %p ¥10000
-            .item--list__image__text__wrapper__like
-              = icon 'far', 'heart'
-              %span 1
-    .item--list
-      .item--list__image
-        = link_to 'products/show' do
-          = image_tag 'top-image.png', height: '200', width: '200'
-        .item--list__image__text
-          = link_to 'products/show' do
-            アイコン売ってます
-          .item--list__image__text__wrapper
-            .item--list__image__text__wrapper__value
-              %p ¥10000
-            .item--list__image__text__wrapper__like
-              = icon 'far', 'heart'
-              %span 1
-    .item--list
-      .item--list__image
-        = link_to 'products/show' do
-          = image_tag 'top-image.png', height: '200', width: '200'
-        .item--list__image__text
-          = link_to 'products/show' do
-            アイコン売ってます
-          .item--list__image__text__wrapper
-            .item--list__image__text__wrapper__value
-              %p ¥10000
-            .item--list__image__text__wrapper__like
-              = icon 'far', 'heart'
-              %span 1
-    .item--list
-      .item--list__image
-        = link_to 'products/show' do
-          = image_tag 'top-image.png', height: '200', width: '200'
-        .item--list__image__text
-          = link_to 'products/show' do
-            アイコン売ってます
-          .item--list__image__text__wrapper
-            .item--list__image__text__wrapper__value
-              %p ¥10000
-            .item--list__image__text__wrapper__like
-              = icon 'far', 'heart'
-              %span 1
-    .item--list
-      .item--list__image
-        = link_to 'products/show' do
-          = image_tag 'top-image.png', height: '200', width: '200'
-        .item--list__image__text
-          = link_to 'products/show' do
-            アイコン売ってます
-          .item--list__image__text__wrapper
-            .item--list__image__text__wrapper__value
-              %p ¥10000
-            .item--list__image__text__wrapper__like
-              = icon 'far', 'heart'
-              %span 1
+      = render @products
+    .item-show
+      = link_to "全ての商品を見る"
   .show-other__brand
-    = link_to "シャネルのショルダーバッグ その他の商品"
+    = link_to "カテゴリー その他の商品"
   .show-other__item
     .item--list
-      .item--list__image
-        = link_to 'products/show' do
-          = image_tag 'top-image.png', height: '200', width: '200'
-        .item--list__image__text
-          = link_to 'products/show' do
-            アイコン売ってます
-          .item--list__image__text__wrapper
-            .item--list__image__text__wrapper__value
-              %p ¥10000
-            .item--list__image__text__wrapper__like
-              = icon 'far', 'heart'
-              %span 1
+      = render @products
+    .item-show
+      = link_to "全ての商品を見る"
   -# .show-status
   -#   .show-status__edit
   -#     =link_to "商品の編集"

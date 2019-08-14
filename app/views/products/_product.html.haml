@@ -1,11 +1,10 @@
 .item--list__image
   = link_to product_path(product) do
-    - if product.images.first
-      = image_tag product.images.first
-    - else
-      = image_tag 'mercari_profile.png'
-  -# 一旦条件分岐してます↑↑↑↑seedファイルには画像がない商品もあったので
-  -# 本来は = image_tag product.images.first だけでOk
+    = image_tag product.images.first
+    - if product.sales_status_id  == 2
+      .item--list__image__sold-out
+        SOLD
+      .item--list__image__sold-out__tag
   .item--list__image__text
     = link_to product.text, product_path(product)
     .item--list__image__text__wrapper
