@@ -20,6 +20,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+
   end
 
   def selling_index
@@ -45,7 +46,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product.destroy #if current_user == @product.user_id ユーザー機能と結合できたら
+    @product.destroy if current_user.id == @product.seller_id
     redirect_to products_selling_index_path
   end
 

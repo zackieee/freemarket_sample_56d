@@ -11,32 +11,32 @@ describe User do
     it "メアドが空の場合は保存できないよ" do
       user = build(:user, email: "")
       user.valid?
-      expect(user.errors[:email]).to include("can't be blank")
+      expect(user.errors[:email]).to include("を入力してください")
     end
 
     it "パスワードが空の場合は登録できないよ" do
       user = build(:user, password: "")
       user.valid?
-      expect(user.errors[:password]).to include("can't be blank")
+      expect(user.errors[:password]).to include("を入力してください")
     end
     
     it "確認用パスワードが空の場合は登録できないよ" do
       user = build(:user, password_confirmation: "")
       user.valid?
-      expect(user.errors[:password_confirmation]).to include("doesn't match Password")
+      expect(user.errors[:password_confirmation]).to include("とPasswordの入力が一致しません")
     end
 
     it "同じメアドは保存できないよ" do
       user = create(:user)
       another_user = build(:user, email: user.email)
       another_user.valid?
-      expect(another_user.errors[:email]).to include("has already been taken")
+      expect(another_user.errors[:email]).to include("はすでに存在します")
     end
 
     it "パスワードが5文字以下は登録できないよ！" do
       user = build(:user, password: "00000", password_confirmation: "00000")
       user.valid?
-      expect(user.errors[:password][0]).to include("is too short")
+      expect(user.errors[:password][0]).to include("は6文字以上で入力してください")
     end
     
     it "パスワードが6文字以上なら登録できるよ！" do
