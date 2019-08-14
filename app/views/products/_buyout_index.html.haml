@@ -1,0 +1,21 @@
+- if product.sales_status.id == 2
+  %li.buyout-page__main__contents__content
+    -# 実際はproduct_path(product)に飛ばす。
+    = link_to "#" do
+      - if product.images.first
+        = image_tag product.images.first, class:'buyout-page__main__contents__content__image', height: '48px', width: '48px'
+      - else
+        = image_tag 'mercari_profile.png', class:'buyout-page__main__contents__content__image', height: '48px', width: '48px'
+      .buyout-page__main__contents__content__middle
+        .buyout-page__main__contents__content__middle__text
+          = product.name
+        .buyout-page__main__contents__content__bottom
+          .buyout-page__main__contents__content__bottom__icon
+            = icon 'far my-black', 'heart'
+            5
+            = icon 'far', 'comment-alt'
+            0
+          .buyout-page__main__contents__content__bottom__text
+            売却済
+      .buyout-page__main__contents__content__link-icon
+        = icon 'fas fa-lg','angle-right'

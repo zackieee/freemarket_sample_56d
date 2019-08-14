@@ -32,11 +32,11 @@ class ProductsController < ApplicationController
   end
 
   def selling_index
-    #本当はこれ
-    # @products = current_user.products
-    
-    #いったん全部取り出す
-    @products = Product.all
+    @products = Product.where(seller_id: current_user.id)
+  end
+  
+  def buyout_index
+    @products = Product.where(seller_id: current_user.id)
   end
 
   def selling_show
