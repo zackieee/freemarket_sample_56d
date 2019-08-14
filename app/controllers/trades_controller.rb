@@ -3,7 +3,7 @@ class TradesController < ApplicationController
   def create
     product = Product.find(trade_params[:product_id])
     # カード決済
-    card = Card.where(user_id: current_user.id).first
+    card = Card.where(user_id: current_user.card).first
     Payjp.api_key = Rails.application.credentials.payjp[:api_secret_key]
     card_pay = Payjp::Charge.create(
       amount: product[:price],
