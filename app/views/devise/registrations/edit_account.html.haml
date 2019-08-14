@@ -6,68 +6,63 @@
       %h2
         本人情報の登録
       .user-profile__area
-        .user-profile__area__info
-          %p お客さまの本人情報をご登録ください。
-          %p 登録されたお名前・生年月日を変更する場合、本人確認書類の提出が必要になります。
-          = link_to "" do
-            = icon 'fas', 'angle-right'
-          = link_to "本人確認書類のアップロードについて"
-        .user-profile__name
-          %p お名前
-          %li 田中卓士
-        .user-profile__kananame
-          %p お名前カナ
-          %li タナカタクシ
-        .user-profile__birthday
-          %p 生年月日
-          %li 2018/1/1
-        .user-profile__contents
-          %label.user-main__contents__form__group__item{for:"postal_code"}
-            郵便番号
-          %span.user-main__contents__form__group__item--optional
-            任意
-          = number_field_tag :postal_code, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 123-4567'
-        .user-profile__contents
-          %label.user-main__contents__form__group__item{for:"postal_code"}
-            都道府県
-          %span.user-main__contents__form__group__item--optional
-            任意
-          %br
-          %select{name: :prefecture_id, class:'postal-code-input'}
-            %option{value:"1"}
-              北海道
-            %option{value:"2"}
-              青森
-            %option{value:"3"}
-              岩手
-            %option{value:"4"}
-              秋田
-            %option{value:"5"}
-              宮城
-        .user-profile__contents
-          %label.user-main__contents__form__group__item
-            市区町村
-          %span.user-main__contents__form__group__item--optional
-            任意
-          = text_field_tag :lastname, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 横浜市緑区'
-        .user-profile__contents
-          %label.user-main__contents__form__group__item
-            番地
-          %span.user-main__contents__form__group__item--optional
-            任意
-          = text_field_tag :lastname, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 青山1-1-1'
-        .user-profile__contents
-          %label.user-main__contents__form__group__item
-            建物名
-          %span.user-main__contents__form__group__item--optional
-            任意
-          = text_field_tag :lastname, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 柳ビル103'
-        .user-profile__contents
-          =link_to users_sign_up_payment_path, class:'regist-btn' do
-            登録する
-        .user-profile__area__info
-          = link_to "" do
-            = icon 'fas', 'angle-right'
-          = link_to "本人情報の登録について"
+        = form_with model: @user, local: true do |f|
+          .user-profile__area__info
+            %p お客さまの本人情報をご登録ください。
+            %p 登録されたお名前・生年月日を変更する場合、本人確認書類の提出が必要になります。
+            = link_to "" do
+              = icon 'fas', 'angle-right'
+            = link_to "本人確認書類のアップロードについて"
+          .user-profile__name
+            %p お名前
+            %li 
+              = current_user.firstname
+              = current_user.lastname
+          .user-profile__kananame
+            %p お名前カナ
+            %li 
+              = current_user.firstname_kana
+              = current_user.lastname_kana
+          .user-profile__birthday
+            %p 生年月日
+            %li 
+              = current_user.birthday
+          .user-profile__contents
+            %label.user-main__contents__form__group__item{for:"postal_code"}
+              郵便番号
+            %span.user-main__contents__form__group__item--optional
+              任意
+            = number_field_tag :postal_code, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 123-4567'
+          .user-profile__contents
+            %label.user-main__contents__form__group__item{for:"postal_code"}
+              都道府県
+            %span.user-main__contents__form__group__item--optional
+              任意
+            %br
+              = f.collection_select :prefecture_id, Prefecture.all, :id, :name, class:'dropdown', type: "hidden"
+          .user-profile__contents
+            %label.user-main__contents__form__group__item
+              市区町村
+            %span.user-main__contents__form__group__item--optional
+              任意
+            = f.text_field :city, class:'user-main__contents__form__group__item__input', placeholder:'例) 横浜市緑区'
+          .user-profile__contents
+            %label.user-main__contents__form__group__item
+              番地
+            %span.user-main__contents__form__group__item--optional
+              任意
+            = f.text_field :address_number, class:'user-main__contents__form__group__item__input', placeholder:'例) 青山1-1-1'
+          .user-profile__contents
+            %label.user-main__contents__form__group__item
+              建物名
+            %span.user-main__contents__form__group__item--optional
+              任意
+            = f.text_field :building_name, class:'user-main__contents__form__group__item__input', placeholder:'例) 柳ビル103'
+          .user-profile__contents     
+            = f.submit "登録する", class:'regist-btn' 
+          .user-profile__area__info
+            = link_to "" do
+              = icon 'fas', 'angle-right'
+            = link_to "本人情報の登録について"
 =render 'products/footer-top'
 =render 'products/footer-bottom'

@@ -87,6 +87,8 @@
         font-size: 14px;
         border: 1px solid #ccc;
         border-radius: 4px;
+        width: 100%;
+        background-color: white;
       }      
       //フォーカス時の挙動を本家に合わせて変更
       select:focus {
