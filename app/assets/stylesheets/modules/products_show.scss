@@ -81,6 +81,19 @@
         display: block;
       }
     }
+    &__buy {
+      width: 100%;
+      text-align: center;
+      background: #EB352D;
+      padding: 2% 0;
+      a {
+        text-decoration: none;
+        color: white;
+        font-size: 23px;
+        font-weight: bold;
+        display: block;
+      }
+    }
     &__no-buy {
       width: 100%;
       text-align: center;
