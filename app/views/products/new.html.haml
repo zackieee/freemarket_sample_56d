@@ -75,7 +75,7 @@
             .right
               %p.dropdown--mark
                 ¥
-                = f.text_field :price, class:'dropdown--right', placeholder:'           例）300', required: true, maxlength: '40'
+                = f.number_field :price, class:'dropdown--right', placeholder:'           例）300', required: true, maxlength: '40'
           .product-details.bottom-border.bottom-space.clearfix
             %label.sell-main__contents__content__item.left
               販売手数料
