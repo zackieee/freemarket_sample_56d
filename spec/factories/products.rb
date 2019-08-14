@@ -15,3 +15,4 @@ FactoryBot.define do
   end
 end
 # 全てのカラムを書き出す
+

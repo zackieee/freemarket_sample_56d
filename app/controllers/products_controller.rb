@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  before_action :set_product, only: [:show, :buy]
+  before_action :set_product, only: [:show, :buy, :selling_show, :edit, :update, :destroy]
 
   def index
     @products= Product.order('id DESC').limit(4)
@@ -24,6 +24,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+
   end
 
   def selling_index
@@ -34,10 +35,23 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def selling_show
+  end
+
   def edit
-    # @product = Product.find(params[:id])
-    #仮でidが21のレコードを使う。
-    @product = Product.find(21)
+  end
+
+  def update
+    if @product.update(product_params)
+      redirect_to selling_show_product_path(@product)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @product.destroy if current_user.id == @product.seller_id
+    redirect_to products_selling_index_path
   end
 
   def buy
