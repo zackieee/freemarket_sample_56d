@@ -1,9 +1,9 @@
 .item--list__image
   - @products.each do |product|
-    = link_to 'products/show' do
+    = link_to '#' do
       = image_tag product.images.first
     .item--list__image__text
-      = link_to product.text, 'products/show'
+      = link_to product.name, '#'
       .item--list__image__text__wrapper
         .item--list__image__text__wrapper__value
           %p  ¥ #{product.price} 

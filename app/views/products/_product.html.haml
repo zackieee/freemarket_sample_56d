@@ -6,7 +6,7 @@
         SOLD
       .item--list__image__sold-out__tag
   .item--list__image__text
-    = link_to product.text, product_path(product)
+    = link_to product.name, product_path(product)
     .item--list__image__text__wrapper
       .item--list__image__text__wrapper__value
         %p  ¥ #{product.price} 
