@@ -156,7 +156,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit_account
+    @user = User.find(current_user.id)
   end
+  
 
 private
   # userモデルに含まれていない項目についてストロングパラメータを設定（編集は別に必要）
