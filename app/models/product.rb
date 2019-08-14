@@ -17,5 +17,5 @@ class Product < ApplicationRecord
   belongs_to_active_hash :delivery_days
   belongs_to_active_hash :sales_status
 
-  validates :name, :text, :price, :status_id, :prefecture_id, :postage_burden_id, :delivery_days_id, :sales_status_id, presence: true
+  validates :images, :name, :text, :price, :status_id, :prefecture_id, :postage_burden_id, :delivery_days_id, :sales_status_id, presence: true
 end
