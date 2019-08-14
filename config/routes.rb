@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   end
 
   root 'products#index'
+
+  get 'producs/all_products' => 'products#all_products'
   get 'products/selling_index' => 'products#selling_index'
   resources :products do
     get :selling_show, on: :member
