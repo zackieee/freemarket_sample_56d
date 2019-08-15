@@ -12,9 +12,10 @@
             必須
           %p.sell-main__contents__content__item--p
             最大10枚までアップロードできます
-          %label
-            = image_tag 'touch.jpg'
-            = f.file_field :images, multiple: true, class: 'hidden'
+          .sell-main__contents__content__item__images
+            %label
+              = image_tag 'touch.jpg', class: "sell-main__contents__content__item__images--upload"
+              = f.file_field :images, multiple: true, class: 'hidden'
         .sell-main__contents__content.clearfix
           %label.sell-main__contents__content__item{for:"name"}
             商品名
@@ -79,12 +80,12 @@
           .product-details.bottom-border.bottom-space.clearfix
             %label.sell-main__contents__content__item.left
               販売手数料
-            %p.sell-main__contents__content__item.text-right.right
+            %p.sell-main__contents__content__item.text-right.right.fee
               ー
           .product-details.bottom-space.clearfix
             %label.sell-main__contents__content__item.left
               販売利益
-            %p.sell-main__contents__content__item.text-right.right
+            %p.sell-main__contents__content__item.text-right.right.profit
               ー
         .sell-main__contents__content
           %p.sell-main__contents__content__confirm-text
