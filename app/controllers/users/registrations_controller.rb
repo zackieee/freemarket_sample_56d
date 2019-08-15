@@ -4,44 +4,70 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   prepend_before_action :check_captcha, only: [:create]
   prepend_before_action :customize_sign_up_params, only: [:create]
+  prepend_before_action :move_to_new_profile, only: [:new_telephone,:new_telephone_auth,:new_address,:new_payment,:new_payment]
 
   def new_profile
     # 次のページで使う空箱(@userなどを使うなら必須)
     @user = User.new
+    session[:user] = @user
   end
 
   def new_telephone
+    # セッションにデータを登録
+    # この時にストロングパラメータ効かせてpermitted:false解消
+    params[:user][:birthday] = date_create
+    session[:user] = user_params
+
     # 既存の顧客で同一emailを利用していないか
     same_mail = User.where(email: user_params[:email])
     if same_mail.length != 0
       @messages = 'メールアドレスに誤りがあります。ご確認いただき、正しく変更してください。'
       render :new_profile
+      @user = User.new
+      return
     end
 
-    # パスワードが一致しているか
-    if user_params[:password] != user_params[:password_confirmation]
+    # バリデーションチェック
+    @user = User.new(user_params)
+    if @user.valid?(:profile)
+      if verify_recaptcha
+        # 問題なし
+      else
+        @message_recaptcha = '選択してください'
+        render :new_profile
+        return
+      end
+    elsif verify_recaptcha
       render :new_profile
+      return
+    else
+      @message_recaptcha = '選択してください'
+      render :new_profile
+      return
     end
-
-    # セッションにデータを登録
-    # この時にストロングパラメータ効かせてpermitted:false解消
-    session[:user] = user_params
-    session[:birthday] = params[:birthday] #日付型の変換のために一旦分離します
-
-    #次のページ用の空箱
-    @user = User.new
   end
 
   def new_telephone_auth
+    # セッションにデータを格納
+    session[:user][:tel]  = user_params[:tel]
+
+    # バリデーションチェック
+    @user = User.new(session[:user])
+    if @user.valid?(:tel)
+    else
+      render :new_telephone
+      return
+    end
+
     # 既存の顧客で同一電話番号を利用していないか
     same_tel = User.where(tel: user_params[:tel])
     if same_tel.length != 0
       @messages = 'この番号はすでに会員登録済みです。会員の方は、ログインをお試しください。登録の覚えがない場合、お問い合わせよりその旨をご連絡ください。'
       render :new_telephone
+      return
     end
 
     # SMS認証用のデータ作成 + セッションにデータ登録
-    session[:user][:tel]  = user_params[:tel]
     session[:to]          = PhonyRails.normalize_number session[:user][:tel], country_code:'JP' # 電話番号を+81にフォーマット
     session[:secure_code] = random_number_generator(4)
 
@@ -58,6 +84,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def authcode_check
+    # 入力チェック
+    if params[:auth_code].present?
+    else
+      @messages = '認証番号を入力してください'
+      render :authcode_check
+    end
+
     # 電話番号認証の結果を受けてレンダリング先を決める
     if session[:secure_code] == params[:auth_code]
       redirect_to action: :new_address
@@ -71,11 +104,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new_address
     #次のページ用の空箱
     @user = User.new
+    @user.build_address #1:1なのでbuild_address/1:多の場合は@user.address.build
+
   end
 
   def new_payment
     # addressで入力したデータを受け取る
-
     # ユーザデータをセッションに格納
     # すでに存在するキーであるため、指定して上書き
     session[:user]["lastname"]        =   user_params[:lastname]
@@ -83,9 +117,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
     session[:user]["lastname_kana"]   =   user_params[:lastname_kana]
     session[:user]["firstname_kana"]  =   user_params[:firstname_kana]
     session[:user]["tel"]             =   user_params[:tel]
-
     # アドレスデータをセッションに格納
-    session[:address] = address_params
+    session[:address] = user_params[:address_attributes]
+
+    # バリデーションチェック
+    @user = User.new(session[:user])
+    @user.build_address(session[:address])
+    if @user.valid?(:address)
+      if @user.address.valid?(:address)
+      else
+        render :new_address
+        return
+      end
+    elsif @user.address.valid?(:address)
+      render :new_address
+      return
+    else
+      render :new_address
+      return
+    end
 
   end
 
@@ -95,50 +145,73 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     # payjpからトークンを受け取れているか確認
     if params[:payjp_token].blank?
-      redirect_to action: :new_payment
+      binding.pry
+      render :new_payment
+      return
     # payjpに顧客情報を送信・登録する/ユーザ入力情報をparamsから受け取らないのでストロングパラメータもなし
     else
-      customer = Payjp::Customer.create(
-        description: 'freemaket_sample_56d',
-        email: session[:user][:email],
-        card: params[:payjp_token],
-      )
+      # 例外処理追加（例外がうまく動くかは未検証）
+      begin
+        customer = Payjp::Customer.create(
+          description: 'freemaket_sample_56d',
+          email: session[:user][:email],
+          card: params[:payjp_token],
+        )
+      rescue Payjp::CardError => e
+        body = e.json_body
+        @err  = body[:error]
+        render :new_payment
+        return
+      rescue Payjp::InvalidRequestError => e
+        body = e.json_body
+        @err  = body[:error]
+        render :new_payment
+        return
+      rescue Payjp::AuthenticationError => e
+        body = e.json_body
+        @err  = body[:error]
+        render :new_payment
+        return
+      rescue Payjp::APIConnectionError => e
+        body = e.json_body
+        @err  = body[:error]
+        render :new_payment
+        return
+      rescue Payjp::APIError => e
+        body = e.json_body
+        @err  = body[:error]
+        render :new_payment
+        return
+      rescue Payjp::PayjpError => e
+        body = e.json_body
+        @err  = body[:error]
+        render :new_payment
+        return
+      rescue => e
+        body = e.json_body
+        @err  = body[:error]
+        render :new_payment
+        return
+      end
     end
 
     # 実際のユーザ登録はここから
-    @user = User.new(
-      nickname:             session[:user]["nickname"],
-      email:                session[:user]["email"],
-      password:             session[:user]["password"],
-      password_confirmation: session[:user]["password_confirmation"],
-      lastname:             session[:user]["lastname"],
-      firstname:            session[:user]["firstname"],
-      lastname_kana:        session[:user]["lastname_kana"],
-      firstname_kana:       session[:user]["firstname_kana"],
-      birthday:             date_create,
-      tel:                  session[:user]["tel"],
-      )
+    @user = User.new(session[:user])
+    @user.build_address(session[:address])
+    @user.build_card(
+      user_id:        @user.id,
+      customer_id:    customer.id,
+      card_id:        customer.default_card,
+    )
+    # newしたユーザをDB登録。成功したら自動ログイン
     if @user.save
-      #userの作成に成功した時だけ住所とカードの情報を登録
-      @address = Address.create(
-        user_id:@user.id,
-        postal_code:    session[:address]["postal_code"],
-        prefecture_id:  session[:address]["prefecture_id"],
-        city:           session[:address]["city"],
-        address_number: session[:address]["address_number"],
-        building_name:  session[:address]["building_name"],
-      )
-      @card = Card.create(
-        user_id:        @user.id,
-        customer_id:    customer.id,
-        card_id:        customer.default_card,
-      )
-      # ユーザ登録に成功しているので自動ログイン
+      session.clear
       session[:id] = @user.id
       sign_in User.find(session[:id]) unless user_signed_in?
     else
       # 失敗したら１ページ前に戻る
-      render :new_payment
+      @message = '会員情報の登録に失敗しました'
+      render :new_profile
     end
 
   end
@@ -188,23 +261,27 @@ private
       :lastname_kana,
       :birthday,
       :tel,
+      :sales_amount,
+      address_attributes:[
+        :postal_code,
+        :prefecture_id,
+        :city,
+        :address_number,
+        :building_name,
+      ]
     )
   end
 
-  def address_params
-    params.require(:user).require(:address).permit(
-      :postal_code,
-      :prefecture_id,
-      :city,
-      :address_number,
-      :building_name,
-    )
-  end
-
-  # selectタグでで取得した年月日をDate型データに結合
+  # selectタグでで取得した年月日をDate型データに結合(paramsを強制書き換え)
   def date_create
-    date = session[:birthday]
+    date = params[:birthday]
+    if date["birthday(1i)"].empty? && date["birthday(2i)"].empty? && date["birthday(3i)"].empty?
+      params[:user][:birthday] = ""
+      return
+    end
+
     Date.new date["birthday(1i)"].to_i,date["birthday(2i)"].to_i,date["birthday(3i)"].to_i
+
   end
 
   # SMS認証用に4桁の乱数を生成
@@ -212,13 +289,12 @@ private
     ''.tap { |s| n.times { s << rand(0..9).to_s } }
   end
 
-  # recaptcha用の魔法のことば
-  # 結果の比較をしてるようです
-  def check_captcha
-    self.resource = resource_class.new sign_up_params
-    resource.validate
-    unless verify_recaptcha(model: resource)
-      respond_with_navigational(resource) { render :new }
+  # ページ直視指定しようとした場合、初期ページに飛ばす
+  # session[:user]が出来ているかで判断する
+  def move_to_new_profile
+    if session[:user]!=nil
+    else
+      redirect_to users_sign_up_profile_path
     end
   end
   

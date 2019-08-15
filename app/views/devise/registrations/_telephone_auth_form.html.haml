@@ -1,8 +1,8 @@
 .user-main__contents__form.single-panel
   = form_with url:users_sign_up_telephone_check_path, method: :get,local: true do |f|
     .user-main__contents__form__group.none-top-margin.text-center
-      .error-messages
-        - if @messages != nil
+      - if @messages != nil
+        .error-messages
           %p
             = @messages
     .user-main__contents__form__group.top-panel.none-top-margin
@@ -10,7 +10,7 @@
         認証番号
       %span.user-main__contents__form__group__item--required
         必須
-      = f.number_field :auth_code, class:'user-main__contents__form__group__item__input', placeholder:'認証番号を入力', autofocus: true, required: true,value:"#{session[:auth_code]}"
+      = f.text_field :auth_code, class:'user-main__contents__form__group__item__input', placeholder:'認証番号を入力', autofocus: true, pattern:'\d*', value:"#{session[:auth_code]}"
       %p.user-main__contents__form__group__confirm-text
         SMSで届いた認証番号を入力してください
       .user-main__contents__form__group
