@@ -60,8 +60,10 @@
           display: flex;
           &--already{
             display: flex;
+            flex-wrap: wrap;
             &__blocks{
-              margin-right: 10px;
+              margin-right: 5px;
+              margin-bottom: 5px;
               background-color: #f5f5f5;
               &__block{
                 display: flex;
@@ -89,7 +91,7 @@
             }
           }
           &--upload{
-            height: 160px;
+            height: 168px;
             max-width: 100%;
           }
         }

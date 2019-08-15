@@ -9,15 +9,15 @@
     .show-item__wrapper
       .show-item__wrapper__contents
         .show-item__wrapper__contents__image
-          = image_tag @product.images.first, height: '265', width: '300'
+          = image_tag @product.images.first, height: '260', width: '300'
         -# 売り切れの場合
         - if @product.sales_status_id  == 2
           .show-item__wrapper__contents__sold-out
             SOLD
           .show-item__wrapper__contents__sold-out__tag
-        - @product.images.each do |image|
-          .show-item__wrapper__contents__list
-            = image_tag image, height: '50', width: '54'
+        .show-item__wrapper__contents__list
+          - @product.images.each do |image|
+            = image_tag image, height: '50', width: '60', class: "show-item__wrapper__contents__list__img"
       .show-item__wrapper__contents__owner
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__left

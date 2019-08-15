@@ -3,21 +3,18 @@
   .selling_show-item
     %h1
       = @product.name
-    .selling_show-item__wrapper
-      .selling_show-item__wrapper__contents
-        .selling_show-item__wrapper__contents__image
-          = image_tag 'top-image.png', alt: '', height: '265', width: '300', class: ''
-        .selling_show-item__wrapper__contents__list
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
-          = image_tag 'top-image.png', height: '50', width: '54'
+    .show-item__wrapper
+      .show-item__wrapper__contents
+        .show-item__wrapper__contents__image
+          = image_tag @product.images.first, height: '260', width: '300'
+        -# 売り切れの場合
+        - if @product.sales_status_id  == 2
+          .show-item__wrapper__contents__sold-out
+            SOLD
+          .show-item__wrapper__contents__sold-out__tag
+        .show-item__wrapper__contents__list
+          - @product.images.each do |image|
+            = image_tag image, height: '50', width: '60', class: "show-item__wrapper__contents__list__img"
       .selling_show-item__wrapper__contents__owner
         .selling_show-item__wrapper__contents__owner__detail
           .selling_show-item__wrapper__contents__owner__detail__left

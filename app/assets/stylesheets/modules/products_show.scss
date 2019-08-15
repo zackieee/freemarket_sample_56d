@@ -161,11 +161,12 @@
       &__contents {
         float: left;
         width: 300px;
+        height: 360px;
         background: #FAFAFA;
         &__image {
-          position: absolute;
+          // position: absolute;
           width: 300px;
-          height: 265px;
+          height: 260px;
         }
         &__sold-out {
           position: absolute;
@@ -186,11 +187,8 @@
           }
         }
         &__list {
-          position: relative;
-          margin-top: 265px;
-          width: 300px;
-          height: 110px;
-          background: #FAFAFA;
+          display: flex;
+          flex-wrap: wrap;
       }
       &__owner {
         float: left;

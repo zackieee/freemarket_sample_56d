@@ -16,7 +16,7 @@
             .sell-main__contents__content__item__images--already
               - @product.images.each do |image|
                 .sell-main__contents__content__item__images--already__blocks
-                  = image_tag image, size: "120x130", class: "sell-main__contents__content__item__images--already__blocks__image"
+                  = image_tag image, size: "115x130", class: "sell-main__contents__content__item__images--already__blocks__image"
                   .sell-main__contents__content__item__images--already__blocks__block
                     = link_to "#", class: "sell-main__contents__content__item__images--already__blocks__block--edit" do
                       編集
@@ -99,6 +99,6 @@
         .sell-main__contents__content
           %p.sell-main__contents__content__confirm-text
             = f.submit "変更する", class:"sell-main__contents__content__btn--big"
-          =link_to '#', class:'sell-main__contents__content__btn--default' do
+          =link_to selling_show_product_path(@product), class:'sell-main__contents__content__btn--default' do
             もどる
   =render '/layouts/sub_footer'
