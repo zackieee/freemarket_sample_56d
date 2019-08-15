@@ -76,9 +76,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'jquery-rails'
 gem 'haml-rails'
-gem 'font-awesome-sass', '~> 5.4.1'
+gem 'font-awesome-sass', "< 5.0.13"
 gem 'pry-rails'
-gem 'carrierwave'
 gem 'mini_magick'
 gem 'active_hash'
 gem 'omniauth-rails_csrf_protection'
@@ -100,3 +99,6 @@ gem 'activesupport'
 
 # パンくず
 gem 'gretel'
+
+gem "aws-sdk-s3", require: false
+
