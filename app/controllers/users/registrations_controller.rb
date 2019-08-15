@@ -10,6 +10,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # 次のページで使う空箱(@userなどを使うなら必須)
     @user = User.new
     session[:user] = @user
+    if session[:sns]!=nil
+      session[:user]["nickname"] =  session[:sns]["info"]["name"]
+      session[:user]["email"] =  session[:sns]["info"]["email"]
+    end
   end
 
   def new_telephone
@@ -203,6 +207,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
       customer_id:    customer.id,
       card_id:        customer.default_card,
     )
+    if session[:sns]!=nil 
+      @user.sns_credentials.build(
+        uid:             session[:sns]["uid"],
+        provider:        session[:sns]["provider"],
+        user_id:         @user.id
+      )
+    end
     # newしたユーザをDB登録。成功したら自動ログイン
     if @user.save
       session.clear

@@ -108,18 +108,18 @@ class User < ApplicationRecord
     else
       user = User.where(email: auth.info.email).first
       if user.present?
-        SnsCredential.create(
+        SnsCredential.new(
           uid: uid,
           provider: provider,
           user_id: user.id
           )
       else
-        user = User.create(
+        user = User.new(
           nickname: auth.info.name,
           email:    auth.info.email,
           password: Devise.friendly_token[0, 20]
           )
-        SnsCredential.create(
+        SnsCredential.new(
           uid: uid,
           provider: provider,
           user_id: user.id
