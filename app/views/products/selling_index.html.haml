@@ -1,0 +1,27 @@
+.wrapper
+  =render 'products/header'
+  .selling-page
+    =render 'users/side-bar'
+    .selling-page__main
+      .selling-page__main__contents.second-contents
+        .selling-page__main__contents__header
+          %h2
+            出品した商品
+        %ul.selling-page__main__contents__nav
+          %li.selling-page__main__contents__nav.selected-tab
+            = link_to products_selling_index_path do
+              出品中
+          %li.selling-page__main__contents__nav
+            = link_to products_buyout_index_path do
+              売却済み
+        .maypage__main__contents__content
+          - if @products
+            %ul
+              = render partial: 'selling_index', collection: @products, as: "product"
+          - else
+            .selling-page__main__contents__content--none
+              %h3
+                取引中の商品がありません
+      .selling-page__main__trade
+  =render 'products/footer-top'
+  =render 'products/footer-bottom'

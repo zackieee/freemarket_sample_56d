@@ -1,0 +1,27 @@
+.wrapper
+  =render 'products/header'
+  .buyout-page
+    =render 'users/side-bar'
+    .buyout-page__main
+      .buyout-page__main__contents.second-contents
+        .buyout-page__main__contents__header
+          %h2
+            出品した商品
+        %ul.buyout-page__main__contents__nav
+          %li.buyout-page__main__contents__nav
+            = link_to products_selling_index_path do
+              出品中
+          %li.buyout-page__main__contents__nav.selected-tab
+            = link_to products_buyout_index_path do
+              売却済み
+        .maypage__main__contents__content
+          - if @products
+            %ul
+              = render partial: 'buyout_index', collection: @products, as: "product"
+          - else
+            .buyout-page__main__contents__content--none
+              %h3
+                取引中の商品がありません
+      .buyout-page__main__trade
+  =render 'products/footer-top'
+  =render 'products/footer-bottom'

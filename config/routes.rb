@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
-
-  devise_for :users, :controllers => {
-    registrations: "users/registrations",
-    sessions: 'users/sessions'
-  }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', :registrations => "users/registrations",
+  :sessions => 'users/sessions' }
 
   devise_scope :user do
     #ユーザ新規作成
@@ -14,6 +11,7 @@ Rails.application.routes.draw do
     get '/users/sign_up/address' => 'users/registrations#new_address' 
     get '/users/sign_up/payment' => 'users/registrations#new_payment'
     post '/users/sign_up/complete' => 'users/registrations#new_complete'
+    post 'users/omniauth_callbacks' => 'users/omniauth_callbacks#passthru'
     #ユーザ編集
     get '/users/edit/profile' => 'users/registrations#edit_profile'
     get '/users/edit/address' => 'users/registrations#edit_address' 
@@ -25,7 +23,12 @@ Rails.application.routes.draw do
   end
 
   root 'products#index'
+
+  get 'producs/all_products'   => 'products#all_products'
+  get 'products/selling_index' => 'products#selling_index'
+  get 'products/buyout_index'  => 'products#buyout_index'
   resources :products do
+    get :selling_show, on: :member
     get :buy, on: :member #productsにデータを入れたら':collection'を':mender'に変更
     resources :trades, only: [:create]
   end

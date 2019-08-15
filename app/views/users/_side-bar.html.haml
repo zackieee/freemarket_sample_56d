@@ -22,15 +22,15 @@
           出品する
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
-        = link_to '#',class: 'side-bar__links' do
+        = link_to products_selling_index_path,class: 'side-bar__links' do
           出品した商品-出品中
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
+      -# %li
+      -#   = link_to products_selling_index_path,class: 'side-bar__links' do
+      -#     出品した商品-取引中
+      -#     = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
-        = link_to '#',class: 'side-bar__links' do
-          出品した商品-取引中
-          = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
-      %li
-        = link_to '#',class: 'side-bar__links' do
+        = link_to products_buyout_index_path, class: 'side-bar__links' do
           出品した商品-売却済み
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
@@ -89,6 +89,6 @@
           電話番号の確認
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
-        = link_to users_sign_out_path,class: 'side-bar__links' do
+        = link_to users_sign_out_path, class: 'side-bar__links' do
           ログアウト
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'

@@ -81,6 +81,9 @@ gem 'pry-rails'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'active_hash'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-google-oauth2', '~> 0.5.4'
+gem 'omniauth-facebook'
 
 #recaptcha用
 gem 'recaptcha'
@@ -94,3 +97,4 @@ gem 'payjp'
 
 # rails拡張機能
 gem 'activesupport'
+

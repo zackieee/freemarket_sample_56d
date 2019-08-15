@@ -1,0 +1,34 @@
+=render 'header'
+.products
+  .products--heading
+    = link_to '' do
+      = image_tag 'heading-image.png', height: '400'
+    .arrow
+    .arrow-second
+    .circle-wrapper
+      .circle
+      .circle
+    -#  TODO: jsをつける場合に使うコード
+    -# .products--heading__backimage
+    -#   = image_tag 'back-image.png', alt: '', height: '400', width: '1500', class: ''
+    -# .products--heading__wrapper
+    -#   .products--heading__wrapper__text
+    -#     %h1 スマホでかんたん
+    -#     %h1 フリマアプリ
+    -#     %p メルカリはスマホカメラからすぐに出品できる
+    -#     %p 購入時も安心な独自システムのアプリです
+    -#     = link_to '' do
+    -#       = image_tag '//www-mercari-jp.akamaized.net/assets/img/common/common/app-store.svg?863303983', class: "dllink-image", width: "170"
+    -#     = link_to '' do
+    -#       = image_tag '//www-mercari-jp.akamaized.net/assets/img/common/common/google-play.svg?863303983', class: "dllink-image", width: "170"
+    -#   .products--heading__wrapper__headingimage
+    -#     = image_tag 'top-image', width: '450'
+.item
+  .item--heading
+    %h1 ピックアップカテゴリー
+    .item--new
+      = link_to "レディース新着アイテム" 
+  .item--list
+    = render 'all_products'
+=render 'footer-top'
+=render 'footer-bottom'

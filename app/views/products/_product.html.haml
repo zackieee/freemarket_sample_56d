@@ -1,8 +1,12 @@
 .item--list__image
-  = link_to 'products/show' do
+  = link_to product_path(product) do
     = image_tag product.images.first
+    - if product.sales_status_id  == 2
+      .item--list__image__sold-out
+        SOLD
+      .item--list__image__sold-out__tag
   .item--list__image__text
-    = link_to product.text, 'products/show'
+    = link_to product.name, product_path(product)
     .item--list__image__text__wrapper
       .item--list__image__text__wrapper__value
         %p  ¥ #{product.price} 

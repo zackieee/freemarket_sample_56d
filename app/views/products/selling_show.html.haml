@@ -1,0 +1,85 @@
+=render 'header'
+.selling_show.crearfix
+  .selling_show-item
+    %h1
+      = @product.name
+    .selling_show-item__wrapper
+      .selling_show-item__wrapper__contents
+        .selling_show-item__wrapper__contents__image
+          = image_tag 'top-image.png', alt: '', height: '265', width: '300', class: ''
+        .selling_show-item__wrapper__contents__list
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+          = image_tag 'top-image.png', height: '50', width: '54'
+      .selling_show-item__wrapper__contents__owner
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__left
+            %p 出品者
+          .selling_show-item__wrapper__contents__owner__detail__right
+            = link_to @product.seller.nickname
+            = icon 'far', 'laugh-squint', class: "good"
+            1
+            = icon 'far', 'meh', class: "normal"
+            1
+            = icon 'far', 'angry', class: "bad"
+            1
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__left
+            %p カテゴリー
+          .selling_show-item__wrapper__contents__owner__detail__right
+            = link_to "aws"
+            .arow
+              = link_to '' do
+                = icon 'fas', 'angle-right'
+              = link_to "aws"
+            .arow-second
+              = link_to '' do
+                = icon 'fas', 'angle-right'
+              = link_to "aws" 
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__lefts
+            %p ブランド
+          .selling_show-item__wrapper__contents__owner__detail__rights
+            = link_to "シャネル"
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__lefts
+            %p 商品の状態
+          .selling_show-item__wrapper__contents__owner__detail__rights
+            %p #{@product.status.name}
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__lefts
+            %p 配送料の負担
+          .selling_show-item__wrapper__contents__owner__detail__rights
+            %p #{@product.postage_burden.name}
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__lefts
+            %p 配送元の地域
+          .selling_show-item__wrapper__contents__owner__detail__rights
+            %p #{@product.prefecture.name}
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__lefts
+            %p 発送日の目安
+          .selling_show-item__wrapper__contents__owner__detail__rights
+            %p #{@product.delivery_days.name}
+    .selling_show-item__value
+      %h1 ¥#{@product.price}
+      %p (税込)
+      %span 送料込み
+    .selling_show-item__text
+      %span #{@product.text}
+  .selling_show-item__second
+    .selling_show-item__edit
+      = link_to "商品の編集", edit_product_path(@product)
+    .selling_show-item__edit__or
+      or
+    .selling_show-item__destroy
+      = link_to "商品の削除", product_path(@product), method: :delete, data: { confirm: "本当に削除してよろしいでしょうか？"}
+=render 'footer-top'
+=render 'footer-bottom'

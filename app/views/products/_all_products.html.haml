@@ -1,0 +1,12 @@
+.item--list__image
+  - @products.each do |product|
+    = link_to '#' do
+      = image_tag product.images.first
+    .item--list__image__text
+      = link_to product.name, '#'
+      .item--list__image__text__wrapper
+        .item--list__image__text__wrapper__value
+          %p  ¥ #{product.price} 
+        .item--list__image__text__wrapper__like
+          = icon 'far', 'heart'
+          %span 1
