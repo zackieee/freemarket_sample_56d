@@ -18,15 +18,21 @@
             Googleでログイン
     .user-main__contents__form.inner-panel
       = form_with model: @user, url: new_user_session_path, id: 'new_user', class: 'new_user', local: true do |f|
-        = devise_error_messages!
+        .error-messages.text-center
+          %p
+            = alert
         .user-main__contents__form__group
           %label.user-main__contents__form__group__item{for:"email"}
-          = f.email_field :email, class:'user-main__contents__form__group__item__input none-top-margin', placeholder:'メールアドレス', required: true
+          = f.email_field :email, class:'user-main__contents__form__group__item__input none-top-margin', placeholder:'メールアドレス'
         .user-main__contents__form__group.nallow-margin
           %label.user-main__contents__form__group__item{for:"password"}
-          = f.password_field :password, class:'user-main__contents__form__group__item__input none-top-margin', placeholder:'パスワード', autocomplete: 'off', required: true, minlength:'7'
+          = f.password_field :password, class:'user-main__contents__form__group__item__input none-top-margin', placeholder:'パスワード', autocomplete: 'off'
         .user-main__contents__form__group
           = recaptcha_tags
+          - if @message_recaptcha != nil
+            .error-messages
+              %p
+                = @message_recaptcha
         .user-main__contents__form__group
           = f.submit 'ログイン', class:'user-main__contents__form__group__btn--default'
           %p.user-main__contents__form__group__confirm-text
