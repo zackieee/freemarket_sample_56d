@@ -15,11 +15,9 @@ $(function() {
 
   $(".hidden").on("change", function(e) {
     var file = e.target.files[0];
-    // e.target.files.forEach(function(file){
-      var blobUrl = window.URL.createObjectURL(file);
-      var html = buildHTML(blobUrl);
-      $(".sell-main__contents__content__item__images").prepend(html);
-    // });
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = buildHTML(blobUrl);
+    $(".sell-main__contents__content__item__images").prepend(html);
   });
 
   $(document).on("click", ".sell-main__contents__content__item__images--already__blocks__block--delete", function(){
