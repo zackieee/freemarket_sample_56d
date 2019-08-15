@@ -117,3 +117,14 @@
     color: white;
   }
 }
+
+.breadcrumbs{
+  height: 50px;
+  background-color: white;
+  border-top: 1px solid #eee;
+  box-shadow: 0 3px 3px -3px rgba(0,0,0,0.16);
+  &__breadcrumb{
+    line-height: 50px;
+    margin-left: 14%;
+  }
+}

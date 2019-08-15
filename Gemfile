@@ -98,3 +98,5 @@ gem 'payjp'
 # rails拡張機能
 gem 'activesupport'
 
+# パンくず
+gem 'gretel'

@@ -1,5 +1,7 @@
 .wrapper
   = render 'products/header'
+  - breadcrumb :sign_out
+  = render "layouts/breadcrumbs"
   .mypage
     = render 'users/side-bar'
     .mypage__main

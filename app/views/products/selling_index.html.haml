@@ -1,5 +1,7 @@
 .wrapper
   =render 'products/header'
+  - breadcrumb :selling_index
+  = render "layouts/breadcrumbs"
   .selling-page
     =render 'users/side-bar'
     .selling-page__main
