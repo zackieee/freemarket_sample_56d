@@ -1,4 +1,4 @@
-# 今後使うかもしれないので残しておきます。
+# TODO: 今後使うかもしれないので残しておきます。
 
 # FactoryBot.define do
 #   factory :attachment, class: ActiveStorage::Attachment do
