@@ -31,10 +31,10 @@
           %p.sell-main__contents__content__info-text.left
             商品の詳細
           .product-details
-            %label.sell-main__contents__content__item{for:"name"}
-              カテゴリー
-            %span.sell-main__contents__content__item--required
-              必須
+            -# %label.sell-main__contents__content__item{for:"name"}
+            -#   カテゴリー
+            -# %span.sell-main__contents__content__item--required
+            -#   必須
             -#   = f.text_field :category, class:'dropdown', placeholder:'---', required: true, maxlength: '40'
             %label.sell-main__contents__content__item{for:"status"}
               商品の状態

@@ -181,6 +181,9 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (0.9.2)
+    mime-types (3.2.2)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2019.0331)
     mimemagic (0.3.3)
     mini_magick (4.9.5)
     mini_mime (1.0.2)
@@ -383,8 +386,8 @@ DEPENDENCIES
   devise
   factory_bot_rails
   faker
-  gretel
   font-awesome-sass (< 5.0.13)
+  gretel
   haml-rails
   jbuilder (~> 2.5)
   jquery-rails
