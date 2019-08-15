@@ -1,4 +1,5 @@
 @import "mixin/arow";
+@import 'mixin/sold-out';
 
 .products {
    &--heading {
@@ -77,15 +78,15 @@
 
 .item {
    background: #F5F5F5;
-   padding: 3% 25% 5% 17%;
-   cursor: pointer;
+   padding: 3% 17% 5% 17%;
    a {
       text-decoration: none;
+      cursor: pointer;
    }
    &--heading {
      text-align: center;
      h1 {
-        margin-left: 10%;
+
        font-size: 27px;
        font-weight: bold;
        }
@@ -101,19 +102,41 @@
          text-decoration: none;
          font-size: 22px;
          font-weight: bold;
-         margin-left: 10%!important;
         }
    }
    &--list {
       padding: 1% 0 1% 0;
       display: flex;
+      flex-wrap: wrap;
       &__image {
          margin: 10px 5px 0 20px;
-         width: 210px;
          background-color: white;
+         img {
+            height: 200px;
+            width: 210px;
+            position: absolute;
+            z-index: 1;
+         }
+         &__sold-out {
+            position: absolute;
+            z-index: 100000;
+            padding-top: 20px;
+            transform: rotate(-45deg);
+            font-size: 20px;
+            color:#ffffff;
+            font-weight: bold;
+            &__tag {
+              position: absolute;
+              z-index: 1000;
+              height: 0px;
+              width: 0px;
+              @include sold-out-tag(50px);
+            }
+          }
          &__text {
             height: 100px;
             width: 210px;
+            margin-top: 200px;
             word-break: break-all;
             background-color: white;
             position: relative;
@@ -123,31 +146,30 @@
                display: block;
                font-weight: normal;
                text-decoration: none;
-               position: absolute;
                padding: 0 10px; 
                top: 0;
                left: 0;
-               height:100%;
                width: 90%;
             }
             &__wrapper {
               display: flex;
               p {
-                 margin: 83% 0 0 20%;
+                 margin: 50px 0 0 10px;
                  width: 80px;
                  font-size: 13px;
                  font-weight: bold;
               }
               i {
-                 margin: 260% 0 0 350%;
+                 margin: 50px 0 0 70px;
                  color : gray
               }
               span {
-                 margin: 260% 0 0 10%;
+                 margin: 50px 0 0 5px;
                  font-size: 14px;
               }
               &__like {
                display: flex;
+
               }
           }
        }
@@ -158,9 +180,10 @@
 .item-show {
    text-align: right;
    width: 100%;
-   margin-left: 100px;
+   
    a {
      color: #1F9DE9;
      font-size: 14px;
+     padding-right: 15px; 
    }
  }

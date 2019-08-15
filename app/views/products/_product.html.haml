@@ -1,0 +1,15 @@
+.item--list__image
+  = link_to product_path(product) do
+    = image_tag product.images.first
+    - if product.sales_status_id  == 2
+      .item--list__image__sold-out
+        SOLD
+      .item--list__image__sold-out__tag
+  .item--list__image__text
+    = link_to product.name, product_path(product)
+    .item--list__image__text__wrapper
+      .item--list__image__text__wrapper__value
+        %p  ¥ #{product.price} 
+      .item--list__image__text__wrapper__like
+        = icon 'far', 'heart'
+        %span 1

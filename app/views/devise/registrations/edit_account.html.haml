@@ -1,5 +1,7 @@
 .wrapper
   =render 'products/header'
+  - breadcrumb :edit_account
+  = render "layouts/breadcrumbs"
   .user
     = render 'users/side-bar'
     .user-profile

@@ -12,9 +12,10 @@
             必須
           %p.sell-main__contents__content__item--p
             最大10枚までアップロードできます
-          %label
-            = image_tag 'touch.jpg'
-            = f.file_field :images, multiple: true, class: 'hidden'
+          .sell-main__contents__content__item__images
+            %label
+              = image_tag 'touch.jpg', class: "sell-main__contents__content__item__images--upload"
+              = f.file_field :images, multiple: true, class: 'hidden'
         .sell-main__contents__content.clearfix
           %label.sell-main__contents__content__item{for:"name"}
             商品名
@@ -30,10 +31,10 @@
           %p.sell-main__contents__content__info-text.left
             商品の詳細
           .product-details
-            %label.sell-main__contents__content__item{for:"name"}
-              カテゴリー
-            %span.sell-main__contents__content__item--required
-              必須
+            -# %label.sell-main__contents__content__item{for:"name"}
+            -#   カテゴリー
+            -# %span.sell-main__contents__content__item--required
+            -#   必須
             -#   = f.text_field :category, class:'dropdown', placeholder:'---', required: true, maxlength: '40'
             %label.sell-main__contents__content__item{for:"status"}
               商品の状態
@@ -75,16 +76,16 @@
             .right
               %p.dropdown--mark
                 ¥
-                = f.text_field :price, class:'dropdown--right', placeholder:'           例）300', required: true, maxlength: '40'
+                = f.number_field :price, class:'dropdown--right', placeholder:'           例）300', required: true, maxlength: '40'
           .product-details.bottom-border.bottom-space.clearfix
             %label.sell-main__contents__content__item.left
               販売手数料
-            %p.sell-main__contents__content__item.text-right.right
+            %p.sell-main__contents__content__item.text-right.right.fee
               ー
           .product-details.bottom-space.clearfix
             %label.sell-main__contents__content__item.left
               販売利益
-            %p.sell-main__contents__content__item.text-right.right
+            %p.sell-main__contents__content__item.text-right.right.profit
               ー
         .sell-main__contents__content
           %p.sell-main__contents__content__confirm-text

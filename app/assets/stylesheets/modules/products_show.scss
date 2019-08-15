@@ -1,3 +1,5 @@
+@import 'mixin/sold-out';
+
 .clearfix::after {
   content: "";
   display: block;
@@ -10,8 +12,15 @@
   a:hover {
     opacity: 0.7;
   }
+  &-item__second{
+    height: 180px;
+    padding: 3% 6% 5% 6%;
+    background: white;
+    word-break: break-all;
+    margin-top: 25px;
+  }
   &-item {
-    min-height: 100vh;
+    min-height: 90vh;
     padding: 3% 6% 5% 6%;
     background: white;
     word-break: break-all;
@@ -19,6 +28,7 @@
       text-align: center;
       font-size: 23px;
       font-weight: bold;
+      margin-bottom: 10px;
     }
     p {
       margin: 1% 0 3% 0;
@@ -41,6 +51,36 @@
         margin: 4.5% 0 0 0; 
       }
     }
+    &__edit {
+      width: 100%;
+      text-align: center;
+      background: #EB352D;
+      padding: 2% 0;
+      a {
+        text-decoration: none;
+        color: white;
+        font-size: 23px;
+        font-weight: bold;
+        display: block;
+      }
+      &__or{
+        text-align: center;
+        margin: 20px 0;
+      }
+    }
+    &__destroy {
+      width: 100%;
+      text-align: center;
+      background: #aaa;
+      padding: 2% 0;
+      a {
+        text-decoration: none;
+        color: white;
+        font-size: 23px;
+        font-weight: bold;
+        display: block;
+      }
+    }
     &__buy {
       width: 100%;
       text-align: center;
@@ -54,10 +94,24 @@
         display: block;
       }
     }
+    &__no-buy {
+      width: 100%;
+      text-align: center;
+      background: #888888;
+      padding: 2% 0;
+      p {
+        margin: 0;
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        display: block;
+        cursor: not-allowed;
+      }
+    }
     &__text {
       min-height: 10px;
       width: 100%;
-      margin: 10% 0 1% 0;
+      margin: 10% 0 3% 0;
       word-break: break-all;
     }
     &__any {
@@ -107,15 +161,34 @@
       &__contents {
         float: left;
         width: 300px;
+        height: 360px;
         background: #FAFAFA;
         &__image {
+          // position: absolute;
           width: 300px;
-          height: 265px;
+          height: 260px;
+        }
+        &__sold-out {
+          position: absolute;
+          z-index: 10000;
+          transform: rotate(-45deg);
+          font-size: 25px;
+          color:#ffffff;
+          font-weight: bold;
+          padding-top: 30px;
+
+
+          &__tag {
+            position: absolute;
+            z-index: 1000;
+            height: 0px;
+            width: 0px;
+            @include sold-out-tag(70px);
+          }
         }
         &__list {
-            width: 300px;
-            height: 150px;
-            background: #FAFAFA;
+          display: flex;
+          flex-wrap: wrap;
       }
       &__owner {
         float: left;
@@ -207,32 +280,33 @@
    }   
   }
   &-other {
-    display: flex;
-    justify-content: space-between;
+    width: 100%;
     margin-top: 3%;
     a {
       text-decoration: none;
       color: #0099E8;
       margin-bottom: 10%;
-      font-size: 12px;
+      font-size: 14px;
     }
     i {
       font-size: 20px;
     }
     &__right {
-      display: flex;
+      float: right;
       i {
         margin-left: 10px; 
       }
     }
     &__left {
-      display: flex;
+      float: left;
       i {
         transform: scale(-1, 1);
+        margin-right: 10px;
     }
    }
   }
   .show-applink {
+    margin-top: 50px;
     padding: 10% 25% 5% 25%;
     background: white;
     text-align: center;
@@ -282,6 +356,9 @@
   &-other__item {
     display: flex;
     flex-wrap: wrap; 
+    .item--list {
+      flex-wrap: wrap; 
+    }
   }
   &-status {
     padding: 2% 3%;

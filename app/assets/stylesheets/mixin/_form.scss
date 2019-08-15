@@ -41,7 +41,7 @@
 @mixin form_select($width,$height,$position){
   width:$width;
   height:$height;
-  background:url(common/down-arrow.ico) $position no-repeat;
+  background:url(/images/common/down-arrow.ico) $position no-repeat;
   background-size:14px;
 }
 

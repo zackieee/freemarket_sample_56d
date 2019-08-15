@@ -1,0 +1,20 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        nickname: ニックネーム
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
+        lastname: 姓
+        firstname: 名
+        lastname_kana: 姓カナ
+        firstname_kana: 名カナ
+        birthday: 生年月日
+        tel: 電話番号
+      address:
+        postal_code: 郵便番号
+        prefecture_id: 都道府県
+        city: 市区町村
+        address_number: 番地
+        building_name: 建物名
