@@ -1,13 +1,13 @@
 .user-main__contents__form.single-panel
-  = form_with model:@user, url:users_sign_up_telephone_auth_path, method: :get,local: true do |f|
+  = form_with model:@user, url:users_sign_up_telephone_auth_path, builder: WithErrorFormBuilder, method: :get,local: true do |f|
     .user-main__contents__form__group
       %label.user-main__contents__form__group__item{for:"tel"}
         携帯電話の番号
       %span.user-main__contents__form__group__item--required
         必須
-      = f.telephone_field :tel, class:'user-main__contents__form__group__item__input', placeholder:'携帯電話の番号を入力', autofocus: true, required: true,value:"#{session[:tel]}"
-      .error-messages
-        - if @messages != nil
+      = f.telephone_field :tel, class:'user-main__contents__form__group__item__input', placeholder:'携帯電話の番号を入力',pattern:'\d*', autofocus: true, value:"#{session[:user]["tel"]}"
+      - if @messages != nil
+        .error-messages
           %p
             = @messages
       %p.user-main__contents__form__group__confirm-text

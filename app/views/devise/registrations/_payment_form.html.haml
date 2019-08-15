@@ -1,11 +1,17 @@
 .user-main__contents__form.single-panel
   = form_with url:users_sign_up_complete_path, method: :post,local: true, html: {name:'inputForm'} do |f|
+    .user-main__contents__form__group.error-messages.none-top-margin
+      - if @err != nil
+        .error-messages.text-center
+          %p
+            = "このカードはご利用になれません。エラーコードを添えてお問い合わせください。 エラーコード:[#{@err[:code]}]"
     .user-main__contents__form__group
       %label.user-main__contents__form__group__item{for:"card_number"}
         カード番号
       %span.user-main__contents__form__group__item--required
         必須
-      = f.number_field :card_number, class:'user-main__contents__form__group__item__input', placeholder:'半角数字のみ', required: true
+      = f.number_field :card_number, class:'user-main__contents__form__group__item__input', placeholder:'半角数字のみ'
+      .check-result#card-number-check-result
       %ul.user-main__contents__form__group__card-list
         %li
           = image_tag 'common/visa.svg', class:'credit-card',width:'49px',height:'20px'
@@ -34,7 +40,8 @@
         セキュリティコード
       %span.user-main__contents__form__group__item--required
         必須
-      = f.number_field :card_security_code, class:'user-main__contents__form__group__item__input', placeholder:'カード背面4桁もしくは3桁の番号', required: true
+      = f.number_field :card_security_code, class:'user-main__contents__form__group__item__input', placeholder:'カード背面4桁もしくは3桁の番号'
+      .check-result#security-code-check-result
       %p.user-main__contents__form__group__confirm-text.text-right
         = link_to users_sign_up_complete_path, class:'user-main__contents__form__group__confirm-text--link', target:'_blank' do
           = icon 'fas', 'question-circle'
