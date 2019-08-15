@@ -78,7 +78,7 @@
 
 .item {
    background: #F5F5F5;
-   padding: 3% 25% 5% 17%;
+   padding: 3% 17% 5% 17%;
    a {
       text-decoration: none;
       cursor: pointer;
@@ -86,7 +86,7 @@
    &--heading {
      text-align: center;
      h1 {
-        margin-left: 10%;
+
        font-size: 27px;
        font-weight: bold;
        }
@@ -102,12 +102,12 @@
          text-decoration: none;
          font-size: 22px;
          font-weight: bold;
-         margin-left: 10%!important;
         }
    }
    &--list {
       padding: 1% 0 1% 0;
       display: flex;
+      flex-wrap: wrap;
       &__image {
          margin: 10px 5px 0 20px;
          background-color: white;
@@ -180,9 +180,10 @@
 .item-show {
    text-align: right;
    width: 100%;
-   margin-left: 100px;
+   
    a {
      color: #1F9DE9;
      font-size: 14px;
+     padding-right: 15px; 
    }
  }
