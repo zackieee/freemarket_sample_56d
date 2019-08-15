@@ -245,6 +245,16 @@
         text-align:left;
       }
 
+      //エラーメッセージ表示
+      .errors{
+        color: #ea352d;
+        font-size: 14px;
+        line-height: 1.5;
+        li{
+          list-style: none;
+        }
+      }
+
       //入力フィールドフォーカス時の挙動を本家に合わせて変更
       input:focus,textarea:focus{
         outline: 0;
@@ -281,14 +291,15 @@
         background-color:#fff;
       }
 
-        input[type=submit],
-        input[type=submit]:active {
-          background-color:none;
-          border: none;
-          outline: none;
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
+
+      input[type=submit],
+      input[type=submit]:active {
+        background-color:none;
+        border: none;
+        outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
       }
 
       input[type=submit]:active{
@@ -343,4 +354,11 @@
 .error-messages{
   font-size:14px;
   color:#ea352d;
+}
+
+.field_with_errors input,
+.field_with_errors select{
+  outline: 0;
+  border-color:#ea352d!important;
+  background-color:#fff!important;
 }
