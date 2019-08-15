@@ -1,5 +1,7 @@
 .wrapper
   =render 'products/header'
+  - breadcrumb :buyout_index
+  = render "layouts/breadcrumbs"
   .buyout-page
     =render 'users/side-bar'
     .buyout-page__main

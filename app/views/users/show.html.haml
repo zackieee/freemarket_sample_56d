@@ -1,5 +1,7 @@
 .wrapper
   =render 'products/header'
+  - breadcrumb :mypage
+  = render "layouts/breadcrumbs"
   .mypage
     =render 'side-bar'
     .mypage__main
