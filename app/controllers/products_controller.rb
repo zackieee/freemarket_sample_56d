@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   require 'payjp'
 
   before_action :set_product, only: [:show, :buy, :selling_show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, only: [:buy]
   def index
     @products= Product.where.not(seller_id: current_user&.id).order('id DESC').limit(4)
   end
