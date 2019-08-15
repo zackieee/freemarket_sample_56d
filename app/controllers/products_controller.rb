@@ -5,11 +5,11 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :buy, :selling_show, :edit, :update, :destroy]
 
   def index
-    @products= Product.order('id DESC').limit(4)
+    @products= Product.where.not(seller_id: current_user&.id).order('id DESC').limit(4)
   end
 
   def all_products
-    @products= Product.order('id DESC')
+    @products= Product.where.not(seller_id: current_user&.id).order('id DESC')
   end
   
   def new
