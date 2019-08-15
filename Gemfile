@@ -91,3 +91,6 @@ gem 'phony_rails'
 
 #クレジットカード用
 gem 'payjp'
+
+# rails拡張機能
+gem 'activesupport'
