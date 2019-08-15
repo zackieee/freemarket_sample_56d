@@ -23,7 +23,9 @@ $(function() {
   $(document).on("click", ".sell-main__contents__content__item__images--already__blocks__block--delete", function(){
     $(this).remove();
   });
-
+  
+  // new画面で使う
+  // 価格を価格を打ち込んだ時に、手数料と販売利益を表示
   $(".dropdown--right").on("keyup", function(){
     var price  = $(this).val();
     var fee    = Math.floor( price / 10 );
@@ -37,4 +39,15 @@ $(function() {
       $(".profit").text("ー");
     }
   });
+
+  // edit画面で使う
+  // 元々の手数料と販売利益を表示
+  var price  = $(".dropdown--right").val();
+  var fee    = Math.floor( price / 10 );
+  var profit = price - fee;
+  if (price.length != 0) {
+    $(".fee").text(fee);
+    $(".profit").text(profit);
+  }
+
 });
