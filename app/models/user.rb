@@ -80,9 +80,7 @@ class User < ApplicationRecord
       presence: true,
       length: { maximum: 35},
       format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい' }
-    address.validates :tel,
-      presence: true,
-      format: { with: VALID_PHONE_REGEX, message: '電話番号が正しくありません' }
+
   end
 
   # 生年月日のチェックメソッド
