@@ -17,7 +17,6 @@ class TradesController < ApplicationController
     product[:sales_status_id] += 1
     unless product.valid?(:sales_status_id)
       redirect_to product_path(product[:id]), alert: '購入できませんでした'
-      binding.pry
       return
     end
 
