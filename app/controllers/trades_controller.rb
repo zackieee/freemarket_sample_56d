@@ -15,8 +15,10 @@ class TradesController < ApplicationController
 
     # 商品を売り切れにする
     @product[:sales_status_id] += 1
-    redirect_to product_path(@product), alert: '購入できませんでした' unless @product.valid?(:sales_status_id)
-
+    unless @product.valid?(:sales_status_id)
+      redirect_to product_path(@product), alert: '購入できませんでした' 
+      return
+    end
     # 売上金の登録
     seller = User.find(@product[:seller_id])
     seller[:sales_amount] += card_pay[:amount]
