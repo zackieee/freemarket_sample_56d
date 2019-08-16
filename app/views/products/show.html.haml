@@ -13,8 +13,9 @@
         -# 売り切れの場合
         - if @product.sales_status_id  == 2
           .show-item__wrapper__contents__sold-out
-            SOLD
-          .show-item__wrapper__contents__sold-out__tag
+            .show-item__wrapper__contents__sold-out__tag
+            .show-item__wrapper__contents__sold-out__text
+              SOLD
         .show-item__wrapper__contents__list
           - @product.images.each do |image|
             = image_tag image, height: '50', width: '60', class: "show-item__wrapper__contents__list__img"
