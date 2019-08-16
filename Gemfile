@@ -76,7 +76,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'jquery-rails'
 gem 'haml-rails'
-gem 'font-awesome-sass', '~> 5.2.0'
+gem 'font-awesome-sass', "< 5.0.13"
 gem 'pry-rails'
 gem 'mini_magick'
 gem 'active_hash'
