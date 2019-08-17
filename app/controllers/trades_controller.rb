@@ -15,7 +15,7 @@ class TradesController < ApplicationController
 
     # 商品を売り切れにする
     @product[:sales_status_id] += 1
-    unless product.valid?(:sales_status_id)
+    unless @product.valid?(:sales_status_id)
       redirect_to product_path(@product[:id]), alert: '購入できませんでした'
       return
     end
