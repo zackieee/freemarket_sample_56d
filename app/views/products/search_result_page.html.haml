@@ -1,0 +1,61 @@
+=render 'header'
+.result-view
+  = form_with url: products_search_result_page_path, local: :true do |f|
+    .result-view__side-bar
+      .result-view__side-bar__header
+        = f.text_field :category, placeholder:'並び替え', maxlength: '40'
+      .result-view__side-bar__footer
+        %p 詳細検索
+        .result-view__side-bar__footer__form
+          = icon 'fas', 'plus'
+          %p キーワードを追加する
+          = f.text_field :category, placeholder:'例) 値下げ', maxlength: '40'
+        .result-view__side-bar__footer__form
+          = icon 'fas', 'list'
+          %p カテゴリーを選択する
+          = f.text_field :category, placeholder:'すべて', maxlength: '40'
+        .result-view__side-bar__footer__form
+          = icon 'fas', 'tag'
+          %p ブランド名から探す
+          = f.text_field :category, placeholder:'例) シャネル', maxlength: '40'
+        .result-view__side-bar__footer__form
+          = icon 'fas', 'expand'
+          %p サイズを指定する
+          = f.text_field :category, placeholder:'すべて', maxlength: '40'
+        .result-view__side-bar__footer__form
+          = icon 'fab', 'bitcoin'
+          %p 価格
+          = f.text_field :category, placeholder:'選択してください', maxlength: '40'
+          .result-view__side-bar__footer__form__price
+            = f.text_field :category, placeholder:'すべて', maxlength: '40'
+            %p ~
+            = f.text_field :category, placeholder:'すべて', maxlength: '40'
+        .result-view__side-bar__footer__form
+          = icon 'fas', 'star'
+          %p 商品の状態
+          = f.= f.check_box 'すべて',{}, "true", "false"
+          %input{type: "checkbox"}
+          %input{type: "checkbox"}
+          %input{type: "checkbox"}
+          %input{type: "checkbox"}
+          %input{type: "checkbox"}
+          %input{type: "checkbox"}
+          %input{type: "checkbox"}
+        .result-view__side-bar__footer__form
+          = icon 'fas', 'car'
+          %p 配送料の負担
+          %input{type: "checkbox"}
+          %input{type: "checkbox"}
+          %input{type: "checkbox"}
+        .result-view__side-bar__footer__form
+          = icon 'fas', 'cart-plus'
+          %p 販売状況
+          %input{type: "checkbox"}
+          %input{type: "checkbox"}
+          %input{type: "checkbox"}
+    .result-view__products
+      .result-view__products__heading
+      .result-view__products__sum
+      .result-view__products__list
+=render 'footer-top'
+=render 'footer-bottom'

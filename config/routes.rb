@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   get 'producs/all_products'   => 'products#all_products'
   get 'products/selling_index' => 'products#selling_index'
   get 'products/buyout_index'  => 'products#buyout_index'
+  get 'products/search_result_page' => 'products#search_result_page'
   resources :products do
     get :selling_show, on: :member
     get :buy, on: :member #productsにデータを入れたら':collection'を':mender'に変更
