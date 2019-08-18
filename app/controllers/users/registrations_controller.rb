@@ -182,7 +182,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit_profile
-    @user = User.find(current_user.id)
   end
 
   def update_profile
@@ -209,7 +208,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit_address
-    @user = User.find(current_user.id)
   end
 
   def update_address
@@ -270,7 +268,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit_telephone
-    @user = User.find(current_user.id)
   end
 
   def edit_telephone_auth
@@ -332,7 +329,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit_account
-    @user = User.find(current_user.id)
   end
 
   def update_account
@@ -349,7 +345,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def edit_password
     # パスワード変更後のリダイレクトでログアウトされる対処。謎。
     sign_in User.find(session[:id]) unless user_signed_in?
-    @user = User.find(current_user.id)
   end
 
   def update_password

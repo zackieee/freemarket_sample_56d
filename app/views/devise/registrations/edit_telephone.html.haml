@@ -5,7 +5,7 @@
   .user-main.sidebar
     = render 'users/side-bar'
     .user-main__contents.edit-form
-      - if @user&.tel != ""
+      - if current_user&.tel != ""
         %h2.user-main__contents__title-edit.form-underline
           完了
         .user-main__contents__form.single-panel

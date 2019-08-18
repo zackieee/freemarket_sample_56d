@@ -8,7 +8,7 @@
       %h2
         本人情報の登録
       .user-profile__area
-        = form_with model: @user,url:users_edit_account_path,builder: WithErrorFormBuilder,method: :post, local: true do |f|
+        = form_with model:current_user,url:users_edit_account_path,builder: WithErrorFormBuilder,method: :post, local: true do |f|
           .user-profile__area__info
             %p お客さまの本人情報をご登録ください。
             %p 登録されたお名前・生年月日を変更する場合、本人確認書類の提出が必要になります。

@@ -6,6 +6,7 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード（確認）
+        current_password: 現在のパスワード
         lastname: 姓
         firstname: 名
         lastname_kana: 姓カナ
