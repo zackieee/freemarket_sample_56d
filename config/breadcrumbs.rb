@@ -21,8 +21,9 @@ crumb :edit_profile do
   parent :mypage
 end
 
+# TODO:current_user以外の場合は記述変更する必要性あり。やり方は今後検討
 crumb :show_profile do
-  link current_user.nickname, show_profile_user_path
+  link current_user&.nickname, show_profile_user_path
   parent :root
 end
 
