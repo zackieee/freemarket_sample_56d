@@ -1,7 +1,7 @@
 =render 'header'
 .result-view
-  = form_with url: products_search_result_page_path, local: :true do |f|
-    .result-view__side-bar
+  .result-view__side-bar
+    = form_with url: products_search_result_page_path, local: :true do |f|
       .result-view__side-bar__header
         = f.text_field :category, placeholder:'並び替え', maxlength: '40'
       .result-view__side-bar__footer
@@ -33,7 +33,6 @@
         .result-view__side-bar__footer__form
           = icon 'fas', 'star'
           %p 商品の状態
-          = f.= f.check_box 'すべて',{}, "true", "false"
           %input{type: "checkbox"}
           %input{type: "checkbox"}
           %input{type: "checkbox"}
@@ -53,9 +52,15 @@
           %input{type: "checkbox"}
           %input{type: "checkbox"}
           %input{type: "checkbox"}
-    .result-view__products
-      .result-view__products__heading
-      .result-view__products__sum
-      .result-view__products__list
+  .result-view__products
+    .result-view__products__heading
+      %p ~の検索結果
+    .result-view__products__sum
+      %p.hit-count 
+        1~100件の表示
+    .result-view__products__list
+      .item--list
+        = render @products
+      
 =render 'footer-top'
 =render 'footer-bottom'

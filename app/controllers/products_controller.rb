@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
   end
 
   def search_result_page
-
+    @products= Product.where.not(seller_id: current_user&.id).order('id DESC')
   end 
   
   def new
