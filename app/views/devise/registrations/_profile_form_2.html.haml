@@ -1,12 +1,18 @@
 .user-main__contents__form
-  .user-main__contents__form__group.max-width-init
-    .user-main__contents__form__group__item__profile
-      .user-main__contents__form__group__item__profile__avator    
-        = image_tag 'common/member_photo_noimage_thumb.png'
-      %label.user-main__contents__form__group__item{for:"nickname"}
-      = text_field_tag :nickname, '', class:'user-main__contents__form__group__item__profile__input-profile', placeholder:'例）AYA☆セール中'
-  .user-main__contents__form__group.max-width-init.inner-panel.none-top-margin
-    %label.user-main__contents__form__group__item{for:"introduction"}
-    = text_area :introduction, '', class:'user-main__contents__form__group__item__profile__input-introduction', placeholder:'例）こんにちは☆ ご覧いただきありがとうございます！かわいいものやきれいめオフィスカジュアル中心に出品しています。服のサイズは主に9号です。気持ちよくお取引できるよう心がけていますので、商品や発送方法などご質問がありましたらお気軽にどうぞ♪'
-    =link_to '#', class:'user-main__contents__form__group__btn--default max-width-init' do
-      変更する
+  = form_with model:@user,url:users_edit_profile_path,builder: WithErrorFormBuilder, method: :post,local: true do | f |
+    .user-main__contents__form__group.max-width-init
+      .user-main__contents__form__group__item__profile
+        .user-main__contents__form__group__item__profile__avator
+          %label.user-main__contents__form__group__item{for:"avatar"}
+            #img_field
+              - if current_user.avatar.attached?
+                = image_tag(current_user.avatar)
+              -else
+                = image_tag('common/member_photo_noimage_thumb.png')
+          =f.file_field :avatar, class: "user-main__contents__form__group__item__profile__avator--file", id: "avatar"
+        %label.user-main__contents__form__group__item{for:"nickname"}
+        = f.text_field :nickname, class:'user-main__contents__form__group__item__profile__input-profile',value:"#{current_user.nickname}", placeholder:'例）AYA☆セール中'
+    .user-main__contents__form__group.max-width-init.inner-panel.none-top-margin
+      %label.user-main__contents__form__group__item{for:"introduction"}
+      = f.text_area :introduction, class:'user-main__contents__form__group__item__profile__input-introduction',value:"#{current_user.introduction}", placeholder:'例）こんにちは☆ ご覧いただきありがとうございます！かわいいものやきれいめオフィスカジュアル中心に出品しています。服のサイズは主に9号です。気持ちよくお取引できるよう心がけていますので、商品や発送方法などご質問がありましたらお気軽にどうぞ♪'
+      = f.submit '変更する', class:'user-main__contents__form__group__btn--default max-width-init'

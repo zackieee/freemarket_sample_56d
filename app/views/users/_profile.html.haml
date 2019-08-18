@@ -1,0 +1,39 @@
+.user-show__contents
+  .user-show__contents__group
+    .user-show__contents__group__profile
+      = link_to "#" do
+        .user-show__contents__group__profile--avatar
+          - if @user.avatar.attached?
+            = image_tag(@user.avatar)
+          -else
+            = image_tag('common/member_photo_noimage_thumb.png')
+        %h2.user-show__contents__group__profile--nickname
+          = @user.nickname
+        .user-show__contents__group__profile__parformance
+          %p.user-show__contents__group__profile__parformance--raiting
+            = "評価 1"
+          %p.user-show__contents__group__profile__parformance--display
+            = "出品数 1"
+    .user-show__contents__group__raiting
+      .user-show__contents__group__raiting--good
+        = icon 'fas fa-lg', 'smile', class: "good"
+        %p
+          1
+      .user-show__contents__group__raiting--normal
+        = icon 'fas fa-lg', 'meh', class: "normal"
+        %p
+          1
+      .user-show__contents__group__raiting--bad
+        = icon 'fas fa-lg', 'frown', class: "bad"
+        %p
+          1
+    .user-show__contents__group__introduction
+      %p
+        = simple_format(@user.introduction)
+    .user-show__contents__group__sns
+      = link_to '#' do
+        = icon 'fab fa-3x', 'facebook', class: 'fb-btn'
+      = link_to '#' do
+        = icon 'fab fa-3x', 'twitter', class: "tw-btn"
+      = link_to '#' do
+        = icon 'fab fa-3x', 'pinterest', class: 'pr-btn'
