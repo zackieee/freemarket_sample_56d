@@ -9,13 +9,13 @@
     .show-item__wrapper
       .show-item__wrapper__contents
         .show-item__wrapper__contents__image
-          = image_tag @product.images.first, height: '260', width: '300'
-        -# 売り切れの場合
-        - if @product.sales_status_id  == 2
-          .show-item__wrapper__contents__sold-out
-            .show-item__wrapper__contents__sold-out__tag
-            .show-item__wrapper__contents__sold-out__text
-              SOLD
+          = image_tag @product.images.first, height: '260', width: '300', class: "slide"
+          -# 売り切れの場合
+          - if @product.sales_status_id  == 2
+            .show-item__wrapper__contents__sold-out
+              .show-item__wrapper__contents__sold-out__tag
+              .show-item__wrapper__contents__sold-out__text
+                SOLD
         .show-item__wrapper__contents__list
           - @product.images.each do |image|
             = image_tag image, height: '50', width: '60', class: "show-item__wrapper__contents__list__img"
@@ -209,3 +209,14 @@
     = link_to '' do
       = image_tag 'logo-white.png', class: 'logo-white'
     %p © 2019 Mercar
+
+:javascript
+    $(".show-item__wrapper__contents__list__img").on("mouseover", function(){
+      $(this).removeClass("show-item__wrapper__contents__list__img")
+      var src = $(this).attr('src')
+      $(".slide").attr('src', src)
+    });
+
+    $(".show-item__wrapper__contents__list__img").on("mouseout", function(){
+     $(this).addClass("show-item__wrapper__contents__list__img")
+    })
