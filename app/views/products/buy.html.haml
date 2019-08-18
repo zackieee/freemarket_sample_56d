@@ -13,14 +13,14 @@
             = @product.name
           .buy__main__contents__item__info__form
             %p
-              ￥ #{@product.price}
+              ￥ #{@product.price.to_s(:delimited, delimiter: ',')}
               %span
                 送料込み
             .buy__main__contents__item__info__form__price
               .buy__main__contents__item__info__form__price__tag
                 支払金額
               .buy__main__contents__item__info__form__price__data
-                ￥ #{@product.price}
+                ￥ #{@product.price.to_s(:delimited, delimiter: ',')}
             =link_to '購入する', product_trades_path(@product), method: :post, class:'buy__main__contents__item__info__form__btn', data: {confirm: "購入しますか？"}
       .buy__main__contents__user-address
         .buy__main__contents__user-address__info
@@ -50,7 +50,7 @@
             %br
             = image_tag "common/#{@card_src}", width: '34px', height: '20px', alt: @card_brand, class: 'card__icon'
             -# = image_tag 'master-card.svg', height: '20px', width: '34px',class: 'card__icon'
-          = link_to '#',class: 'buy__main__contents__user-card__info__edit' do
+          = link_to users_edit_payment_path ,class: 'buy__main__contents__user-card__info__edit' do
             変更する >
   .buy__footer
     = render 'layouts/sub_footer' 

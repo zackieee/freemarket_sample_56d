@@ -20,12 +20,12 @@
           .selling_show-item__wrapper__contents__owner__detail__left
             %p 出品者
           .selling_show-item__wrapper__contents__owner__detail__right
-            = link_to @product.seller.nickname
-            = icon 'far', 'laugh-squint', class: "good"
+            = link_to @product.seller.nickname, show_profile_user_path(@product.seller.id)
+            = icon 'fas', 'smile', class: "good"
             1
-            = icon 'far', 'meh', class: "normal"
+            = icon 'fas', 'meh', class: "normal"
             1
-            = icon 'far', 'angry', class: "bad"
+            = icon 'fas', 'frown', class: "bad"
             1
         .selling_show-item__wrapper__contents__owner__detail
           .selling_show-item__wrapper__contents__owner__detail__left
@@ -66,11 +66,11 @@
           .selling_show-item__wrapper__contents__owner__detail__rights
             %p #{@product.delivery_days.name}
     .selling_show-item__value
-      %h1 ¥#{@product.price}
+      %h1 ¥#{@product.price.to_s(:delimited, delimiter: ',')}
       %p (税込)
       %span 送料込み
     .selling_show-item__text
-      %span #{@product.text}
+      = simple_format(@product.text)
   .selling_show-item__second
     .selling_show-item__edit
       = link_to "商品の編集", edit_product_path(@product)
