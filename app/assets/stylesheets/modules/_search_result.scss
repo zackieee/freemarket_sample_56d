@@ -1,7 +1,7 @@
 @import 'mixin/crearfix';
 
 .result-view {
-  min-height: 300vh;
+  height:   300vh;
   background: #F5F5F5;
   padding: 3% 0 10% 15%;
   &__side-bar{
@@ -27,7 +27,6 @@
     }
     &__footer {
      background: white;
-     min-height: 100vh;
      width: 75%;
      margin-top: 30px;
      padding: 5%;
@@ -48,7 +47,6 @@
     }
   }
   &__products {
-    min-height: 100vh;
     width: 60%;
     float: left;
     .hit-count {
