@@ -8,25 +8,17 @@
       = @product.name
     .show-item__wrapper
       .show-item__wrapper__contents
-        -# %input{type: "radio", name: "r", id: "r1"}
-        -# %input{type: "radio", name: "r", id: "r2"}
-        -# %input{type: "radio", name: "r", id: "r1"}
-        -# %input{type: "radio", name: "r", id: "r1"}
-        -# %input{type: "radio", name: "r", id: "r1"}
         .show-item__wrapper__contents__image
-          - @product.images.each do |image|
-            .slides
-              = image_tag image, height: '260', width: '300', class: "slide"
-            -# 売り切れの場合
-            - if @product.sales_status_id  == 2
-              .show-item__wrapper__contents__sold-out
-                .show-item__wrapper__contents__sold-out__tag
-                .show-item__wrapper__contents__sold-out__text
-                  SOLD
+          = image_tag @product.images.first, height: '260', width: '300', class: "slide"
+          -# 売り切れの場合
+          - if @product.sales_status_id  == 2
+            .show-item__wrapper__contents__sold-out
+              .show-item__wrapper__contents__sold-out__tag
+              .show-item__wrapper__contents__sold-out__text
+                SOLD
         .show-item__wrapper__contents__list
           - @product.images.each do |image|
-            %label{for: "r1", class: "bar"}
-              = image_tag image, height: '50', width: '60', class: "show-item__wrapper__contents__list__img"
+            = image_tag image, height: '50', width: '60', class: "show-item__wrapper__contents__list__img"
       .show-item__wrapper__contents__owner
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__left
@@ -219,13 +211,6 @@
     %p © 2019 Mercar
 
 :javascript
-    var page = 0;
-    var lastPage = parseInt($(".show-item__wrapper__contents__image img").length-1);
-
-    $(".show-item__wrapper__contents__image img").css("display", "none");
-    $(".show-item__wrapper__contents__image img").eq(page).css("display", "block")
-
-
     $(".show-item__wrapper__contents__list__img").on("mouseover", function(){
       $(this).removeClass("show-item__wrapper__contents__list__img")
       var src = $(this).attr('src')
@@ -233,5 +218,5 @@
     });
 
     $(".show-item__wrapper__contents__list__img").on("mouseout", function(){
-    $(this).addClass("show-item__wrapper__contents__list__img")
+     $(this).addClass("show-item__wrapper__contents__list__img")
     })

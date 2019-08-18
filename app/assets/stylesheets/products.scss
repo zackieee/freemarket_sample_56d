@@ -2,9 +2,24 @@
 @import 'mixin/sold-out';
 
 .products {
+   background: #ECEBE9;
+   height: 400px;
+   overflow-x: hidden;
+   display: flex;
+   .slide {
+      width: 1440px;
+      position: relative;
+       right: 0;
+   }
+   .slider {
+      position: absolute;
+      top: 100px;
+      right: 0px;
+      width: 100%;
+      height: 100%;
+   }
    &--heading {
       height: 400px;
-      background: #ECEBE9;
       text-align: center;
       a {
          text-decoration: none;
@@ -16,8 +31,9 @@
          display: flex;
          position: relative;
          text-align: left;
+         width: 150%;
          &__text {
-            margin: 2.5% 0 0 20%;
+            margin: 2.5% 0 0 13%;
             .dllink-image {
                margin: 3% 0 0 1%;
             }
@@ -32,48 +48,61 @@
             p {
                margin-top: 10px;
                font-size: 18px;
-              }           
+              } 
+   
          }
       }
    }
 }
 
-
-.arrow{
-   display: inline-block;
-   padding-left: 20px;
-   &::before{
-      @include arow;
-      left: 93%;
-      transform: rotate(45deg);
-   }
-}
-
-.arrow-second {
-   display: inline-block;
-   padding-left: 20px;
-   &::before{
-      @include arow;
-      left: 5%;
-      transform: rotate(225deg);
-   }
-}
-
-.circle-wrapper {
-  display: flex;
-  position: absolute;
-  top: 475px;
-  left: 650px;
-  .circle {
-    height: 15px;
-    width: 15px;
-    margin-left: 15px;
-    background: #F4F3F2;
-    border-radius: 50%;
-    &:hover {
+.arrow-cover {
+   background: #F5F5F5;
+   .arrow{
+      display: inline-block;
+      padding-left: 20px;
       cursor: pointer;
-    }
-  }
+      &::before{
+         @include arow;
+         left: 93%;
+         transform: rotate(45deg);
+      }
+   }
+   .arrow-second {
+      display: inline-block;
+      padding-left: 20px;
+      cursor: pointer;
+      &::before{
+         @include arow;
+         left: 5%;
+         transform: rotate(225deg);
+      }
+   }
+   .circle-wrapper {
+      display: flex;
+      position: absolute;
+      top: 475px;
+      left: 650px;
+      .circle {
+        height: 15px;
+        width: 15px;
+        margin-left: 15px;
+        background: #F4F3F2;
+        border-radius: 50%;
+        &:hover {
+         background-color: #696862;
+        }
+      }
+      .circle-second {
+         height: 15px;
+         width: 15px;
+         margin-left: 15px;
+         background: #F4F3F2;
+         border-radius: 50%;
+         &:hover {
+            background-color: #696862;color: #696862;
+         }
+      }
+   }
 }
 
 .item {
@@ -177,6 +206,7 @@
  }
 }
 
+//全ての商品を見るを指定している
 .item-show {
    text-align: right;
    width: 100%;
@@ -186,4 +216,9 @@
      font-size: 14px;
      padding-right: 15px; 
    }
+ }
+
+ //jsでsliderに付与されるクラス
+ .appear {
+    display: block!important;
  }

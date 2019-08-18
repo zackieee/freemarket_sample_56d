@@ -12,12 +12,12 @@
   .header--select
     .header--select__category
       = link_to '' do
-        = icon 'fas', 'list', class: "awsome"
-        カテゴリーから探す    
+        = icon 'fas', 'list'
+      = link_to "カテゴリーから探す", root_path, class: "search-text"
     .header--select__category
       = link_to '' do
-        = icon 'fas', 'tag', class: "awsome"
-        ブランドから探す
+        = icon 'fas', 'tag'
+      = link_to "ブランドから探す", root_path, class: "search-text"
     - if user_signed_in?
       .header--user--status--login
         = link_to '' do
