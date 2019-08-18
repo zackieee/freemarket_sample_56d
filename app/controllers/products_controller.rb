@@ -14,6 +14,7 @@ class ProductsController < ApplicationController
   
   def new
     @product= Product.new
+    @category_parment = Category.where(depth: 0)
   end
     
   def create
