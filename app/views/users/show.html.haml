@@ -8,10 +8,15 @@
       .mypage__main__header
         = image_tag 'mypage-background.jpg', height: '200px', width: '700px', class: 'mypage-background'
         .mypage__main__header__contents
-          = link_to users_edit_profile_path do
-            =image_tag 'icon.png', height: '60px', width: '60px', class: 'user-avater'
+          = link_to show_profile_user_path(current_user.id) do
+            .user-main__contents__form__group__item__profile__avator
+              %label.user-main__contents__form__group__item{for:"avatar"}
+                - if current_user.avatar.attached?
+                  = image_tag(current_user.avatar)
+                -else
+                  = image_tag('common/member_photo_noimage_thumb.png')
             %h2
-              user-name
+              ="#{current_user.nickname}"
             .mypage__main__header__contents__number
               .mypage__main__header__contents__number__rating
                 評価

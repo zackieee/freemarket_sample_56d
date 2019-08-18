@@ -4,6 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   prepend_before_action :check_captcha, only: [:create]
   prepend_before_action :customize_sign_up_params, only: [:create]
+  prepend_before_action :customize_update_params, only: [:update]
   prepend_before_action :move_to_new_profile, only: [:new_telephone,:new_telephone_auth,:new_address,:new_payment,:new_payment]
 
   def new_profile
@@ -144,68 +145,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def new_complete
-    # payjpとapi通信するためのアクセスキー
-    Payjp.api_key = Rails.application.credentials.payjp[:api_secret_key]
-
-    # payjpからトークンを受け取れているか確認
-    if params[:payjp_token].blank?
-      binding.pry
+    # クレジットカードの登録処理
+    @customer = user_credit('create')
+    if @customer[:status] != '200'
       render :new_payment
       return
-    # payjpに顧客情報を送信・登録する/ユーザ入力情報をparamsから受け取らないのでストロングパラメータもなし
-    else
-      # 例外処理追加（例外がうまく動くかは未検証）
-      begin
-        customer = Payjp::Customer.create(
-          description: 'freemaket_sample_56d',
-          email: session[:user][:email],
-          card: params[:payjp_token],
-        )
-      rescue Payjp::CardError => e
-        body = e.json_body
-        @err  = body[:error]
-        render :new_payment
-        return
-      rescue Payjp::InvalidRequestError => e
-        body = e.json_body
-        @err  = body[:error]
-        render :new_payment
-        return
-      rescue Payjp::AuthenticationError => e
-        body = e.json_body
-        @err  = body[:error]
-        render :new_payment
-        return
-      rescue Payjp::APIConnectionError => e
-        body = e.json_body
-        @err  = body[:error]
-        render :new_payment
-        return
-      rescue Payjp::APIError => e
-        body = e.json_body
-        @err  = body[:error]
-        render :new_payment
-        return
-      rescue Payjp::PayjpError => e
-        body = e.json_body
-        @err  = body[:error]
-        render :new_payment
-        return
-      rescue => e
-        body = e.json_body
-        @err  = body[:error]
-        render :new_payment
-        return
-      end
     end
+
 
     # 実際のユーザ登録はここから
     @user = User.new(session[:user])
     @user.build_address(session[:address])
     @user.build_card(
       user_id:        @user.id,
-      customer_id:    customer.id,
-      card_id:        customer.default_card,
+      customer_id:    @customer.id,
+      card_id:        @customer.default_card,
     )
     if session[:sns]!=nil 
       @user.sns_credentials.build(
@@ -230,16 +184,198 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def edit_profile
   end
 
+  def update_profile
+    @user = User.find(current_user.id)
+    @user.update(
+      nickname: user_params[:nickname],      
+      introduction: user_params[:introduction]
+    )
+    # 指定データがある場合のみ保存
+    if user_params[:avatar] != nil
+      @user.update(
+        avatar: user_params[:avatar]
+      )
+    end
+
+    if @user.valid?(:profile_2)
+      redirect_to action: :edit_profile
+      return
+    else
+      render action: :edit_profile
+      return
+    end
+
+  end
+
   def edit_address
   end
 
+  def update_address
+    @user = User.find(current_user.id)
+    @user.update(user_params)
+    if @user.valid?(:address) && @user.address.valid?(:address)
+      redirect_to users_edit_address_path
+    else
+      render :edit_address
+    end
+
+  end
+
   def edit_payment
+    # クレジットカードの登録があるか確認
+    @user = User.find(current_user.id)
+    # クレジットカード情報が登録されていた場合のみ情報取得
+    if @user.card&.customer_id.nil?
+    else
+      @card = user_credit('show')
+      if @err != nil
+        render :edit_payment
+        return
+      end
+    end
   end
 
   def edit_payment_2
   end
 
+  def update_payment
+    # クレジットカード情報の登録
+    session[:user]["email"] = current_user.email
+    @customer = user_credit('create')
+    if @err != nil
+      render :edit_payment
+      return
+    end
+    @car = Card.create(
+      user_id:        current_user.id,
+      customer_id:    @customer.id,
+      card_id:        @customer.default_card,
+    )
+    redirect_to action: :edit_payment
+  end
+
+  def destroy_payment
+    # クレジットカード情報の削除
+    @customer = user_credit('delete')
+    if @err != nil
+      render :edit_payment
+      return
+    end
+    @card = Card.find_by(user_id: current_user.id)
+    @card.destroy
+
+    redirect_to action: :edit_payment
+  end
+
+  def edit_telephone
+  end
+
+  def edit_telephone_auth
+    # セッションにデータを格納
+    session[:user][:tel]  = user_params[:tel]
+
+    # 既存の顧客で同一電話番号を利用していないか
+    same_tel = User.where(tel: user_params[:tel])
+    if same_tel.length != 0
+      @messages = 'この番号はすでに会員登録済みです。会員の方は、ログインをお試しください。登録の覚えがない場合、お問い合わせよりその旨をご連絡ください。'
+      render :edit_telephone
+      return
+    end
+
+    # SMS認証用のデータ作成 + セッションにデータ登録
+    session[:to]          = PhonyRails.normalize_number session[:user][:tel], country_code:'JP' # 電話番号を+81にフォーマット
+    session[:secure_code] = random_number_generator(4)
+
+    # SMSに認証コード送信
+    if Phony.plausible? session[:to]
+      client = Twilio::REST::Client.new
+      client.messages.create(
+        from: "+15624441204", #送信用電話番号
+        to:   session[:to],
+        body: "認証番号：#{session[:secure_code]} この番号をfreemarket_sampleの画面で入力してください。"
+    )
+    end
+
+  end
+
+  def update_telephone_auth
+    # 入力チェック
+    if params[:auth_code].present?
+    else
+      @messages = '認証番号を入力してください'
+      render :edit_telephone_auth
+      return
+    end
+
+    # 電話番号認証の結果を受けてレンダリング先を決める
+    if session[:secure_code] == params[:auth_code]
+      @user = User.find(current_user.id)
+      @user.update(tel: session[:user]["tel"])
+      # バリデーションに通ったか確認、elseの場合は画面を戻す
+      if @user.valid?(:tel)
+      else
+        render :edit_telephone
+        return
+      end
+    else
+      @messages = '認証番号が一致しません'
+      session[:auth_code] = params[:auth_code]
+      render :edit_telephone_auth
+      return
+    end
+
+    redirect_to users_edit_telephone_path
+
+  end
+
   def edit_account
+  end
+
+  def update_account
+    @user = User.find(current_user.id)
+    @user.update(user_params)
+    if @user.address.valid?(:identify)
+      redirect_to users_edit_account_path
+    else
+      render :edit_account
+      return
+    end
+  end
+
+  def edit_password
+    # パスワード変更後のリダイレクトでログアウトされる対処。謎。
+    sign_in User.find(session[:id]) unless user_signed_in?
+  end
+
+  def update_password
+    # メールアドレス変更処理
+    @user = User.find(current_user.id)
+    @user.update(email: user_params[:email])
+    if @user.valid?(:email)
+    else
+      render :edit_password
+      return
+    end
+
+    # パスワード変更処理(入力があった場合のみ)
+    if user_params[:password] != "" || user_params[:password_confirmation] != "" || user_params[:current_password] != ""
+      result = current_user.update_with_password(user_params)
+
+      if result
+        # パスワード変更すると一旦サインアウトされる可能性があると
+        # 記事で読んだので念のため、ログイン処理追加
+        session[:id] = @user.id
+        sign_in User.find(session[:id])
+      else
+        @messages = 'パスワードの更新に失敗しました。入力された値に間違いがあります。'
+        render :edit_password
+        return
+      end
+
+    end
+
+    redirect_to users_edit_password_path
+
   end
 
 private
@@ -260,12 +396,31 @@ private
     ]
   end
 
+  def customize_update_params
+    devise_parameter_sanitizer.permit :account_update,
+     keys:
+     [:nickname,
+      :avatar,
+      :introduction,
+      :firstname,
+      :lastname,
+      :firstname_kana,
+      :lastname_kana,
+      :birthday,
+      :tel,
+      :sales_amount,
+    ]
+  end
+
   def user_params
     params.require(:user).permit(
       :nickname,
+      :avatar,
+      :introduction,
       :email,
       :password,
       :password_confirmation,
+      :current_password,
       :firstname,
       :lastname,
       :firstname_kana,
@@ -281,6 +436,65 @@ private
         :building_name,
       ]
     )
+  end
+
+  # クレジットカード情報の登録
+  def user_credit(key)
+    # payjpとapi通信するためのアクセスキー
+    Payjp.api_key = Rails.application.credentials.payjp[:api_secret_key]
+
+    begin
+      case key
+      when 'create'
+        if params[:payjp_token].blank?
+          render :new_payment
+          return
+        else
+          @customer = Payjp::Customer.create(
+            description: 'freemaket_sample_56d',
+            email: session[:user][:email],
+            card: params[:payjp_token],
+          )
+        end
+      when 'show'
+        @user = User.find(current_user.id)
+        @customer = Payjp::Customer.retrieve(
+          @user.card.customer_id
+        )
+        @card = @customer.cards.retrieve(@user.card.card_id)
+      when 'delete'
+        # 削除対象データの取得
+        @user = User.find(current_user.id)
+        @customer = Payjp::Customer.retrieve(
+          @user.card.customer_id
+        )
+        @customer.delete
+      else
+        #特に処理なし
+      end
+    # 例外キャッチ処理
+    rescue Payjp::CardError => e
+      body = e.json_body
+      @err  = body[:error]
+    rescue Payjp::InvalidRequestError => e
+      body = e.json_body
+      @err  = body[:error]
+    rescue Payjp::AuthenticationError => e
+      body = e.json_body
+      @err  = body[:error]
+    rescue Payjp::APIConnectionError => e
+      body = e.json_body
+      @err  = body[:error]
+    rescue Payjp::APIError => e
+      body = e.json_body
+      @err  = body[:error]
+    rescue Payjp::PayjpError => e
+      body = e.json_body
+      @err  = body[:error]
+    rescue => e
+      body = e.json_body
+      @err  = body[:error]
+    end
   end
 
   # selectタグでで取得した年月日をDate型データに結合(paramsを強制書き換え)

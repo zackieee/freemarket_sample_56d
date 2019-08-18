@@ -1,19 +1,19 @@
 .user-main__contents__form.edit-form
   .user-main__contents__form__group.top-panel.max-width-init
-    %p.user-main__contents__form__group__user-card__title
-      クレジットカード一覧
-      .user-main__contents__form__group__user-card
-        .user-main__contents__form__group__user-card__info
-          = image_tag 'master-card.svg', height: '20px', width: '34px',class: 'card__icon'
-          %p.user-main__contents__form__group__user-card__info-text
-            ************0000
-            %br
-          %p
-            10/23
-            %br
-        = link_to '#', class: 'user-main__contents__form__group__user-card__delete' do
-          削除する
-    %p.user-main__contents__form__group__confirm-text.text-right
-      = link_to '#', class:'user-main__contents__form__group__confirm-text--link', target:'_blank' do
-        支払い方法について
-        = icon 'fas', 'chevron-right'
+    = form_with mode:@card, url:user_delete_payment_path, method: :delete,local: true do | f |
+      %p.user-main__contents__form__group__user-card__title
+        クレジットカード一覧
+        .user-main__contents__form__group__user-card
+          .user-main__contents__form__group__user-card__info
+            = show_brand(@card.brand)
+            %p.user-main__contents__form__group__user-card__info-text
+              = "＊＊＊＊ - ＊＊＊＊ - ＊＊＊＊ - #{@card.last4}"
+              %br
+            %p.user-main__contents__form__group__user-card__info-text
+              = "#{@card.exp_month}/#{(@card.exp_year).to_i - 2000 }"
+              %br
+          = f.submit '削除する', class: 'user-main__contents__form__group__user-card__delete'
+      %p.user-main__contents__form__group__confirm-text.text-right
+        = link_to '#', class:'user-main__contents__form__group__confirm-text--link', target:'_blank' do
+          支払い方法について
+          = icon 'fas', 'chevron-right'

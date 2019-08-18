@@ -1,0 +1,20 @@
+.wrapper
+  =render 'products/header'
+  - breadcrumb :edit_telephone
+  = render "layouts/breadcrumbs"
+  .user-main.sidebar
+    = render 'users/side-bar'
+    .user-main__contents.edit-form
+      - if current_user&.tel != ""
+        %h2.user-main__contents__title-edit.form-underline
+          完了
+        .user-main__contents__form.single-panel
+          .user-main__contents__form__group
+            %p.text-center
+              確認済みです
+      - else
+        %h2.user-main__contents__title-edit.form-underline
+          電話番号の確認
+        = render 'telephone_form_2'
+  =render 'products/footer-top'
+  =render 'products/footer-bottom'

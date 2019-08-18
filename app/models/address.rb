@@ -20,4 +20,17 @@ class Address < ApplicationRecord
     address.validates :building_name,
       length:{ maximum: 100} 
   end
+
+  # 本人確認情報登録画面用のバリデーション
+  with_options on: :identify do | identify |
+    identify.validates :postal_code,
+      format: {with:/\A\d{7}\z/, message: 'のフォーマットが不適切です'}
+    identify.validates :city,
+      length:{ maximum: 50}
+    identify.validates :address_number,
+      length:{ maximum: 100}
+    identify.validates :building_name,
+      length:{ maximum: 100} 
+  end
+
 end

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', :registrations => "users/registrations",
-  :sessions => 'users/sessions' }
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations: "users/registrations",
+    sessions: 'users/sessions',
+   }
 
   devise_scope :user do
     #ユーザ新規作成
@@ -14,10 +17,21 @@ Rails.application.routes.draw do
     post 'users/omniauth_callbacks' => 'users/omniauth_callbacks#passthru'
     #ユーザ編集
     get '/users/edit/profile' => 'users/registrations#edit_profile'
+    post '/users/edit/profile' => 'users/registrations#update_profile'
     get '/users/edit/address' => 'users/registrations#edit_address' 
+    post '/users/edit/address' => 'users/registrations#update_address' 
     get '/users/edit/payment' => 'users/registrations#edit_payment'
     get '/users/edit/payment_2' => 'users/registrations#edit_payment_2'
+    post '/users/edit/payment_2' => 'users/registrations#update_payment'
+    delete '/user/delete/payment' => 'users/registrations#destroy_payment'
     get '/users/edit/account' => 'users/registrations#edit_account'
+    post '/users/edit/account' => 'users/registrations#update_account'
+    get '/users/edit/telephone' => 'users/registrations#edit_telephone'
+    get '/users/edit/telephone/auth' => 'users/registrations#edit_telephone_auth'
+    post '/users/edit/telephone/auth' => 'users/registrations#update_telephone_auth'
+    # パスワード編集
+    get 'users/edit/password' => 'users/registrations#edit_password'
+    post 'users/edit/password' => 'users/registrations#update_password'
     #ユーザサインアウト画面
     get '/users/sign_out' => 'users/sessions#sign_out_confirm'
   end
@@ -32,5 +46,9 @@ Rails.application.routes.draw do
     get :buy, on: :member #productsにデータを入れたら':collection'を':mender'に変更
     resources :trades, only: [:create]
   end
-  resources :users
+  resources :users do
+    member do
+      get 'show_profile'
+    end
+  end
 end

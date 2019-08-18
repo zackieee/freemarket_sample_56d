@@ -1,15 +1,12 @@
 .wrapper
   =render 'products/header'
-  - breadcrumb :edit_payment
+  - breadcrumb :edit_telephone_auth
   = render "layouts/breadcrumbs"
   .user-main.sidebar
     = render 'users/side-bar'
     .user-main__contents.edit-form
       %h2.user-main__contents__title-edit.form-underline
-        支払い方法
-      - if @user&.card&.customer_id.nil?
-        = render 'payment_form_edit_1'
-      - else
-        = render 'payment_show', @card
+        電話番号認証
+      =render 'telephone_auth_form_2'
   =render 'products/footer-top'
   =render 'products/footer-bottom'

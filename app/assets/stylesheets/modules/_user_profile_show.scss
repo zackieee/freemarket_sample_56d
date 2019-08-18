@@ -1,0 +1,129 @@
+//　プロフィール画面専用
+.wrapper{
+  .user-show{
+    width: 100vw;
+    color: #333333;
+    background-color:#f5f5f5;
+    &__contents{
+      width:700px;
+      margin: 40px auto;
+      background-color:#fff;
+      &__group{
+        a{
+          text-decoration:none;
+          color: #333333;
+          h2:hover{
+            text-decoration:underline;
+          }
+        }
+        &__profile{
+          box-sizing: border-box;
+          display:inline-block;
+          text-align:center;
+          width:700px;
+          padding: 72px 16px 24px;
+          background:url(/images/common/user-bg.jpg) no-repeat;
+          background-size:cover;
+          text-decoration: none;
+          &--avatar{
+            img{
+              width:180px;
+              height:180px;
+              border-radius: 100%;
+            }
+          }
+          &--nickname{
+            margin-bottom:10px;
+            font-size:18px;
+          }
+          &__parformance{
+            display:flex;
+            justify-content: center;
+            &--raiting{
+              font-size:12px;
+              font-weight:bold;
+            }
+            &--display{
+              margin-left:10px;
+              font-size:12px;
+              font-weight:bold;
+            }
+          }
+        }
+        &__raiting{
+          display:flex;
+          justify-content: center;
+          align-items: center;
+          height: 50px;
+          padding-top: 14px;
+          text-align:center;
+          border-bottom:solid 1px #ccc;
+          &--good{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            width:100px;
+            i{
+              color:#ef5185;
+            }
+            p{
+              margin-left:30px;
+              font-size:16px;
+              line-height:31px;
+            }
+          }
+          &--normal{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            width:100px;
+            i{
+              color:#fba933;
+            }
+            p{
+              margin-left:30px;
+              font-size:16px;
+              line-height:31px;
+            }
+          }
+          &--bad{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            width:100px;
+            i{
+              color:#6ab5d8;
+            }
+            p{
+              margin-left:30px;
+              font-size:16px;
+              line-height:31px;
+            }
+          }
+        }
+        &__introduction{
+          padding: 30px 50px 60px 50px;
+        }
+        &__sns{
+          display:flex;
+          justify-content: center;
+          padding: 30px 50px 60px 50px;
+          a{
+            text-decoration:none;
+            .fb-btn{
+              color:#385185;
+            }
+            .tw-btn{
+              color:#5d9dc9;
+              margin-left:15px;
+            }
+            .pr-btn{
+              color:#aa262a;
+              margin-left:15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -30,9 +30,13 @@
           = icon 'fas', 'tag'
           やることリスト
       .mypage-link
-        = link_to users_edit_profile_path do
-          = image_tag 'icon.png', width: "35", class: "img"
-        = link_to "マイページ", "/users/mypage", class: "mypage-btn"
+        = link_to user_path(current_user.id) do
+          - if current_user.avatar.attached?
+            = image_tag(current_user.avatar)
+          -else
+            = image_tag('common/member_photo_noimage_thumb.png')
+          %p.mypage-btn
+            マイページ
     - else    
       .header--btn
         .header--btn__signupbtn

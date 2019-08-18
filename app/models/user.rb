@@ -17,6 +17,9 @@ class User < ApplicationRecord
   has_many :rater_user_ratings, class_name: 'Rating', foreign_key: 'rater_user_id'
   has_many :sns_credentials, dependent: :destroy
 
+  # イメージ画像の紐付け
+  has_one_attached :avatar
+
   # fields_for用のネスト設定
   accepts_nested_attributes_for :address, allow_destroy: true
 
@@ -80,9 +83,25 @@ class User < ApplicationRecord
       presence: true,
       length: { maximum: 35},
       format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい' }
-
   end
 
+  # プロフィール編集画面のバリデーション
+  with_options on: :profile_2 do | profile |
+    profile.validates :nickname,
+      presence: true,
+      length:{ maximum: 20 }
+      profile.validates :introduction,
+      length:{ maximum: 1000 }
+  end
+
+  # パスワード・メールアドレス編集画面のバリデーション
+  with_options on: :email do | email |
+    email.validates :email,
+      presence: true,
+      format: { with: VALID_EMAIL_REGEX , message: 'のフォーマットが不適切です'},
+      uniqueness: true
+  end
+  
   # 生年月日のチェックメソッド
   def check_birthday
     # 生年月日が入力済かつ未来日(現在日付より未来)

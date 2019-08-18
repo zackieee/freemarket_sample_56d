@@ -1,5 +1,5 @@
 .user-main__contents__form.single-panel
-  = form_with url:users_sign_up_telephone_check_path, method: :get,local: true do |f|
+  = form_with url:users_edit_telephone_auth_path, method: :post,local: true do |f|
     .user-main__contents__form__group.none-top-margin.text-center
       - if @messages != nil
         .error-messages
@@ -32,6 +32,6 @@
         電話番号を再度入力する
       %p.user-main__contents__form__group__confirm-text
         ※SMSが届かない場合は
-        = link_to '#', class:'user-main__contents__form__group__confirm-text--link' do
+        = link_to users_edit_telephone_path, class:'user-main__contents__form__group__confirm-text--link' do
           SMS受信設定
         を確認して、もう一度電話番号を入力してください。
