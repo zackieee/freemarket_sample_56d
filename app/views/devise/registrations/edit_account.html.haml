@@ -8,7 +8,7 @@
       %h2
         本人情報の登録
       .user-profile__area
-        = form_with model: @user, local: true do |f|
+        = form_with model: @user,url:users_edit_account_path,builder: WithErrorFormBuilder,method: :post, local: true do |f|
           .user-profile__area__info
             %p お客さまの本人情報をご登録ください。
             %p 登録されたお名前・生年月日を変更する場合、本人確認書類の提出が必要になります。
@@ -28,41 +28,41 @@
           .user-profile__birthday
             %p 生年月日
             %li 
-              = current_user.birthday
+              = current_user.birthday.strftime('%Y/%m/%d')
+          = f.fields_for :address do |fields|
+            .user-profile__contents
+              %label.user-main__contents__form__group__item{for:"postal_code"}
+                郵便番号
+              %span.user-main__contents__form__group__item--optional
+                任意
+              = fields.text_field :postal_code, class:'user-main__contents__form__group__item__input', placeholder:'例) 123-4567',value:"#{current_user.address.postal_code}"
+            .user-profile__contents
+              %label.user-main__contents__form__group__item{for:"postal_code"}
+                都道府県
+              %span.user-main__contents__form__group__item--optional
+                任意
+              %br
+              = fields.collection_select :prefecture_id, Prefecture.all, :id, :name,{prompt: "--",selected: current_user.address.prefecture_id}, class:'dropdown', type: "hidden"
+            .user-profile__contents
+              %label.user-main__contents__form__group__item
+                市区町村
+              %span.user-main__contents__form__group__item--optional
+                任意
+              = fields.text_field :city, class:'user-main__contents__form__group__item__input', placeholder:'例) 横浜市緑区',value:"#{current_user.address.city}"
+            .user-profile__contents
+              %label.user-main__contents__form__group__item
+                番地
+              %span.user-main__contents__form__group__item--optional
+                任意
+              = fields.text_field :address_number, class:'user-main__contents__form__group__item__input', placeholder:'例) 青山1-1-1',value:"#{current_user.address.address_number}"
+            .user-profile__contents
+              %label.user-main__contents__form__group__item
+                建物名
+              %span.user-main__contents__form__group__item--optional
+                任意
+              = fields.text_field :building_name, class:'user-main__contents__form__group__item__input', placeholder:'例) 柳ビル103',value:"#{current_user.address.building_name}"
           .user-profile__contents
-            %label.user-main__contents__form__group__item{for:"postal_code"}
-              郵便番号
-            %span.user-main__contents__form__group__item--optional
-              任意
-            = number_field_tag :postal_code, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 123-4567'
-          .user-profile__contents
-            %label.user-main__contents__form__group__item{for:"postal_code"}
-              都道府県
-            %span.user-main__contents__form__group__item--optional
-              任意
-            %br
-            = f.collection_select :prefecture_id, Prefecture.all, :id, :name, class:'dropdown', type: "hidden"
-          .user-profile__contents
-            %label.user-main__contents__form__group__item
-              市区町村
-            %span.user-main__contents__form__group__item--optional
-              任意
-            = text_field_tag :lastname, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 横浜市緑区'
-          .user-profile__contents
-            %label.user-main__contents__form__group__item
-              番地
-            %span.user-main__contents__form__group__item--optional
-              任意
-            = text_field_tag :lastname, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 青山1-1-1'
-          .user-profile__contents
-            %label.user-main__contents__form__group__item
-              建物名
-            %span.user-main__contents__form__group__item--optional
-              任意
-            = text_field_tag :lastname, '', class:'user-main__contents__form__group__item__input', placeholder:'例) 柳ビル103'
-          .user-profile__contents
-            =link_to users_sign_up_payment_path, class:'regist-btn' do
-              登録する
+            =f.submit '登録する', class:'regist-btn'
           .user-profile__area__info
             = link_to "" do
               = icon 'fas', 'angle-right'
