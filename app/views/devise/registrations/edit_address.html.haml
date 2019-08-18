@@ -1,0 +1,12 @@
+.wrapper
+  =render 'products/header'
+  - breadcrumb :edit_address
+  = render "layouts/breadcrumbs"
+  .user-main.sidebar
+    = render 'users/side-bar'
+    .user-main__contents.edit-form
+      %h2.user-main__contents__title-edit
+        発送元・お届け先住所変更
+      = render 'address_form_2'
+  =render 'products/footer-top'
+  =render 'products/footer-bottom'
