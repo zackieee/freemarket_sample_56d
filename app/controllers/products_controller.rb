@@ -13,7 +13,8 @@ class ProductsController < ApplicationController
   end
 
   def search_result_page
-    @products = Product.where.not(seller_id: current_user&.id).order('id DESC').search(params[:search])
+    @q = Product.ransack(params[:q])
+    @products = Product.where.not(seller_id: current_user&.id).order('id DESC').search(params[:search]).merge(@q.result(distinct: true))
   end 
 
   def new
@@ -99,7 +100,12 @@ class ProductsController < ApplicationController
    def set_product
     @product = Product.find(params[:id])
   end
+
+  def search_params
+    params.require(:q).permit!
+  end
 end
+
 
 # image: product_params[:image], name: product_params[:name], 
 #     text: product_params[:text], status: product_params[:status], price: product_params[:price], 
