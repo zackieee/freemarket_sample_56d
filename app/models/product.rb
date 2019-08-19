@@ -4,10 +4,12 @@ class Product < ApplicationRecord
   has_many :comments
   has_many :favorites
   belongs_to :category
-  has_many :brands,through: :products_brands
-  has_many :products_brands
-  has_many :sizes,through: :products_sizes
-  has_many :products_sizes
+  belongs_to :brand
+  belongs_to :size
+  # has_many :brands,through: :products_brands
+  # has_many :products_brands
+  # has_many :sizes,through: :products_sizes
+  # has_many :products_sizes
   has_one :trade
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
