@@ -18,18 +18,18 @@ class ProductsController < ApplicationController
 
   def new
     @product= Product.new
-    @category_parment = Category.where(depth: 0)
+    @category_parent = Category.where(depth: 0)
   end
 
   def get_category_children
-    @category_children = Category.find(params[:parment_id]).children
+    @category_children = Category.find(params[:parent_id]).children
     respond_to do |format|
       format.json
     end
   end
 
   def get_category_grandchildren
-    @category_grandchildren = Category.find(params[:parment_id]).children
+    @category_grandchildren = Category.find(params[:parent_id]).children
     respond_to do |format|
       format.json
     end
@@ -48,6 +48,15 @@ class ProductsController < ApplicationController
     @products = Product.where.not(id: @product.id).where(seller_id: @product.seller_id).order('id DESC').limit(6)
     @product_before = Product.find( @product.id - 1 ) if Product.exists?(@product.id - 1)
     @product_after = Product.find( @product.id + 1 ) if Product.exists?(@product.id + 1)
+
+    if @product.category.depth == 1
+      @category_children = Category.find(@product.category_id)
+      @category_parent = Category.find(@category_children.parent_id)
+    else
+      @category_grandchildren = Category.find(@product.category_id)
+      @category_children = Category.find(@category_grandchildren.parent_id)
+      @category_parent = Category.find(@category_children.parent_id)
+    end
   end
 
   def selling_index
@@ -59,6 +68,14 @@ class ProductsController < ApplicationController
   end
 
   def selling_show
+    if @product.category.depth == 1
+      @category_children = Category.find(@product.category_id)
+      @category_parent = Category.find(@category_children.parent_id)
+    else
+      @category_grandchildren = Category.find(@product.category_id)
+      @category_children = Category.find(@category_grandchildren.parent_id)
+      @category_parent = Category.find(@category_children.parent_id)
+    end
   end
 
   def edit
