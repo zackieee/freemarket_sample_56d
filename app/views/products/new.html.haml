@@ -36,6 +36,8 @@
             %span.sell-main__contents__content__item--required
               必須
             = f.collection_select :category_id, @category_parment, :id, :name,{prompt: "---"}, required: true, maxlength: '40'
+            #category_children
+            #category_grandchildren
             %label.sell-main__contents__content__item{for:"status"}
               商品の状態
             %span.sell-main__contents__content__item--required.top-space
