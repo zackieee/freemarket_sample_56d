@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   get 'products/get_category_children'  => 'products#get_category_children'
   get 'products/get_category_grandchildren'  => 'products#get_category_grandchildren'
 
+  get 'products/search_result_page' => 'products#search_result_page'
   resources :products do
     get :selling_show, on: :member
     get :buy, on: :member

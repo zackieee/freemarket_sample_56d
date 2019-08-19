@@ -5,13 +5,17 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :buy, :selling_show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show, :all_products]
   def index
-    @products= Product.where.not(seller_id: current_user&.id).order('id DESC').limit(4)
+    @products = Product.where.not(seller_id: current_user&.id).order('id DESC').limit(4)
   end
 
   def all_products
-    @products= Product.where.not(seller_id: current_user&.id).order('id DESC')
+    @products = Product.where.not(seller_id: current_user&.id).order('id DESC')
   end
-  
+
+  def search_result_page
+    @products = Product.where.not(seller_id: current_user&.id).order('id DESC').search(params[:search])
+  end 
+
   def new
     @product= Product.new
     @category_parment = Category.where(depth: 0)
@@ -41,7 +45,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @products= Product.where.not(id: @product.id).where(seller_id: @product.seller_id).order('id DESC').limit(6)
+    @products = Product.where.not(id: @product.id).where(seller_id: @product.seller_id).order('id DESC').limit(6)
     @product_before = Product.find( @product.id - 1 ) if Product.exists?(@product.id - 1)
     @product_after = Product.find( @product.id + 1 ) if Product.exists?(@product.id + 1)
   end

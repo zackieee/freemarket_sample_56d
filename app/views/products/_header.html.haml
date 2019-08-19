@@ -5,7 +5,9 @@
         = image_tag 'logo.png', width: '133', alt: 'アイコン'
     .header--search
       .header--search__input
-        %input.search-register{type: "text", name: "name", placeholder: "何かお探しですか？", autocomplete: "off", style: "font-size:100%;"}
+        = form_tag products_search_result_page_path, method: "get" do
+          = text_field_tag :search
+          = submit_tag '', type: "hidden", name: nil
       .header--search__icon
         = link_to '' do
           = icon 'fas', 'search', class: 'icon'

@@ -19,4 +19,12 @@ class Product < ApplicationRecord
   validates :images, :name, :text, :price, :category_id, :status_id, :prefecture_id, :postage_burden_id, :delivery_days_id, :sales_status_id, presence: true
   validates :sales_status_id, numericality: { greater_than_or_equal_to: 1 }
   validates :sales_status_id, numericality: { less_than_or_equal_to: 2 }
+
+  def self.search(search)
+    if search
+      Product.where(['name LIKE ?', "%#{search}%"])
+    else
+      Product.all
+    end
+  end
 end
