@@ -3,7 +3,7 @@ class Product < ApplicationRecord
   has_many_attached :images, dependent: :destroy
   has_many :comments
   has_many :favorites
-  belongs_to :categories
+  belongs_to :category
   has_many :brands,through: :products_brands
   has_many :products_brands
   has_many :sizes,through: :products_sizes

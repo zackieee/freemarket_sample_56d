@@ -147,7 +147,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new_complete
     # クレジットカードの登録処理
     @customer = user_credit('create')
-    if @customer[:status] != '200'
+    if @err !=nil
       render :new_payment
       return
     end
