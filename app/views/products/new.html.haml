@@ -13,9 +13,10 @@
           %p.sell-main__contents__content__item--p
             最大10枚までアップロードできます
           .sell-main__contents__content__item__images
-            %label
-              = image_tag 'touch.jpg', class: "sell-main__contents__content__item__images--upload"
-              = f.file_field :images, multiple: true, class: 'hidden'
+            .sell-main__contents__content__item__images--upload#upload1
+              写真を選択
+              = f.label :images_1, class: "sell-main__contents__content__item__images--upload--label" do
+                = f.file_field :images, { multiple: true, class: 'hidden', data: {image_id: 1}, id: "product_images_1" }
         .sell-main__contents__content.clearfix
           %label.sell-main__contents__content__item{for:"name"}
             商品名

@@ -1,27 +1,161 @@
 $(function() {
 
-  function buildHTML(url){
+  function imageHTML(url, num){
     var html = `<div class="sell-main__contents__content__item__images--already">
                   <div class="sell-main__contents__content__item__images--already__blocks">
-                    <img src="${url}" width="120" height="130" class="sell-main__contents__content__item__images--already__blocks__image">
+                    <img src="${url}" width="117" height="130" class="sell-main__contents__content__item__images--already__blocks__image">
                     <div class="sell-main__contents__content__item__images--already__blocks__block">
-                      <a class="sell-main__contents__content__item__images--already__blocks__block--edit">編集</a>
-                      <a href="" class="sell-main__contents__content__item__images--already__blocks__block--delete">削除</a>
+                      <p class="sell-main__contents__content__item__images--already__blocks__block--edit">編集</p>
+                      <p class="sell-main__contents__content__item__images--already__blocks__block--delete" data-id="${num}">削除</p>
                     </div>
                   </div>
                 </div>`;
     return html;
-  }
+  };
 
-  $(".hidden").on("change", function(e) {
+  function fileHTML(num){
+    var html =`<div class="sell-main__contents__content__item__images--upload" id="upload${num}">
+                写真を選択
+                <label class="sell-main__contents__content__item__images--upload--label" for="product_images_${num}">
+                  <input multiple="multiple" class="hidden" data-image-id="${num}" type="file" name="product[images][]" id="product_images_${num}">
+                </label>
+               </div>`;
+    return html;
+  };
+
+  var num = 1;
+
+  $("#product_images_1").on("change", function(e) {
     var file = e.target.files[0];
     var blobUrl = window.URL.createObjectURL(file);
-    var html = buildHTML(blobUrl);
+    var html = imageHTML(blobUrl, num);
     $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload1").css("display", "none");
+    var fileHtml = fileHTML(2);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+    num += 1;
+  });
+  
+  // 本当はこれでいきたかった。。
+  // if (num > 1) {
+  //   $(document).on("change", "#product_images_" + num, function(e) {
+  //     var file = e.target.files[0];
+  //     var blobUrl = window.URL.createObjectURL(file);
+  //     var html = imageHTML(blobUrl, num);
+  //     $(".sell-main__contents__content__item__images").prepend(html);
+  //     $("#upload" + String(num)).css("display", "none");
+  //     num += 1;
+  //     var fileHtml = fileHTML(num);
+  //     $(".sell-main__contents__content__item__images").append(fileHtml);
+  //   });
+  // }
+
+  $(document).on("change", "#product_images_2", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_3", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_4", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_5", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_6", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_7", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_8", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_9", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_10", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
   });
 
   $(document).on("click", ".sell-main__contents__content__item__images--already__blocks__block--delete", function(){
-    $(this).remove();
+    // プレビューを削除
+    $(this).parents(".sell-main__contents__content__item__images--already").remove();
+    // 削除した画像のdata-idを取得
+    var dataId = $(this).data("id");
+    // file_fieldごと削除
+    $("#upload" + String(dataId)).remove();
   });
   
   // new画面で使う
@@ -48,6 +182,6 @@ $(function() {
   if (price.length != 0) {
     $(".fee").text(fee);
     $(".profit").text(profit);
-  }
+  };
 
 });
