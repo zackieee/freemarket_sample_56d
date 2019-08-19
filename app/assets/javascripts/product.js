@@ -36,18 +36,118 @@ $(function() {
     num += 1;
   });
   
-  if (num > 1) {
-    $(document).on("change", "#product_images_" + num, function(e) {
-      var file = e.target.files[0];
-      var blobUrl = window.URL.createObjectURL(file);
-      var html = imageHTML(blobUrl, num);
-      $(".sell-main__contents__content__item__images").prepend(html);
-      $("#upload" + String(num)).css("display", "none");
-      num += 1;
-      var fileHtml = fileHTML(num);
-      $(".sell-main__contents__content__item__images").append(fileHtml);
-    });
-  }
+  // 本当はこれでいきたかった。。
+  // if (num > 1) {
+  //   $(document).on("change", "#product_images_" + num, function(e) {
+  //     var file = e.target.files[0];
+  //     var blobUrl = window.URL.createObjectURL(file);
+  //     var html = imageHTML(blobUrl, num);
+  //     $(".sell-main__contents__content__item__images").prepend(html);
+  //     $("#upload" + String(num)).css("display", "none");
+  //     num += 1;
+  //     var fileHtml = fileHTML(num);
+  //     $(".sell-main__contents__content__item__images").append(fileHtml);
+  //   });
+  // }
+
+  $(document).on("change", "#product_images_2", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_3", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_4", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_5", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_6", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_7", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_8", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_9", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
+
+  $(document).on("change", "#product_images_10", function(e) {
+    var file = e.target.files[0];
+    var blobUrl = window.URL.createObjectURL(file);
+    var html = imageHTML(blobUrl, num);
+    $(".sell-main__contents__content__item__images").prepend(html);
+    $("#upload" + String(num)).css("display", "none");
+    num += 1;
+    var fileHtml = fileHTML(num);
+    $(".sell-main__contents__content__item__images").append(fileHtml);
+  });
 
   $(document).on("click", ".sell-main__contents__content__item__images--already__blocks__block--delete", function(){
     // プレビューを削除
