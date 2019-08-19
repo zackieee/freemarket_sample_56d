@@ -20,7 +20,7 @@ $(function(){
     $.ajax({
         url: '/products/get_category_children',
         type: "GET",
-        data: { parment_id: id },
+        data: { parent_id: id },
         dataType: 'json'
       })
       .done(function(data){
@@ -43,7 +43,7 @@ $(function(){
     $.ajax({
         url: '/products/get_category_grandchildren',
         type: "GET",
-        data: { parment_id: id },
+        data: { parent_id: id },
         dataType: 'json'
       })
       .done(function(data){

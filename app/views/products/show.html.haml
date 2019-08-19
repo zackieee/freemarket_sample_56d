@@ -35,15 +35,16 @@
           .show-item__wrapper__contents__owner__detail__left
             %p カテゴリー
           .show-item__wrapper__contents__owner__detail__right
-            = link_to "aws"
+            = link_to "#{@category_parent.name}"
             .arow
               = link_to '' do
                 = icon 'fas', 'angle-right'
-              = link_to "aws"
-            .arow-second
-              = link_to '' do
-                = icon 'fas', 'angle-right'
-              = link_to "aws" 
+              = link_to "#{@category_children.name}"
+            - unless @product.category.depth == 1
+              .arow-second
+                = link_to '' do
+                  = icon 'fas', 'angle-right'
+                = link_to "#{@category_grandchildren.name}" 
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
             %p ブランド
