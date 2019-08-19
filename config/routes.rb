@@ -41,10 +41,14 @@ Rails.application.routes.draw do
   get 'producs/all_products'   => 'products#all_products'
   get 'products/selling_index' => 'products#selling_index'
   get 'products/buyout_index'  => 'products#buyout_index'
+  # カテゴリ選択
+  get 'products/get_category_children'  => 'products#get_category_children'
+  get 'products/get_category_grandchildren'  => 'products#get_category_grandchildren'
+
   get 'products/search_result_page' => 'products#search_result_page'
   resources :products do
     get :selling_show, on: :member
-    get :buy, on: :member #productsにデータを入れたら':collection'を':mender'に変更
+    get :buy, on: :member
     resources :trades, only: [:create]
   end
   resources :users do

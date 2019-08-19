@@ -20,6 +20,20 @@ class ProductsController < ApplicationController
     @product= Product.new
     @category_parment = Category.where(depth: 0)
   end
+
+  def get_category_children
+    @category_children = Category.find(params[:parment_id]).children
+    respond_to do |format|
+      format.json
+    end
+  end
+
+  def get_category_grandchildren
+    @category_grandchildren = Category.find(params[:parment_id]).children
+    respond_to do |format|
+      format.json
+    end
+  end
     
   def create
     @product= Product.new(product_params)
