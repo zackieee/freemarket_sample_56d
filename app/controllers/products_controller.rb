@@ -57,6 +57,7 @@ class ProductsController < ApplicationController
     @products = Product.where.not(id: @product.id).where(seller_id: @product.seller_id).order('id DESC').limit(6)
     @product_before = Product.find( @product.id - 1 ) if Product.exists?(@product.id - 1)
     @product_after = Product.find( @product.id + 1 ) if Product.exists?(@product.id + 1)
+    @fav = Favorite.new
 
     if @product.category.depth == 1
       @category_children = Category.find(@product.category_id)

@@ -13,4 +13,5 @@
         %p  ¥ #{product.price.to_s(:delimited, delimiter: ',')} 
       .item--list__image__text__wrapper__like
         = icon 'far', 'heart'
-        %span 1
+        .short-upper
+          = product.favorites.count

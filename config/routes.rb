@@ -56,4 +56,9 @@ Rails.application.routes.draw do
       get 'show_profile'
     end
   end
+
+  get "products/favorites" => "favorites#index"
+  post "/products/:product_id/favorites" => "favorites#create"
+  delete "/products/:product_id/favorites" => "favorites#destroy"
+
 end
