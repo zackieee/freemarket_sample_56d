@@ -1,4 +1,48 @@
 # coding: utf-8
+require "csv"
+
+# ブランドテーブル作成
+
+CSV.foreach('db/brand_csv/ladies.csv', headers: true) do |row|
+  Brand.create(name: row['name'])
+end
+CSV.foreach('db/brand_csv/mens.csv', headers: true) do |row|
+  Brand.create(name: row['name'])
+end
+CSV.foreach('db/brand_csv/baby.csv', headers: true) do |row|
+  Brand.create(name: row['name'])
+end
+CSV.foreach('db/brand_csv/interior.csv', headers: true) do |row|
+  Brand.create(name: row['name'])
+end
+CSV.foreach('db/brand_csv/kitchen.csv', headers: true) do |row|
+  Brand.create(name: row['name'])
+end
+CSV.foreach('db/brand_csv/clock.csv', headers: true) do |row|
+  Brand.create(name: row['name'])
+end
+CSV.foreach('db/brand_csv/cosme.csv', headers: true) do |row|
+  Brand.create(name: row['name'])
+end
+CSV.foreach('db/brand_csv/game.csv', headers: true) do |row|
+  Brand.create(name: row['name'])
+end
+CSV.foreach('db/brand_csv/sports.csv', headers: true) do |row|
+  Brand.create(name: row['name'])
+end
+CSV.foreach('db/brand_csv/appliances.csv', headers: true) do |row|
+  Brand.create(name: row['name'])
+end
+CSV.foreach('db/brand_csv/car.csv', headers: true) do |row|
+  Brand.create(name: row['name'])
+end
+CSV.foreach('db/brand_csv/musical_instrument.csv', headers: true) do |row|
+  Brand.create(name: row['name'])
+end
+CSV.foreach('db/brand_csv/drink.csv', headers: true) do |row|
+  Brand.create(name: row['name'])
+end
+
 
 # カテゴリテーブル作成
 #   親カラム
