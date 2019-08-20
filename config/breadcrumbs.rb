@@ -7,7 +7,7 @@ crumb :mypage do
 end
 
 crumb :favorites_index do
-  link "いいね！一覧", mypage_favorites_path
+  link "いいね！一覧", products_favorites_path
   parent :mypage
 end
 
