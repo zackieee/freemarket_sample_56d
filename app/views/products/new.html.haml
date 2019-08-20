@@ -43,7 +43,7 @@
               商品の状態
             %span.sell-main__contents__content__item--required.top-space
               必須
-            = f.collection_select :status_id, Status.all, :id, :name, required: true, maxlength: '40'
+            = f.collection_select :status_id, Status.all, :id, :name, {prompt: "---"}, required: true, maxlength: '40'
         .sell-main__contents__content.clearfix
           %p.sell-main__contents__content__info-text.left
             配送について
@@ -54,7 +54,7 @@
               配送料の負担
             %span.sell-main__contents__content__item--required
               必須
-            = f.collection_select :postage_burden_id, PostageBurden.all, :id, :name, required: true, maxlength: '40'
+            = f.collection_select :postage_burden_id, PostageBurden.all, :id, :name, {prompt: "---"}, required: true, maxlength: '40'
             %label.sell-main__contents__content__item{for:"buyer_area"}
               配送元の地域
             %span.sell-main__contents__content__item--required.top-space
