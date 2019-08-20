@@ -13,7 +13,15 @@ class ProductsController < ApplicationController
   end
 
   def search_result_page
+    @search = params[:search]
     @q = Product.ransack(params[:q])
+    @categories = Category.where(depth: 0)
+    @brands = Brand.all
+    @sizes = Size.all
+    @prices = PriceSelect.all
+    @status = Status.all
+    @postage_burdens = PostageBurden.all
+    @sales_status = SalesStatus.all
     @products = Product.where.not(seller_id: current_user&.id).order('id DESC').search(params[:search]).merge(@q.result(distinct: true))
   end 
 
@@ -102,7 +110,7 @@ class ProductsController < ApplicationController
   end
 
   def search_params
-    params.require(:q).permit!
+    params.require(:q).permit(:text_cont, :category_id_eq, :brand_id_eq, :size_id_eq, :price_cont, :status_id_in, :postage_burden_id_in, :sales_status_id_in)
   end
 end
 
