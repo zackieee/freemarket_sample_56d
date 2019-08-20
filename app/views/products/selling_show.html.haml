@@ -6,7 +6,7 @@
     .show-item__wrapper
       .show-item__wrapper__contents
         .show-item__wrapper__contents__image
-          = image_tag @product.images.first, height: '260', width: '300'
+          = image_tag @product.images.first, height: '260', width: '300', class: "slide"
         -# 売り切れの場合
         - if @product.sales_status_id  == 2
           .show-item__wrapper__contents__sold-out
@@ -81,3 +81,14 @@
       = link_to "商品の削除", product_path(@product), method: :delete, data: { confirm: "本当に削除してよろしいでしょうか？"}
 =render 'footer-top'
 =render 'footer-bottom'
+
+:javascript
+    $(".show-item__wrapper__contents__list__img").on("mouseover", function(){
+      $(this).removeClass("show-item__wrapper__contents__list__img")
+      var src = $(this).attr('src')
+      $(".slide").attr('src', src)
+    });
+
+    $(".show-item__wrapper__contents__list__img").on("mouseout", function(){
+     $(this).addClass("show-item__wrapper__contents__list__img")
+    })
