@@ -1,0 +1,19 @@
+// Place all the styles related to the favorites controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.fav{
+  text-decoration: none;
+  width: 100%;
+  color: red;
+}
+
+.unfav{
+  text-decoration: none;
+  width: 100%;
+  color: black;
+}
+
+.short-upper{
+  padding-top: 46px;
+  padding-left: 5px;
+}
