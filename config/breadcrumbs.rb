@@ -6,6 +6,14 @@ crumb :mypage do
   link "マイページ", user_path(current_user)
 end
 
+crumb :notice_index do
+  link "お知らせ", notifications_path
+end
+
+crumb :todo_index do
+  link "お知らせ", notifications_index_todo_path
+end
+
 crumb :selling_index do
   link "出品した商品-出品中", products_selling_index_path
   parent :mypage
@@ -64,5 +72,10 @@ end
 
 crumb :sign_out do
   link "ログアウト", users_sign_out_path
+  parent :mypage
+end
+
+crumb :trade_show do
+  link "取引画面", product_trade_path
   parent :mypage
 end
