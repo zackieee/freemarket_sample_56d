@@ -4,7 +4,10 @@ freemaket.sample.d56にご登録いただきありがとうございます。
 会員登録が完了しました。
 
 Webページを開く
-http://localhost:3000
+-if Rails.env.production?
+  http://18.179.211.119
+-else
+  http://localhost:3000
 
 ※このメールは返信しても届きません。
 お問い合わせはアプリを起動して「お問い合わせ」からお願いいたします。
