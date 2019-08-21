@@ -41,7 +41,6 @@ document.addEventListener(
         var reg_new = new RegExp('users/sign_up/payment');
         var reg_edit = new RegExp('users/edit/payment_2');
         if(reg_new.test(location.pathname) || reg_edit.test(location.pathname)){
-          console.log(reg_new.test(location.pathname) || reg_edit.test(location.pathname))
           e.preventDefault();
           var result = checkForm();
           if(result){
