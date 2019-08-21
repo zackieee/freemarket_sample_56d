@@ -13,18 +13,23 @@
           %p.sell-main__contents__content__item--p
             最大10枚までアップロードできます
           .sell-main__contents__content__item__images
-            .sell-main__contents__content__item__images--already
-              - @product.images.each do |image|
+            - @product.images.each.with_index(1) do |image, num|
+              .sell-main__contents__content__item__images--already
                 .sell-main__contents__content__item__images--already__blocks
-                  = image_tag image, size: "115x130", class: "sell-main__contents__content__item__images--already__blocks__image"
+                  = image_tag image, size: "117x130", class: "sell-main__contents__content__item__images--already__blocks__image"
                   .sell-main__contents__content__item__images--already__blocks__block
-                    = link_to "#", class: "sell-main__contents__content__item__images--already__blocks__block--edit" do
+                    %p.sell-main__contents__content__item__images--already__blocks__block--edit
                       編集
-                    = link_to "#", class: "sell-main__contents__content__item__images--already__blocks__block--delete" do
+                    %p.sell-main__contents__content__item__images--already__blocks__block--delete{data: {image_id: num}}
                       削除
-            %label
-              = image_tag 'touch.jpg', class: "sell-main__contents__content__item__images--upload"
-              = f.file_field :images, multiple: true, class: 'hidden'
+              .sell-main__contents__content__item__images--upload.hidden
+                写真を選択
+                = f.label :images_1, class: "sell-main__contents__content__item__images--upload--label" do
+                  = f.file_field :images, { multiple: true, value: image, class: 'hidden', data: {image_id: num}, id: "product_images_1" }
+            .sell-main__contents__content__item__images--upload#upload1
+              写真を選択
+              = f.label :images_1, class: "sell-main__contents__content__item__images--upload--label" do
+                = f.file_field :images, { multiple: true, class: 'hidden', data: {image_id: 1}, id: "product_images_1" }
         .sell-main__contents__content.clearfix
           %label.sell-main__contents__content__item{for:"name"}
             商品名

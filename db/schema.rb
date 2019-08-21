@@ -65,6 +65,11 @@ ActiveRecord::Schema.define(version: 2019_08_20_073406) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "parent_id"
+    t.integer "lft", null: false
+    t.integer "rgt", null: false
+    t.integer "depth", default: 0, null: false
+    t.integer "children_count", default: 0, null: false
     t.index ["name"], name: "index_categories_on_name"
   end
 
@@ -153,6 +158,8 @@ ActiveRecord::Schema.define(version: 2019_08_20_073406) do
     t.bigint "seller_id", null: false
     t.string "name", null: false
     t.text "text", null: false
+    t.bigint "category_id", null: false
+    t.integer "brand_id"
     t.integer "status_id"
     t.integer "postage_burden_id"
     t.integer "prefecture_id"
@@ -161,6 +168,7 @@ ActiveRecord::Schema.define(version: 2019_08_20_073406) do
     t.integer "sales_status_id", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["name"], name: "index_products_on_name"
     t.index ["seller_id"], name: "index_products_on_seller_id"
   end
@@ -249,6 +257,7 @@ ActiveRecord::Schema.define(version: 2019_08_20_073406) do
   add_foreign_key "product_categories", "products"
   add_foreign_key "product_sizes", "products"
   add_foreign_key "product_sizes", "sizes"
+  add_foreign_key "products", "categories"
   add_foreign_key "products", "users", column: "seller_id"
   add_foreign_key "ratings", "users", column: "rated_user_id"
   add_foreign_key "ratings", "users", column: "rater_user_id"

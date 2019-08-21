@@ -6,7 +6,7 @@
     .show-item__wrapper
       .show-item__wrapper__contents
         .show-item__wrapper__contents__image
-          = image_tag @product.images.first, height: '260', width: '300'
+          = image_tag @product.images.first, height: '260', width: '300', class: "slide"
         -# 売り切れの場合
         - if @product.sales_status_id  == 2
           .show-item__wrapper__contents__sold-out
@@ -31,20 +31,22 @@
           .selling_show-item__wrapper__contents__owner__detail__left
             %p カテゴリー
           .selling_show-item__wrapper__contents__owner__detail__right
-            = link_to "aws"
+            = link_to "#{@category_parent.name}"
             .arow
               = link_to '' do
                 = icon 'fas', 'angle-right'
-              = link_to "aws"
-            .arow-second
-              = link_to '' do
-                = icon 'fas', 'angle-right'
-              = link_to "aws" 
+              = link_to "#{@category_children.name}"
+            - unless @product.category.depth == 1
+              .arow-second
+                = link_to '' do
+                  = icon 'fas', 'angle-right'
+                = link_to "#{@category_grandchildren.name}" 
         .selling_show-item__wrapper__contents__owner__detail
           .selling_show-item__wrapper__contents__owner__detail__lefts
             %p ブランド
           .selling_show-item__wrapper__contents__owner__detail__rights
-            = link_to "シャネル"
+            - if @product.brand_id.present?
+              = link_to "#{@product.brand.name}"
         .selling_show-item__wrapper__contents__owner__detail
           .selling_show-item__wrapper__contents__owner__detail__lefts
             %p 商品の状態
@@ -80,3 +82,14 @@
       = link_to "商品の削除", product_path(@product), method: :delete, data: { confirm: "本当に削除してよろしいでしょうか？"}
 =render 'footer-top'
 =render 'footer-bottom'
+
+:javascript
+    $(".show-item__wrapper__contents__list__img").on("mouseover", function(){
+      $(this).removeClass("show-item__wrapper__contents__list__img")
+      var src = $(this).attr('src')
+      $(".slide").attr('src', src)
+    });
+
+    $(".show-item__wrapper__contents__list__img").on("mouseout", function(){
+     $(this).addClass("show-item__wrapper__contents__list__img")
+    })

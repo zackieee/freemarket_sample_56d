@@ -8,15 +8,50 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :all_products]
 
   def index
-    @products= Product.where.not(seller_id: current_user&.id).order('id DESC').limit(4)
+    @products = Product.where.not(seller_id: current_user&.id).order('id DESC').limit(4)
   end
 
   def all_products
-    @products= Product.where.not(seller_id: current_user&.id).order('id DESC')
+    @products = Product.where.not(seller_id: current_user&.id).order('id DESC')
   end
-  
+
+  def search_result_page
+    @search = params[:search]
+    @q = Product.ransack(params[:q])
+    @categories = Category.where(depth: 0)
+    @brands = Brand.all
+    @sizes = Size.all
+    @prices = PriceSelect.all
+    @status = Status.all
+    @postage_burdens = PostageBurden.all
+    @sales_status = SalesStatus.all
+    @products = Product.where.not(seller_id: current_user&.id).order('id DESC').search(params[:search]).merge(@q.result(distinct: true))
+  end 
+
   def new
     @product= Product.new
+    @category_parent = Category.where(depth: 0)
+  end
+
+  def get_category_children
+    @category_children = Category.find(params[:parent_id]).children
+    respond_to do |format|
+      format.json
+    end
+  end
+
+  def get_category_grandchildren
+    @category_grandchildren = Category.find(params[:parent_id]).children
+    respond_to do |format|
+      format.json
+    end
+  end
+
+  def get_brand
+    @brands = Brand.where('name LIKE(?)', "%#{params[:keyword]}%")
+    respond_to do |format|
+      format.json
+    end
   end
     
   def create
@@ -29,9 +64,19 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @products= Product.where.not(id: @product.id).where(seller_id: @product.seller_id).order('id DESC').limit(6)
+    @products = Product.where.not(id: @product.id).where(seller_id: @product.seller_id).order('id DESC').limit(6)
     @product_before = Product.find( @product.id - 1 ) if Product.exists?(@product.id - 1)
     @product_after = Product.find( @product.id + 1 ) if Product.exists?(@product.id + 1)
+    @fav = Favorite.new
+
+    if @product.category.depth == 1
+      @category_children = Category.find(@product.category_id)
+      @category_parent = Category.find(@category_children.parent_id)
+    else
+      @category_grandchildren = Category.find(@product.category_id)
+      @category_children = Category.find(@category_grandchildren.parent_id)
+      @category_parent = Category.find(@category_children.parent_id)
+    end
   end
 
   def selling_index
@@ -43,6 +88,14 @@ class ProductsController < ApplicationController
   end
 
   def selling_show
+    if @product.category.depth == 1
+      @category_children = Category.find(@product.category_id)
+      @category_parent = Category.find(@category_children.parent_id)
+    else
+      @category_grandchildren = Category.find(@product.category_id)
+      @category_children = Category.find(@category_grandchildren.parent_id)
+      @category_parent = Category.find(@category_children.parent_id)
+    end
   end
 
   def edit
@@ -91,13 +144,18 @@ class ProductsController < ApplicationController
   
   private
    def product_params
-    params.require(:product).permit(:name, :text, :price, :status_id, :prefecture_id, :postage_burden_id, :delivery_days_id, images: [] ).merge(seller_id: current_user.id)
+    params.require(:product).permit(:name, :text, :category_id, :brand_id, :price, :status_id, :prefecture_id, :postage_burden_id, :delivery_days_id, images: [] ).merge(seller_id: current_user.id)
    end
 
    def set_product
     @product = Product.find(params[:id])
-  end
+   end
+
+   def search_params
+    params.require(:q).permit(:text_cont, :category_id_eq, :brand_id_eq, :size_id_eq, :price_cont, :status_id_in, :postage_burden_id_in, :sales_status_id_in)
+   end
 end
+
 
 # image: product_params[:image], name: product_params[:name], 
 #     text: product_params[:text], status: product_params[:status], price: product_params[:price], 

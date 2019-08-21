@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_many :buyer_trades, class_name: 'Trade', foreign_key: 'buyer_id'
   has_many :comments
   has_many :favorites
+  has_many :fav_products, through: :favorites, source: :product
   has_many :rated_user_ratings, class_name: 'Rating', foreign_key: 'rated_user_id'
   has_many :rater_user_ratings, class_name: 'Rating', foreign_key: 'rater_user_id'
   has_many :sns_credentials, dependent: :destroy

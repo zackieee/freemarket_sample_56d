@@ -11,7 +11,13 @@ crumb :notice_index do
 end
 
 crumb :todo_index do
-  link "お知らせ", notifications_index_todo_path
+  link "やることリスト", notifications_index_todo_path
+  parent :mypage
+end
+
+crumb :favorites_index do
+  link "いいね！一覧", product_favorites_path
+  parent :mypage
 end
 
 crumb :selling_index do

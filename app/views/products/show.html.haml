@@ -35,20 +35,22 @@
           .show-item__wrapper__contents__owner__detail__left
             %p カテゴリー
           .show-item__wrapper__contents__owner__detail__right
-            = link_to "aws"
+            = link_to "#{@category_parent.name}"
             .arow
               = link_to '' do
                 = icon 'fas', 'angle-right'
-              = link_to "aws"
-            .arow-second
-              = link_to '' do
-                = icon 'fas', 'angle-right'
-              = link_to "aws" 
+              = link_to "#{@category_children.name}"
+            - unless @product.category.depth == 1
+              .arow-second
+                = link_to '' do
+                  = icon 'fas', 'angle-right'
+                = link_to "#{@category_grandchildren.name}" 
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
             %p ブランド
-          .show-item__wrapper__contents__owner__detail__rights
-            = link_to "シャネル"
+          .selling_show-item__wrapper__contents__owner__detail__rights
+            - if @product.brand_id.present?
+              = link_to "#{@product.brand.name}"
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
             %p 商品の状態
@@ -83,9 +85,12 @@
       = simple_format(@product.text)
     .show-item__any
       .show-item__any__like
-        = icon 'far', 'heart'
-        %p いいね！
-        %p 8
+        - if user_signed_in?
+          = render partial: "favorite", locals: {product: @product}
+        - else
+          = icon 'far', 'heart'
+          いいね!
+          = @product.favorites.count
       .show-item__any__info
         = icon 'far', 'flag'
         %p 不適切な商品の報告

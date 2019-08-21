@@ -86,6 +86,7 @@ gem 'active_hash'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2', '~> 0.5.4'
 gem 'omniauth-facebook'
+gem 'ransack'
 
 #recaptcha用
 gem 'recaptcha'
@@ -105,3 +106,5 @@ gem 'gretel'
 
 gem "aws-sdk-s3", require: false
 
+# 階層構造
+gem 'awesome_nested_set'
