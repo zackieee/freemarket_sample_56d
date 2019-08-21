@@ -21,9 +21,9 @@ class UsersController < ApplicationController
 
     @notifications  =  Notification.where.not(action: 5 ).where(receiver_id: @user.id).order("created_at DESC")
     @rating_count   =  Rating.where(rated_user_id: @user.id).count
-    @raiting_good   =  Rating.where(rated_user_id: @user.id, rate: 1).count
-    @raiting_normal =  Rating.where(rated_user_id: @user.id, rate: 2).count
-    @raiting_bad    =  Rating.where(rated_user_id: @user.id, rate: 3).count
+    @rating_good   =  Rating.where(rated_user_id: @user.id, rate: 1).count
+    @rating_normal =  Rating.where(rated_user_id: @user.id, rate: 2).count
+    @rating_bad    =  Rating.where(rated_user_id: @user.id, rate: 3).count
     @trade_count    =  Trade.where(seller_id: @user.id).count
 
   end
