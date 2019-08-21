@@ -51,16 +51,12 @@ Rails.application.routes.draw do
     resources :trades, only: [:create, :show ,:edit, :update]
   end
   resources :users do
-    member do
-      get 'show_profile'
-    end
+    get :show_profile, on: :member
   end
 
   get 'notifications/index_todo'  =>  'notifications#index_todo'
   resources :notifications do
-    member do
-      get 'dispatcher'
-    end
+    get :dispatcher, on: :member
   end
 
 end
