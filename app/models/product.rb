@@ -9,6 +9,7 @@ class Product < ApplicationRecord
   has_many :products_brands
   has_many :sizes,through: :products_sizes
   has_many :products_sizes
+  has_many :notifications
   has_one :trade
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture

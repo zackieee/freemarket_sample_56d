@@ -3,8 +3,14 @@ class User < ApplicationRecord
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[facebook google_oauth2]
+  devise  :database_authenticatable,
+          :registerable,
+          :recoverable,
+          :rememberable,
+          :validatable,
+          :confirmable,
+          :omniauthable,
+          omniauth_providers: %i[facebook google_oauth2]
   
   has_one  :address, dependent: :destroy
   has_one  :card, dependent: :destroy
@@ -16,6 +22,8 @@ class User < ApplicationRecord
   has_many :rated_user_ratings, class_name: 'Rating', foreign_key: 'rated_user_id'
   has_many :rater_user_ratings, class_name: 'Rating', foreign_key: 'rater_user_id'
   has_many :sns_credentials, dependent: :destroy
+  has_many :notifications, class_name: 'Notification', foreign_key:'sender_id'
+  has_many :notifications, class_name: 'Notification', foreign_key:'receiver_id'
 
   # イメージ画像の紐付け
   has_one_attached :avatar
