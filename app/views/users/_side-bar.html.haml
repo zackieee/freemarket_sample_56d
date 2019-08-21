@@ -9,7 +9,7 @@
         = link_to notifications_path ,class: 'side-bar__links' do
           .side-bar__user-menu__notice
             お知らせ
-          - if @notices != nil  && @notices != 0
+          - if @notices&.present? && @notices > 0
             - if @notices <= 99
               .side-bar__user-menu__side-block
                 %p.side-bar__user-menu__side-block--notice-counts#notice-counts
@@ -25,7 +25,7 @@
       %li
         = link_to notifications_index_todo_path ,class: 'side-bar__links' do
           やることリスト
-          - if @todo != nil  && @todo != 0
+          - if @todo&.present? && @todo > 0
             - if @todo <= 99
               .side-bar__user-menu__side-block
                 %p.side-bar__user-menu__side-block--notice-counts#notice-counts

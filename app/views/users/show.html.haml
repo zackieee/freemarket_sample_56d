@@ -35,7 +35,7 @@
             = link_to '#' do
               やることリスト
         .maypage__main__contents__content
-          -if @notifications != nil && @notifications.size > 0
+          - if @notifications&.present? > @notifications > 0
             %ul
               - @notifications.first(5).each do | info |
                 %li.mypage__main__contents__content
@@ -72,7 +72,7 @@
             = link_to '#' do
               過去の取引
         .maypage__main__contents__content
-          -if @trade_products != nil && @trade_products.size > 0
+          -if @trade_products&.present? && @trade_products > 0
             %ul
               - @trade_products.first(5).each do | trade_product |
                 %li.mypage__main__contents__content

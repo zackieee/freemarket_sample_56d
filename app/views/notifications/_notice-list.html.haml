@@ -8,7 +8,7 @@
         = link_to notifications_index_todo_path do
           やることリスト
     .maypage__main__contents__content
-      -if @notifications != nil && @notifications.size > 0
+      -if @notifications&.present? && @notifications > 0
         %ul
           - @notifications.each do | info |
             %li.mypage__main__contents__content
