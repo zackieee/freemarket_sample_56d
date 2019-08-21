@@ -58,7 +58,7 @@ class ProductsController < ApplicationController
     @product_before = Product.find( @product.id - 1 ) if Product.exists?(@product.id - 1)
     @product_after = Product.find( @product.id + 1 ) if Product.exists?(@product.id + 1)
     @fav = Favorite.new
-
+    
     if @product.category.depth == 1
       @category_children = Category.find(@product.category_id)
       @category_parent = Category.find(@category_children.parent_id)
@@ -68,7 +68,7 @@ class ProductsController < ApplicationController
       @category_parent = Category.find(@category_children.parent_id)
     end
   end
-
+  
   def selling_index
     @products = Product.where(seller_id: current_user.id)
   end
@@ -87,23 +87,32 @@ class ProductsController < ApplicationController
       @category_parent = Category.find(@category_children.parent_id)
     end
   end
-
+  
   def edit
   end
-
+  
   def update
+    unless params[:product][:image_ids].nil?
+      params[:product][:image_ids].each do |image_id|
+        image = @product.images.find(image_id)
+        image.purge
+      end
+    end
+    # params = product_params
+    # images = params[:images]
+    # images.delete_at(1)
     if @product.update(product_params)
       redirect_to selling_show_product_path(@product)
     else
       render :edit
     end
   end
-
+  
   def destroy
     @product.destroy if current_user.id == @product.seller_id
     redirect_to products_selling_index_path
   end
-
+  
   def buy
     if @product.sales_status_id == 2
       redirect_to product_path(@product.id), alert: '購入できません'
