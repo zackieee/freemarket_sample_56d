@@ -52,17 +52,17 @@ end
 # 靴のサイズ
 shoes_size = 20.5
 Size.create({data: "20.0cm以下", size_category: 2})
-while shoes_size == 30.0
+while shoes_size < 30.0
   Size.create({data: "#{shoes_size}cm", size_category: 2})
-  size += 0.5
+  shoes_size += 0.5
 end
 Size.create({data: "30.0cm以上", size_category: 2})
 # 子供靴のサイズ
 kids_shoes_size = 10.5
 Size.create({data: "10.0cm以下", size_category: 3})
-while kids_shoes_size == 17.0
+while kids_shoes_size < 17.0
   Size.create({data: "#{kids_shoes_size}cm", size_category: 3})
-  size += 0.5
+  kids_shoes_size += 0.5
 end
 Size.create({data: "17.0cm以上", size_category: 3})
 
