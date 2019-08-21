@@ -1,8 +1,8 @@
 class TradesController < ApplicationController
   before_action :notice_count,:todo_count, only: [:show,:update]
+  before_action :set_trade, only: [:show, :update]
 
   def show
-    @trade = Trade.find(params[:id])
   end
 
   def create
@@ -61,7 +61,6 @@ class TradesController < ApplicationController
   end
 
   def update
-    @trade = Trade.find(params[:id])
     notifications = Notification.where("(trade_id = ?) && (action = ?) && (todo_status = ?)",@trade.id,5,0)
 
     # TODOが2つ以上ある状態は異常なので先に進まない
@@ -149,6 +148,10 @@ class TradesController < ApplicationController
   private
   def trade_params
     params.permit(:product_id)
+  end
+
+  def set_trade
+    @trade = Trade.find(params[:id])
   end
 
 end

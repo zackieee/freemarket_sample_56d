@@ -2,6 +2,7 @@ class NotificationsController < ApplicationController
   require 'base64'
 
   before_action :notice_count,:todo_count,  only: [:index,:index_todo,:show]
+  before_action :set_notification, only: [:dispatcher, :show]
 
   # お知らせ
   def index
@@ -15,8 +16,6 @@ class NotificationsController < ApplicationController
 
   # 表示内容の振り分け
   def dispatcher
-    @notification = Notification.find(params[:id])
-
     # 未読(false)の場合は、既読の状態にアップデートする
     @notification.update(checked: true) unless @notification.checked
 
@@ -36,7 +35,6 @@ class NotificationsController < ApplicationController
 
   # 以下はactionが'1'(通知)だった場合のアクション
   def show
-    @notification = Notification.find(params[:id])
   end
 
   def new
@@ -66,6 +64,10 @@ private
     :message,
     :checked,
   )
+ end
+
+ def set_notification
+  @notification = Notification.find(params[:id])
  end
 
 end
