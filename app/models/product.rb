@@ -3,10 +3,11 @@ class Product < ApplicationRecord
   has_many_attached :images, dependent: :destroy
   has_many :comments
   has_many :favorites
+  has_many :fav_users, through: :favorites, source: :user
   belongs_to :category
   belongs_to :brand, optional: true
-  has_many :sizes,through: :products_sizes
-  has_many :products_sizes
+  # has_many :sizes,through: :products_sizes
+  # has_many :products_sizes
   has_one :trade
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
@@ -14,6 +15,7 @@ class Product < ApplicationRecord
   belongs_to_active_hash :postage_burden
   belongs_to_active_hash :delivery_days
   belongs_to_active_hash :sales_status
+  belongs_to_active_hash :price_select
 
   validates :images, :name, :text, :price, :category_id, :status_id, :prefecture_id, :postage_burden_id, :delivery_days_id, :sales_status_id, presence: true
   validates :sales_status_id, numericality: { greater_than_or_equal_to: 1 }

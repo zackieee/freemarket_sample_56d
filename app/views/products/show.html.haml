@@ -85,9 +85,12 @@
       = simple_format(@product.text)
     .show-item__any
       .show-item__any__like
-        = icon 'far', 'heart'
-        %p いいね！
-        %p 8
+        - if user_signed_in?
+          = render partial: "favorite", locals: {product: @product}
+        - else
+          = icon 'far', 'heart'
+          いいね!
+          = @product.favorites.count
       .show-item__any__info
         = icon 'far', 'flag'
         %p 不適切な商品の報告

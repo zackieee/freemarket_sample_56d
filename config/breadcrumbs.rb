@@ -6,6 +6,11 @@ crumb :mypage do
   link "マイページ", user_path(current_user)
 end
 
+crumb :favorites_index do
+  link "いいね！一覧", product_favorites_path
+  parent :mypage
+end
+
 crumb :selling_index do
   link "出品した商品-出品中", products_selling_index_path
   parent :mypage

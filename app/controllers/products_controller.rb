@@ -13,7 +13,16 @@ class ProductsController < ApplicationController
   end
 
   def search_result_page
-    @products = Product.where.not(seller_id: current_user&.id).order('id DESC').search(params[:search])
+    @search = params[:search]
+    @q = Product.ransack(params[:q])
+    @categories = Category.where(depth: 0)
+    @brands = Brand.all
+    @sizes = Size.all
+    @prices = PriceSelect.all
+    @status = Status.all
+    @postage_burdens = PostageBurden.all
+    @sales_status = SalesStatus.all
+    @products = Product.where.not(seller_id: current_user&.id).order('id DESC').search(params[:search]).merge(@q.result(distinct: true))
   end 
 
   def new
@@ -55,6 +64,7 @@ class ProductsController < ApplicationController
     @products = Product.where.not(id: @product.id).where(seller_id: @product.seller_id).order('id DESC').limit(6)
     @product_before = Product.find( @product.id - 1 ) if Product.exists?(@product.id - 1)
     @product_after = Product.find( @product.id + 1 ) if Product.exists?(@product.id + 1)
+    @fav = Favorite.new
 
     if @product.category.depth == 1
       @category_children = Category.find(@product.category_id)
@@ -136,8 +146,13 @@ class ProductsController < ApplicationController
 
    def set_product
     @product = Product.find(params[:id])
-  end
+   end
+
+   def search_params
+    params.require(:q).permit(:text_cont, :category_id_eq, :brand_id_eq, :size_id_eq, :price_cont, :status_id_in, :postage_burden_id_in, :sales_status_id_in)
+   end
 end
+
 
 # image: product_params[:image], name: product_params[:name], 
 #     text: product_params[:text], status: product_params[:status], price: product_params[:price], 
