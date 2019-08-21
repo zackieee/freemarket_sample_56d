@@ -23,6 +23,10 @@
                     = icon 'far fa-lg','clock'
                     %p
                       %time(datetime="#{info.created_at}")= time_ago_in_words(info.created_at) + '前'
+                    - if info.checked
+                    - else
+                      %p.user-main__contents__form__group__item--required
+                        未読
                 .mypage__main__contents__content__link-icon
                   = icon 'fas fa-lg','angle-right'
       - else 
