@@ -44,6 +44,8 @@ Rails.application.routes.draw do
   # カテゴリ選択
   get 'products/get_category_children'  => 'products#get_category_children'
   get 'products/get_category_grandchildren'  => 'products#get_category_grandchildren'
+  # ブランド選択
+  get 'products/get_brand'  => 'products#get_brand'
 
   get 'products/search_result_page' => 'products#search_result_page'
   resources :products do

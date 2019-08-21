@@ -40,12 +40,16 @@
         //フォームの入力エリア
         &__input{
           @include form_input;
+          position: relative;
           width:100%; 
           margin-bottom: 40px;
         }
         //フォームラベル指定用
         &--required{
           @include form_label($required);
+        }
+        &--optional{
+          @include form_label($optional);
         }
         &__textarea{
           @include form_input;
@@ -168,3 +172,13 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 } 
 
+.brand_box__list {
+  overflow: auto;
+  position: relative;
+  top: -40px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  max-height: 280px;
+  background: #fff;
+}
