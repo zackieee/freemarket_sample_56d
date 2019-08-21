@@ -1,0 +1,11 @@
+.user-main__contents.edit-form
+  %h2.user-main__contents__title-edit.form-underline
+    = @notification.title
+  .user-main__contents__form.single-panel
+    .user-main__contents__form__group
+    %p.text-right
+      = icon 'far fa-lg','clock'
+      = @notification.created_at.strftime("%m月%d日 %H時%M分")
+    .user-main__contents__form__group--message
+      %p
+        = simple_format(@notification.message)

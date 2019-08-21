@@ -2,8 +2,11 @@ class ProductsController < ApplicationController
   require 'active_support/all'
   require 'payjp'
 
+  before_action :notice_count, only: [:index,:all_products,:show,:selling_index,:buyer_index,:selling_show]
+  before_action :todo_count,   only: [:index,:all_products,:show,:selling_index,:buyer_index,:selling_show]
   before_action :set_product, only: [:show, :buy, :selling_show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show, :all_products]
+
   def index
     @products = Product.where.not(seller_id: current_user&.id).order('id DESC').limit(4)
   end

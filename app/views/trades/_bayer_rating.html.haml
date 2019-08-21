@@ -1,0 +1,66 @@
+// 対象：購入者 内容：受取評価
+.trade-main__contents
+  .trade-main__contents__attention
+    .trade-main__contents__attention--headline
+      = icon 'fas fa-2x','check'
+      %h2
+        受取評価をしてください
+    .trade-main__contents__attention--text
+      商品が発送されました。商品が到着したら、出品者の評価をしてください。
+  .trade-main__contents__link
+    = link_to '#' do
+      %p
+        購入した後の流れ
+        = icon 'fas', 'chevron-right'
+    = link_to '#' do
+      %p
+        購入者のよくある質問
+        = icon 'fas', 'chevron-right'
+.trade-main__contents
+  .trade-main__contents__stepper
+    %h2
+      発送状況
+    %ol
+      %li.trade-main__contents__stepper__progress.passed
+        発送済み
+        .trade-main__contents__stepper__progress__status.first
+      %li.trade-main__contents__stepper__progress.passed
+        輸送中
+        .trade-main__contents__stepper__progress__status
+      %li.trade-main__contents__stepper__progress.active
+        = icon 'fas fa-lg','truck'
+        %br
+        配達中
+        .trade-main__contents__stepper__progress__status
+      %li.trade-main__contents__stepper__progress
+        配送済
+        .trade-main__contents__stepper__progress__status.last
+    %h3
+      配達中です。
+.trade-main__contents
+  .trade-main__contents__rating
+    = form_with url:product_trade_path,method: :patch,local: true do | f |
+      %h2
+        受取評価
+      .trade-main__contents__rating--notice
+        = f.check_box :check
+        = f.label :check, '商品の中身を確認しました'
+      .trade-main__contents__rating__wrapper
+        .trade-main__contents__rating__wrapper--check
+          = icon 'fas fa-2x', 'smile', class: "good"
+          良い
+          = f.radio_button :rate, 1
+        .trade-main__contents__rating__wrapper--check
+          = icon 'fas fa-2x', 'meh', class: "normal"
+          普通
+          = f.radio_button :rate, 2
+        .trade-main__contents__rating__wrapper--check
+          = icon 'fas fa-2x', 'frown', class: "bad"
+          惡い
+          = f.radio_button :rate, 3
+      .trade-main__contents__rating--comment
+        %p
+          評価のコメントを記入しましょう
+        = f.text_area :message, class:'rating-coment'
+      = f.submit '投稿を評価する', class:'comment-submit-btn'
+

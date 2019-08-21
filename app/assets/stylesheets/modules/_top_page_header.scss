@@ -60,20 +60,44 @@
 .header--user--status--login {
   margin: 0.6% 0 0 11%;
   display: flex;
+  align-items: center;
   height: 40px;
   line-height: 15px;
   a {
     margin-left: 20px;
-    color: black;
+    color: #333;
     font-size: 14px;
   }
-  p {
-    margin-top: 8px;
+  a:hover{
+    margin-left: 20px;
+    color: #4A98E8;
+    font-size: 14px;
   }
-  i {
-    color: #8A8A8A;
-    font-size: 20px;
-    margin-right: 5px;
+  &__link{
+    margin:0 20px;
+    &__transparent{
+      margin-left:4px;
+      position:relative;
+      i {
+        position: absolute;
+        margin-right: 5px;
+      }
+      div{
+        position: absolute;
+        top:-10px;
+        left:8px;
+        p{
+          align-items: center;
+          width:20px;
+          height:20px;
+          line-height:20px!important;
+          margin:0 5px 0 0!important;
+        }
+      }
+    }
+    &__text{
+      margin-left:35px;
+    }
   }
 }
 

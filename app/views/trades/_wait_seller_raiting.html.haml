@@ -1,0 +1,39 @@
+// 対象：購入者 内容：出品者評価待ち
+.trade-main__contents
+  .trade-main__contents__attention
+    .trade-main__contents__attention--headline
+      = icon 'fas fa-2x','check'
+      %h2
+        受取評価が完了しました
+    .trade-main__contents__attention--text
+      出品者からの評価が終わると取引完了となります。しばらくお待ちください。
+  .trade-main__contents__link
+    = link_to '#' do
+      %p
+        購入した後の流れ
+        = icon 'fas', 'chevron-right'
+    = link_to '#' do
+      %p
+        購入者のよくある質問
+        = icon 'fas', 'chevron-right'
+.trade-main__contents
+  .trade-main__contents__stepper
+    %h2
+      発送状況
+    %ol
+      %li.trade-main__contents__stepper__progress.passed
+        発送済み
+        .trade-main__contents__stepper__progress__status.first
+      %li.trade-main__contents__stepper__progress.passed
+        輸送中
+        .trade-main__contents__stepper__progress__status
+      %li.trade-main__contents__stepper__progress.passed
+        配達中
+        .trade-main__contents__stepper__progress__status
+      %li.trade-main__contents__stepper__progress.active
+        = icon 'fas fa-lg','truck'
+        %br
+        配送済
+        .trade-main__contents__stepper__progress__status.last
+    %h3
+      配送は完了しています。
