@@ -7,13 +7,11 @@ class FavoritesController < ApplicationController
 
   def create
     @fav = Favorite.create(user_id: current_user.id, product_id: @product.id)
-    # redirect_back(fallback_location: root_path)
   end
 
   def destroy
     @fav = Favorite.find_by(user_id: current_user.id, product_id: @product.id)
     @fav.destroy
-    # redirect_back(fallback_location: root_path)
   end
 
   private

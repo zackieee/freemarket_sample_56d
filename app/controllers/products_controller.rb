@@ -139,11 +139,11 @@ class ProductsController < ApplicationController
 
    def set_product
     @product = Product.find(params[:id])
-  end
+   end
 
-  def search_params
+   def search_params
     params.require(:q).permit(:text_cont, :category_id_eq, :brand_id_eq, :size_id_eq, :price_cont, :status_id_in, :postage_burden_id_in, :sales_status_id_in)
-  end
+   end
 end
 
 

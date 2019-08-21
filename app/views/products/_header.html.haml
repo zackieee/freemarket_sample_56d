@@ -22,7 +22,7 @@
       = link_to "ブランドから探す", root_path, class: "search-text"
     - if user_signed_in?
       .header--user--status--login
-        = link_to products_favorites_path do
+        = link_to product_favorites_path do
           = icon 'fas', 'heart'
           いいね！一覧
         = link_to '' do

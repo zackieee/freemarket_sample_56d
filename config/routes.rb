@@ -57,8 +57,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get "products/favorites" => "favorites#index"
-  post "/products/:product_id/favorites" => "favorites#create"
-  delete "/products/:product_id/favorites" => "favorites#destroy"
+  get "/product/favorites" => "favorites#index"
+  post "/product/:product_id/favorites" => "favorites#create"
+  delete "/product/:product_id/favorites" => "favorites#destroy"
 
 end
