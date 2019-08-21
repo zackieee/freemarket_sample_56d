@@ -8,7 +8,7 @@
         = link_to '#' do
           やることリスト
     .maypage__main__contents__content
-      -if @todo_list&.present? && @todo_list > 0
+      -if @todo_list&.present? && @todo_list.size > 0
         %ul
           - @todo_list.each do | todo |
             %li.mypage__main__contents__content

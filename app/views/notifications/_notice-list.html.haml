@@ -8,7 +8,7 @@
         = link_to notifications_index_todo_path do
           やることリスト
     .maypage__main__contents__content
-      -if @notifications&.present? && @notifications > 0
+      -if @notifications&.present? && @notifications.size > 0
         %ul
           - @notifications.each do | info |
             %li.mypage__main__contents__content
@@ -23,8 +23,7 @@
                     = icon 'far fa-lg','clock'
                     %p
                       %time(datetime="#{info.created_at}")= time_ago_in_words(info.created_at) + '前'
-                    - if info.checked
-                    - else
+                    - unless info.checked
                       %p.user-main__contents__form__group__item--required
                         未読
                 .mypage__main__contents__content__link-icon
