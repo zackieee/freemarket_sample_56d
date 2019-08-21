@@ -1,0 +1,328 @@
+@import "config/variable";
+@import "mixin/stepper";
+@import "mixin/form";
+
+.wrapper{
+  background-color:#f5f5f5;
+  .trade-show{
+    display:flex;
+    align-items:flex-start;
+    margin: 40px auto 0;
+    padding-bottom: 40px;
+    width: 1020px;  
+    .side-bar{
+      width:350px;
+      .trade-info{
+        width:350px;
+        &__title{
+          font-size:14px;
+          font-weight:600;
+          color:#333;
+        }
+        table{
+          width:100%;
+        }
+        &__table{
+          width:100%;
+          box-sizing: border-box;
+          background-color:#fff;
+          &__column-name{
+            padding:20px;
+            font-size:12px;
+            color:#333;
+            }
+          &__content{
+            padding:20px;
+            font-size:12px;
+            color:#333;
+            &__wrapper{
+              a{
+                font-size:12px;
+                font-weight:600;
+                color:#0099e8;
+                text-decoration:underline;
+                img{
+                  width:80px;
+                  height:80px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .gray-color{
+        background-color:#fafafa;
+      }
+      .seller-info{
+        width:100%;
+        &__title{
+          margin-top:20px;
+          font-size:14px;
+          font-weight:600;
+          color:#333;
+        }
+        &__content{
+          display:flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color:#fff;
+          padding:10px;
+          a{
+            color:#333;
+            text-decoration: none;
+          }
+          &__wrapper{
+            display:flex;
+            align-items: center;
+            img{
+              width:48px;
+              height:48px;
+              margin-right:10px;
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+    }
+    .trade-main{
+      background-color:#fff;
+      &__title{
+        @include form_headline(8px 24px);
+      }
+      &__contents{
+        width:700px;
+        border-bottom: #eee solid 1px;
+        &__attention{
+          position: relative;
+          padding: 24px 8px;
+          background: #fff6de;
+          text-align: center;
+          &--headline{
+            display:flex;
+            margin:10px;
+            justify-content: center;
+            align-items: center;
+            h2{
+              color:#333;
+              font-size:18px;
+              font-weight:bold;
+            }
+            i{
+              margin-right:5px;
+              color: #ea352d;
+            }
+          }
+          &--text{
+            color: #333;
+            font-size:14px;
+
+          }
+        }
+        &__link{
+          margin:20px;
+          text-align:right;
+          a{
+            text-decoration: none;
+            font-size:14px;
+            color:#0099e8;
+          }
+        }
+        &__send{
+          &__attention-text{
+            text-align:center;
+            font-size:14px;
+            color:#ea352d;
+          }
+          &__text{
+            text-align:center;
+            font-size:14px;
+            a{
+              text-decoration: none;
+              font-size:14px;
+              color:#0099e8;
+            }
+          }
+          &--default-btn{
+            @include form_button($default_color,0,1);
+            margin:40px auto!important;
+            max-width:none!important;
+            width:400px;
+          }
+          &--btn{
+            display:block;
+            width:400px;
+            margin:40px auto;
+            font-size:14px;
+            font-weight:600;
+            color:#999;
+            text-align:center;
+            text-decoration: none;
+            line-height:48px;
+            border:#999 solid 2px;
+            border-radius: 30px;
+
+          }
+        }
+        &__comment{
+          &__form{
+            width:600px;
+            margin: 20px auto;
+            &--text{
+              padding-left:10px;
+              background: #fff6de;
+              color:#333;
+              font-size:14px;
+              line-height:40px;
+            }
+            &--input{
+              margin:10px auto;
+              textarea{
+                width:600px;
+                height:10em;
+              }
+            }
+            &--btn{
+              button{
+                @include form_button($default_color,0,1);
+                width:600px;
+                max-width:none!important;
+              }
+            }
+            &--info-text{
+              margin:40px 10px;
+              font-size:14px;
+              color:#333;
+              a{
+                text-decoration: none;
+                font-size:14px;
+                color:#0099e8;
+              }
+            }
+          }
+        }
+        //ステッパー表示
+        &__stepper{
+          width:100%;
+          margin:40 auto;
+          vertical-align:top;
+          text-align:center;
+          //タイトル
+          h2{
+            margin:20px;
+            font-size:16px;
+            color:#333;
+            font-weight:bold;
+          }
+          //進捗メッセージ
+          h3{
+            margin:20px;
+            font-size:16px;
+            color:#333;
+          }
+          //プログレスバー
+          &__progress{
+            position: relative;
+            display:inline-block;
+            z-index: 1;
+            margin: 0 40px 0 0;
+            min-width: 60px;
+            font-size:11px;
+            color: #888;
+            &__status{
+              width:12px;
+              height:12px;
+              margin: 8px auto 0;
+              background: #ccc;
+              border-radius: 50%;
+            }
+            &__status:before{
+              @include stepper_status();
+              right:50%;
+            }
+            &__status:after{
+              @include stepper_status();
+              left:50%;
+            }
+          }
+          //最後の要素についてはマージンをなくす
+          &__progress:last-child {
+            margin-right: 0;
+          }
+          //最初と最後の要素については:before/:after非適用
+          .first:before{
+            content:none;
+          }
+          .last:after{
+            content:none;           
+          }
+        }
+        //ステッパーのアクティブ項目表示
+        .active{
+          font-weight: 600;
+          color: #ea352d;
+        }
+        //アクティブ状態のステッパー表示
+        .active > div,
+        .active > div:before{
+          background-color: #ea352d;
+        }
+        //入力終了後のステップバー表示
+        .passed > div,
+        .passed > div:after,
+        .passed > div:before{
+          background-color: #ea352d;
+        }
+        &__rating{
+          text-align:center;
+          margin:20px;
+          h2{
+            margin:20px;
+            font-size:16px;
+            color:#333;
+            font-weight:bold;
+          }
+          &--notice{
+            font-size:16px;
+            color:#333;
+          }
+          &__wrapper{
+            display:flex;
+            justify-content: center;
+            margin:20px;
+            &--check{
+              display:flex;
+              flex-direction: column;
+              align-items: center;
+              font-weight:bold;
+              color:#333;
+              width:100px;
+              .good{
+                color:#ef5185;
+              }
+              .normal{
+                color:#fba933;
+              }
+              .bad{
+                color:#6ab5d8;
+              }
+            }
+          }
+          &--comment{
+            p{
+              font-size:14px;
+              color:#666;
+            }
+            textarea{
+              width:400px;
+              height:5em;
+            }
+          }
+          .comment-submit-btn{
+            @include form_button($unused_color,0,1);
+            width:400px;
+          }
+        }
+      }
+    }
+  }
+}
