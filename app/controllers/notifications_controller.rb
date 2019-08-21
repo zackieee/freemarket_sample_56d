@@ -6,7 +6,7 @@ class NotificationsController < ApplicationController
 
   # お知らせ
   def index
-    @notifications = Notification.where.not(action: 5 ).where("(receiver_id = ?",current_user.id).order("created_at DESC")
+    @notifications = Notification.where.not(action: 5 ).where("(receiver_id = ?)",current_user.id).order("created_at DESC")
   end
 
   # やることリスト
