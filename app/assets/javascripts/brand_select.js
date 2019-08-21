@@ -22,6 +22,7 @@ $(function(){
 
   //カテゴリ2つ目を選択するとブランド選択が出てくる
   $(document).on('change','#category_box_1', function(){
+    $('#brand_box').empty();
     var id = '';
     var name = '';
     html = buildBOX(id,name);
