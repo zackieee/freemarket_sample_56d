@@ -1,6 +1,5 @@
 class TradesController < ApplicationController
-  before_action :notice_count, only: [:show,:update]
-  before_action :todo_count,   only: [:show,:update]
+  before_action :notice_count,:todo_count, only: [:show,:update]
 
   def show
     @trade = Trade.find(params[:id])
@@ -63,7 +62,7 @@ class TradesController < ApplicationController
 
   def update
     @trade = Trade.find(params[:id])
-    notifications = Notification.where("(trade_id = ?) AND (action = ?) AND (todo_status = ?)",@trade.id,5,0)
+    notifications = Notification.where("(trade_id = ?) && (action = ?) && (todo_status = ?)",@trade.id,5,0)
 
     # TODOが2つ以上ある状態は異常なので先に進まない
     if notifications.size != 1

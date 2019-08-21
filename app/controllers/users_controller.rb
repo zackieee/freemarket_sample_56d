@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  before_action :notice_count, only: [:show]
-  before_action :todo_count,   only: [:show]
+  before_action :notice_count,:todo_count, only: [:show]
 
   def show
     # 評価／出品数を取得
@@ -11,7 +10,7 @@ class UsersController < ApplicationController
     @notifications  = Notification.where.not(action: 5 ).where(receiver_id: current_user.id).order("created_at DESC")
 
     # 取引中の商品取得
-    @trade_products = Trade.where.not(trade_status: 3).where("(seller_id = ?) OR (buyer_id = ?)",current_user.id,current_user.id).order("created_at DESC")
+    @trade_products = Trade.where.not(trade_status: 3).where("(seller_id = ?) || (buyer_id = ?)",current_user.id,current_user.id).order("created_at DESC")
 
   end
 

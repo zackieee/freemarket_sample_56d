@@ -3,11 +3,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   require "payjp"
   require "base64"
 
-  before_action :notice_count, only: [:edit_profile,:edit_account,:edit_address,:edit_password,:edit_password_2,:edit_payment,:edit_payment_2,:edit_telephone,:edit_telephone_auth]
-  before_action :todo_count,   only: [:edit_profile,:edit_account,:edit_address,:edit_password,:edit_password_2,:edit_payment,:edit_payment_2,:edit_telephone,:edit_telephone_auth]
-  prepend_before_action :check_captcha, only: [:create]
-  prepend_before_action :customize_sign_up_params, only: [:create]
-  prepend_before_action :customize_update_params, only: [:update]
+  before_action :notice_count,:todo_count, only: [:edit_profile,:edit_account,:edit_address,:edit_password,:edit_password_2,:edit_payment,:edit_payment_2,:edit_telephone,:edit_telephone_auth]
+  prepend_before_action :check_captcha,:customize_sign_up_params, only: [:create]
   prepend_before_action :move_to_new_profile, only: [:new_telephone,:new_telephone_auth,:new_address,:new_payment,:new_payment]
 
   def new_profile

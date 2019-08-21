@@ -1,8 +1,7 @@
 class NotificationsController < ApplicationController
   require 'base64'
 
-  before_action :notice_count,  only: [:index,:index_todo,:show]
-  before_action :todo_count,    only: [:index,:index_todo,:show]
+  before_action :notice_count,:todo_count,  only: [:index,:index_todo,:show]
 
   # お知らせ
   def index
@@ -11,7 +10,7 @@ class NotificationsController < ApplicationController
 
   # やることリスト
   def index_todo
-    @todo_list = Notification.where("(receiver_id = ?) AND (action = ?) AND (todo_status = ?)",current_user.id,5,0).order("created_at DESC")
+    @todo_list = Notification.where("(receiver_id = ?) && (action = ?) && (todo_status = ?)",current_user.id,5,0).order("created_at DESC")
   end
 
   # 表示内容の振り分け

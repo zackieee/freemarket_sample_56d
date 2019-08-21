@@ -14,14 +14,14 @@ class ApplicationController < ActionController::Base
   # 未読のお知らせ数をカウントするメソッド
   def notice_count
     if user_signed_in?
-      @notices = Notification.where.not(action: 5 ).where("(receiver_id = ?) AND (checked = ?)",current_user.id,0).count
+      @notices = Notification.where.not(action: 5 ).where("(receiver_id = ?) && (checked = ?)",current_user.id,0).count
     end
   end
 
   # TODOがある場合、未読／既読に関わらずカウントするメソッド
   def todo_count
     if user_signed_in?
-      @todo = Notification.where("(receiver_id = ?) AND (action = ?) AND (todo_status = ?)",current_user.id,5,0).count
+      @todo = Notification.where("(receiver_id = ?) && (action = ?) && (todo_status = ?)",current_user.id,5,0).count
     end
   end
 
