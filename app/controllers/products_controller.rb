@@ -34,6 +34,13 @@ class ProductsController < ApplicationController
       format.json
     end
   end
+
+  def get_brand
+    @brands = Brand.where('name LIKE(?)', "%#{params[:keyword]}%")
+    respond_to do |format|
+      format.json
+    end
+  end
     
   def create
     @product= Product.new(product_params)
@@ -124,7 +131,7 @@ class ProductsController < ApplicationController
   
   private
    def product_params
-    params.require(:product).permit(:name, :text, :category_id, :price, :status_id, :prefecture_id, :postage_burden_id, :delivery_days_id, images: [] ).merge(seller_id: current_user.id)
+    params.require(:product).permit(:name, :text, :category_id, :brand_id, :price, :status_id, :prefecture_id, :postage_burden_id, :delivery_days_id, images: [] ).merge(seller_id: current_user.id)
    end
 
    def set_product
