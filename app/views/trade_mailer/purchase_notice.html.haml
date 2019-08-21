@@ -1,0 +1,39 @@
+%p
+  = "#{@trade.buyer.nickname}さん"
+  %br
+  %br
+  freemaket.sample.d56をご利用いただきありがとうございます。
+  %br
+  下記の商品の購入が完了しました。
+  %br
+  %br
+  ■商品情報
+  = "商品ID : #{@trade.product_id}"
+  %br
+  = "商品名 : #{@trade.product.name}"
+  %br
+  = "出品者 : #{@trade.seller.nickname}"
+  %br
+  ■支払い金額
+  %br
+  = " 商品代金 : ￥#{@trade.product.price.to_s(:delimited, delimiter: ',')}"
+  %br
+  ーーーーーーーーーーーーーーーーー
+  %br
+  = "支払い金額 : ￥#{@trade.product.price.to_s(:delimited, delimiter: ',')}"
+  %br
+  %br
+  商品の発送までしばらくお待ちください。
+  %br
+  = "商品が届きましたら内容を確認して、#{@trade.seller.nickname}さんの受取評価してください。"
+  %br
+  %br
+  Webサイトを起動しホーム画面右上のアイコンから「やることリスト」が確認できます。
+  %br
+  %br
+  Webサイトを起動する
+  %br
+  http://localhost:3000
+  %br
+  %br
+  ※このメールは返信しても届きません。お問い合わせはアプリを起動して「お問い合わせ」からお願いいたします。

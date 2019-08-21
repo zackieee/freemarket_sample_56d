@@ -1,0 +1,31 @@
+%p
+  = "#{@trade.buyer.nickname}さん"
+  %br
+  %br
+  = "下記の商品を取引した#{@trade.seller.nickname}さんがあなたを評価しました。"
+  %br
+  %br
+  ■商品情報
+  = "商品ID : #{@trade.product_id}"
+  %br
+  = "商品名 : #{@trade.product.name}"
+  %br
+  = "商品価格 : #{@trade.product.price.to_s(:delimited, delimiter: ',')}円"
+  %br
+  = "出品者 : #{@trade.seller.nickname}"
+  %br
+  これで商品の購入取引は完了しました。
+  %br
+  %br
+  %br
+  freemaket.sample.d56をご利用いただきありがとうございました。
+  %br
+  今後ともfreemaket.sample.d56をよろしくお願い致します。
+  %br
+  %br
+  Webサイトを起動する
+  %br
+  http://localhost:3000
+  %br
+  %br
+  ※このメールは返信しても届きません。お問い合わせはアプリを起動して「お問い合わせ」からお願いいたします。
