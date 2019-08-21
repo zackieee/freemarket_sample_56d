@@ -4,7 +4,7 @@ class Product < ApplicationRecord
   has_many :comments
   has_many :favorites
   belongs_to :category
-  belongs_to :brand
+  belongs_to :brand, optional: true
   has_many :sizes,through: :products_sizes
   has_many :products_sizes
   has_one :trade
