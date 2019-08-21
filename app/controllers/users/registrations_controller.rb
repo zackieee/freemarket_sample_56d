@@ -242,6 +242,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update_payment
     # クレジットカード情報の登録
+    @user = current_user
+    session[:user] = @user    
     session[:user]["email"] = current_user.email
     @customer = user_credit('create')
     if @err != nil
