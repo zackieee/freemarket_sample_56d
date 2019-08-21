@@ -1,7 +1,10 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  require 'securerandom'
+  require "securerandom"
   require "payjp"
+  require "base64"
 
+  before_action :notice_count, only: [:edit_profile,:edit_account,:edit_address,:edit_password,:edit_password_2,:edit_payment,:edit_payment_2,:edit_telephone,:edit_telephone_auth]
+  before_action :todo_count,   only: [:edit_profile,:edit_account,:edit_address,:edit_password,:edit_password_2,:edit_payment,:edit_payment_2,:edit_telephone,:edit_telephone_auth]
   prepend_before_action :check_captcha, only: [:create]
   prepend_before_action :customize_sign_up_params, only: [:create]
   prepend_before_action :customize_update_params, only: [:update]
@@ -26,9 +29,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # 既存の顧客で同一emailを利用していないか
     same_mail = User.where(email: user_params[:email])
     if same_mail.length != 0
+      @user = User.new
       @messages = 'メールアドレスに誤りがあります。ご確認いただき、正しく変更してください。'
       render :new_profile
-      @user = User.new
       return
     end
 
@@ -147,12 +150,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new_complete
     # クレジットカードの登録処理
     @customer = user_credit('create')
-    if @customer[:status] != '200'
+    if @err != nil
       render :new_payment
       return
     end
-
-
     # 実際のユーザ登録はここから
     @user = User.new(session[:user])
     @user.build_address(session[:address])
@@ -168,8 +169,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
         user_id:         @user.id
       )
     end
+    @user.skip_confirmation!
     # newしたユーザをDB登録。成功したら自動ログイン
     if @user.save
+      user = @user
+      # 【send-mail】ユーザ登録完了メール送信
+      mail = UserMailer.registration_confirmation(user).deliver
       session.clear
       session[:id] = @user.id
       sign_in User.find(session[:id]) unless user_signed_in?
@@ -350,8 +355,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update_password
     # メールアドレス変更処理
     @user = User.find(current_user.id)
+
+    # 既存の顧客で同一emailを利用していないか
+    same_mail = User.where(email: user_params[:email])
+    if same_mail.length != 0
+      @messages = 'メールアドレスに誤りがあります。ご確認いただき、正しく変更してください。'
+      render :new_profile
+      @user = User.new
+      return
+    end
+
+    # 【send-mail】認証メールをスキップさせる場合はコメントアウトを外す
+    # @user.skip_reconfirmation!
+
+    # アップデート処理。問題なくupdateされれば自動的にメールも飛ぶ
     @user.update(email: user_params[:email])
     if @user.valid?(:email)
+      session[:change_email] = @user.email
     else
       render :edit_password
       return
@@ -371,11 +391,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
         render :edit_password
         return
       end
-
     end
 
-    redirect_to users_edit_password_path
+    # メールアドレス変更に成功している場合、別画面に遷移。
+    if session[:change_email]  != nil
+      redirect_to users_edit_password_2_path
+    else
+      redirect_to users_edit_password_path
+    end
 
+  end
+
+  def edit_password_2
   end
 
 private
