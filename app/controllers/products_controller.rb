@@ -44,6 +44,13 @@ class ProductsController < ApplicationController
     end
   end
 
+  def get_size
+    @sizes = Size.where(size_category: params[:size_category_id])
+    respond_to do |format|
+      format.json
+    end
+  end
+
   def get_brand
     @brands = Brand.where('name LIKE(?)', "%#{params[:keyword]}%")
     respond_to do |format|
