@@ -4,14 +4,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   require "base64"
 
   before_action :notice_count,:todo_count, only: [:edit_profile,:edit_account,:edit_address,:edit_password,:edit_password_2,:edit_payment,:edit_payment_2,:edit_telephone,:edit_telephone_auth]
-  prepend_before_action :check_captcha,:customize_sign_up_params, only: [:create]
+  prepend_before_action :check_captcha,:customize_sign_up_params, only: [:create,:update]
   prepend_before_action :move_to_new_profile, only: [:new_telephone,:new_telephone_auth,:new_address,:new_payment,:new_payment]
 
   def new_profile
     # 次のページで使う空箱(@userなどを使うなら必須)
     @user = User.new
     session[:user] = @user
-    if session[:sns]!=nil
+    if session[:sns].present?
       session[:user]["nickname"] =  session[:sns]["info"]["name"]
       session[:user]["email"] =  session[:sns]["info"]["email"]
     end
@@ -25,7 +25,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     # 既存の顧客で同一emailを利用していないか
     same_mail = User.where(email: user_params[:email])
-    if same_mail.length != 0
+    if same_mail.present?
       @user = User.new
       @messages = 'メールアドレスに誤りがあります。ご確認いただき、正しく変更してください。'
       render :new_profile
@@ -66,7 +66,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     # 既存の顧客で同一電話番号を利用していないか
     same_tel = User.where(tel: user_params[:tel])
-    if same_tel.length != 0
+    if same_tel.present?
       @messages = 'この番号はすでに会員登録済みです。会員の方は、ログインをお試しください。登録の覚えがない場合、お問い合わせよりその旨をご連絡ください。'
       render :new_telephone
       return
@@ -147,7 +147,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new_complete
     # クレジットカードの登録処理
     @customer = user_credit('create')
-    if @err != nil
+    if @err.present?
       render :new_payment
       return
     end
@@ -159,7 +159,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       customer_id:    @customer.id,
       card_id:        @customer.default_card,
     )
-    if session[:sns]!=nil 
+    if session[:sns].present?
       @user.sns_credentials.build(
         uid:             session[:sns]["uid"],
         provider:        session[:sns]["provider"],
@@ -193,7 +193,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       introduction: user_params[:introduction]
     )
     # 指定データがある場合のみ保存
-    if user_params[:avatar] != nil
+    if user_params[:avatar].present?
       @user.update(
         avatar: user_params[:avatar]
       )
@@ -217,8 +217,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user.update(user_params)
     if @user.valid?(:address) && @user.address.valid?(:address)
       redirect_to users_edit_address_path
+      return
     else
-      render :edit_address
+      render action: :edit_address
+      return
     end
 
   end
@@ -227,10 +229,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # クレジットカードの登録があるか確認
     @user = User.find(current_user.id)
     # クレジットカード情報が登録されていた場合のみ情報取得
-    if @user.card&.customer_id.nil?
-    else
+    unless @user.card&.customer_id.nil?
       @card = user_credit('show')
-      if @err != nil
+      if @err.present?
         render :edit_payment
         return
       end
@@ -246,7 +247,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     session[:user] = @user    
     session[:user]["email"] = current_user.email
     @customer = user_credit('create')
-    if @err != nil
+    if @err.present?
       render :edit_payment
       return
     end
@@ -261,7 +262,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def destroy_payment
     # クレジットカード情報の削除
     @customer = user_credit('delete')
-    if @err != nil
+    if @err.present?
       render :edit_payment
       return
     end
@@ -280,7 +281,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     # 既存の顧客で同一電話番号を利用していないか
     same_tel = User.where(tel: user_params[:tel])
-    if same_tel.length != 0
+    if same_tel.present?
       @messages = 'この番号はすでに会員登録済みです。会員の方は、ログインをお試しください。登録の覚えがない場合、お問い合わせよりその旨をご連絡ください。'
       render :edit_telephone
       return
@@ -299,13 +300,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
         body: "認証番号：#{session[:secure_code]} この番号をfreemarket_sampleの画面で入力してください。"
     )
     end
-
   end
 
   def update_telephone_auth
     # 入力チェック
-    if params[:auth_code].present?
-    else
+    if params[:auth_code].blank?
       @messages = '認証番号を入力してください'
       render :edit_telephone_auth
       return
@@ -317,6 +316,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @user.update(tel: session[:user]["tel"])
       # バリデーションに通ったか確認、elseの場合は画面を戻す
       if @user.valid?(:tel)
+        redirect_to users_edit_telephone_path
+        return
       else
         render :edit_telephone
         return
@@ -355,25 +356,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # メールアドレス変更処理
     @user = User.find(current_user.id)
 
-    # 既存の顧客で同一emailを利用していないか
-    same_mail = User.where(email: user_params[:email])
-    if same_mail.length != 0
-      @messages = 'メールアドレスに誤りがあります。ご確認いただき、正しく変更してください。'
-      render :new_profile
-      @user = User.new
-      return
-    end
+    # emailの変更が無いかチェック
+    if @user.email != user_params[:email]
 
-    # 【send-mail】認証メールをスキップさせる場合はコメントアウトを外す
-    # @user.skip_reconfirmation!
+      # 既存の顧客で同一emailを利用していないか
+      same_mail = User.where(email: user_params[:email])
+      if same_mail.present?
+        @messages = 'メールアドレスに誤りがあります。ご確認いただき、正しく変更してください。'
+        render :edit_password
+        return
+      end
 
-    # アップデート処理。問題なくupdateされれば自動的にメールも飛ぶ
-    @user.update(email: user_params[:email])
-    if @user.valid?(:email)
-      session[:change_email] = @user.email
-    else
-      render :edit_password
-      return
+      # 【send-mail】認証メールをスキップさせる場合はコメントアウトを外す
+      # @user.skip_reconfirmation!
+
+      # アップデート処理。問題なくupdateされれば自動的にメールも飛ぶ
+      @user.update(email: user_params[:email])
+      if @user.valid?(:email)
+        session[:change_email] = @user.email
+      else
+        render :edit_password
+        return
+      end
+
     end
 
     # パスワード変更処理(入力があった場合のみ)
@@ -393,10 +398,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     # メールアドレス変更に成功している場合、別画面に遷移。
-    if session[:change_email]  != nil
-      redirect_to users_edit_password_2_path
-    else
+    if session[:change_email].blank?
       redirect_to users_edit_password_path
+    else
+      sign_in User.find(session[:id]) unless user_signed_in?
+      session[:change_email].clear
+      redirect_to users_edit_password_2_path
     end
 
   end
@@ -472,15 +479,15 @@ private
     begin
       case key
       when 'create'
-        if params[:payjp_token].blank?
-          render :new_payment
-          return
-        else
+        if params[:payjp_token].present?
           @customer = Payjp::Customer.create(
             description: 'freemaket_sample_56d',
             email: session[:user][:email],
             card: params[:payjp_token],
           )
+        else
+          render :new_payment
+          return
         end
       when 'show'
         @user = User.find(current_user.id)
@@ -543,8 +550,7 @@ private
   # ページ直視指定しようとした場合、初期ページに飛ばす
   # session[:user]が出来ているかで判断する
   def move_to_new_profile
-    if session[:user]!=nil
-    else
+    if session[:user].nil?
       redirect_to users_sign_up_profile_path
     end
   end

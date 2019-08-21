@@ -30,7 +30,7 @@ document.addEventListener(
         appendCheckNumberResult();
       }
       if(document.getElementById("card_security_code").value == ""){
-        flag = fase;
+        flag = false;
         appendCheckCVCResult();
       }
       return flag;
