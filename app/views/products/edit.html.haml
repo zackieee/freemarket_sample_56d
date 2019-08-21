@@ -20,12 +20,9 @@
                   .sell-main__contents__content__item__images--already__blocks__block
                     %p.sell-main__contents__content__item__images--already__blocks__block--edit
                       編集
-                    %p.sell-main__contents__content__item__images--already__blocks__block--delete{data: {image_id: num}}
+                    = f.label :"image_ids_#{image.id}", id: "edit-delete" do
                       削除
-              .sell-main__contents__content__item__images--upload.hidden
-                写真を選択
-                = f.label :images_1, class: "sell-main__contents__content__item__images--upload--label" do
-                  = f.file_field :images, { multiple: true, value: image, class: 'hidden', data: {image_id: num}, id: "product_images_1" }
+                      = f.check_box :image_ids, {multiple: true, class: "hidden"}, image.id, false
             .sell-main__contents__content__item__images--upload#upload1
               写真を選択
               = f.label :images_1, class: "sell-main__contents__content__item__images--upload--label" do

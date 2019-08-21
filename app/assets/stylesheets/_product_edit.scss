@@ -216,3 +216,15 @@
     padding: 10px 16px 8px;
   }
 }
+
+#edit-delete{
+  cursor: pointer;
+  height: 30px;
+  width: 50%;
+  border: solid 1px #ccc;
+  display: inline-block;
+  text-align: center;
+  line-height: 30px;
+  text-decoration: none;
+  color: #0099e8;
+}
