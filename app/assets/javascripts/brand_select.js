@@ -7,6 +7,7 @@ $(function(){
                         <span class="sell-main__contents__content__item--optional">
                           任意
                         </span>
+                        <span>検索してクリック選択してください</span>
                         <input class="sell-main__contents__content__item__input" placeholder="シャネル" maxlength="40" size="40" type="text" name="product[brand_id]" id="product_brand_box" data-brand-id='${id}' value='${name}'></input>
                         <input type="hidden" name="product[brand_id]" value='${id}'></input>
                         <div id = brand_box__lists>
