@@ -17,10 +17,9 @@ class NotificationsController < ApplicationController
   # 表示内容の振り分け
   def dispatcher
     @notification = Notification.find(params[:id])
-    # 未読の場合は、既読の状態にアップデートする
-    if @notification.checked != true
-      @notification.update(checked: true)
-    end
+
+    # 未読(false)の場合は、既読の状態にアップデートする
+    @notification.update(checked: true) unless @notification.checked
 
     case @notification.action
     when 1 # 事務局からのお知らせなど
