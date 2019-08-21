@@ -1,0 +1,43 @@
+// 対象：出品者 内容：受取／評価待ち
+.trade-main__contents
+  .trade-main__contents__attention
+    .trade-main__contents__attention--headline
+      = icon 'fas fa-2x','check'
+      %h2
+        商品の発送を通知しました。
+    .trade-main__contents__attention--text
+      購入者の受取確認と評価をしばらくお待ちください
+  .trade-main__contents__link
+    = link_to '#' do
+      %p
+        商品が売れた後の流れ
+        = icon 'fas', 'chevron-right'
+    = link_to '#' do
+      %p
+        出品者のよくある質問
+        = icon 'fas', 'chevron-right'
+    = link_to '#' do
+      %p
+        らくらくメルカリ便とは？
+        = icon 'fas', 'chevron-right'
+.trade-main__contents
+  .trade-main__contents__stepper
+    %h2
+      発送状況
+    %ol
+      %li.trade-main__contents__stepper__progress.active
+        = icon 'fas fa-lg','truck'
+        %br
+        発送済み
+        .trade-main__contents__stepper__progress__status.first
+      %li.trade-main__contents__stepper__progress
+        輸送中
+        .trade-main__contents__stepper__progress__status
+      %li.trade-main__contents__stepper__progress
+        配達中
+        .trade-main__contents__stepper__progress__status
+      %li.trade-main__contents__stepper__progress
+        配送済
+        .trade-main__contents__stepper__progress__status.last
+    %h3
+      発送が完了しました。

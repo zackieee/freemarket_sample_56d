@@ -1,0 +1,63 @@
+.side-bar
+  .trade-info
+    %h2.trade-info__title
+      取引情報
+    %table
+      %tr.trade-info__table
+        %td.trade-info__table__column-name
+          %p
+            商品
+        %td.trade-info__table__content
+          .trade-info__table__content__wrapper
+            = link_to product_path(@trade.product_id) do
+              = image_tag @trade.product.images.first
+              %p
+                = truncate(@trade.product.name, length:14)
+              %p
+                = "¥#{@trade.product.price.to_s(:delimited, delimiter: ',')}"
+      %tr.trade-info__table.gray-color
+        %td.trade-info__table__column-name
+          %p
+            送料
+        %td.trade-info__table__content
+          = @trade.product.postage_burden.name
+      %tr.trade-info__table
+        %td.trade-info__table__column-name
+          %p
+            購入日時
+        %td.trade-info__table__content
+          = @trade.created_at.strftime("%m月%d日 %H:%M")
+      %tr.trade-info__table.gray-color
+        %td.trade-info__table__column-name
+          %p
+            商品ID
+        %td.trade-info__table__content
+          = @trade.product_id
+      %tr.trade-info__table
+        %td.trade-info__table__column-name
+          %p
+            お届け先
+        %td.trade-info__table__content
+          .trade-info__table__content__wrapper
+            %p
+              = "〒#{@trade.buyer.address.postal_code}"
+            %p
+              = @trade.buyer.address.prefecture.name + @trade.buyer.address.city + @trade.buyer.address.address_number
+            %p
+              = @trade.buyer.address.building_name
+            %p
+              = @trade.buyer.lastname + @trade.buyer.firstname + '様'
+  .seller-info
+    %h2.seller-info__title
+      出品者情報
+    .seller-info__content
+      = link_to show_profile_user_path(@trade.seller.id) do
+        .seller-info__content__wrapper
+          .seller-info__content__wrapper--image
+            - if @trade.seller.avatar.attached?
+              = image_tag(@trade.seller.avatar)
+            -else
+              = image_tag('common/member_photo_noimage_thumb.png')
+          .seller-info__content__wrapper--nickname
+            = @trade.seller.nickname
+      = icon 'fas fa-lg','angle-right', class: 'seller-info__content__icon'
