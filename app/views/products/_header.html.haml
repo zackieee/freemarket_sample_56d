@@ -16,7 +16,14 @@
       = link_to '' do
         = icon 'fas', 'list'
       = link_to "カテゴリーから探す", root_path, class: "search-text"
-    .header--select__category
+      .header--select__category__wrapper
+        .header--select__category__wrapper__drop
+          - @category.each do |parent|
+            = link_to '', data: {category_id: parent.id}, class: "drop-list" do
+              = parent.name
+        .header--select__category__wrapper__second
+        .header--select__category__wrapper__third
+    .header--select__right
       = link_to '' do
         = icon 'fas', 'tag'
       = link_to "ブランドから探す", root_path, class: "search-text"
@@ -81,4 +88,5 @@
           = link_to "新規会員登録", new_user_registration_path
         .header--btn__logbtn
           = link_to "ログイン",  user_session_path
+
 

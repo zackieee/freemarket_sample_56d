@@ -6,9 +6,16 @@ class ProductsController < ApplicationController
   before_action :todo_count,   only: [:index,:all_products,:show,:selling_index,:buyer_index,:selling_show]
   before_action :set_product, only: [:show, :buy, :selling_show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show, :all_products]
+  before_action :set_category
 
   def index
     @products = Product.where.not(seller_id: current_user&.id).order('id DESC').limit(4)
+    # @category_children = Category.find(params[:parent_id]).children
+    # @category_grandchildren = Category.find(params[:parent_id]).children
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def all_products
@@ -160,9 +167,13 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
    end
 
-   def search_params
-    params.require(:q).permit(:text_cont, :category_id_eq, :brand_id_eq, :size_id_eq, :price_cont, :status_id_in, :postage_burden_id_in, :sales_status_id_in)
-   end
+    def set_category
+      @category = Category.where(depth: 0)
+    end
+
+    def search_params
+      params.require(:q).permit(:text_cont, :category_id_eq, :brand_id_eq, :size_id_eq, :price_cont, :status_id_in, :postage_burden_id_in, :sales_status_id_in)
+    end
 end
 
 
