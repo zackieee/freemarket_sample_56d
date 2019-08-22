@@ -52,6 +52,8 @@ Rails.application.routes.draw do
   get 'products/get_brand'  => 'products#get_brand'
 
   get 'products/search_result_page' => 'products#search_result_page'
+  get 'trade/active_index'          => 'trades#active_index'
+  get 'trade/close_index'          => 'trades#close_index'  
   resources :products do
     get :selling_show, on: :member
     get :buy, on: :member

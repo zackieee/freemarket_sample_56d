@@ -1,0 +1,31 @@
+.mypage__main
+  .mypage__main__contents
+    %ul.mypage__main__contents__nav
+      %li.mypage__main__contents__nav
+        = link_to trade_active_index_path do
+          取引中
+      %li.mypage__main__contents__nav.selected-tab
+        = link_to '#' do
+          過去の取引
+    .maypage__main__contents__content
+      -if @trades&.present? && @trades.size > 0
+        %ul
+          - @trades.each do | trade |
+            %li.mypage__main__contents__content
+              = link_to dispatcher_notification_path(trade.id) do
+                - if trade.product.images.attached?
+                  = image_tag trade.product.images.first, class:'mypage__main__contents__content__image', height: '48px', width: '48px'
+                -else
+                  = image_tag 'mercari_profile.png', class:'mypage__main__contents__content__image', height: '48px', width: '48px'
+                .mypage__main__contents__content__text
+                  = trade.product.name
+                  .mypage__main__contents__content__time
+                    = icon 'far fa-lg','clock'
+                    %p
+                      %time(datetime="#{trade.created_at}")= time_ago_in_words(trade.created_at) + '前'
+                .mypage__main__contents__content__link-icon
+                  = icon 'fas fa-lg','angle-right'
+      - else 
+        .mypage__main__contents__content--none
+          %h3
+            取引した商品はありません

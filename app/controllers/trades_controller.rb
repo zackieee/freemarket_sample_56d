@@ -5,6 +5,14 @@ class TradesController < ApplicationController
   def show
   end
 
+  def active_index
+    @trades = Trade.where.not(trade_status: 3).where(buyer_id: current_user.id).order("created_at DESC")
+  end
+
+  def close_index
+    @trades = Trade.where("(buyer_id = ?) && (trade_status = ?)", current_user.id,3).order("created_at DESC")
+  end
+
   def create
     @product = Product.find(trade_params[:product_id])
     # カード決済
