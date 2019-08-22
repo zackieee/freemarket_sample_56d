@@ -192,8 +192,8 @@ $(function() {
     var fee    = Math.floor( price / 10 );
     var profit = price - fee;
     if (price >= 300 && price <= 9999999) {
-      $(".fee").text(fee);
-      $(".profit").text(profit);
+      $(".fee").text(fee.toLocaleString());
+      $(".profit").text(profit.toLocaleString());
     }
     else {
       $(".fee").text("ー");
@@ -210,8 +210,8 @@ $(function() {
       var fee    = Math.floor( price / 10 );
       var profit = price - fee;
       if (price.length != 0) {
-        $(".fee").text(fee);
-        $(".profit").text(profit);
+        $(".fee").text(fee.toLocaleString());
+        $(".profit").text(profit.toLocaleString());
       };
     }
   })
