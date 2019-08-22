@@ -1,7 +1,4 @@
 =render 'header'
-.notification
-  - flash.each do |key, value|
-    = content_tag :div, value, class: key
 .show.crearfix
   .show-item
     %h1
@@ -48,9 +45,15 @@
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
             %p ブランド
-          .selling_show-item__wrapper__contents__owner__detail__rights
+          .show-item__wrapper__contents__owner__detail__rights
             - if @product.brand_id.present?
               = link_to "#{@product.brand.name}"
+        .show-item__wrapper__contents__owner__detail
+          .show-item__wrapper__contents__owner__detail__lefts
+            %p サイズ
+          .show-item__wrapper__contents__owner__detail__rights
+            - if @product.size_id.present?
+              = link_to "#{@product.size.data}"
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
             %p 商品の状態

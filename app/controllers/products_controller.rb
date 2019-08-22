@@ -52,6 +52,13 @@ class ProductsController < ApplicationController
     end
   end
 
+  def get_size
+    @sizes = Size.where(size_category: params[:size_category_id])
+    respond_to do |format|
+      format.json
+    end
+  end
+
   def get_brand
     @brands = Brand.where('name LIKE(?)', "%#{params[:keyword]}%")
     respond_to do |format|
@@ -130,7 +137,7 @@ class ProductsController < ApplicationController
   
   def buy
     if @product.sales_status_id == 2
-      redirect_to product_path(@product.id), alert: '購入できません'
+      redirect_to product_path(@product.id)
       return
     end
     @card = Card.find(current_user.id)
@@ -158,7 +165,7 @@ class ProductsController < ApplicationController
   
   private
    def product_params
-    params.require(:product).permit(:name, :text, :category_id, :brand_id, :price, :status_id, :prefecture_id, :postage_burden_id, :delivery_days_id, images: [] ).merge(seller_id: current_user.id)
+    params.require(:product).permit(:name, :text, :category_id, :brand_id, :size_id,:price, :status_id, :prefecture_id, :postage_burden_id, :delivery_days_id, images: [] ).merge(seller_id: current_user.id)
    end
 
    def set_product
