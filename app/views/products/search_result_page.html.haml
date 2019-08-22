@@ -3,7 +3,7 @@
   .result-view__side-bar
     = search_form_for(@q, url: products_search_result_page_path) do |f|
       .result-view__side-bar__header
-        -# = f.search_field '', placeholder:'並び替え', maxlength: '40'
+        = f.search_field '', placeholder:'並び替え', maxlength: '40'
       .result-view__side-bar__footer
         %p 詳細検索
         .result-view__side-bar__footer__form
@@ -16,12 +16,12 @@
           = f.collection_select :category_id_eq, @categories, :id, :name, {prompt: "すべて"}, class: "select"
         .result-view__side-bar__footer__form
           = icon 'fas', 'tag'
-          -# = f.label :brand_id_eq, 'ブランド名から探す'
-          -# = f.collection_select :brand_id_eq, @brands, :id, :name, {prompt: "例) シャネル"}, class: "select"
+          = f.label :brand_id_eq, 'ブランド名から探す'
+          = f.collection_select :brand_id_eq, @brands, :id, :name, {prompt: "例) シャネル"}, class: "select"
         .result-view__side-bar__footer__form
           = icon 'fas', 'expand'
-          -# = f.label :size_id_eq, 'サイズを指定する'
-          -# = f.collection_select :size_id_eq, @sizes, :id, :name, {prompt: "すべて"}, class: "select"
+          = f.label :size_id_eq, 'サイズを指定する'
+          = f.collection_select :size_id_eq, @sizes, :id, :name, {prompt: "すべて"}, class: "select"
         .result-view__side-bar__footer__form
           = icon 'fab', 'bitcoin'
           = f.label :price_cont, '価格'

@@ -50,6 +50,8 @@ Rails.application.routes.draw do
   get 'products/get_category_grandchildren'  => 'products#get_category_grandchildren'
   # ブランド選択
   get 'products/get_brand'  => 'products#get_brand'
+  # サイズ選択
+  get 'products/get_size'  => 'products#get_size'
 
   get 'products/search_result_page' => 'products#search_result_page'
   resources :products do
