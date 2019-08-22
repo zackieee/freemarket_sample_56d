@@ -1,0 +1,9 @@
+.wrapper
+  =render 'products/header'
+  - breadcrumb :active_index
+  = render "layouts/breadcrumbs"
+  .user-main.sidebar
+    = render 'side-bar/active_trade-list'
+    = render 'active_trade-list'
+  =render 'products/footer-top'
+  =render 'products/footer-bottom'

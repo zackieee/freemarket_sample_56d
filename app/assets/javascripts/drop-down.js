@@ -1,19 +1,17 @@
 $(function(){
 
   function buildBOX3(category){
-    var category_box = `<ul name="product[category_id]" id="category_box_3"></ul>`
+    var category_box = `<div name="product[category_id]" id="category_box_3"></div>`
     return category_box;
   }
 
   function buildBOX4(category){
-    var category_box = `<ul name="product[category_id]" id="category_box_4"></ul>`
+    var category_box = `<div name="product[category_id]" id="category_box_4"></div>`
     return category_box;
   }
 
   function buildCHILDREN(value){
-    var category_children = `<li>
-                              <a href= "/products" class="second" data-category-id="${value.id}">${value.name}</a>
-                             </li>`
+    var category_children = `<div class: "gem"><a href= "/products" class="second" data-category-id="${value.id}">${value.name}</a></div>`
     return category_children;
   }
   
@@ -68,19 +66,26 @@ $(function(){
         };
       })
       .fail(function(){
-        // alert('正しくありません');
+        alert('正しくありません');
       })
   });
-  $(document).on('mouseout', "#category_box_3", function(){
+
+  $(document).on('mouseout', ".drop-list", function(){
     $('#category_box_3').addClass("hidden")
   })
-  $(document).on('mouseover', "#category_box_3", function(){
+  $(document).on('mouseover', ".header--select__category__wrapper__second", function(){
     $('#category_box_3').addClass("appear")
   })
-  $(document).on('mouseout', '.second', function(){
+  $(document).on('mouseover', '.drop-list', function(){
     $('#category_box_4').addClass("hidden")
   })
   $(document).on('mouseover', ".second", function(){
     $('#category_box_4').addClass("appear")
+  })
+  $(document).on('mouseover', "img", function(){
+    $('#category_box_3').remove();
+  })
+  $(document).on('mouseover', "img", function(){
+    $('#category_box_4').remove();
   })
 });

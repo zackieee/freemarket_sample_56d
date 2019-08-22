@@ -7,8 +7,7 @@ class Product < ApplicationRecord
   has_many :fav_users, through: :favorites, source: :user
   belongs_to :category
   belongs_to :brand, optional: true
-  # has_many :sizes,through: :products_sizes
-  # has_many :products_sizes
+  belongs_to :size, optional: true
   has_one :trade
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
