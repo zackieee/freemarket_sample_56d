@@ -28,13 +28,13 @@
                   = @trade_count
       .mypage__main__contents
         %ul.mypage__main__contents__nav
-          %li.mypage__main__contents__nav.selected-tab
+          %li.mypage__main__contents__nav.selected-tab#notice-list
             = link_to '#' do
               お知らせ
-          %li.mypage__main__contents__nav
+          %li.mypage__main__contents__nav#todo-list
             = link_to '#' do
               やることリスト
-        .maypage__main__contents__content
+        .maypage__main__contents__content#notice-result
           - if @notifications&.present? && @notifications.size > 0
             %ul
               - @notifications.first(5).each do | info |
@@ -50,6 +50,9 @@
                         = icon 'far fa-sm','clock'
                         %p
                           %time(datetime="#{info.created_at}")= time_ago_in_words(info.created_at) + '前'
+                        - unless info.checked
+                          %p.user-main__contents__form__group__item--required
+                            未読
                     .mypage__main__contents__content__link-icon
                       = icon 'fas fa-lg','angle-right'
             - if @notifications.size > 5
@@ -65,13 +68,13 @@
           %h2
             購入した商品
         %ul.mypage__main__contents__nav
-          %li.mypage__main__contents__nav.selected-tab
+          %li.mypage__main__contents__nav.selected-tab#active-trade
             = link_to '#' do
               取引中
-          %li.mypage__main__contents__nav
+          %li.mypage__main__contents__nav#close-trade
             = link_to '#' do
               過去の取引
-        .maypage__main__contents__content
+        .maypage__main__contents__content#trade-result
           -if @trade_products&.present? && @trade_products.size > 0
             %ul
               - @trade_products.first(5).each do | trade_product |
