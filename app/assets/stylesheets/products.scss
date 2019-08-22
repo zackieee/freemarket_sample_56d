@@ -9,7 +9,7 @@
    .slide {
       width: 1440px;
       position: relative;
-       right: 0;
+      right: 0;
    }
    .slider {
       position: absolute;
@@ -144,7 +144,6 @@
             height: 200px;
             width: 210px;
             position: absolute;
-            z-index: 1;
          }
          &__sold-out {
             position: absolute;
