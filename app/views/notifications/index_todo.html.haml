@@ -1,0 +1,9 @@
+.wrapper
+  =render 'products/header'
+  - breadcrumb :todo_index
+  = render "layouts/breadcrumbs"
+  .user-main.sidebar
+    = render 'users/side-bar'
+    = render 'todo-list'
+  =render 'products/footer-top'
+  =render 'products/footer-bottom'

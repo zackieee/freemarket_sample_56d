@@ -48,8 +48,9 @@
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
             %p ブランド
-          .show-item__wrapper__contents__owner__detail__rights
-            = link_to "シャネル"
+          .selling_show-item__wrapper__contents__owner__detail__rights
+            - if @product.brand_id.present?
+              = link_to "#{@product.brand.name}"
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
             %p 商品の状態
@@ -84,9 +85,12 @@
       = simple_format(@product.text)
     .show-item__any
       .show-item__any__like
-        = icon 'far', 'heart'
-        %p いいね！
-        %p 8
+        - if user_signed_in?
+          = render partial: "favorite", locals: {product: @product}
+        - else
+          = icon 'far', 'heart'
+          いいね!
+          = @product.favorites.count
       .show-item__any__info
         = icon 'far', 'flag'
         %p 不適切な商品の報告

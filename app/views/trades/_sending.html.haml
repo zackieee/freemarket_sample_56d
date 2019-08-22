@@ -1,0 +1,34 @@
+//出品者の発送画面
+.trade-main__contents
+  .trade-main__contents__attention
+    .trade-main__contents__attention--headline
+      = icon 'fas fa-lg fa-flip-horizontal','truck'
+      %h2
+        発送してください。
+    .trade-main__contents__attention--text
+      商品が購入され支配されました。商品の発送を行ってください。
+  .trade-main__contents__link
+    = link_to '#' do
+      %p
+        商品が売れた後の流れ
+        = icon 'fas', 'chevron-right'
+    = link_to '#' do
+      %p
+        出品者のよくある質問
+        = icon 'fas', 'chevron-right'
+    = link_to '#' do
+      %p
+        らくらくメルカリ便とは？
+        = icon 'fas', 'chevron-right'
+  .trade-main__contents__send
+    = form_with url:product_trade_path, method: :patch,local: true do | f |
+      = f.submit '商品の発送をしたので、発送通知をする', class:'trade-main__contents__send--default-btn'
+      = link_to '#', class:'trade-main__contents__send--btn' do
+        発送方法を変更する
+      %p.trade-main__contents__send__text
+        ※配送のお問い合わせは
+        = link_to '#' do
+          こちら 
+        よりお願いします。
+        %br
+        （ヤマト運輸への直接のお問い合わせ、ご回答等はできませんのでご了承ください）

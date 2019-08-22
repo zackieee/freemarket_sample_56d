@@ -3,7 +3,7 @@
   - breadcrumb :edit_telephone
   = render "layouts/breadcrumbs"
   .user-main.sidebar
-    = render 'users/side-bar'
+    = render 'side-bar/edit_telephone'
     .user-main__contents.edit-form
       - if current_user&.tel != ""
         %h2.user-main__contents__title-edit.form-underline

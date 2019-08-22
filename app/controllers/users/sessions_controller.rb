@@ -1,4 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
+  before_action :notice_count,:todo_count, only: [:sign_out_confirm]
+
   def create
     # 入力値チェック
     if verify_recaptcha

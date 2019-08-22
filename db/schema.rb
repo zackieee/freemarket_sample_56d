@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_18_061345) do
+ActiveRecord::Schema.define(version: 2019_08_20_073406) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -109,6 +109,24 @@ ActiveRecord::Schema.define(version: 2019_08_18_061345) do
     t.index ["product_id"], name: "index_images_on_product_id"
   end
 
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "sender_id", null: false
+    t.bigint "receiver_id", null: false
+    t.bigint "product_id"
+    t.bigint "trade_id"
+    t.integer "action", null: false
+    t.string "title"
+    t.text "message"
+    t.integer "todo_status", default: 0, null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_notifications_on_product_id"
+    t.index ["receiver_id"], name: "index_notifications_on_receiver_id"
+    t.index ["sender_id"], name: "index_notifications_on_sender_id"
+    t.index ["trade_id"], name: "index_notifications_on_trade_id"
+  end
+
   create_table "product_brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "brand_id", null: false
@@ -141,6 +159,7 @@ ActiveRecord::Schema.define(version: 2019_08_18_061345) do
     t.string "name", null: false
     t.text "text", null: false
     t.bigint "category_id", null: false
+    t.integer "brand_id"
     t.integer "status_id"
     t.integer "postage_burden_id"
     t.integer "prefecture_id"
@@ -187,6 +206,7 @@ ActiveRecord::Schema.define(version: 2019_08_18_061345) do
     t.string "pay_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "trade_status", default: 0
     t.index ["buyer_id"], name: "index_trades_on_buyer_id"
     t.index ["product_id"], name: "index_trades_on_product_id"
     t.index ["seller_id"], name: "index_trades_on_seller_id"
@@ -209,6 +229,10 @@ ActiveRecord::Schema.define(version: 2019_08_18_061345) do
     t.date "birthday"
     t.string "tel"
     t.integer "sales_amount", default: 0
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -223,6 +247,10 @@ ActiveRecord::Schema.define(version: 2019_08_18_061345) do
   add_foreign_key "favorites", "products"
   add_foreign_key "favorites", "users"
   add_foreign_key "images", "products"
+  add_foreign_key "notifications", "products"
+  add_foreign_key "notifications", "trades"
+  add_foreign_key "notifications", "users", column: "receiver_id"
+  add_foreign_key "notifications", "users", column: "sender_id"
   add_foreign_key "product_brands", "brands"
   add_foreign_key "product_brands", "products"
   add_foreign_key "product_categories", "categories"

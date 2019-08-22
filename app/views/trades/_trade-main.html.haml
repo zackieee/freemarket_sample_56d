@@ -1,0 +1,25 @@
+.trade-main
+  %h2.trade-main__title
+    取引画面
+  - if current_user.id == @trade.seller_id
+    = seller_display_dispatcher(@trade)
+  - else current_user.id == @trade.buyer_id
+    = buyer_display_dispatcher(@trade)
+  .trade-main__contents__comment
+    .trade-main__contents__comment__area
+      // ここにコメントが追加されていく（予定）
+    .trade-main__contents__comment__form
+      = form_with model:@comment, method: :post, local: true do | f |
+        .trade-main__contents__comment__form--text
+          取引メッセージの内容は、必要に応じて事務局で確認しています。
+        .trade-main__contents__comment__form--input
+          = f.text_area :text
+        .trade-main__contents__comment__form--btn
+          = f.button type:'submit' do
+            = icon 'far', 'comment-alt'
+            取引メッセージを送る
+        .trade-main__contents__comment__form--info-text
+          ※お困りの際は
+          = link_to '#' do
+            よくある質問
+          をご確認ください。

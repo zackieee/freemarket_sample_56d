@@ -2,19 +2,44 @@
   %nav.side-bar__user-menu
     %ul
       %li
-        = link_to '',class: 'side-bar__links selected' do
+        = link_to user_path(current_user.id), class: 'side-bar__links selected' do
           マイページ
           = icon 'fas fa-lg ','angle-right', class: 'side-bar__links__icon'
       %li
-        = link_to '#',class: 'side-bar__links' do
-          お知らせ
-          = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
+        = link_to notifications_path ,class: 'side-bar__links' do
+          .side-bar__user-menu__notice
+            お知らせ
+          - if @notices&.present? && @notices > 0
+            - if @notices <= 99
+              .side-bar__user-menu__side-block
+                %p.side-bar__user-menu__side-block--notice-counts#notice-counts
+                  = @notices
+                = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
+            - else
+              .side-bar__user-menu__side-block
+                %p.side-bar__user-menu__side-block--notice-counts#notice-counts
+                  99+
+                = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
+          - else
+            = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
-        = link_to '#',class: 'side-bar__links' do
+        = link_to notifications_index_todo_path ,class: 'side-bar__links' do
           やることリスト
-          = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
+          - if @todo&.present? && @todo > 0
+            - if @todo <= 99
+              .side-bar__user-menu__side-block
+                %p.side-bar__user-menu__side-block--notice-counts#notice-counts
+                  = @todo
+                = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
+            - else
+              .side-bar__user-menu__side-block
+                %p.side-bar__user-menu__side-block--notice-counts#notice-counts
+                  99+
+              = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
+          - else
+            = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
-        = link_to '#',class: 'side-bar__links' do
+        = link_to product_favorites_path,class: 'side-bar__links' do
           いいね！一覧
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
