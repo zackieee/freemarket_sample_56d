@@ -1,0 +1,18 @@
+// 対象：購入者 内容：発送待ち画面
+.trade-main__contents
+  .trade-main__contents__attention
+    .trade-main__contents__attention--headline
+      = icon 'far fa-2x','clock'
+      %h2
+        発送をお待ちください。
+    .trade-main__contents__attention--text
+      出品者からの発送通知をお待ちください。
+  .trade-main__contents__link
+    = link_to '#' do
+      %p
+        購入した後の流れ
+        = icon 'fas', 'chevron-right'
+    = link_to '#' do
+      %p
+        購入者のよくある質問
+        = icon 'fas', 'chevron-right'

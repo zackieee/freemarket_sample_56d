@@ -1,0 +1,56 @@
+.user-main__contents__form.single-panel
+  = form_with model:current_user, url:users_edit_address_path,builder: WithErrorFormBuilder,method: :post,local: true do |f|
+    .user-main__contents__form__group
+      %label.user-main__contents__form__group__item
+        お名前
+      %span.user-main__contents__form__group__item--required
+        必須
+      = f.text_field :lastname, class:'user-main__contents__form__group__item__input', placeholder:'例) 山田', autofocus: true, value:"#{current_user.lastname}"
+      = f.text_field :firstname, class:'user-main__contents__form__group__item__input', placeholder:'例) 彩', value:"#{current_user.firstname}"
+    .user-main__contents__form__group
+      %label.user-main__contents__form__group__item
+        お名前カナ 
+      %span.user-main__contents__form__group__item--required
+        必須
+      = f.text_field :lastname_kana, class:'user-main__contents__form__group__item__input', placeholder:'例) ヤマダ', value:"#{current_user.lastname_kana}"
+      = f.text_field :firstname_kana, class:'user-main__contents__form__group__item__input', placeholder:'例) アヤ', value:"#{current_user.firstname_kana}"
+    = f.fields_for :address do |fields|
+      .user-main__contents__form__group
+        %label.user-main__contents__form__group__item{for:"postal_code"}
+          郵便番号
+        %span.user-main__contents__form__group__item--required
+          必須
+        = fields.text_field :postal_code, class:'user-main__contents__form__group__item__input', placeholder:'例) 1234567',maxlength:'7', value:"#{current_user.address.postal_code}"
+      .user-main__contents__form__group
+        %label.user-main__contents__form__group__item{for:"prefecture_id"}
+          都道府県
+        %span.user-main__contents__form__group__item--required
+          必須
+        %br
+        = fields.collection_select :prefecture_id, Prefecture.all, :id, :name,{prompt: "--",selected: current_user.address.prefecture_id}, {class: "prefecture_id"}
+      .user-main__contents__form__group
+        %label.user-main__contents__form__group__item
+          市区町村
+        %span.user-main__contents__form__group__item--required
+          必須
+        = fields.text_field :city, class:'user-main__contents__form__group__item__input', placeholder:'例) 横浜市緑区', value:"#{current_user.address.city}"
+      .user-main__contents__form__group
+        %label.user-main__contents__form__group__item
+          番地
+        %span.user-main__contents__form__group__item--required
+          必須
+        = fields.text_field :address_number, class:'user-main__contents__form__group__item__input', placeholder:'例) 青山1-1-1', value:"#{current_user.address.address_number}"
+      .user-main__contents__form__group
+        %label.user-main__contents__form__group__item
+          建物名
+        %span.user-main__contents__form__group__item--optional
+          任意
+        = fields.text_field :building_name, class:'user-main__contents__form__group__item__input', placeholder:'例) 柳ビル103', value:"#{current_user.address.building_name}"
+    .user-main__contents__form__group
+      %label.user-main__contents__form__group__item{for:"tel"}
+        携帯電話の番号
+      %span.user-main__contents__form__group__item--optional
+        任意
+      = f.telephone_field :tel, class:'user-main__contents__form__group__item__input', placeholder:'例) 09012345678',pattern:'\d*', value:"#{current_user.tel}"
+    .user-main__contents__form__group
+      = f.submit '変更する', class:'user-main__contents__form__group__btn--default'

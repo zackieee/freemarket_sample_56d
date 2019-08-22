@@ -8,85 +8,97 @@
       .mypage__main__header
         = image_tag 'mypage-background.jpg', height: '200px', width: '700px', class: 'mypage-background'
         .mypage__main__header__contents
-          = link_to users_edit_profile_path do
-            =image_tag 'icon.png', height: '60px', width: '60px', class: 'user-avater'
+          = link_to show_profile_user_path(current_user.id) do
+            .user-main__contents__form__group__item__profile__avator
+              %label.user-main__contents__form__group__item{for:"avatar"}
+                - if current_user.avatar.attached?
+                  = image_tag(current_user.avatar)
+                -else
+                  = image_tag('common/member_photo_noimage_thumb.png')
             %h2
-              user-name
+              ="#{current_user.nickname}"
             .mypage__main__header__contents__number
               .mypage__main__header__contents__number__rating
                 評価
                 %span
-                  4
+                  = @rating_count
               .mypage__main__header__contents__number__products
                 出品数
                 %span
-                  10
+                  = @trade_count
       .mypage__main__contents
         %ul.mypage__main__contents__nav
-          %li.mypage__main__contents__nav.selected-tab
+          %li.mypage__main__contents__nav.selected-tab#notice-list
             = link_to '#' do
               お知らせ
-          %li.mypage__main__contents__nav
+          %li.mypage__main__contents__nav#todo-list
             = link_to '#' do
               やることリスト
-        .maypage__main__contents__content
-          -if true
+        .maypage__main__contents__content#notice-result
+          - if @notifications&.present? && @notifications.size > 0
             %ul
-              - (1..5).each do | info |
+              - @notifications.first(5).each do | info |
                 %li.mypage__main__contents__content
-                  =link_to '#' do
-                    =image_tag 'mercari_profile.png', class:'mypage__main__contents__content__image', height: '48px', width: '48px'
+                  = link_to dispatcher_notification_path(info.id) do
+                    - if info.sender.avatar.attached?
+                      = image_tag info.sender.avatar, class:'mypage__main__contents__content__image', height: '48px', width: '48px'
+                    -else
+                      = image_tag 'mercari_profile.png', class:'mypage__main__contents__content__image', height: '48px', width: '48px'
                     .mypage__main__contents__content__text
-                      事務局から個別メッセージ「【新機能の紹介】商品画面で値引き可能かどうかを表示できるようになりました！」
+                      = info.title
                       .mypage__main__contents__content__time
                         = icon 'far fa-sm','clock'
                         %p
-                          4時間前
+                          %time(datetime="#{info.created_at}")= time_ago_in_words(info.created_at) + '前'
+                        - unless info.checked
+                          %p.user-main__contents__form__group__item--required
+                            未読
                     .mypage__main__contents__content__link-icon
                       = icon 'fas fa-lg','angle-right'
-            .mypage__main__contents__content__btn
-              = link_to '#' do
-                一覧を見る
+            - if @notifications.size > 5
+              .mypage__main__contents__content__btn
+                = link_to '#' do
+                  一覧を見る
           - else 
             .mypage__main__contents__content--none
               %h3
                 お知らせはありません
-
       .mypage__main__contents.second-contents
         .mypage__main__contents__header
           %h2
             購入した商品
         %ul.mypage__main__contents__nav
-          %li.mypage__main__contents__nav.selected-tab
+          %li.mypage__main__contents__nav.selected-tab#active-trade
             = link_to '#' do
               取引中
-          %li.mypage__main__contents__nav
+          %li.mypage__main__contents__nav#close-trade
             = link_to '#' do
               過去の取引
-        .maypage__main__contents__content
-          -if false
+        .maypage__main__contents__content#trade-result
+          -if @trade_products&.present? && @trade_products.size > 0
             %ul
-              - (1..5).each do | info |
+              - @trade_products.first(5).each do | trade_product |
                 %li.mypage__main__contents__content
-                  =link_to '#' do
-                    =image_tag 'mercari_profile.png', class:'mypage__main__contents__content__image', height: '48px', width: '48px'
+                  = link_to dispatcher_notification_path(trade_product.id) do
+                    - if trade_product.product.images.attached?
+                      = image_tag trade_product.product.images.first, class:'mypage__main__contents__content__image', height: '48px', width: '48px'
+                    -else
+                      = image_tag 'mercari_profile.png', class:'mypage__main__contents__content__image', height: '48px', width: '48px'
                     .mypage__main__contents__content__text
-                      事務局から個別メッセージ「【新機能の紹介】商品画面で値引き可能かどうかを表示できるようになりました！」
+                      = trade_product.product.name
                       .mypage__main__contents__content__time
                         = icon 'far fa-sm','clock'
                         %p
-                          4時間前
+                          %time(datetime="#{trade_product.created_at}")= time_ago_in_words(trade_product.created_at) + '前'
                     .mypage__main__contents__content__link-icon
                       = icon 'fas fa-lg','angle-right'
-            .mypage__main__contents__content__btn
-              = link_to '#' do
-                一覧を見る
+            - if @trade_products.size > 5
+              .mypage__main__contents__content__btn
+                = link_to '#' do
+                  一覧を見る
           - else 
-          .mypage__main__contents__content--none
-            %h3
-              取引中の商品がありません
-
-      .mypage__main__trade
-
+            .mypage__main__contents__content--none
+              %h3
+                取引中の商品がありません
   =render 'products/footer-top'
   =render 'products/footer-bottom'

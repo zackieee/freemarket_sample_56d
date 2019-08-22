@@ -1,0 +1,8 @@
+.wrapper
+  =render 'products/header'
+  - breadcrumb :show_profile
+  = render "layouts/breadcrumbs"
+  .user-show
+    =render 'profile'
+  =render 'products/footer-top'
+  =render 'products/footer-bottom'

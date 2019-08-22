@@ -6,10 +6,12 @@
         SOLD
       .item--list__image__sold-out__tag
   .item--list__image__text
-    = link_to product.name, product_path(product)
+    = link_to product_path(product) do
+      = truncate(product.name, length:14)
     .item--list__image__text__wrapper
       .item--list__image__text__wrapper__value
-        %p  ¥ #{product.price} 
+        %p  ¥ #{product.price.to_s(:delimited, delimiter: ',')} 
       .item--list__image__text__wrapper__like
         = icon 'far', 'heart'
-        %span 1
+        .short-upper
+          = product.favorites.count

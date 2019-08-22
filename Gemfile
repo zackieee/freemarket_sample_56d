@@ -48,6 +48,9 @@ group :development, :test do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
+  # 開発環境でメール送信せずにメール確認するためのgem
+  # 導入すると「http://localhost:3000/letter_opener」から見れます
+  gem 'letter_opener_web', '~> 1.0'
 end
 
 group :development do
@@ -83,6 +86,7 @@ gem 'active_hash'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2', '~> 0.5.4'
 gem 'omniauth-facebook'
+gem 'ransack'
 
 #recaptcha用
 gem 'recaptcha'
@@ -102,3 +106,5 @@ gem 'gretel'
 
 gem "aws-sdk-s3", require: false
 
+# 階層構造
+gem 'awesome_nested_set'

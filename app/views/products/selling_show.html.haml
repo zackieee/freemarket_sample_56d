@@ -6,10 +6,10 @@
     .show-item__wrapper
       .show-item__wrapper__contents
         .show-item__wrapper__contents__image
-          = image_tag @product.images.first, height: '260', width: '300'
+          = image_tag @product.images.first, height: '260', width: '300', class: "slide"
         -# 売り切れの場合
         - if @product.sales_status_id  == 2
-          .show-item__wrapper__contents__sold-out
+          .show-item__wrapper__contents__sold-out__text
             SOLD
           .show-item__wrapper__contents__sold-out__tag
         .show-item__wrapper__contents__list
@@ -20,31 +20,39 @@
           .selling_show-item__wrapper__contents__owner__detail__left
             %p 出品者
           .selling_show-item__wrapper__contents__owner__detail__right
-            = link_to @product.seller.nickname
-            = icon 'far', 'laugh-squint', class: "good"
-            1
-            = icon 'far', 'meh', class: "normal"
-            1
-            = icon 'far', 'angry', class: "bad"
-            1
+            = link_to @product.seller.nickname, show_profile_user_path(@product.seller.id)
+            = icon 'fas', 'smile', class: "good"
+            = @rating_good
+            = icon 'fas', 'meh', class: "normal"
+            = @rating_normal
+            = icon 'fas', 'frown', class: "bad"
+            = @rating_bad
         .selling_show-item__wrapper__contents__owner__detail
           .selling_show-item__wrapper__contents__owner__detail__left
             %p カテゴリー
           .selling_show-item__wrapper__contents__owner__detail__right
-            = link_to "aws"
+            = link_to "#{@category_parent.name}"
             .arow
               = link_to '' do
                 = icon 'fas', 'angle-right'
-              = link_to "aws"
-            .arow-second
-              = link_to '' do
-                = icon 'fas', 'angle-right'
-              = link_to "aws" 
+              = link_to "#{@category_children.name}"
+            - unless @product.category.depth == 1
+              .arow-second
+                = link_to '' do
+                  = icon 'fas', 'angle-right'
+                = link_to "#{@category_grandchildren.name}" 
         .selling_show-item__wrapper__contents__owner__detail
           .selling_show-item__wrapper__contents__owner__detail__lefts
             %p ブランド
           .selling_show-item__wrapper__contents__owner__detail__rights
-            = link_to "シャネル"
+            - if @product.brand_id.present?
+              = link_to "#{@product.brand.name}"
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__lefts
+            %p サイズ
+          .selling_show-item__wrapper__contents__owner__detail__rights
+            - if @product.size_id.present?
+              = link_to "#{@product.size.data}"
         .selling_show-item__wrapper__contents__owner__detail
           .selling_show-item__wrapper__contents__owner__detail__lefts
             %p 商品の状態
@@ -66,11 +74,11 @@
           .selling_show-item__wrapper__contents__owner__detail__rights
             %p #{@product.delivery_days.name}
     .selling_show-item__value
-      %h1 ¥#{@product.price}
+      %h1 ¥#{@product.price.to_s(:delimited, delimiter: ',')}
       %p (税込)
       %span 送料込み
     .selling_show-item__text
-      %span #{@product.text}
+      = simple_format(@product.text)
   .selling_show-item__second
     .selling_show-item__edit
       = link_to "商品の編集", edit_product_path(@product)
@@ -80,3 +88,14 @@
       = link_to "商品の削除", product_path(@product), method: :delete, data: { confirm: "本当に削除してよろしいでしょうか？"}
 =render 'footer-top'
 =render 'footer-bottom'
+
+:javascript
+    $(".show-item__wrapper__contents__list__img").on("mouseover", function(){
+      $(this).removeClass("show-item__wrapper__contents__list__img")
+      var src = $(this).attr('src')
+      $(".slide").attr('src', src)
+    });
+
+    $(".show-item__wrapper__contents__list__img").on("mouseout", function(){
+     $(this).addClass("show-item__wrapper__contents__list__img")
+    })

@@ -83,6 +83,11 @@
       width: 100%;
       margin: 10% 0 3% 0;
       word-break: break-all;
+      p{
+        font-size:16px;
+        color:#333;
+      }
+
     }
     &__any {
       display: flex;
@@ -206,23 +211,22 @@
             }
           }
           a {
-          margin: 0 5% 0 3%; 
           text-decoration: none;
           display: block;
           color: #0099E8;
           font-size: 14px;
         }
         .good {
-          margin-top: 15%; 
-          color: pink;
+          margin-top: 5%; 
+          color:#ef5185;
         }
         .normal {
-          margin-left: 10%;
-          color: orange;
+          margin-left: 5%;
+          color: #fba933;
         }
         .bad {
-          margin-left: 10%;
-          color: blue;
+          margin-left: 5%;
+          color: #6ab5d8;
         }
        }
       } 

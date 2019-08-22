@@ -28,7 +28,7 @@
     .user-main__contents__form__group
       %p.user-main__contents__form__group__confirm-text--bold
         認証番号を再送することもできます。もう一度電話番号を入力して下さい。
-      = link_to '#', class:'user-main__contents__form__group__confirm-text--link' do
+      = link_to users_edit_telephone_path, class:'user-main__contents__form__group__confirm-text--link' do
         電話番号を再度入力する
       %p.user-main__contents__form__group__confirm-text
         ※SMSが届かない場合は

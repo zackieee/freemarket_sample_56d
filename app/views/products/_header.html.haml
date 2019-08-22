@@ -5,38 +5,88 @@
         = image_tag 'logo.png', width: '133', alt: 'アイコン'
     .header--search
       .header--search__input
-        %input.search-register{type: "text", name: "name", placeholder: "何かお探しですか？", autocomplete: "off", style: "font-size:100%;"}
+        = form_tag products_search_result_page_path, method: "get" do
+          = text_field_tag :search
+          = submit_tag '', type: "hidden", name: nil
       .header--search__icon
         = link_to '' do
           = icon 'fas', 'search', class: 'icon'
   .header--select
     .header--select__category
       = link_to '' do
-        = icon 'fas', 'list', class: "awsome"
-        カテゴリーから探す    
-    .header--select__category
+        = icon 'fas', 'list'
+      = link_to "カテゴリーから探す", root_path, class: "search-text"
+      .header--select__category__wrapper
+        .header--select__category__wrapper__drop
+          - @category.each do |parent|
+            = link_to '', data: {category_id: parent.id}, class: "drop-list" do
+              = parent.name
+        .header--select__category__wrapper__second
+        .header--select__category__wrapper__third
+    .header--select__right
       = link_to '' do
-        = icon 'fas', 'tag', class: "awsome"
-        ブランドから探す
+        = icon 'fas', 'tag'
+      = link_to "ブランドから探す", root_path, class: "search-text"
     - if user_signed_in?
       .header--user--status--login
-        = link_to '' do
-          = icon 'fas', 'heart'
-          いいね！一覧
-        = link_to '' do
-          = icon 'fas', 'bell'
-          お知らせ
-        = link_to '' do
-          = icon 'fas', 'tag'
-          やることリスト
+        .header--user--status--login__link
+          = link_to product_favorites_path do
+            .header--user--status--login__link__transparent
+              = icon 'far fa-lg', 'heart'
+              - if @nice != nil  && @nice != 0
+                - if @nice <= 99
+                  .side-bar__user-menu__side-block
+                    %p.side-bar__user-menu__side-block--notice-counts#notice-counts
+                      = @nice
+                - else
+                  .side-bar__user-menu__side-block
+                    %p.side-bar__user-menu__side-block--notice-counts#notice-counts
+                      99+
+            %p.header--user--status--login__link__text
+              いいね！一覧
+        .header--user--status--login__link
+          = link_to notifications_path do
+            .header--user--status--login__link__transparent
+              = icon 'far fa-lg', 'bell'
+              - if @notices != nil  && @notices != 0
+                - if @notices <= 99
+                  .side-bar__user-menu__side-block
+                    %p.side-bar__user-menu__side-block--notice-counts#notice-counts
+                      = @notices
+                - else
+                  .side-bar__user-menu__side-block
+                    %p.side-bar__user-menu__side-block--notice-counts#notice-counts
+                      99+
+            %p.header--user--status--login__link__text
+              お知らせ
+        .header--user--status--login__link
+          = link_to notifications_index_todo_path do
+            .header--user--status--login__link__transparent
+              = icon 'fas fa-lg', 'check'
+              - if @todo != nil  && @todo != 0
+                - if @todo <= 99
+                  .side-bar__user-menu__side-block
+                    %p.side-bar__user-menu__side-block--notice-counts#notice-counts
+                      = @todo
+                - else
+                  .side-bar__user-menu__side-block
+                    %p.side-bar__user-menu__side-block--notice-counts#notice-counts
+                      99+
+            %p.header--user--status--login__link__text
+              やることリスト
       .mypage-link
-        = link_to users_edit_profile_path do
-          = image_tag 'icon.png', width: "35", class: "img"
-        = link_to "マイページ", "/users/mypage", class: "mypage-btn"
+        = link_to user_path(current_user.id) do
+          - if current_user.avatar.attached?
+            = image_tag(current_user.avatar)
+          -else
+            = image_tag('common/member_photo_noimage_thumb.png')
+          %p.mypage-btn
+            マイページ
     - else    
       .header--btn
         .header--btn__signupbtn
           = link_to "新規会員登録", new_user_registration_path
         .header--btn__logbtn
           = link_to "ログイン",  user_session_path
+
 

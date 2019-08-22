@@ -1,0 +1,62 @@
+=render 'header'
+.result-view
+  .result-view__side-bar
+    = search_form_for(@q, url: products_search_result_page_path) do |f|
+      .result-view__side-bar__header
+        = f.search_field '', placeholder:'並び替え', maxlength: '40'
+      .result-view__side-bar__footer
+        %p 詳細検索
+        .result-view__side-bar__footer__form
+          = icon 'fas', 'plus'
+          = f.label :text_cont, 'キーワードを追加する'
+          = f.search_field :text_cont, placeholder: "例) 値下げ", class: "select"
+        .result-view__side-bar__footer__form
+          = icon 'fas', 'list'
+          = f.label :category_id_eq, 'カテゴリーを選択する'
+          = f.collection_select :category_id_eq, @categories, :id, :name, {prompt: "すべて"}, class: "select"
+        .result-view__side-bar__footer__form
+          = icon 'fas', 'tag'
+          = f.label :brand_id_eq, 'ブランド名から探す'
+          = f.collection_select :brand_id_eq, @brands, :id, :name, {prompt: "例) シャネル"}, class: "select"
+        .result-view__side-bar__footer__form
+          = icon 'fas', 'expand'
+          = f.label :size_id_eq, 'サイズを指定する'
+          = f.collection_select :size_id_eq, @sizes, :id, :data, {prompt: "すべて"}, class: "select"
+        .result-view__side-bar__footer__form
+          = icon 'fab', 'bitcoin'
+          = f.label :price_cont, '価格'
+          = f.search_field :price_cont, placeholder: "選択してください", class: "select"
+          .result-view__side-bar__footer__form__price
+            = f.search_field :price_cont, placeholder: "¥Min", class: "select"
+            = f.label :price_cont, '~'
+            = f.search_field :price_cont, placeholder: "¥Max", class: "select"
+        .result-view__side-bar__footer__form
+          = icon 'fas', 'star'
+          =  f.label :status_id_in, '商品の状態'
+        .result-view__side-bar__footer__form__checkbox 
+          =  f.collection_check_boxes :status_id_in, @status, :id, :name 
+        .result-view__side-bar__footer__form
+          = icon 'fas', 'car'
+          =  f.label :postage_burden_id_in, '配送料の負担'
+          .result-view__side-bar__footer__form__checkbox
+            =  f.collection_check_boxes :postage_burden_id_in, @postage_burdens, :id, :name
+        .result-view__side-bar__footer__form
+          = icon 'fas', 'cart-plus'
+          =  f.label :sales_status_id_in, '販売状況'
+          .result-view__side-bar__footer__form__checkbox
+            =  f.collection_check_boxes :sales_status_id_in, @sales_status, :id, :name
+          .result-view__side-bar__footer__form__btn
+            = f.submit 'クリア', class: 'clear'
+            = f.submit '完了', class: 'complete'
+  .result-view__products
+    .result-view__products__heading
+      = "#{@search}" + "の検索結果"
+    .result-view__products__sum
+      %p.hit-count
+        = "#{@search.length}" + "件の表示"
+    .result-view__products__list
+      .item--list
+        = render @products
+      
+=render 'footer-top'
+=render 'footer-bottom'

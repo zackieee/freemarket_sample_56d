@@ -1,0 +1,17 @@
+- if product.sales_status.id == 1
+  %li.selling-page__main__contents__content
+    -# 実際はproduct_path(product)に飛ばす。
+    = link_to product_path(product) do
+      - if product.images.first
+        = image_tag product.images.first, class:'selling-page__main__contents__content__image', height: '48px', width: '48px'
+      - else
+        = image_tag 'mercari_profile.png', class:'selling-page__main__contents__content__image', height: '48px', width: '48px'
+      .selling-page__main__contents__content__middle
+        .selling-page__main__contents__content__middle__text
+          = product.name
+        .selling-page__main__contents__content__bottom
+          .selling-page__main__contents__content__bottom__icon
+            ¥
+            = product.price
+      .selling-page__main__contents__content__link-icon
+        = icon 'fas fa-lg','angle-right'

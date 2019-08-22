@@ -119,8 +119,11 @@
           display:flex;
           align-items:center;
           text-decoration: none;
+          width:668px;
           color:#333;
           &__image {
+            width:48px;
+            height:48px;
             display:inline-block;
           }
           &__text {
@@ -132,6 +135,7 @@
         }
         &__text {
           margin: 0 40px 0 20px;
+          width:85%;
           font-size:14px;
           color:#333;
           p{
@@ -171,6 +175,10 @@
       &__content:hover{
         background-color:#f5f5f5;
       }
+      &__content:last-child{
+        border:none;
+      }
+
     }
     .second-contents{
       margin-top:40px;

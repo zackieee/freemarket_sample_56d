@@ -1,0 +1,20 @@
+.wrapper
+  =render 'products/header'
+  - breadcrumb :favorites_index
+  = render "layouts/breadcrumbs"
+  .user-main.sidebar
+    = render 'side-bar/favorites'
+    .user-main__contents.edit-form
+      %h2.user-main__contents__title-edit.form-underline
+        いいね！一覧
+        .selling-page__main__contents.second-contents
+          .maypage__main__contents__content
+            - if @products
+              %ul
+                = render partial: 'favorites_index', collection: @products, as: "product"
+            - else
+              .selling-page__main__contents__content--none
+                %h3
+                  取引中の商品がありません
+  =render 'products/footer-top'
+  =render 'products/footer-bottom'

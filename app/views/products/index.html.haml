@@ -1,30 +1,33 @@
 =render 'header'
 .products
-  .products--heading
-    = link_to '' do
-      = image_tag 'heading-image.png', height: '400'
-    .arrow
-    .arrow-second
-    .circle-wrapper
-      .circle
-      .circle
-    -# .products--heading__backimage
-    -#   = image_tag 'back-image.png', alt: '', height: '400', width: '1500', class: ''
-    -# .products--heading__wrapper
-    -#   .products--heading__wrapper__text
-    -#     %h1 スマホでかんたん
-    -#     %h1 フリマアプリ
-    -#     %p メルカリはスマホカメラからすぐに出品できる
-    -#     %p 購入時も安心な独自システムのアプリです
-    -#     = link_to '' do
-    -#       = image_tag '//www-mercari-jp.akamaized.net/assets/img/common/common/app-store.svg?863303983', class: "dllink-image", width: "170"
-    -#     = link_to '' do
-    -#       = image_tag '//www-mercari-jp.akamaized.net/assets/img/common/common/google-play.svg?863303983', class: "dllink-image", width: "170"
-    -#   .products--heading__wrapper__headingimage
-    -#     = image_tag 'top-image', width: '450'
+  .slide.auto-move
+    .products--heading
+      = link_to '' do
+        = image_tag 'heading-image.png', height: '400'
+  .slider.auto-move
+    .products--heading__backimage
+      = image_tag 'back-image.png', alt: '', height: '400', width: '1440', class: ''
+    .products--heading__wrapper
+      .products--heading__wrapper__text
+        %h1 スマホでかんたん
+        %h1 フリマアプリ
+        %p メルカリはスマホカメラからすぐに出品できる
+        %p 購入時も安心な独自システムのアプリです
+        = link_to '' do
+          = image_tag '//www-mercari-jp.akamaized.net/assets/img/common/common/app-store.svg?863303983', class: "dllink-image", width: "170"
+        = link_to '' do
+          = image_tag '//www-mercari-jp.akamaized.net/assets/img/common/common/google-play.svg?863303983', class: "dllink-image", width: "170"
+      .products--heading__wrapper__headingimage
+        = image_tag 'top-image', width: '450'
+.arrow-cover
+  .arrow
+  .arrow-second
+  .circle-wrapper
+    .circle
+    .circle-second
 .item
   .item--heading
-    %h1 ピックアップカテゴリー
+    %h1 ピックアップアイテム
     .item--new
       = link_to "新着アイテム" 
   .item--list
@@ -33,9 +36,9 @@
     = link_to "全ての商品を見る", producs_all_products_path
 .item
   .item--heading
-    %h1 ピックアップカテゴリー
+    %h1 ピックアップアイテム
     .item--new
-      = link_to "レディース新着アイテム" 
+      = link_to "新着アイテム" 
   .item--list
     .item--list__image
       = link_to '#' do
@@ -89,3 +92,74 @@
     = link_to "全ての商品を見る", class: "item-all"
 =render 'footer-top'
 =render 'footer-bottom'
+:javascript
+  var page = 0;
+  var lastPage = parseInt($(".auto-move").length-1);
+  $(".auto-move").css("display","none");
+  $(".auto-move").eq(page).css("display","block");
+
+  //（1）ページ切換用、自作関数作成
+  function changePage(){
+    $(".slider").addClass("appear")
+    $(".auto-move").animate({'right' : '1840px' }, 500);
+    $(".auto-move").eq(page).animate({'right' : 0 }, 500);
+  };
+
+  //（2）～秒間隔でイメージ切換の発火設定
+  var Timer;
+  function startTimer(){
+  Timer =setInterval(function(){
+            if(page === lastPage){
+                          page = 0;
+                          changePage();
+                }else{
+                          page ++;
+                          changePage();
+            };
+      },5000);
+  }
+  //（3）～秒間隔でイメージ切換の停止設定
+  function stopTimer(){
+  clearInterval(Timer);
+  }
+
+  //（4）タイマースタート
+  startTimer();
+  
+  //ここからボタン対応js
+  var menu = $('.slider'), // スライドインするメニューを指定
+      menuBtn = $('.arrow,.arrow-second'), // メニューボタンを指定
+      body = $(".slide"),     
+      menuWidth = menu.outerWidth();                
+    
+    // メニューボタンをクリックした時の動き
+    menuBtn.on('click', function(){
+    $(".slider").addClass("appear")
+    // body に open クラスを付与する
+    body.toggleClass('open');
+    if(body.hasClass('open')){
+        // open クラスが body についていたらメニューをスライドインする
+        body.animate({'right' : '1440px' }, 500);            
+        menu.animate({'right' : 0 }, 500);                    
+    } else {
+        // open クラスが body についていなかったらスライドアウトする
+        menu.animate({'right' : '-1440px' }, 500);
+        body.animate({'right' : 0 }, 500);          
+    }       
+  });
+    var menu = $('.slider'),
+        menuBtn = $('.circle,.circle-second'),
+        body = $(".slide"),     
+        menuWidth = menu.outerWidth();                
+    
+    menuBtn.on('mouseover', function(){
+    $(".slider").addClass("appear")
+    body.toggleClass('open');
+    if(body.hasClass('open')){
+        body.animate({'right' : '1440px' }, 500);            
+        menu.animate({'right' : 0 }, 500);                    
+    } else {
+        menu.animate({'right' : '-1440px' }, 500);
+        body.animate({'right' : 0 }, 500);          
+    }       
+  });

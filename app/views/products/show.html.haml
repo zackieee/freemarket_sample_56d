@@ -1,7 +1,4 @@
 =render 'header'
-.notification
-  - flash.each do |key, value|
-    = content_tag :div, value, class: key
 .show.crearfix
   .show-item
     %h1
@@ -9,13 +6,12 @@
     .show-item__wrapper
       .show-item__wrapper__contents
         .show-item__wrapper__contents__image
-          = image_tag @product.images.first, height: '260', width: '300'
-        -# 売り切れの場合
-        - if @product.sales_status_id  == 2
-          .show-item__wrapper__contents__sold-out
-            .show-item__wrapper__contents__sold-out__tag
+          = image_tag @product.images.first, height: '260', width: '300', class: "slide"
+          -# 売り切れの場合
+          - if @product.sales_status_id  == 2
             .show-item__wrapper__contents__sold-out__text
               SOLD
+            .show-item__wrapper__contents__sold-out__tag
         .show-item__wrapper__contents__list
           - @product.images.each do |image|
             = image_tag image, height: '50', width: '60', class: "show-item__wrapper__contents__list__img"
@@ -24,31 +20,39 @@
           .show-item__wrapper__contents__owner__detail__left
             %p 出品者
           .show-item__wrapper__contents__owner__detail__right
-            = link_to @product.seller.nickname
-            = icon 'far', 'laugh-squint', class: "good"
-            1
-            = icon 'far', 'meh', class: "normal"
-            1
-            = icon 'far', 'angry', class: "bad"
-            1
+            = link_to @product.seller.nickname, show_profile_user_path(@product.seller.id)
+            = icon 'fas', 'smile', class: "good"
+            = @rating_good
+            = icon 'fas', 'meh', class: "normal"
+            = @rating_normal
+            = icon 'fas', 'frown', class: "bad"
+            = @rating_bad
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__left
             %p カテゴリー
           .show-item__wrapper__contents__owner__detail__right
-            = link_to "aws"
+            = link_to "#{@category_parent.name}"
             .arow
               = link_to '' do
                 = icon 'fas', 'angle-right'
-              = link_to "aws"
-            .arow-second
-              = link_to '' do
-                = icon 'fas', 'angle-right'
-              = link_to "aws" 
+              = link_to "#{@category_children.name}"
+            - unless @product.category.depth == 1
+              .arow-second
+                = link_to '' do
+                  = icon 'fas', 'angle-right'
+                = link_to "#{@category_grandchildren.name}" 
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
             %p ブランド
           .show-item__wrapper__contents__owner__detail__rights
-            = link_to "シャネル"
+            - if @product.brand_id.present?
+              = link_to "#{@product.brand.name}"
+        .show-item__wrapper__contents__owner__detail
+          .show-item__wrapper__contents__owner__detail__lefts
+            %p サイズ
+          .show-item__wrapper__contents__owner__detail__rights
+            - if @product.size_id.present?
+              = link_to "#{@product.size.data}"
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__lefts
             %p 商品の状態
@@ -70,7 +74,7 @@
           .show-item__wrapper__contents__owner__detail__rights
             %p #{@product.delivery_days.name}
     .show-item__value
-      %h1 ¥#{@product.price}
+      %h1 ¥#{@product.price.to_s(:delimited, delimiter: ',')}
       %p (税込)
       %span 送料込み
     - if @product.sales_status_id  == 1
@@ -80,12 +84,15 @@
       .show-item__no-buy
         %p 売り切れました
     .show-item__text
-      %span #{@product.text}
+      = simple_format(@product.text)
     .show-item__any
       .show-item__any__like
-        = icon 'far', 'heart'
-        %p いいね！
-        %p 8
+        - if user_signed_in?
+          = render partial: "favorite", locals: {product: @product}
+        - else
+          = icon 'far', 'heart'
+          いいね!
+          = @product.favorites.count
       .show-item__any__info
         = icon 'far', 'flag'
         %p 不適切な商品の報告
@@ -209,3 +216,14 @@
     = link_to '' do
       = image_tag 'logo-white.png', class: 'logo-white'
     %p © 2019 Mercar
+
+:javascript
+    $(".show-item__wrapper__contents__list__img").on("mouseover", function(){
+      $(this).removeClass("show-item__wrapper__contents__list__img")
+      var src = $(this).attr('src')
+      $(".slide").attr('src', src)
+    });
+
+    $(".show-item__wrapper__contents__list__img").on("mouseout", function(){
+     $(this).addClass("show-item__wrapper__contents__list__img")
+    })

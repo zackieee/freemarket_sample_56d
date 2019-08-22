@@ -1,0 +1,9 @@
+.wrapper
+  =render 'products/header'
+  - breadcrumb :trade_show
+  = render "layouts/breadcrumbs"
+  .trade-show
+    = render 'side-bar'
+    = render 'trade-main'
+  =render 'products/footer-top'
+  =render 'products/footer-bottom'
