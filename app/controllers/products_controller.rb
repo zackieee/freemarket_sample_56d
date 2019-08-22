@@ -6,7 +6,6 @@ class ProductsController < ApplicationController
   before_action :todo_count,   only: [:index,:all_products,:show,:selling_index,:buyer_index,:selling_show]
   before_action :set_product, only: [:show, :buy, :selling_show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show, :all_products]
-  before_action :set_category
 
   def index
     @products = Product.where.not(seller_id: current_user&.id).order('id DESC').limit(4)
@@ -159,16 +158,12 @@ class ProductsController < ApplicationController
   end
   
   private
-   def product_params
-    params.require(:product).permit(:name, :text, :category_id, :brand_id, :price, :status_id, :prefecture_id, :postage_burden_id, :delivery_days_id, images: [] ).merge(seller_id: current_user.id)
-   end
+    def product_params
+      params.require(:product).permit(:name, :text, :category_id, :brand_id, :price, :status_id, :prefecture_id, :postage_burden_id, :delivery_days_id, images: [] ).merge(seller_id: current_user.id)
+    end
 
-   def set_product
-    @product = Product.find(params[:id])
-   end
-
-    def set_category
-      @category = Category.where(depth: 0)
+    def set_product
+      @product = Product.find(params[:id])
     end
 
     def search_params

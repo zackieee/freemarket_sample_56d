@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :basic_auth, if: :production?
   protect_from_forgery with: :exception
+  before_action :set_category
 
   def after_sign_in_path_for(resource)
     root_path
@@ -36,4 +37,9 @@ class ApplicationController < ActionController::Base
       username == ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]
     end
   end
+
+  def set_category
+    @category = Category.where(depth: 0)
+  end
+
 end
