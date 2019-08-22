@@ -53,7 +53,7 @@
       = "#{@search}" + "の検索結果"
     .result-view__products__sum
       %p.hit-count
-        1~100件の表示
+        = "#{@search.length}" + "件の表示"
     .result-view__products__list
       .item--list
         = render @products
