@@ -21,7 +21,7 @@
         .result-view__side-bar__footer__form
           = icon 'fas', 'expand'
           = f.label :size_id_eq, 'サイズを指定する'
-          = f.collection_select :size_id_eq, @sizes, :id, :name, {prompt: "すべて"}, class: "select"
+          = f.collection_select :size_id_eq, @sizes, :id, :data, {prompt: "すべて"}, class: "select"
         .result-view__side-bar__footer__form
           = icon 'fab', 'bitcoin'
           = f.label :price_cont, '価格'
