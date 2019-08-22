@@ -25,7 +25,7 @@ set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
 set :keep_releases, 5
 
-set :linked_files, %w{ config/credentials.yml.enc }
+# set :linked_files, %w{ config/credentials.yml.enc }
 # set :linked_files, fetch(:linked_files, []).push("config/master.key")
 
 # デプロイ処理が終わった後、Unicornを再起動するための記述
@@ -43,9 +43,9 @@ namespace :deploy do
   #     end
   #     upload!('config/credentials.yml.enc', "#{shared_path}/config/credentials.yml.enc")
   #   end
-  # end
-  before :starting, 'deploy:upload'
-  after :finishing, 'deploy:cleanup'
+  # # end
+  # before :starting, 'deploy:upload'
+  # after :finishing, 'deploy:cleanup'
 end
 
 set :default_env, {
