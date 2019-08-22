@@ -3,6 +3,28 @@
   width: 280px;
   margin-right: 40px;
   &__user-menu {
+    // お知らせカウント専用
+    &__side-block{
+      display:flex;
+      align-items:center;
+      &--notice-counts{
+        display:inline-block;
+        width:24px;
+        height:24px;
+        margin-right:10px;
+        text-align: center;
+        font-size:10px;
+        color: #fff;
+        line-height: 24px;
+        background: #ea352d;
+        border-radius: 50%;
+      }
+      i{
+        padding-right: 20px;
+        transition: all ease-out .2s;
+        color: #ccc;  
+      }
+    }
     ul {
       background-color: #FFFFFF;
       h3 {

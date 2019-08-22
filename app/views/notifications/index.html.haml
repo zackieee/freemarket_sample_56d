@@ -1,0 +1,9 @@
+.wrapper
+  =render 'products/header'
+  - breadcrumb :notice_index
+  = render "layouts/breadcrumbs"
+  .user-main.sidebar
+    = render 'side-bar/notifications_index'
+    = render 'notice-list'
+  =render 'products/footer-top'
+  =render 'products/footer-bottom'

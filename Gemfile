@@ -48,6 +48,9 @@ group :development, :test do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
+  # 開発環境でメール送信せずにメール確認するためのgem
+  # 導入すると「http://localhost:3000/letter_opener」から見れます
+  gem 'letter_opener_web', '~> 1.0'
 end
 
 group :development do

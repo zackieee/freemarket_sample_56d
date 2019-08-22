@@ -1,0 +1,28 @@
+.user-main
+  .user-main__contents.login-form
+    .user-main__contents__form.form-underline.top-panel
+      .user-main__contents__form__group
+        %p.user-main__contents__form__group__info-text.text-center
+          アカウントをお持ちでない方はこちら
+        =link_to new_user_registration_path, class:'user-main__contents__form__group__btn--signup' do
+          新規会員登録
+    .user-main__contents__form.middle-panel
+      .user-main__contents__form__group.nallow-margin
+        .user-main__contents__form__group__btn.nallow-margin
+          =link_to user_facebook_omniauth_authorize_path, class:'user-main__contents__form__group__btn--facebook none-radius', method: :post do
+            = icon 'fab', 'facebook-square', class: "contents__btn--icon"
+            Facebookでログイン
+      .user-main__contents__form__group.nallow-margin
+        .user-main__contents__form__group__btn.nallow-margin
+          =link_to user_google_oauth2_omniauth_authorize_path, class:'user-main__contents__form__group__btn--google none-radius', method: :post do
+            Googleでログイン
+    .user-main__contents__form.inner-panel
+      = form_with model: resource, as: resource_name, url: confirmation_path(resource_name), local: true, html: { method: :post } do |f|
+        .error-messages.text-center
+          %p
+            = alert
+        .user-main__contents__form__group
+          %label.user-main__contents__form__group__item{for:"email"}
+          = f.email_field :email, class:'user-main__contents__form__group__item__input none-top-margin', autofocus: true, placeholder:'メールアドレス',value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
+        .user-main__contents__form__group
+          = f.submit '承認メールを再送信', class:'user-main__contents__form__group__btn--default'
