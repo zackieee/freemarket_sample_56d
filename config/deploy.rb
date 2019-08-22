@@ -30,10 +30,6 @@ set :keep_releases, 5
 
 # デプロイ処理が終わった後、Unicornを再起動するための記述
 after 'deploy:publishing', 'deploy:restart'
-namespace :deploy do
-  task :restart do
-    invoke 'unicorn:restart'
-  end
 
   # desc 'upload credentials.yml.enc'
   # task :upload do
@@ -46,7 +42,6 @@ namespace :deploy do
   # # end
   # before :starting, 'deploy:upload'
   # after :finishing, 'deploy:cleanup'
-end
 
 namespace :deploy do
   desc 'db_seed'
@@ -58,6 +53,9 @@ namespace :deploy do
         end
       end
     end
+  end
+  task :restart do
+    invoke 'unicorn:restart'
   end
 end
 
