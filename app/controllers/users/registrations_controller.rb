@@ -12,9 +12,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.new
     session[:user] = @user
     if session[:sns].present?
-      session[:user]["nickname"] =  session[:sns]["info"]["name"]
-      session[:user]["email"] =  session[:sns]["info"]["email"]
+      # session[:sns]に認証成功のデータがある場合の対処
+      if session[:snsn]["info"].present?
+        session[:user]["nickname"] =  session[:sns]["info"]["name"]
+        session[:user]["email"] =  session[:sns]["info"]["email"]
+      end
     end
+
   end
 
   def new_telephone
