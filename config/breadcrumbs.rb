@@ -8,6 +8,7 @@ end
 
 crumb :notice_index do
   link "お知らせ", notifications_path
+  parent :mypage
 end
 
 crumb :todo_index do

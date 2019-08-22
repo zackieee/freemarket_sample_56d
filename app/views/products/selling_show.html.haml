@@ -49,6 +49,12 @@
               = link_to "#{@product.brand.name}"
         .selling_show-item__wrapper__contents__owner__detail
           .selling_show-item__wrapper__contents__owner__detail__lefts
+            %p サイズ
+          .selling_show-item__wrapper__contents__owner__detail__rights
+            - if @product.size_id.present?
+              = link_to "#{@product.size.data}"
+        .selling_show-item__wrapper__contents__owner__detail
+          .selling_show-item__wrapper__contents__owner__detail__lefts
             %p 商品の状態
           .selling_show-item__wrapper__contents__owner__detail__rights
             %p #{@product.status.name}

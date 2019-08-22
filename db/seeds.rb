@@ -43,6 +43,28 @@ CSV.foreach('db/brand_csv/drink.csv', headers: true) do |row|
   Brand.create(name: row['name'])
 end
 
+# サイズテーブル作成
+# 服のサイズ
+sizes = ['XXS以下','XS(SS)','S','M','L','XL(LL)','2XL(3L)','3XL(4L)以上']
+sizes.each do |s|
+  Size.create({data: "#{s}", size_category: 1})
+end
+# 靴のサイズ
+shoes_size = 20.5
+Size.create({data: "20.0cm以下", size_category: 2})
+while shoes_size < 30.0
+  Size.create({data: "#{shoes_size}cm", size_category: 2})
+  shoes_size += 0.5
+end
+Size.create({data: "30.0cm以上", size_category: 2})
+# 子供靴のサイズ
+kids_shoes_size = 10.5
+Size.create({data: "10.0cm以下", size_category: 3})
+while kids_shoes_size < 17.0
+  Size.create({data: "#{kids_shoes_size}cm", size_category: 3})
+  kids_shoes_size += 0.5
+end
+Size.create({data: "17.0cm以上", size_category: 3})
 
 # カテゴリテーブル作成
 #   親カラム
