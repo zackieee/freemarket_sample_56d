@@ -4,8 +4,15 @@ class ProductsController < ApplicationController
 
   before_action :set_product, only: [:show, :buy, :selling_show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show, :all_products]
+  before_action :set_category
   def index
     @products = Product.where.not(seller_id: current_user&.id).order('id DESC').limit(4)
+    # @category_children = Category.find(params[:parent_id]).children
+    # @category_grandchildren = Category.find(params[:parent_id]).children
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def all_products
@@ -138,6 +145,10 @@ class ProductsController < ApplicationController
 
    def set_product
     @product = Product.find(params[:id])
+  end
+
+  def set_category
+    @category = Category.where(depth: 0)
   end
 
   def search_params
