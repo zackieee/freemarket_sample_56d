@@ -56,7 +56,9 @@
     margin: 8px 40px 0 5px;
     position: absolute;
     left: 380px;
-  }
+    width: 20%;
+    height: 50%;
+  }  
   &__category {
     margin: 8px 40px 0 5px;
     width: 11.9%;
@@ -64,6 +66,7 @@
       display: flex;
       position: relative;
       &__drop {
+      border: none;
         a {
           display: block;
           position: relative;
@@ -82,8 +85,6 @@
         position: relative;
         z-index:  100000;
         background-color: white;
-        border-right: 1px solid #D2D2D2;
-        border-left: 1px solid #D2D2D2;
         a {
           display: block;
           position: relative;
@@ -100,8 +101,6 @@
         position: relative;
         z-index:  100000;
         background-color: white;
-        border-right: 1px solid #D2D2D2;
-        border-bottom: 1px solid #D2D2D2;
         a {
           display: block;
           position: relative;
