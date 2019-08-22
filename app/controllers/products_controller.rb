@@ -2,9 +2,9 @@ class ProductsController < ApplicationController
   require 'active_support/all'
   require 'payjp'
 
-  before_action :notice_count, only: [:index,:all_products,:show,:selling_index,:buyer_index,:selling_show]
-  before_action :todo_count,   only: [:index,:all_products,:show,:selling_index,:buyer_index,:selling_show]
+  before_action :notice_count,:todo_count, only: [:index,:all_products,:show,:selling_index,:buyer_index,:selling_show,:buyout_index]
   before_action :set_product, only: [:show, :buy, :selling_show, :edit, :update, :destroy]
+  before_action :set_seller_rating, only:[:show, :selling_show]
   before_action :authenticate_user!, except: [:index, :show, :all_products]
 
   def index
@@ -160,9 +160,17 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
    end
 
+   def set_seller_rating
+    @product = Product.find(params[:id])
+    @rating_good    =  Rating.where(rated_user_id: @product.seller_id, rate: 1).count
+    @rating_normal  =  Rating.where(rated_user_id: @product.seller_id, rate: 2).count
+    @rating_bad     =  Rating.where(rated_user_id: @product.seller_id, rate: 3).count
+   end
+
    def search_params
     params.require(:q).permit(:text_cont, :category_id_eq, :brand_id_eq, :size_id_eq, :price_cont, :status_id_in, :postage_burden_id_in, :sales_status_id_in)
    end
+
 end
 
 
