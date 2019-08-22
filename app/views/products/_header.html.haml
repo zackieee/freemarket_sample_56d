@@ -23,7 +23,7 @@
     - if user_signed_in?
       .header--user--status--login
         .header--user--status--login__link
-          = link_to notifications_path do
+          = link_to product_favorites_path do
             .header--user--status--login__link__transparent
               = icon 'far fa-lg', 'heart'
               - if @nice != nil  && @nice != 0
