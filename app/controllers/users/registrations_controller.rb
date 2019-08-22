@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     session[:user] = @user
     if session[:sns].present?
       # session[:sns]に認証成功のデータがある場合の対処
-      if session[:snsn]["info"].present?
+      if session[:sns]["info"].present?
         session[:user]["nickname"] =  session[:sns]["info"]["name"]
         session[:user]["email"] =  session[:sns]["info"]["email"]
       end
