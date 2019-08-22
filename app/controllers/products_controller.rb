@@ -10,8 +10,6 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.where.not(seller_id: current_user&.id).order('id DESC').limit(4)
-    # @category_children = Category.find(params[:parent_id]).children
-    # @category_grandchildren = Category.find(params[:parent_id]).children
     respond_to do |format|
       format.html
       format.json
