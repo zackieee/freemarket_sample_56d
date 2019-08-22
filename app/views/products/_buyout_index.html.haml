@@ -1,7 +1,7 @@
 - if product.sales_status.id == 2
   %li.buyout-page__main__contents__content
     -# 実際はproduct_path(product)に飛ばす。
-    = link_to "#" do
+    = link_to product_trade_path(product_id: product.id, id: product.trade.id ) do
       - if product.images.first
         = image_tag product.images.first, class:'buyout-page__main__contents__content__image', height: '48px', width: '48px'
       - else
