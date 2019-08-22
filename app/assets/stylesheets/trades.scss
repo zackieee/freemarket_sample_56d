@@ -183,6 +183,7 @@
             }
             &--btn{
               button{
+                cursor: not-allowed;
                 @include form_button($default_color,0,1);
                 width:600px;
                 max-width:none!important;
