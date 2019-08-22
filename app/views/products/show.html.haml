@@ -23,11 +23,11 @@
           .show-item__wrapper__contents__owner__detail__right
             = link_to @product.seller.nickname, show_profile_user_path(@product.seller.id)
             = icon 'fas', 'smile', class: "good"
-            1
+            = @rating_good
             = icon 'fas', 'meh', class: "normal"
-            1
+            = @rating_normal
             = icon 'fas', 'frown', class: "bad"
-            1
+            = @rating_bad
         .show-item__wrapper__contents__owner__detail
           .show-item__wrapper__contents__owner__detail__left
             %p カテゴリー

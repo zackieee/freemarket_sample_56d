@@ -30,6 +30,16 @@ crumb :buyout_index do
   link "出品した商品-売却済み", products_buyout_index_path
   parent :mypage
 end
+
+crumb :active_index do
+  link "購入した商品-取引中", trade_active_index_path
+  parent :mypage
+end
+
+crumb :close_index do
+  link "購入した商品-過去の取引", trade_close_index_path
+  parent :mypage
+end
  
 crumb :edit_profile do
   link "プロフィール", users_edit_profile_path

@@ -2,7 +2,7 @@
   %nav.side-bar__user-menu
     %ul
       %li
-        = link_to user_path(current_user.id), class: 'side-bar__links' do
+        = link_to user_path(current_user),class: 'side-bar__links' do
           マイページ
           = icon 'fas fa-lg ','angle-right', class: 'side-bar__links__icon'
       %li
@@ -55,7 +55,7 @@
       -#     出品した商品-取引中
       -#     = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
-        = link_to products_buyout_index_path, class: 'side-bar__links selected' do
+        = link_to products_buyout_index_path, class: 'side-bar__links' do
           出品した商品-売却済み
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
@@ -63,7 +63,7 @@
           購入した商品-取引中
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
-        = link_to trade_close_index_path,class: 'side-bar__links' do
+        = link_to trade_close_index_path,class: 'side-bar__links selected' do
           購入した商品-過去の取引
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
