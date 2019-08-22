@@ -11,7 +11,7 @@ $(function(){
   }
 
   function buildCHILDREN(value){
-    var category_children = `<div class: "gem"><a href= "/products" class="second" data-category-id="${value.id}">${value.name}</a></div>`
+    var category_children = `<a href= "/products" class="second" data-category-id="${value.id}">${value.name}</a>`
     return category_children;
   }
   
@@ -32,7 +32,6 @@ $(function(){
         dataType: 'json'
       })
       .done(function(data){
-        console.log(data)
         $('#category_box_3').remove();
         html = buildBOX3(data)
         $(".header--select__category__wrapper__second").append(html);
@@ -69,11 +68,15 @@ $(function(){
         alert('正しくありません');
       })
   });
-
+  
+  $(document).on('mouseover', "i, p, input, h1, img, .header--select__right, .products--heading__wrapper, .item", function(){
+    $('#category_box_3').remove();
+    $('#category_box_4').remove();
+  })
   $(document).on('mouseout', ".drop-list", function(){
     $('#category_box_3').addClass("hidden")
   })
-  $(document).on('mouseover', ".header--select__category__wrapper__second", function(){
+  $(document).on('mouseover', ".second", function(){
     $('#category_box_3').addClass("appear")
   })
   $(document).on('mouseover', '.drop-list', function(){
@@ -81,11 +84,5 @@ $(function(){
   })
   $(document).on('mouseover', ".second", function(){
     $('#category_box_4').addClass("appear")
-  })
-  $(document).on('mouseover', "img", function(){
-    $('#category_box_3').remove();
-  })
-  $(document).on('mouseover', "img", function(){
-    $('#category_box_4').remove();
   })
 });
