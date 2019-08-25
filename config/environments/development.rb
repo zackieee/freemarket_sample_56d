@@ -57,7 +57,7 @@ Rails.application.configure do
   # end
 
   # 【send-mail】本番環境でもどこでもletter_opener使う場合
-  ActionMailer::Base.delivery_method = :letter_opener_web
+  ActionMailer::Base.delivery_method = :letter_opener_web if Rails.env.development?
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
