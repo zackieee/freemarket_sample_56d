@@ -3,6 +3,7 @@ document.addEventListener(
     Payjp.setPublicKey("pk_test_fce09d900358cad3e1310579");
     const btn = document.getElementById('token_submit');
 
+    // 入力チェック
     const check_list_number = $("#card-number-check-result");
     function appendCheckNumberResult(){
       var html =
@@ -13,7 +14,6 @@ document.addEventListener(
           </div>`
       check_list_number.append(html);
     }
-  
     const check_list_cvc = $("#security-code-check-result");
     function appendCheckCVCResult(){
       var html =
@@ -22,7 +22,6 @@ document.addEventListener(
           </ul>`
       check_list_cvc.append(html);
     }
-  
     function checkForm(){
       var flag = true;
       if(document.getElementById("card_number").value == ""){
@@ -36,6 +35,19 @@ document.addEventListener(
       return flag;
     }
 
+    // payjpからのエラー表示
+    const error_list = $("#error-messages-payjp");
+    function appendErrorList(response){
+      var html =`
+                <div class="error-messages text-center">
+                  <p>このカードはご利用になれません。<br>
+                  エラーコードを添えてお問い合わせください。<br>
+                  エラーコード:[${response.error.code}]</p>
+                </div>`
+      error_list.append(html);
+    }
+
+    //PayjpAPI呼び出し開始
     if(btn){
       btn.addEventListener("click", (e) => {
         var reg_new = new RegExp('users/sign_up/payment');
@@ -67,6 +79,10 @@ document.addEventListener(
             } else {
               //TODO:Payjp.createTokenの例外処理はここに記述。
               //try/chatchにする場合は構造自体に変更ある可能せ合いあり
+              console.log(response);
+              error_list.empty();
+              appendErrorList(response);
+              return false;
             }
           });
         }
