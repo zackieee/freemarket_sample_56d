@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
   has_many_attached :images, dependent: :destroy
   has_many :comments
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :notifications
   has_many :fav_users, through: :favorites, source: :user
   belongs_to :category
