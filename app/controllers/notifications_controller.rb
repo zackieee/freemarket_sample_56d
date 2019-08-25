@@ -9,9 +9,23 @@ class NotificationsController < ApplicationController
     @notifications = Notification.where.not(action: 5 ).where("(receiver_id = ?)",current_user.id).order("created_at DESC")
   end
 
+  def index_api
+    @notifications = Notification.where.not(action: 5 ).where("(receiver_id = ?)",current_user.id).order("created_at DESC")
+        respond_to do |format|
+      format.json {@notifications}
+    end
+  end
+
   # やることリスト
   def index_todo
     @todo_list = Notification.where("(receiver_id = ?) && (action = ?) && (todo_status = ?)",current_user.id,5,0).order("created_at DESC")
+  end
+
+  def index_todo_api
+    @todo_list = Notification.where("(receiver_id = ?) && (action = ?) && (todo_status = ?)",current_user.id,5,0).order("created_at DESC")
+    respond_to do |format|
+      format.json {@todo_list}
+    end
   end
 
   # 表示内容の振り分け

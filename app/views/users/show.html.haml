@@ -29,24 +29,19 @@
       .mypage__main__contents
         %ul.mypage__main__contents__nav
           %li.mypage__main__contents__nav.selected-tab#notice-list
-            = link_to '#' do
-              お知らせ
+            お知らせ
           %li.mypage__main__contents__nav#todo-list
-            = link_to '#' do
-              やることリスト
-        .maypage__main__contents__content#notice-result
+            やることリスト
+        .maypage__main__contents__content#result-all
           - if @notifications&.present? && @notifications.size > 0
-            %ul
-              - @notifications.first(5).each do | info |
+            %ul#result-list
+              - @notifications.first(5).each_with_index do | info, index |
                 %li.mypage__main__contents__content
                   = link_to dispatcher_notification_path(info.id) do
-                    - if info.sender.avatar.attached?
-                      = image_tag info.sender.avatar, class:'mypage__main__contents__content__image', height: '48px', width: '48px'
-                    -else
-                      = image_tag 'mercari_profile.png', class:'mypage__main__contents__content__image', height: '48px', width: '48px'
+                    = notice_image_dispacher(info)
                     .mypage__main__contents__content__text
                       = info.title
-                      .mypage__main__contents__content__time
+                      .mypage__main__contents__content__time{id:"checked-#{index}"}
                         = icon 'far fa-sm','clock'
                         %p
                           %time(datetime="#{info.created_at}")= time_ago_in_words(info.created_at) + '前'
@@ -56,7 +51,7 @@
                     .mypage__main__contents__content__link-icon
                       = icon 'fas fa-lg','angle-right'
             - if @notifications.size > 5
-              .mypage__main__contents__content__btn
+              .mypage__main__contents__content__btn#result-btn
                 = link_to '#' do
                   一覧を見る
           - else 
@@ -69,15 +64,13 @@
             購入した商品
         %ul.mypage__main__contents__nav
           %li.mypage__main__contents__nav.selected-tab#active-trade
-            = link_to '#' do
-              取引中
+            取引中
           %li.mypage__main__contents__nav#close-trade
-            = link_to '#' do
-              過去の取引
-        .maypage__main__contents__content#trade-result
-          -if @trade_products&.present? && @trade_products.size > 0
-            %ul
-              - @trade_products.first(5).each do | trade_product |
+            過去の取引
+        .maypage__main__contents__content#trade-result-all
+          -if @trades&.present? && @trades.size > 0
+            %ul#trade-result-list
+              - @trades.first(5).each do | trade_product |
                 %li.mypage__main__contents__content
                   = link_to dispatcher_notification_path(trade_product.id) do
                     - if trade_product.product.images.attached?
@@ -92,13 +85,13 @@
                           %time(datetime="#{trade_product.created_at}")= time_ago_in_words(trade_product.created_at) + '前'
                     .mypage__main__contents__content__link-icon
                       = icon 'fas fa-lg','angle-right'
-            - if @trade_products.size > 5
-              .mypage__main__contents__content__btn
+            - if @trades.size > 5
+              .mypage__main__contents__content__btn#trade-result-btn
                 = link_to '#' do
                   一覧を見る
           - else 
             .mypage__main__contents__content--none
               %h3
-                取引中の商品がありません
+                取引中の商品はありません
   =render 'products/footer-top'
   =render 'products/footer-bottom'

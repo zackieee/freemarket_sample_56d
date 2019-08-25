@@ -9,9 +9,8 @@ class UsersController < ApplicationController
 
     # お知らせ情報取得
     @notifications  = Notification.where.not(action: 5 ).where(receiver_id: current_user.id).order("created_at DESC")
-
     # 取引中の商品取得
-    @trades = Trade.where("(buyer_id = ?) && (trade_status = ?)", current_user.id,3).order("created_at DESC")
+    @trades = Trade.where.not(trade_status: 3).where(buyer_id: current_user.id).order("created_at DESC")
   end
 
   # これを呼ぶと見たいユーザのプロフィールページが参照できる
