@@ -39,25 +39,22 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   #【send-mail】本番環境で実際にメール通知する場合に使用
-  # if Rails.env.production?
-  #   config.action_mailer.delivery_method = :smtp
-  #   config.action_mailer.smtp_settings = {
-  #     address:"smtp.gmail.com",
-  #     domain: 'gmail.com',
-  #     port:587,
-  #     user_name: Rails.application.credentials.gmail[:user_name],
-  #     password: Rails.application.credentials.gmail[:password],
-  #     authentication: :plain,
-  #     enable_starttls_auto: true
-  #   }
-  # elsif Rails.env.development?
-  #   ActionMailer::Base.delivery_method = :letter_opener_web
-  # else
-  #   ActionMailer::Base.delivery_method = :test
-  # end
-
-  # 【send-mail】本番環境でもどこでもletter_opener使う場合
-  ActionMailer::Base.delivery_method = :letter_opener_web if Rails.env.development?
+  if Rails.env.production?
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address:"smtp.gmail.com",
+      domain: 'gmail.com',
+      port:587,
+      user_name: Rails.application.credentials.gmail[:user_name],
+      password: Rails.application.credentials.gmail[:password],
+      authentication: :plain,
+      enable_starttls_auto: true
+    }
+  elsif Rails.env.development?
+    ActionMailer::Base.delivery_method = :letter_opener_web
+  else
+    ActionMailer::Base.delivery_method = :test
+  end
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
