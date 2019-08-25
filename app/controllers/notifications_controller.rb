@@ -39,7 +39,11 @@ class NotificationsController < ApplicationController
     when 2 # 取引ステータス変更時（購入〜取引完了まで）
       redirect_to product_trade_path(@notification.trade.product_id,@notification.trade_id)
     when 3 # 「いいね」された
-      redirect_to selling_show_product_path(@notification.product_id)
+      if @notification.product.sales_status_id == 2
+        redirect_to product_path(@notification.product_id)
+      else
+        redirect_to selling_show_product_path(@notification.product_id)
+      end
     when 4 # 「コメント」された
       redirect_to selling_show_product_path(@notification.product_id)
     when 5 # 「todo」の場合
