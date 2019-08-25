@@ -6,8 +6,8 @@ Rails.application.routes.draw do
    }
 
   # 【send-mail】開発環境で擬似メール送信結果を見るためのルーティング
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" # if Rails.env.development? 【本番環境で使うときはコメントアウト外す】
-
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  
   devise_scope :user do
     #ユーザ新規作成
     get     '/users/sign_up/profile'        => 'users/registrations#new_profile'
