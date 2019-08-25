@@ -48,9 +48,9 @@ group :development, :test do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
-  # 開発環境でメール送信せずにメール確認するためのgem
+  # 【send-mail】開発環境でメール送信せずにメール確認するためのgem（本番環境では使わない場合にここに書く）
   # 導入すると「http://localhost:3000/letter_opener」から見れます
-  gem 'letter_opener_web', '~> 1.0'
+  # gem 'letter_opener_web', '~> 1.0'
 end
 
 group :development do
@@ -108,3 +108,7 @@ gem "aws-sdk-s3", require: false
 
 # 階層構造
 gem 'awesome_nested_set'
+
+# 導入すると「http://localhost:3000/letter_opener」から見れます
+# 【send-mail】本番環境でメールを実際に飛ばすときはコメントアウト
+gem 'letter_opener_web', '~> 1.0'
