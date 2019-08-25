@@ -115,6 +115,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.new
     @user.build_address #1:1なのでbuild_address/1:多の場合は@user.address.build
 
+    session[:address] = @user.address
+
   end
 
   def new_payment
@@ -164,11 +166,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
       card_id:        @customer.default_card,
     )
     if session[:sns].present?
-      @user.sns_credentials.build(
-        uid:             session[:sns]["uid"],
-        provider:        session[:sns]["provider"],
-        user_id:         @user.id
-      )
+      if session[:sns]["info"].present?
+        @user.sns_credentials.build(
+          uid:             session[:sns]["uid"],
+          provider:        session[:sns]["provider"],
+          user_id:         @user.id
+        )
+      end
     end
     @user.skip_confirmation!
     # newしたユーザをDB登録。成功したら自動ログイン
@@ -180,8 +184,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       session[:id] = @user.id
       sign_in User.find(session[:id]) unless user_signed_in?
     else
-      # 失敗したら１ページ前に戻る
-      @message = '会員情報の登録に失敗しました'
+      # 失敗したら１ページ目に戻る
+      @messages = "会員情報の登録に失敗しました。 #{@user.errors.messages}"
       render :new_profile
     end
 
