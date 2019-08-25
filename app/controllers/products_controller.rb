@@ -6,7 +6,6 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :buy, :selling_show, :edit, :update, :destroy]
   before_action :set_seller_rating, only:[:show, :selling_show]
   before_action :authenticate_user!, except: [:index, :show, :all_products]
-  before_action :move_to_index, only: :selling_show
 
   def index
     @products = Product.where.not(seller_id: current_user&.id).order('id DESC').limit(4)
@@ -181,12 +180,6 @@ class ProductsController < ApplicationController
 
   def search_params
     params.require(:q).permit(:text_cont, :category_id_eq, :brand_id_eq, :size_id_eq, :price_cont, :status_id_in, :postage_burden_id_in, :sales_status_id_in)
-  end
-
-  def move_to_index
-    if current_user.id == product.seller_id
-      redirect_to action: :index
-    end
   end
 end
 
