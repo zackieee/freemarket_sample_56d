@@ -5,7 +5,7 @@ json.array! @ratings do | rate |
   if rate.rater_user.avatar.attached?
     json.rater_avatar        url_for(rate.rater_user.avatar)
   else
-    json.rater_avatar        "/assets/common/member_photo_noimage_thumb.png"
+    json.rater_avatar        "/assets/common/member_photo_noimage_thumb-224a733c50d48aba6d9fdaded809788bbeb5ea5f6d6b8368adaebb95e58bcf53.png"
   end
 
   json.stance              stance_check(rate)
