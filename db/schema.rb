@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_21_070754) do
+ActiveRecord::Schema.define(version: 2019_08_24_092603) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -177,11 +177,14 @@ ActiveRecord::Schema.define(version: 2019_08_21_070754) do
   create_table "ratings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "rated_user_id", null: false
     t.bigint "rater_user_id", null: false
+    t.bigint "trade_id"
     t.integer "rate", null: false
+    t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["rated_user_id"], name: "index_ratings_on_rated_user_id"
     t.index ["rater_user_id"], name: "index_ratings_on_rater_user_id"
+    t.index ["trade_id"], name: "index_ratings_on_trade_id"
   end
 
   create_table "sizes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -260,6 +263,7 @@ ActiveRecord::Schema.define(version: 2019_08_21_070754) do
   add_foreign_key "product_sizes", "sizes"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "users", column: "seller_id"
+  add_foreign_key "ratings", "trades"
   add_foreign_key "ratings", "users", column: "rated_user_id"
   add_foreign_key "ratings", "users", column: "rater_user_id"
   add_foreign_key "sns_credentials", "users"

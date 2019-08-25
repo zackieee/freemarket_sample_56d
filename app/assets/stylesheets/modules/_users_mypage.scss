@@ -81,13 +81,19 @@
           font-weight: bold;
           text-decoration:none;
           background-color:#eee;
-          a{
-            color:#333;
-            text-decoration:none;
-          }
-          a:hover{
-            opacity:0.5;
-          }  
+          color:#333;
+          cursor: pointer;
+        }
+        li:hover{
+          color:#999;
+          cursor: pointer;
+        }
+        a{
+          color:#333;
+          text-decoration:none;
+        }  
+        a:hover{
+          opacity:0.5;
         }
         .selected-tab {
           border-top: 2px solid #dd0e0e;

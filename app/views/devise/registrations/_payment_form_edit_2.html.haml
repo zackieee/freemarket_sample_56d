@@ -1,6 +1,6 @@
 .user-main__contents__form.single-panel
   = form_with url:users_edit_payment_2_path, method: :post,local: true, html: {name:'inputForm'} do |f|
-    .user-main__contents__form__group.error-messages.none-top-margin
+    .user-main__contents__form__group.error-messages.none-top-margin#error-messages-payjp
       - if @err != nil
         .error-messages.text-center
           %p

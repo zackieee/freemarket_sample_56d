@@ -1,0 +1,47 @@
+.rating
+  .rating__title
+    %h2
+      評価一覧
+  %ul.rating__nav
+    %li.rating__nav--all.selected-tab#rating-tab-all{ data: {rating: '0'}}
+      %h3
+        全て
+    %li.rating__nav--good#rating-tab-good{ data: {rating: '1'}}
+      = icon 'fas fa-lg', 'smile', class: "good"
+      %h3
+        良い
+    %li.rating__nav--normal#rating-tab-normal{ data: {rating: '2'}}
+      = icon 'fas fa-lg', 'meh', class: "normal"
+      %h3
+        普通
+    %li.rating__nav--bad#rating-tab-bad{ data: {rating: '3'}}
+      = icon 'fas fa-lg', 'frown', class: "bad"
+      %h3
+        悪い
+  .rating__contents#rating-result-all
+    - if @ratings&.present? && @ratings.size > 0
+      %ul#rating-result-list
+        - @ratings.each do | rate |
+          %li.rating__contents__content
+            = link_to show_profile_user_path(rate.rater_user_id) do
+              - if rate.rater_user.avatar.attached?
+                = image_tag rate.rater_user.avatar, class:'rating__contents__content__image', height: '48px', width: '48px'
+              - else
+                = image_tag 'mercari_profile.png', class:'rating__contents__content__image', height: '48px', width: '48px'
+              .rating__contents__content__text
+                = rating_check(rate)
+                = stance_check(rate)
+                %p
+                  = rate.rater_user.nickname
+                %p
+                  = rate.comment
+                .rating__contents__content__text__time
+                  = icon 'far fa-lg','clock'
+                  %p
+                    = rate.created_at.strftime("%m月%d日 %H:%M")
+              .rating__contents__content__link-icon
+                = icon 'fas fa-lg','angle-right'
+    -else
+      .rating__contents__none#rating-result-none
+        %h3
+          評価はまだありません

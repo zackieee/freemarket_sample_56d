@@ -5,8 +5,8 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
    }
 
-  # 開発環境で擬似メール送信結果を見るためのルーティング
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  # 【send-mail】開発環境で擬似メール送信結果を見るためのルーティング
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" # if Rails.env.development? 【本番環境で使うときはコメントアウト外す】
 
   devise_scope :user do
     #ユーザ新規作成
@@ -55,7 +55,15 @@ Rails.application.routes.draw do
 
   get 'products/search_result_page' => 'products#search_result_page'
   get 'trade/active_index'          => 'trades#active_index'
-  get 'trade/close_index'          => 'trades#close_index'  
+  get 'trade/close_index'          => 'trades#close_index'
+  resources :trades do
+    get :active_index_api,:close_index_api, on: :collection
+  end
+
+  resources :ratings do
+    get :index_api, on: :collection
+  end
+ 
   resources :products do
     get :selling_show, on: :member
     get :buy, on: :member
@@ -66,6 +74,8 @@ Rails.application.routes.draw do
   end
 
   get 'notifications/index_todo'  =>  'notifications#index_todo'
+  get 'notifications/index_todo_api'  =>  'notifications#index_todo_api'
+  get 'notifications/index_api'  =>  'notifications#index_api'
   resources :notifications do
     get :dispatcher, on: :member
   end

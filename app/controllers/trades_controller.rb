@@ -6,11 +6,25 @@ class TradesController < ApplicationController
   end
 
   def active_index
-    @trades = Trade.where("(buyer_id = ?) && (trade_status = ?)", current_user.id,3).order("created_at DESC")
+    @trades = Trade.where.not(trade_status: 3).where(buyer_id: current_user.id).order("created_at DESC")
+  end
+
+  def active_index_api
+    @trades = Trade.where.not(trade_status: 3).where(buyer_id: current_user.id).order("created_at DESC")
+    respond_to do |format|
+      format.json {@trades}
+    end
   end
 
   def close_index
-    @trades = Trade.where.not(trade_status: 3).where(buyer_id: current_user.id).order("created_at DESC")
+    @trades = Trade.where("(buyer_id = ?) && (trade_status = ?)", current_user.id,3).order("created_at DESC")
+  end
+
+  def close_index_api
+    @trades = Trade.where("(buyer_id = ?) && (trade_status = ?)", current_user.id,3).order("created_at DESC")
+    respond_to do |format|
+      format.json {@trades}
+    end
   end
 
   def create
@@ -105,8 +119,10 @@ class TradesController < ApplicationController
       seller_rate = Rating.create(
         rated_user_id:    @trade.seller_id,
         rater_user_id:    @trade.buyer_id,
-        rate:             params[:rate]
-      )      
+        trade_id:         @trade.id,
+        rate:             params[:rate],
+        comment:          params[:message]
+      )
       # 商品受け取り後の出品者評価TODOを作成する
       next_notifications = Notification.create(
         sender_id:    @trade.buyer_id,
@@ -114,7 +130,6 @@ class TradesController < ApplicationController
         trade_id:     @trade.id,
         action:       5,
         title:        "#{@trade.buyer.nickname}さんがあなたを評価しました。#{@trade.seller.nickname}さんも#{@trade.buyer.nickname}さんを評価して取引を完了させましょう。",
-        message:      params[:message]
       )
       # 【send-mail】購入者評価完了を出品者に送信する
       mail  =  TradeMailer.seller_raiting_notice(@trade).deliver
@@ -129,7 +144,9 @@ class TradesController < ApplicationController
       buyer_rate = Rating.create(
         rated_user_id:    @trade.buyer_id,
         rater_user_id:    @trade.seller_id,
-        rate:             params[:rate]
+        trade_id:         @trade.id,
+        rate:             params[:rate],
+        comment:          params[:message]
       )
       # TODOはなくなったのでお知らせを作成する
       next_notifications = Notification.create(
@@ -138,7 +155,6 @@ class TradesController < ApplicationController
         trade_id:     @trade.id,
         action:       2,
         title:        "#{@trade.seller.nickname}さんがあなたを評価しました。これで取引完了です。",
-        message:      params[:message]
       )
       # 【send-mail】評価・取引完了を出品者、購入者双方に送信する
       mail_seller  =  TradeMailer.trade_close_notice(@trade).deliver

@@ -9,6 +9,7 @@ class Product < ApplicationRecord
   belongs_to :brand, optional: true
   belongs_to :size, optional: true
   has_one :trade
+  has_many :ratings
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :status
