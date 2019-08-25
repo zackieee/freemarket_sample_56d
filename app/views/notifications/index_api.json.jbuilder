@@ -6,7 +6,7 @@ json.array! @notifications do | notice |
     if notice.sender.avatar.attached?
       json.image url_for(notice.sender.avatar)
     else
-      json.image "assets/common/member_photo_noimage_thumb.png"
+      json.image "/assets/common/member_photo_noimage_thumb.png"
     end
   when 2
     json.image url_for(notice.trade.product.images.first)
