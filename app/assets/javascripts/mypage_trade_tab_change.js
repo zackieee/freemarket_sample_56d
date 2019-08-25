@@ -9,7 +9,7 @@ $(function(){
   function ListBuildHTML(data,index){
     var html =`
               <li class="mypage__main__contents__content">
-                <a href="/notifications/${data.id}/dispatcher">
+                <a href="/products/${data.product_id}/trades/${data.id}">
                   <img class="mypage__main__contents__content__image" height="48px" width="48px" src="${data.image}">
                   <div class="mypage__main__contents__content__text">
                     ${data.name}

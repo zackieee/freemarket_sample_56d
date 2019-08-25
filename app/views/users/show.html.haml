@@ -72,7 +72,7 @@
             %ul#trade-result-list
               - @trades.first(5).each do | trade_product |
                 %li.mypage__main__contents__content
-                  = link_to dispatcher_notification_path(trade_product.id) do
+                  = link_to product_trade_path(product_id: trade_product.product.id,id: trade_product.id) do
                     - if trade_product.product.images.attached?
                       = image_tag trade_product.product.images.first, class:'mypage__main__contents__content__image', height: '48px', width: '48px'
                     -else

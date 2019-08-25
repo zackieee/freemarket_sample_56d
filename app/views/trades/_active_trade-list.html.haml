@@ -12,7 +12,7 @@
         %ul
           - @trades.each do | trade |
             %li.mypage__main__contents__content
-              = link_to dispatcher_notification_path(trade.id) do
+              = link_to product_trade_path(product_id: trade.product.id,id: trade.id) do
                 - if trade.product.images.attached?
                   = image_tag trade.product.images.first, class:'mypage__main__contents__content__image', height: '48px', width: '48px'
                 -else
