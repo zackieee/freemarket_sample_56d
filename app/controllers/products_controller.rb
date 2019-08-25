@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   before_action :notice_count,:todo_count, only: [:index,:all_products,:show,:selling_index,:buyer_index,:selling_show,:buyout_index]
   before_action :set_product, only: [:show, :buy, :selling_show, :edit, :update, :destroy]
   before_action :set_seller_rating, only:[:show, :selling_show]
-  before_action :authenticate_user!, except: [:index, :show, :all_products]
+  before_action :authenticate_user!, except: [:index, :show, :all_products, :get_category_children, :get_category_grandchildren]
 
   def index
     @products = Product.where.not(seller_id: current_user&.id).order('id DESC').limit(4)
