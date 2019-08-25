@@ -40,6 +40,11 @@ crumb :close_index do
   link "購入した商品-過去の取引", trade_close_index_path
   parent :mypage
 end
+
+crumb :rating_index do
+  link "評価一覧", ratings_path
+  parent :mypage
+end
  
 crumb :edit_profile do
   link "プロフィール", users_edit_profile_path
