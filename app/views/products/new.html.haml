@@ -61,7 +61,7 @@
               配送元の地域
             %span.sell-main__contents__content__item--required.top-space
               必須
-            = f.collection_select :prefecture_id, Prefecture.all, :id, :name, class:'dropdown', type: "hidden", {prompt: "---"}
+            = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: "---"}, class:'dropdown', type: "hidden"
             %label.sell-main__contents__content__item{for:"delivery_days"}
               配送元までの日数
             %span.sell-main__contents__content__item--required.top-space
