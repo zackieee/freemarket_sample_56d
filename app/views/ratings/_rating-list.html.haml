@@ -27,7 +27,7 @@
               - if rate.rater_user.avatar.attached?
                 = image_tag rate.rater_user.avatar, class:'rating__contents__content__image', height: '48px', width: '48px'
               - else
-                = image_tag 'mercari_profile.png', class:'rating__contents__content__image', height: '48px', width: '48px'
+                = image_tag 'common/member_photo_noimage_thumb.png', class:'rating__contents__content__image', height: '48px', width: '48px'
               .rating__contents__content__text
                 = rating_check(rate)
                 = stance_check(rate)

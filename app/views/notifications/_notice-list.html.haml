@@ -16,7 +16,7 @@
                 - if info.sender.avatar.attached?
                   = image_tag info.sender.avatar, class:'mypage__main__contents__content__image', height: '48px', width: '48px'
                 -else
-                  = image_tag 'mercari_profile.png', class:'mypage__main__contents__content__image', height: '48px', width: '48px'
+                  = image_tag 'common/member_photo_noimage_thumb.png', class:'mypage__main__contents__content__image', height: '48px', width: '48px'
                 .mypage__main__contents__content__text
                   = info.title
                   .mypage__main__contents__content__time

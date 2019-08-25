@@ -3,7 +3,11 @@ json.array! @notifications do | notice |
   json.title notice.title
   case notice.action
   when 1
-    json.image url_for(notice.sender.avatar)    
+    if notice.sender.avatar.attached?
+      json.image url_for(notice.sender.avatar)
+    else
+      json.image "assets/common/member_photo_noimage_thumb.png"
+    end
   when 2
     json.image url_for(notice.trade.product.images.first)
   when 3
