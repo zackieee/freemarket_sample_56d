@@ -8,7 +8,7 @@ class Address < ApplicationRecord
   with_options on: :address do | address |
     address.validates :postal_code,
       presence: true,
-      format: {with:/\A\d{7}\z/, message: 'のフォーマットが不適切です'}
+      format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'のフォーマットが不適切です'}
     address.validates :prefecture_id,
       presence: true
     address.validates :city,
@@ -24,7 +24,7 @@ class Address < ApplicationRecord
   # 本人確認情報登録画面用のバリデーション
   with_options on: :identify do | identify |
     identify.validates :postal_code,
-      format: {with:/\A\d{7}\z/, message: 'のフォーマットが不適切です'}
+      format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'のフォーマットが不適切です'}
     identify.validates :city,
       length:{ maximum: 50}
     identify.validates :address_number,

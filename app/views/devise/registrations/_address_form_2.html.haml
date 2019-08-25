@@ -20,7 +20,7 @@
           郵便番号
         %span.user-main__contents__form__group__item--required
           必須
-        = fields.text_field :postal_code, class:'user-main__contents__form__group__item__input', placeholder:'例) 1234567',maxlength:'7', value:"#{current_user.address.postal_code}"
+        = fields.text_field :postal_code, class:'user-main__contents__form__group__item__input', placeholder:'例) 1234567',maxlength:'8', value:"#{current_user.address.postal_code}"
       .user-main__contents__form__group
         %label.user-main__contents__form__group__item{for:"prefecture_id"}
           都道府県
