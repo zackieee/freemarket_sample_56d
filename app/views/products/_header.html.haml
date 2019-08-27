@@ -19,7 +19,7 @@
       .header--select__category__wrapper
         .header--select__category__wrapper__drop
           - @category.each do |parent|
-            = link_to '', data: {category_id: parent.id}, class: "drop-list" do
+            = link_to products_category_search_path(id: parent.id), data: {category_id: parent.id}, class: "drop-list" do
               = parent.name
         .header--select__category__wrapper__second
         .header--select__category__wrapper__third

@@ -1,0 +1,14 @@
+=render 'header'
+.category-search-view
+  .category-search-view__products
+    .category-search-view__products__heading
+      = "#{@search}" + "の検索結果"
+    .category-search-view__products__sum
+      %p.hit-count
+        = "#{@products.length}" + "件の表示"
+    .category-search-view__products__list
+      .item--list
+        = render @products
+      
+=render 'footer-top'
+=render 'footer-bottom'

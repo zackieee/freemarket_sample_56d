@@ -32,6 +32,13 @@ class ProductsController < ApplicationController
     @products = Product.where.not(seller_id: current_user&.id).order('id DESC').search(params[:search]).merge(@q.result(distinct: true))
   end 
 
+  def category_search
+    category = Category.find(params[:id])
+    @categories = Category.where(lft: [category.lft..category.rgt])
+    @products = Product.where(category_id: @categories.ids)
+    @search = category.name
+  end
+
   def new
     @product= Product.new
     @category_parent = Category.where(depth: 0)

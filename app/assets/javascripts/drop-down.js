@@ -11,7 +11,7 @@ $(function(){
   }
 
   function buildCHILDREN(value){
-    var category_children = `<a href= "/products" class="second" data-category-id="${value.id}">${value.name}</a>`
+    var category_children = `<a href= "/products/category_search/?id=${value.id}" class="second" data-category-id="${value.id}">${value.name}</a>`
     return category_children;
   }
   
