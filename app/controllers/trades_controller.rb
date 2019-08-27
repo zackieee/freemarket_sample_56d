@@ -49,7 +49,7 @@ class TradesController < ApplicationController
 
     # 売上金の登録
     seller = User.find(@product[:seller_id])
-    seller[:sales_amount] += card_pay[:amount]
+    seller[:sales_amount] += card_pay[:amount] * 0.9
 
     #処理が終わったら一覧画面へ
     if trade.save

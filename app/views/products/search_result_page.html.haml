@@ -1,9 +1,7 @@
 =render 'header'
-.result-view
-  .result-view__side-bar
-    = search_form_for(@q, url: products_search_result_page_path) do |f|
-      .result-view__side-bar__header
-        = f.search_field '', placeholder:'並び替え', maxlength: '40'
+= search_form_for(@q, url: products_search_result_page_path) do |f|
+  .result-view
+    .result-view__side-bar
       .result-view__side-bar__footer
         %p 詳細検索
         .result-view__side-bar__footer__form
@@ -13,7 +11,9 @@
         .result-view__side-bar__footer__form
           = icon 'fas', 'list'
           = f.label :category_id_eq, 'カテゴリーを選択する'
-          = f.collection_select :category_id_eq, @categories, :id, :name, {prompt: "すべて"}, class: "select"
+          = f.collection_select :category_id_eq, @categories, :id, :name, {prompt: "すべて"}, class: "select", id: "product_category_id"
+        .result-view__side-bar__footer__form#category_children
+        .result-view__side-bar__footer__form#category_grandchildren
         .result-view__side-bar__footer__form
           = icon 'fas', 'tag'
           = f.label :brand_id_eq, 'ブランド名から探す'
@@ -46,17 +46,21 @@
           .result-view__side-bar__footer__form__checkbox
             =  f.collection_check_boxes :sales_status_id_in, @sales_status, :id, :name
           .result-view__side-bar__footer__form__btn
-            = f.submit 'クリア', class: 'clear'
+            %button{class: 'clear'}
+              クリア
             = f.submit '完了', class: 'complete'
-  .result-view__products
-    .result-view__products__heading
-      = "#{@search}" + "の検索結果"
-    .result-view__products__sum
-      %p.hit-count
-        = "#{@search.length}" + "件の表示"
-    .result-view__products__list
-      .item--list
-        = render @products
-      
-=render 'footer-top'
-=render 'footer-bottom'
+    .result-view__products
+      .result-view__products__sum
+        %p.hit-count
+          = "#{@products.length}" + "件の表示"
+      .result-view__products__list
+        .item--list
+          = render @products
+        
+  =render 'footer-top'
+  =render 'footer-bottom'
+
+:javascript
+  $('.clear').on('click', function(){
+    $('.select').empty();
+  })

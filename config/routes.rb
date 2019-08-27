@@ -52,6 +52,8 @@ Rails.application.routes.draw do
   get 'products/get_brand'  => 'products#get_brand'
   # サイズ選択
   get 'products/get_size'  => 'products#get_size'
+  # カテゴリ検索
+  get 'products/category_search'  => 'products#category_search'
 
   get 'products/search_result_page' => 'products#search_result_page'
   get 'trade/active_index'          => 'trades#active_index'
