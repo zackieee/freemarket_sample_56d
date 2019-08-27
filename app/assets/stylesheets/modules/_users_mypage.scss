@@ -53,6 +53,14 @@
             }
           }
         }
+        &__sales_amount {
+          margin-top: 5px;
+          display:inline-block;
+          font-size: 14px;
+          span{
+            font-weight:bold;
+          }
+        }
       }
       &__contents:hover{
         opacity: 0.8;
