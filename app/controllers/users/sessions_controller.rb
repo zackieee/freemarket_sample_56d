@@ -11,9 +11,9 @@ class Users::SessionsController < Devise::SessionsController
         super
       else
         flash[:alert] = 'メールアドレス もしくはパスワードが不正です。'
+        render action: :new
+        return
       end
-      render action: :new
-      return
     end
   end
 

@@ -29,7 +29,7 @@
             .mypage__main__header__contents__sales_amount
               売上金
               %span
-                = "￥ #{current_user.sales_amount}"
+                = "￥ #{current_user.sales_amount.to_s(:delimited, delimiter: ',')}"
       .mypage__main__contents
         %ul.mypage__main__contents__nav
           %li.mypage__main__contents__nav.selected-tab#notice-list
