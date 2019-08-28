@@ -1,12 +1,12 @@
 $(function(){
 
   function buildBOX1(category){
-    var category_box = `<select maxlength="40" name="q[category_id_eq]" id="category_box_1" class="select"><option value="">---</option>`
+    var category_box = `<select maxlength="40" name="q[category_id_eq]" id="category_box_5" class="select"><option value="">---</option>`
     return category_box;
   }
 
   function buildBOX2(category){
-    var category_box = `<select maxlength="40" name="q[category_id_eq]" id="category_box_2" class="select"><option value="">---</option>`
+    var category_box = `<select maxlength="40" name="q[category_id_eq]" id="category_box_6" class="select"><option value="">---</option>`
     return category_box;
   }
 
@@ -15,7 +15,7 @@ $(function(){
     return category_children;
   }
 
-  $('#product_category_id').on('change', function(){
+  $('#ransack_category_id').on('change', function(){
     var id = this.value;
     $.ajax({
         url: '/products/get_category_children',
@@ -24,13 +24,13 @@ $(function(){
         dataType: 'json'
       })
       .done(function(data){
-        $('#category_box_1').remove();
-        $('#category_box_2').remove();
+        $('#category_box_5').remove();
+        $('#category_box_6').remove();
         html = buildBOX1(data)
         $("#category_children").append(html);
         data.forEach(function( children ) {
           html = buildCHILDREN(children);
-          $("#category_box_1").append(html);
+          $("#category_box_5").append(html);
          });
       })
       .fail(function(){
@@ -38,7 +38,7 @@ $(function(){
       })
   });
 
-  $(document).on('change','#category_box_1', function(){
+  $(document).on('change','#category_box_5', function(){
     var id = this.value;
     $.ajax({
         url: '/products/get_category_grandchildren',
@@ -48,12 +48,12 @@ $(function(){
       })
       .done(function(data){
         if (data.length){
-          $('#category_box_2').remove();
+          $('#category_box_6').remove();
           html = buildBOX2(data);
           $("#category_grandchildren").append(html);
           data.forEach(function( grandchildren ) {
             html = buildCHILDREN(grandchildren);
-            $("#category_box_2").append(html);
+            $("#category_box_6").append(html);
           });
         };
       })

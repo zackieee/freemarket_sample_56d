@@ -11,7 +11,7 @@
         .result-view__side-bar__footer__form
           = icon 'fas', 'list'
           = f.label :category_id_eq, 'カテゴリーを選択する'
-          = f.collection_select :category_id_eq, @categories, :id, :name, {prompt: "すべて"}, class: "select", id: "product_category_id"
+          = f.collection_select :category_id_eq, @categories, :id, :name, {prompt: "すべて"}, class: "select", id: "ransack_category_id"
         .result-view__side-bar__footer__form#category_children
         .result-view__side-bar__footer__form#category_grandchildren
         .result-view__side-bar__footer__form
