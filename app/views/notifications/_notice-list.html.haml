@@ -13,10 +13,7 @@
           - @notifications.each do | info |
             %li.mypage__main__contents__content
               = link_to dispatcher_notification_path(info.id) do
-                - if info.sender.avatar.attached?
-                  = image_tag info.sender.avatar, class:'mypage__main__contents__content__image', height: '48px', width: '48px'
-                -else
-                  = image_tag 'common/member_photo_noimage_thumb.png', class:'mypage__main__contents__content__image', height: '48px', width: '48px'
+                = notice_image_dispacher(info)
                 .mypage__main__contents__content__text
                   = info.title
                   .mypage__main__contents__content__time
