@@ -1,0 +1,20 @@
+.sales-amount
+  .sales-amount__contents
+    %h2.sales-amount__contents__title
+      売上履歴
+    .sales-amount__contents
+      %ul
+        - @trade.each do | trade |
+          %li.sales-amount__contents__li
+            = link_to product_trade_path(product_id: trade.product.id, id: trade.id), class:'sales-amount__contents__li__link' do
+              = image_tag trade.product.images.first, class:'sales-amount__contents__li__image', height: '48px', width: '48px'
+              .sales-amount__contents__li__text
+                .sales-amount__contents__li__text__time
+                  = icon 'far fa-lg','clock'
+                  %p
+                    = trade.updated_at.strftime("%m月%d日 %H:%M")
+                %p
+                  販売利益
+              .sales-amount__contents__li__amount
+                = "¥#{(trade.product.price*0.9).round.to_s(:delimited, delimiter: ',')}"
+              = icon 'fas fa-lg','angle-right'
