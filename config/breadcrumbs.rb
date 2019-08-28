@@ -41,6 +41,16 @@ crumb :close_index do
   parent :mypage
 end
 
+crumb :sales_amount do
+  link "売上確認", sales_amount_trades_path
+  parent :mypage
+end
+
+crumb :sales_amount_list do
+  link "売上履歴", sales_amount_list_trades_path
+  parent :sales_amount
+end
+
 crumb :rating_index do
   link "評価一覧", ratings_path
   parent :mypage
@@ -53,7 +63,8 @@ end
 
 # TODO:current_user以外の場合は記述変更する必要性あり。やり方は今後検討
 crumb :show_profile do
-  link current_user&.nickname, show_profile_user_path
+  @user = User.find(params[:id])
+  link @user.nickname, show_profile_user_path
   parent :root
 end
 

@@ -1,0 +1,9 @@
+.wrapper
+  =render 'products/header'
+  - breadcrumb :sales_amount
+  = render "layouts/breadcrumbs"
+  .user-main.sidebar
+    = render 'side-bar/sales_amount'
+    = render 'sales_amount'
+  =render 'products/footer-top'
+  =render 'products/footer-bottom'

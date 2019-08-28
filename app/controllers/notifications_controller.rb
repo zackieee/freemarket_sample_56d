@@ -45,7 +45,7 @@ class NotificationsController < ApplicationController
         redirect_to selling_show_product_path(@notification.product_id)
       end
     when 4 # 「コメント」された
-      redirect_to selling_show_product_path(@notification.product_id)
+      redirect_to product_trade_path(@notification.trade.product_id,@notification.trade_id)
     when 5 # 「todo」の場合
       redirect_to product_trade_path(@notification.trade.product_id,@notification.trade_id)
     end

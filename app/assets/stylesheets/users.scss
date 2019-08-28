@@ -126,15 +126,8 @@
               border:solid 1px #ea352d!important;
               border-radius:3px;
               text-decoration: none;
-              input[type=submit]:active{
-                position:absolute;
-                padding:2px 6px;
-                left:75%;
-                font-size:12px;
-                color:#ea352d;
-                border:solid 1px #ea352d;
-                border-radius:3px;
-                text-decoration: none;
+              input[type="submit"]:active{
+                -webkit-appearance: none;
               }
             }
           }
@@ -317,10 +310,6 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-      }
-
-      input[type=submit]:active{
-        @include form_button($default_color,0,1);
       }
 
 

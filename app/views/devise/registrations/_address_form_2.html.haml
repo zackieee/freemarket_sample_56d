@@ -14,7 +14,7 @@
         必須
       = f.text_field :lastname_kana, class:'user-main__contents__form__group__item__input', placeholder:'例) ヤマダ', value:"#{current_user.lastname_kana}"
       = f.text_field :firstname_kana, class:'user-main__contents__form__group__item__input', placeholder:'例) アヤ', value:"#{current_user.firstname_kana}"
-    = f.fields_for :address do |fields|
+    = f.fields_for :address, current_user.address do |fields|
       .user-main__contents__form__group
         %label.user-main__contents__form__group__item{for:"postal_code"}
           郵便番号

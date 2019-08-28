@@ -7,7 +7,7 @@
     .user-main__contents.edit-form
       %h2.user-main__contents__title-edit.form-underline
         支払い方法
-      - if @user&.card&.customer_id.nil?
+      - if current_user&.card&.customer_id.nil?
         = render 'payment_form_edit_1'
       - else
         = render 'payment_show', @card

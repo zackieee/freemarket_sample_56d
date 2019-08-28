@@ -50,10 +50,6 @@
         = link_to products_selling_index_path,class: 'side-bar__links selected' do
           出品した商品-出品中
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
-      -# %li
-      -#   = link_to products_selling_index_path,class: 'side-bar__links' do
-      -#     出品した商品-取引中
-      -#     = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
         = link_to products_buyout_index_path, class: 'side-bar__links' do
           出品した商品-売却済み
@@ -67,12 +63,8 @@
           購入した商品-過去の取引
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
-        = link_to '#',class: 'side-bar__links' do
+        = link_to sales_amount_trades_path,class: 'side-bar__links' do
           売上確認
-          = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
-      %li
-        = link_to '#',class: 'side-bar__links' do
-          ポイント
           = icon 'fas fa-lg','angle-right', class: 'side-bar__links__icon'
       %li
         = link_to ratings_path,class: 'side-bar__links' do
