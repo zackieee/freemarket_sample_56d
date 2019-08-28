@@ -195,19 +195,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update_profile
-    @user = User.find(current_user.id)
-    @user.update(
+    current_user.update(
       nickname: user_params[:nickname],      
       introduction: user_params[:introduction]
     )
     # 指定データがある場合のみ保存
     if user_params[:avatar].present?
-      @user.update(
+      current_user.update(
         avatar: user_params[:avatar]
       )
     end
 
-    if @user.valid?(:profile_2)
+    if current_user.valid?
       redirect_to action: :edit_profile
       return
     else
@@ -221,23 +220,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update_address
-    @user = User.find(current_user.id)
-    @user.update(user_params)
-    if @user.valid?(:address) && @user.address.valid?(:address)
+    if current_user.update_without_current_password(user_params)
       redirect_to users_edit_address_path
       return
     else
-      render action: :edit_address
+      render :edit_address
       return
     end
 
   end
 
   def edit_payment
-    # クレジットカードの登録があるか確認
-    @user = User.find(current_user.id)
     # クレジットカード情報が登録されていた場合のみ情報取得
-    unless @user.card&.customer_id.nil?
+    unless current_user.card&.customer_id.nil?
       @card = user_credit('show')
       if @err.present?
         render :edit_payment
@@ -251,15 +246,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update_payment
     # クレジットカード情報の登録
-    @user = current_user
-    session[:user] = @user    
+    session[:user] = current_user
     session[:user]["email"] = current_user.email
     @customer = user_credit('create')
     if @err.present?
       render :edit_payment
       return
     end
-    @car = Card.create(
+    current_user.card = Card.create(
       user_id:        current_user.id,
       customer_id:    @customer.id,
       card_id:        @customer.default_card,
@@ -320,10 +314,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     # 電話番号認証の結果を受けてレンダリング先を決める
     if session[:secure_code] == params[:auth_code]
-      @user = User.find(current_user.id)
-      @user.update(tel: session[:user]["tel"])
       # バリデーションに通ったか確認、elseの場合は画面を戻す
-      if @user.valid?(:tel)
+      if current_user.update_without_current_password(tel: session[:user]["tel"])
         redirect_to users_edit_telephone_path
         return
       else
@@ -345,9 +337,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update_account
-    @user = User.find(current_user.id)
-    @user.update(user_params)
-    if @user.address.valid?(:identify)
+    if current_user.update_without_current_password(user_params)
       redirect_to users_edit_account_path
     else
       render :edit_account
@@ -361,11 +351,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update_password
-    # メールアドレス変更処理
-    @user = User.find(current_user.id)
-
     # emailの変更が無いかチェック
-    if @user.email != user_params[:email]
+    if current_user.email != user_params[:email]
 
       # 既存の顧客で同一emailを利用していないか
       same_mail = User.where(email: user_params[:email])
@@ -379,9 +366,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       # @user.skip_reconfirmation!
 
       # アップデート処理。問題なくupdateされれば自動的にメールも飛ぶ
-      @user.update(email: user_params[:email])
-      if @user.valid?(:email)
-        session[:change_email] = @user.email
+      if current_user.update_without_current_password(email: user_params[:email])
+        session[:change_email] = current_user.email
       else
         render :edit_password
         return
@@ -389,6 +375,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     end
 
+    binding.pry
     # パスワード変更処理(入力があった場合のみ)
     if user_params[:password] != "" || user_params[:password_confirmation] != "" || user_params[:current_password] != ""
       result = current_user.update_with_password(user_params)
@@ -396,7 +383,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if result
         # パスワード変更すると一旦サインアウトされる可能性があると
         # 記事で読んだので念のため、ログイン処理追加
-        session[:id] = @user.id
+        session[:id] = current_user.id
         sign_in User.find(session[:id])
       else
         @messages = 'パスワードの更新に失敗しました。入力された値に間違いがあります。'
@@ -498,16 +485,14 @@ private
           return
         end
       when 'show'
-        @user = User.find(current_user.id)
         @customer = Payjp::Customer.retrieve(
-          @user.card.customer_id
+          current_user.card.customer_id
         )
-        @card = @customer.cards.retrieve(@user.card.card_id)
+        @card = @customer.cards.retrieve(current_user.card.card_id)
       when 'delete'
         # 削除対象データの取得
-        @user = User.find(current_user.id)
         @customer = Payjp::Customer.retrieve(
-          @user.card.customer_id
+          current_user.card.customer_id
         )
         @customer.delete
       else
