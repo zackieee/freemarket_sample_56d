@@ -164,6 +164,91 @@
           }
         }
         &__comment{
+          &__area{
+            .trade-comment-right{
+              display:flex;
+              margin:20px;
+              img{
+                border-radius: 50%;
+              }
+              &__comment{
+                position: relative;
+                width:80%;
+                margin:0 20px;
+                font-size:14px;
+                color:#333;
+                &__nickname{
+                  text-align: right;
+                  color:#ea352d;
+                  font-weight:bold;
+                }
+                &__content{
+                  padding:15px;
+                  background-color:#fbf0e6;
+                  border-radius: 10px;
+                  &__time{
+                    display:flex;
+                    align-items: center;
+                    margin-top:5px;
+                    font-size:12px;
+                    color:#999;
+                    i{
+                      margin-right:5px;
+                    }
+                  }  
+                }
+                &__content:before{
+                  position: absolute;
+                  content: '';
+                  border: 10px solid transparent;
+                  border-left: 10px solid #fbf0e6;
+                  top: 30px;
+                  left: 528px;
+                }
+              }
+            }
+            .trade-comment-left{
+              display:flex;
+              margin:20px;
+              img{
+                border-radius: 50%;
+              }
+              &__comment{
+                position: relative;
+                width:80%;
+                margin:0 20px;
+                font-size:14px;
+                color:#333;
+                &__nickname{
+                  font-weight:bold;
+                }
+                &__content{
+                  padding:15px;
+                  background-color:#eef0f4;
+                  border-radius: 10px;
+                  &__time{
+                    display:flex;
+                    align-items: center;
+                    margin-top:5px;
+                    font-size:12px;
+                    color:#999;
+                    i{
+                      margin-right:5px;
+                    }
+
+                  }  
+                }
+                &__content:before{
+                  position: absolute;
+                  content: '';
+                  border: 10px solid transparent;
+                  border-right: 10px solid #eef0f4;
+                  top: 30px;
+                  left: -20px;
+                }
+              }
+            }
+          }
           &__form{
             width:600px;
             margin: 20px auto;
@@ -183,7 +268,6 @@
             }
             &--btn{
               button{
-                cursor: not-allowed;
                 @include form_button($default_color,0,1);
                 width:600px;
                 max-width:none!important;
