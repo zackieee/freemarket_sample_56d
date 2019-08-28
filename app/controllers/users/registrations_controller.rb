@@ -375,7 +375,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     end
 
-    binding.pry
     # パスワード変更処理(入力があった場合のみ)
     if user_params[:password] != "" || user_params[:password_confirmation] != "" || user_params[:current_password] != ""
       result = current_user.update_with_password(user_params)
