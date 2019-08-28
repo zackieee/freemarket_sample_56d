@@ -73,7 +73,6 @@ class ProductsController < ApplicationController
   end
     
   def create
-    binding.pry
     @product= Product.new(product_params)
     if @product.save
       redirect_to root_path
@@ -92,7 +91,6 @@ class ProductsController < ApplicationController
       @category_children = Category.find(@product.category_id)
       @category_parent = Category.find(@category_children.parent_id)
     else
-      binding.pry
       @category_grandchildren = Category.find(@product.category_id)
       @category_children = Category.find(@category_grandchildren.parent_id)
       @category_parent = Category.find(@category_children.parent_id)
@@ -112,7 +110,6 @@ class ProductsController < ApplicationController
       @category_children = Category.find(@product.category_id)
       @category_parent = Category.find(@category_children.parent_id)
     else
-      binding.pry
       @category_grandchildren = Category.find(@product.category_id)
       @category_children = Category.find(@category_grandchildren.parent_id)
       @category_parent = Category.find(@category_children.parent_id)
