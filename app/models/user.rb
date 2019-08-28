@@ -32,10 +32,34 @@ class User < ApplicationRecord
   # fields_for用のネスト設定
   accepts_nested_attributes_for :address, allow_destroy: true
 
+  # 指定なしの場合のバリデーション
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  VALID_PASSWORD_REGEX = /\A[a-z0-9]+\z/i
+  VALID_PHONE_REGEX = /\A\d{10}$|^\d{11}\z/
+  validates :email,
+    presence: true,
+    format: { with: VALID_EMAIL_REGEX , message: 'のフォーマットが不適切です'},
+    uniqueness: true
+  validates :nickname,
+    presence: true,
+    length:{ maximum: 20}
+  validates :lastname,
+    presence: true,
+    length:{ maximum: 35}
+  validates :firstname,
+    presence: true,
+    length:{ maximum: 35}
+  validates :lastname_kana,
+    presence: true,
+    length:{ maximum: 35},
+    format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい' }
+  validates :firstname_kana,
+    presence: true,
+    length: { maximum: 35},
+    format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい' }
+
   # 会員情報登録画面用のバリデーション
   with_options on: :profile do | profile |
-    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-    VALID_PASSWORD_REGEX = /\A[a-z0-9]+\z/i
     profile.validates :nickname,
       presence: true,
       length:{ maximum: 20}
@@ -77,7 +101,6 @@ class User < ApplicationRecord
 
   # 発送元・お届け先住所入力画面用のバリデーション(Addressモデル分も含む)
   with_options on: :address do | address |
-    VALID_PHONE_REGEX = /\A\d{10}$|^\d{11}\z/
     address.validates :lastname,
       presence: true,
       length:{ maximum: 35}
@@ -92,23 +115,6 @@ class User < ApplicationRecord
       presence: true,
       length: { maximum: 35},
       format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい' }
-  end
-
-  # プロフィール編集画面のバリデーション
-  with_options on: :profile_2 do | profile |
-    profile.validates :nickname,
-      presence: true,
-      length:{ maximum: 20 }
-      profile.validates :introduction,
-      length:{ maximum: 1000 }
-  end
-
-  # パスワード・メールアドレス編集画面のバリデーション
-  with_options on: :email do | email |
-    email.validates :email,
-      presence: true,
-      format: { with: VALID_EMAIL_REGEX , message: 'のフォーマットが不適切です'},
-      uniqueness: true
   end
   
   # 生年月日のチェックメソッド
@@ -153,6 +159,21 @@ class User < ApplicationRecord
       end
     end
     return user
+  end
+
+  # update時パスワードを求めないように変更
+  def update_without_current_password(params, *options)
+    params.delete(:current_password)
+ 
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+
+    result = update_attributes(params, *options)
+
+    clean_up_passwords
+    result
   end
   
 end

@@ -1,0 +1,14 @@
+.sales-amount
+  .sales-amount__contents
+    %h2.sales-amount__contents__title
+      売上確認
+    .sales-amount__contents__sales-amount
+      %p
+        現在の売上金
+      %p
+        = "¥#{current_user.sales_amount.to_s(:delimited, delimiter: ',')}"
+    .sales-amount__contents__list
+      = link_to sales_amount_list_trades_path, class:'sales-amount__contents__list__link' do
+        %p
+          売上履歴
+        = icon 'fas fa-lg','angle-right'

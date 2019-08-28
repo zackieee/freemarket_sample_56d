@@ -59,7 +59,7 @@ Rails.application.routes.draw do
   get 'trade/active_index'          => 'trades#active_index'
   get 'trade/close_index'          => 'trades#close_index'
   resources :trades do
-    get :active_index_api,:close_index_api, on: :collection
+    get :active_index_api,:close_index_api,:sales_amount,:sales_amount_list, on: :collection
   end
 
   resources :ratings do
@@ -74,6 +74,8 @@ Rails.application.routes.draw do
   resources :users do
     get :show_profile, on: :member
   end
+  
+  resources :comments
 
   get 'notifications/index_todo'  =>  'notifications#index_todo'
   get 'notifications/index_todo_api'  =>  'notifications#index_todo_api'

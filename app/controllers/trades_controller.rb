@@ -3,6 +3,8 @@ class TradesController < ApplicationController
   before_action :set_trade, only: [:show, :update]
 
   def show
+    @comments = Comment.where(product_id: params[:product_id])
+    @comment  = Comment.new()
   end
 
   def active_index
@@ -167,6 +169,13 @@ class TradesController < ApplicationController
       redirect_to product_trade_path(@trade.product_id,@trade.id)
       return
     end
+  end
+
+  def sales_amount
+  end
+
+  def sales_amount_list
+    @trade = Trade.where("(seller_id = ?) && (trade_status = ?)",current_user.id, 3 )
   end
 
   private
