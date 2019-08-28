@@ -7,9 +7,9 @@
     = buyer_display_dispatcher(@trade)
   .trade-main__contents__comment
     .trade-main__contents__comment__area
-      // ここにコメントが追加されていく（予定）
+      = comment_baloon(@comments)
     .trade-main__contents__comment__form
-      = form_with model:@comment, method: :post, local: true do | f |
+      = form_with model:@comment,url:comments_path(product_id: @trade.product_id), method: :post, local: true do | f |
         .trade-main__contents__comment__form--text
           取引メッセージの内容は、必要に応じて事務局で確認しています。
         .trade-main__contents__comment__form--input
