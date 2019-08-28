@@ -12,6 +12,8 @@ module NoticeHelper
       image_tag info.trade.product.images.first, class:'mypage__main__contents__content__image', height: '48px', width: '48px'
     when 3
       image_tag info.product.images.first, class:'mypage__main__contents__content__image', height: '48px', width: '48px'
+    when 4
+      image_tag info.trade.product.images.first, class:'mypage__main__contents__content__image', height: '48px', width: '48px'
     end
   end
 
