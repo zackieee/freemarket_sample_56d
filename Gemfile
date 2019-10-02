@@ -51,6 +51,7 @@ group :development, :test do
   # 【send-mail】開発環境でメール送信せずにメール確認するためのgem（本番環境では使わない場合にここに書く）
   # 導入すると「http://localhost:3000/letter_opener」から見れます
   gem 'letter_opener_web', '~> 1.0'
+  gem 'letter_opener'
 end
 
 group :development do
