@@ -46,18 +46,11 @@
         = f.check_box :check
         = f.label :check, '商品の中身を確認しました'
       .trade-main__contents__rating__wrapper
-        .trade-main__contents__rating__wrapper--check
-          = icon 'fas fa-2x', 'smile', class: "good"
-          良い
-          = f.radio_button :rate, 1
-        .trade-main__contents__rating__wrapper--check
-          = icon 'fas fa-2x', 'meh', class: "normal"
-          普通
-          = f.radio_button :rate, 2
-        .trade-main__contents__rating__wrapper--check
-          = icon 'fas fa-2x', 'frown', class: "bad"
-          悪い
-          = f.radio_button :rate, 3
+        - Rating.rates_i18n.invert.each do | rate |
+          .trade-main__contents__rating__wrapper--check
+            = rating_check(rate)
+            = f.label t("enums.rating.rate.#{rate[0]}")
+            = f.radio_button :rate, rate[0]
       .trade-main__contents__rating--comment
         %p
           評価のコメントを記入しましょう

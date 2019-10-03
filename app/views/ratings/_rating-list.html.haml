@@ -3,18 +3,18 @@
     %h2
       評価一覧
   %ul.rating__nav
-    %li.rating__nav--all.selected-tab#rating-tab-all{ data: {rating: '0'}}
+    %li.rating__nav--all.selected-tab#rating-tab-all{ data: {rating: 'all'}}
       %h3
         全て
-    %li.rating__nav--good#rating-tab-good{ data: {rating: '1'}}
+    %li.rating__nav--good#rating-tab-good{ data: {rating: 'good'}}
       = icon 'fas fa-lg', 'smile', class: "good"
       %h3
         良い
-    %li.rating__nav--normal#rating-tab-normal{ data: {rating: '2'}}
+    %li.rating__nav--normal#rating-tab-normal{ data: {rating: 'normal'}}
       = icon 'fas fa-lg', 'meh', class: "normal"
       %h3
         普通
-    %li.rating__nav--bad#rating-tab-bad{ data: {rating: '3'}}
+    %li.rating__nav--bad#rating-tab-bad{ data: {rating: 'bad'}}
       = icon 'fas fa-lg', 'frown', class: "bad"
       %h3
         悪い

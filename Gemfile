@@ -109,3 +109,6 @@ gem "aws-sdk-s3", require: false
 
 # 階層構造
 gem 'awesome_nested_set'
+
+# enumの日本語化用に使用する
+gem 'enum_help'

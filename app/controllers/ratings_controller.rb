@@ -2,15 +2,14 @@ class RatingsController < ApplicationController
   before_action :notice_count,:todo_count, only: [:index]
 
   def index
-    @ratings = Rating.where(rated_user: current_user.id).order("created_at DESC")
+    @ratings = Rating.my_ratings(current_user.id).recent
   end
 
   def index_api
-
-    if params[:rating].to_i.eql?(0)
-      @ratings = Rating.where("(rated_user_id = ?)",current_user.id).order("created_at DESC")
+    if params[:rating].eql?('all')
+      @ratings = Rating.my_ratings(current_user.id).recent
     else
-      @ratings = Rating.where("(rated_user_id = ?) && (rate = ?)",current_user.id,params[:rating]).order("created_at DESC")
+      @ratings = Rating.my_ratings(current_user.id).rating_type(params[:rating]).recent
     end
 
     respond_to do | format |

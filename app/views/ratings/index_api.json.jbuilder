@@ -12,13 +12,14 @@ json.array! @ratings do | rate |
   json.comment             rate.comment
   json.created_at          rate.created_at.strftime("%m月%d日 %H:%M")
 
-  case rate.rate
-  when 1
-    json.rate 'fa-smile good'
-  when 2
-    json.rate 'fa-meh normal'
-  when 3
-    json.rate 'fa-frown bad'
-  end
+  json.rate
+    case rate.rate
+    when "good"
+      json.rate 'fa-smile good'
+    when "normal"
+      json.rate 'fa-meh normal'
+    when "bad"
+      json.rate 'fa-frown bad'
+    end
 
 end

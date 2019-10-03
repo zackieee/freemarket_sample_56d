@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def show
     @category = Category.where(depth: 0)
     # 評価／出品数を取得
-    @rating_count   = Rating.where(rated_user_id: current_user.id).count
+    @rating_count   = Rating.my_ratings(current_user.id).count
     @trade_count    = Trade.where(seller_id: current_user.id).count
 
     # お知らせ情報取得
@@ -17,11 +17,9 @@ class UsersController < ApplicationController
   def show_profile
     @user = User.find(params[:id])
     @category = Category.where(depth: 0)
+
     @notifications  =  Notification.where.not(action: 5 ).where(receiver_id: @user.id).order("created_at DESC")
-    @rating_count   =  Rating.where(rated_user_id: @user.id).count
-    @rating_good   =  Rating.where(rated_user_id: @user.id, rate: 1).count
-    @rating_normal =  Rating.where(rated_user_id: @user.id, rate: 2).count
-    @rating_bad    =  Rating.where(rated_user_id: @user.id, rate: 3).count
+    @rating_count   =  Rating.count_rating(@user.id)
     @trade_count    =  Trade.where(seller_id: @user.id).count
   end
 end

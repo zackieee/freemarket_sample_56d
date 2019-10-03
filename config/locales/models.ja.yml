@@ -1,4 +1,10 @@
 ja:
+  enums:
+    rating:
+      rate:
+        good: 良い
+        normal: 普通
+        bad: 悪い
   activerecord:
     attributes:
       user:

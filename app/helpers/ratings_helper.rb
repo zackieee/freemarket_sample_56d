@@ -1,12 +1,12 @@
 module RatingsHelper
 
   def rating_check(rate)
-    case rate.rate
-    when 1
+    case rate[0]
+    when "good"
       icon 'fas', 'smile', class: "good"
-    when 2
+    when "normal"
       icon 'fas', 'meh', class: "normal"
-    when 3
+    when "bad"
       icon 'fas', 'frown', class: "bad"
     end
   end
