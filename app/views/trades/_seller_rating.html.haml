@@ -45,9 +45,10 @@
       .trade-main__contents__rating__wrapper
         - Rating.rates.each do | rate |
           .trade-main__contents__rating__wrapper--check
-            = rating_check(rate)
+            -# = rating_check(rate)
             = f.label t("enums.rating.rate.#{rate[0]}")
             = f.radio_button :rate, rate[0]
+        -# = f.select :rate, options_for_select_from_enum(Rating, :rate) 
       .trade-main__contents__rating--comment
         %p
           評価のコメントを記入しましょう

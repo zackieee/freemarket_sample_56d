@@ -231,14 +231,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit_payment
-    # クレジットカード情報が登録されていた場合のみ情報取得
+
+    binding.pry
+    
     unless current_user.card&.customer_id.nil?
-      @card = user_credit('show')
-      if @err.present?
-        render :edit_payment
-        return
-      end
+    # クレジットカード情報が登録されていた場合のみ情報取得
+      @card,@err = Card.show(current_user.card)
+      binding.pry
+      
+      render :edit_payment if @err != nil and return
+
     end
+
+
+    # unless current_user.card&.customer_id.nil?
+    #   @card = user_credit('show')
+    #   if @err.present?
+    #     render :edit_payment
+    #     return
+    #   end
+    # end
   end
 
   def edit_payment_2
@@ -248,28 +260,31 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # クレジットカード情報の登録
     session[:user] = current_user
     session[:user]["email"] = current_user.email
-    @customer = user_credit('create')
+
+    @card,@err = Card.create(current_user,params[:payjp_token])
+
     if @err.present?
       render :edit_payment
       return
     end
-    current_user.card = Card.create(
-      user_id:        current_user.id,
-      customer_id:    @customer.id,
-      card_id:        @customer.default_card,
-    )
+
     redirect_to action: :edit_payment
   end
 
   def destroy_payment
     # クレジットカード情報の削除
-    @customer = user_credit('delete')
-    if @err.present?
-      render :edit_payment
-      return
-    end
-    @card = Card.find_by(user_id: current_user.id)
-    @card.destroy
+
+    binding.pry
+
+    _ , @err = Card.destroy(current_user.card)
+
+    # @customer = user_credit('delete')
+    # if @err.present?
+    #   render :edit_payment
+    #   return
+    # end
+    # @card = Card.find_by(user_id: current_user.id)
+    # @card.destroy
 
     redirect_to action: :edit_payment
   end

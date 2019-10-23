@@ -25,3 +25,9 @@ ja:
         city: 市区町村
         address_number: 番地
         building_name: 建物名
+      rating:
+        good: 良い
+        normal: 普通
+        bad: 悪い
+
+

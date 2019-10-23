@@ -2,6 +2,7 @@ class RatingsController < ApplicationController
   before_action :notice_count,:todo_count, only: [:index]
 
   def index
+    binding.pry
     @ratings = Rating.my_ratings(current_user.id).recent
   end
 

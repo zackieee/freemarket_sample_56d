@@ -138,6 +138,7 @@ class TradesController < ApplicationController
       redirect_to product_trade_path(@trade.product_id,@trade.id)
       return
     when 2 # 購入者評価済／出品者評価待ち
+      binding.pry
       # 取引ステータスを3(取引完了)に変更する
       @trade.update(trade_status: 3)
       # 評価依頼に対するTODOステータスを1(完了)に変更する
